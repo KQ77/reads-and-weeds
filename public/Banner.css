@@ -1,0 +1,45 @@
+img.banner-image {
+  position: absolute;
+  width: 100vw;
+  height: 75%;
+  display: block;
+  opacity: 1;
+  transition: opacity 3s;
+  margin: auto;
+}
+
+#banner {
+  height: 100vw;
+  min-width: 100%;
+  position: relative;
+  top: 0;
+}
+
+#banner > div {
+  color: white;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  top: 55vh;
+}
+
+#banner > div h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  letter-spacing: 0.4rem;
+}
+
+h1,
+h2 {
+  font-family: cursive;
+  text-shadow: 3px 3px black;
+}
+
+img.hidden {
+  opacity: 0;
+  transition: opacity 3s;
+}

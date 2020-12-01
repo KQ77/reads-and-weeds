@@ -1,0 +1,7 @@
+header {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+}
