@@ -1,16 +1,15 @@
 import React from 'react';
 import '../public/Banner.css';
-const library = require('../public/library.jpg');
-const hike = require('../public/hike.jpg');
-// import hike from '../public/hike.jpg';
-// import library from '../public/library.jpg';
+// const library = require('../public/library.jpg');
+// const hike = require('../images/hike_e1f0015.jpg');
+import Hike from '../public/hike.jpg';
+import Library from '../public/library.jpg';
 
 export class Banner extends React.Component {
   constructor(props) {
     super(props);
-    console.log(hike, 'hike');
     this.state = {
-      imageSources: [{ hike }, { library }],
+      imageSources: [Hike, Library],
     };
     this.getClass = this.getClass.bind(this);
   }
