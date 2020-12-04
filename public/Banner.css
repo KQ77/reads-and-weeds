@@ -1,7 +1,7 @@
 img.banner-image {
   position: absolute;
   width: 100vw;
-  height: 75%;
+  height: 100%;
   display: block;
   opacity: 1;
   transition: opacity 3s;
@@ -9,33 +9,39 @@ img.banner-image {
 }
 
 #banner {
-  height: 100vw;
+  height: 45rem;
   min-width: 100%;
   position: relative;
   top: 0;
 }
 
 #banner > div {
+  text-align: center;
   color: white;
   position: absolute;
-  left: 50%;
+  left: 55%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  top: 55vh;
+  top: 60%;
 }
 
 #banner > div h1 {
-  font-size: 4rem;
+  font-weight: 300;
+  font-size: 3.5rem;
+  letter-spacing: 0.24rem;
+  padding: 3rem;
 }
 
-h2 {
-  font-size: 2.5rem;
+#banner h2 {
+  font-size: 1.2rem;
+  font-weight: 200;
   letter-spacing: 0.4rem;
 }
 
-h1,
-h2 {
-  font-family: cursive;
+#banner h1,
+#banner h2 {
+  margin: 0;
+  font-family: sans-serif;
   text-shadow: 3px 3px black;
 }
 

@@ -23,16 +23,16 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(jpg|png|jpeg)$/,
-        use: {
-          loader: 'url-loader',
-        },
-      },
+      // {
+      //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      //   type: 'asset/resource',
+      // },
+      // {
+      //   test: /\.(jpg|png|jpeg)$/,
+      //   use: {
+      //     loader: 'url-loader',
+      //   },
+      // },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [

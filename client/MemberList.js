@@ -1,55 +1,55 @@
 import React from 'react';
 
-const members = [
-  {
-    firstName: 'Courtney',
-    lastName: 'Marsh',
-    bio: ``,
-    faveGen: ``,
-    favePick: ``,
-    wantsToRed: ``,
-  },
-  {
-    firstName: 'Melissa',
-    lastName: 'Mahon',
-    bio: ``,
-    faveGen: ``,
-    favePick: ``,
-    wantsToRed: ``,
-  },
-  {
-    firstName: 'Melissa',
-    lastName: 'Veloz',
-    bio: ``,
-    faveGen: ``,
-    favePick: ``,
-    wantsToRed: ``,
-  },
-  {
-    firstName: 'Kate',
-    lastName: 'Quinn',
-    bio: ``,
-    faveGen: ``,
-    favePick: ``,
-    wantsToRed: ``,
-  },
-  {
-    firstName: 'Laura',
-    lastName: 'Yarusavage',
-    bio: ``,
-    faveGen: ``,
-    favePick: ``,
-    wantsToRed: ``,
-  },
-  {
-    firstName: 'Sarah',
-    lastName: 'Voris',
-    bio: ``,
-    faveGen: ``,
-    favePick: ``,
-    wantsToRed: ``,
-  },
-];
+// const members = [
+//   {
+//     firstName: 'Courtney',
+//     lastName: 'Marsh',
+//     bio: ``,
+//     faveGen: ``,
+//     favePick: ``,
+//     wantsToRed: ``,
+//   },
+//   {
+//     firstName: 'Melissa',
+//     lastName: 'Mahon',
+//     bio: ``,
+//     faveGen: ``,
+//     favePick: ``,
+//     wantsToRed: ``,
+//   },
+//   {
+//     firstName: 'Melissa',
+//     lastName: 'Veloz',
+//     bio: ``,
+//     faveGen: ``,
+//     favePick: ``,
+//     wantsToRed: ``,
+//   },
+//   {
+//     firstName: 'Kate',
+//     lastName: 'Quinn',
+//     bio: ``,
+//     faveGen: ``,
+//     favePick: ``,
+//     wantsToRed: ``,
+//   },
+//   {
+//     firstName: 'Laura',
+//     lastName: 'Yarusavage',
+//     bio: ``,
+//     faveGen: ``,
+//     favePick: ``,
+//     wantsToRed: ``,
+//   },
+//   {
+//     firstName: 'Sarah',
+//     lastName: 'Voris',
+//     bio: ``,
+//     faveGen: ``,
+//     favePick: ``,
+//     wantsToRed: ``,
+//   },
+// ];
 
 // export const MemberList = (props) => {
 //   return (
@@ -68,8 +68,14 @@ const members = [
 //   );
 // };
 
-export const MemberList = (props) => {
-  return props.members.map((member, idx) => {
-    return <div key={idx}>{member.name}</div>;
-  });
+const MemberList = (props) => {
+  return (
+    <div>
+      {props.members.map((member, idx) => {
+        return <div key={idx}>{member.name}</div>;
+      })}
+    </div>
+  );
 };
+
+export default MemberList;
