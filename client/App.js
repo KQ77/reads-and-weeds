@@ -25,8 +25,7 @@ class App extends Component {
     super(props);
     this.state = {
       currentBook: '',
-      currentBookID: `rQumDwAAQBAJ`,
-      books: [],
+      prevBooks: [],
     };
     this.getMembers = this.getMembers.bind(this);
   }
@@ -36,14 +35,11 @@ class App extends Component {
   }
   async getBook(id) {}
   async componentDidMount() {
-    const books = [];
-    await bookIds.forEach(async (bookId) => {
-      const book = await axios.get(`/api/volume/${bookId}`).data;
-      books.push(book);
-    });
-    this.setState({ books: books });
+    const books = (await axios.get('/api/books')).data;
+    const prevBooks = books.filter((book) => book.isCurrent === false);
+    const currentBook = books.filter((book) => book.isCurrent === true);
+    this.setState({ prevBooks, currentBook });
   }
-
   render() {
     return (
       <div className="App">

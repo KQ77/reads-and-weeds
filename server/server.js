@@ -43,6 +43,22 @@ router.get('/volume/:id', async (req, res, next) => {
   }
 });
 
+router.get('/books', async (req, res, next) => {
+  const dbBooks = await Book.findAll();
+  const apiBooks = await Promise.all(
+    dbBooks.map(async (book) => {
+      let response = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes/${book.apiId}?key=${apiKey}`
+      );
+      response = response.data;
+      response.isCurrent = book.isCurrent;
+      return response;
+    })
+  );
+  console.log(apiBooks, 'apiBooks');
+  res.status(200).send(apiBooks);
+});
+
 //any request to homepage of app will serve up the index.html page ?
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
