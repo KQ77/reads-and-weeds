@@ -1,0 +1,57 @@
+/* member photo itself */
+img.member-img {
+  height: 100%;
+  width: 20rem;
+  border-radius: 12px;
+  border: 1px solid gold;
+  overflow: hidden;
+}
+
+/* entire members section div */
+#members {
+  background-color: rgb(218, 218, 230);
+}
+
+/* div.member-photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* member details, bio, name, etc */
+div.member-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 1rem 4rem;
+  width: 60%;
+}
+
+/* div around member image itself */
+.member-img-wrapper {
+  height: 100%;
+}
+
+.flex-row {
+  height: 26rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(176, 175, 192);
+}
+
+/* entire div around picture, member info, etc */
+.member-wrapper {
+  margin: 2rem auto;
+  width: 70%;
+  align-items: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.large {
+  font-size: 2rem;
+}

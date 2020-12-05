@@ -5,20 +5,9 @@ import { Banner } from './Banner.js';
 import MemberList from './MemberList.js';
 import SingleBook from './SingeBook';
 import Comments from './Comments';
+import BookList from './BookList';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
-
-const currentId = `rQumDwAAQBAJ`;
-const bookIds = [
-  'PmpfDwAAQBAJ',
-  'RidvDwAAQBAJ',
-  `9-GCDwAAQBAJ`,
-  `wKFaDwAAQBAJ`,
-  `ey-BDwAAQBAJ`,
-  `FkiSDwAAQBAJ`,
-  `gt7EQgH8-b4C`,
-  `dAzJCwAAQBAJ`,
-];
 
 class App extends Component {
   constructor(props) {
@@ -26,18 +15,17 @@ class App extends Component {
     this.state = {
       currentBook: '',
       prevBooks: [],
+      members: [],
     };
-    this.getMembers = this.getMembers.bind(this);
   }
-  async getMembers() {
-    let members = (await axios.get('/members')).data;
-    this.setState({ members: members });
-  }
-  async getBook(id) {}
+
   async componentDidMount() {
     const books = (await axios.get('/api/books')).data;
+    const members = (await axios.get('api/members')).data;
+    console.log(members);
+    this.setState({ members: members });
     const prevBooks = books.filter((book) => book.isCurrent === false);
-    const currentBook = books.filter((book) => book.isCurrent === true);
+    const currentBook = books.filter((book) => book.isCurrent === true)[0];
     this.setState({ prevBooks, currentBook });
   }
   render() {
@@ -47,17 +35,29 @@ class App extends Component {
           <Navbar></Navbar>
         </header>
         <Banner></Banner>
-        {this.state.currentBook.id ? (
-          <section id="current-selection">
-            <h1>Current Selection</h1>
-            <SingleBook book={this.state.currentBook} />
-            <Comments book={this.state.currentBook} />
-          </section>
-        ) : (
-          ''
-        )}
-        <button onClick={this.getMembers}>Get Members</button>
-        {this.state.members ? <MemberList members={this.state.members} /> : ''}
+        <section id="current-selection">
+          <h1>Current Selection</h1>
+          {this.state.currentBook.id ? (
+            <>
+              <SingleBook book={this.state.currentBook} />
+              <Comments book={this.state.currentBook} />
+            </>
+          ) : (
+            ''
+          )}
+        </section>
+        <section id="past-selections">
+          <h1>Past Selections</h1>
+          <BookList books={this.state.prevBooks} />
+        </section>
+        <section id="members">
+          <h1>Meet Our Members</h1>
+          {this.state.members.length ? (
+            <MemberList members={this.state.members} />
+          ) : (
+            ''
+          )}
+        </section>
       </div>
     );
   }

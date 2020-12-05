@@ -6,7 +6,7 @@ const SingleBook = (props) => {
     <div>
       <p>{book.title} </p>
       <p>{book.subtitle}</p>
-      {<img src={book.imageLinks.thumbnail}></img>}
+      {<img src={book.imageLinks.small}></img>}
     </div>
   );
 };

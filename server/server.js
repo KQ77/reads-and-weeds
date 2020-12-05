@@ -4,8 +4,9 @@ const router = express.Router();
 const PORT = process.env.PORT || 1337;
 const path = require('path');
 const axios = require('axios');
-const { syncAndSeed, Member, Review, Book } = require('./db.js');
+const { Member, Rating, Comment, Book } = require('../utils/seed.js');
 app.use('/api', router);
+
 //body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,11 +16,10 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
 
-app.get('/members', async (req, res, next) => {
+router.get('/members', async (req, res, next) => {
   try {
     const members = await Member.findAll();
     if (members) {
-      console.log(members, 'members');
       res.status(200).send(members);
     }
   } catch (err) {
@@ -34,7 +34,6 @@ router.get('/volume/:id', async (req, res, next) => {
         `https://www.googleapis.com/books/v1/volumes/${req.params.id}?key=${apiKey}`
       )
     ).data;
-    console.log(book);
     if (book) {
       res.status(200).send(book);
     }
@@ -55,7 +54,6 @@ router.get('/books', async (req, res, next) => {
       return response;
     })
   );
-  console.log(apiBooks, 'apiBooks');
   res.status(200).send(apiBooks);
 });
 
@@ -64,9 +62,4 @@ app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-const init = async () => {
-  await syncAndSeed();
-  app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
-};
-
-init();
+app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
