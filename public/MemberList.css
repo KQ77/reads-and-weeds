@@ -2,43 +2,50 @@
 img.member-img {
   height: 100%;
   width: 20rem;
-  border-radius: 12px;
-  border: 1px solid gold;
+  border-radius: 12px 0 0 12px;
   overflow: hidden;
+  background-color: rgb(255, 192, 221);
 }
 
 /* entire members section div */
 #members {
-  background-color: rgb(218, 218, 230);
 }
-
-/* div.member-photo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
 
 /* member details, bio, name, etc */
 div.member-details {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   margin: 1rem 4rem;
   width: 60%;
+  overflow: scroll;
+  height: inherit;
+  background-color: purple;
 }
 
 /* div around member image itself */
 .member-img-wrapper {
   height: 100%;
 }
-
+#past-book-list img:hover {
+  border: 1px solid seagreen;
+}
+.member-details h2 {
+  margin: 0;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8rem;
+  font-weight: 100;
+}
 .flex-row {
-  height: 26rem;
+  border: 1px solid lightgray;
+  height: 25rem;
   border-radius: 12px;
   display: flex;
   align-items: center;
-  background-color: rgb(176, 175, 192);
+  background-color: rgb(255, 255, 255);
+}
+
+.member-details span {
+  font-size: 1.1rem;
 }
 
 /* entire div around picture, member info, etc */
@@ -46,6 +53,7 @@ div.member-details {
   margin: 2rem auto;
   width: 70%;
   align-items: center;
+  background-color: rgb(0, 153, 255);
 }
 
 .bold {

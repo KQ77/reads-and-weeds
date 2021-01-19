@@ -1,0 +1,35 @@
+#single-book {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#book-details {
+  display: flex;
+  flex-direction: column;
+}
+
+#book-details span,
+div.description span {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+div.description {
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+#single-book img,
+#book-details,
+div.description {
+  margin: 1rem;
+}
+
+#book-img-details {
+  margin: 1rem;
+  padding-left: 5rem;
+}
+#single-book img {
+  border: 1px solid rgb(158, 151, 109);
+}

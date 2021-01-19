@@ -22,7 +22,6 @@ class App extends Component {
   async componentDidMount() {
     const books = (await axios.get('/api/books')).data;
     const members = (await axios.get('api/members')).data;
-    console.log(members);
     this.setState({ members: members });
     const prevBooks = books.filter((book) => book.isCurrent === false);
     const currentBook = books.filter((book) => book.isCurrent === true)[0];

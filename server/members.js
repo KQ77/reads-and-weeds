@@ -1,6 +1,6 @@
 const members = [
   {
-    firstName: 'Melissa',
+    firstName: 'Melissa V',
     lastName: 'Veloz',
     bio: `Just trying to get by...`,
     genre: `Historical Fiction, Mystery`,
@@ -9,12 +9,12 @@ const members = [
     favePick: ``,
   },
   {
-    firstName: 'Melissa',
+    firstName: 'Melissa M',
     lastName: 'Mahon',
     bio: `Charismatic lover of life, extrovert that is married to an introvert with  2 highly adored spunky children,
     and a communication expert who couldn't survive this thing called life without the fabulous village around her.`,
     genre: `Psychological Thriller/ Mystery`,
-    imageUrl: `./melm.JPG`,
+    imageUrl: `./melm2.jpg`,
     faveBook: `The Interpreter of Maladies`,
     favePick: ``,
   },
@@ -45,16 +45,19 @@ const members = [
     bio: `Single Dad to two amazing kids, lover of life and all things Jo-Jo Siwa.  `,
     genre: `Twilight Fan Fiction`,
     imageUrl: ``,
-    faveBook: `Dear God, Are You There, It's Me, Margaret`,
-    favePick: ``,
+    faveBook: `Are You There, God? It's Me, Margaret.`,
+    favePick: `Whichever one I picked`,
   },
   {
     firstName: 'Sarah',
     lastName: 'Voris',
-    bio: ``,
-    genre: ``,
-    imageUrl: ``,
-    faveBook: ``,
+    bio: `Mom to 2 boys who would rather be with their devices than their family.  Employee extraordinaire 
+    who works relentlessly to make sure the job gets done.  Pinot Noir, massages and spa pedicures put me in my peaceful place 
+    (seriously missing the massages and pedi's this week).  Beginning to appreciate the outdoors - biking, hiking, camping and all.  
+    Reader of 1 author who joined book club to experience more and gain back some portion of my life with women who make me laugh! `,
+    genre: `crime (fiction)`,
+    imageUrl: `./sarah.jpg`,
+    faveBook: `Anything James Patterson - Alex Cross or Michael Bennett`,
     favePick: ``,
   },
 ];

@@ -91,11 +91,4 @@ const syncAndSeed = async () => {
   );
 };
 
-const seed = async () => {
-  await syncAndSeed();
-  console.log(`DB seeded!`);
-};
-
-seed();
-
-module.exports = { Book, Rating, Comment, Member };
+module.exports = { Book, Rating, Comment, Member, syncAndSeed };

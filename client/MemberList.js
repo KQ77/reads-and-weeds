@@ -6,19 +6,32 @@ export const MemberList = (props) => {
     <>
       {props.members.map((member, idx) => {
         return (
-          <div className="member-wrapper">
+          <div key={idx} className="member-wrapper">
             <div className="flex-row">
               <div className="member-img-wrapper" key={idx}>
                 <img className="member-img" src={member.imageUrl} />
               </div>
               <div className="member-details">
-                <p className="bold large">
-                  {member.firstName} {member.lastName}
+                <h2 className="heading bold">{member.firstName}</h2>
+                <p>
+                  <span className="bold">Favorite Genre </span>
+                  <br></br>
+                  {member.genre}
                 </p>
-                <p>Favorite Genre:{member.genre}</p>
-                <p>Favorite Book: {member.faveBook}</p>
-                <p>Favorite BookClub Pick: {member.favePick}</p>
-                <div className="bio">Bio: {member.bio}</div>
+                <p>
+                  <span className="bold">Favorite Book</span>
+                  <br></br>
+                  {member.faveBook}
+                </p>
+                <p>
+                  <span className="bold">Favorite Book Club Pick </span>
+                  <br></br>
+                  {member.favePick}
+                </p>
+                <p className="bio">
+                  <span className="bold">Bio: </span> <br></br>
+                  {member.bio}
+                </p>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-img.banner-image {
+/* img.banner-image {
   position: absolute;
   width: 100vw;
   height: 100%;
@@ -6,16 +6,55 @@ img.banner-image {
   opacity: 1;
   transition: opacity 3s;
   margin: auto;
-}
+} */
 
-#banner {
-  height: 45rem;
+.slide-container {
+  max-height: 48rem;
   min-width: 100%;
   position: relative;
   top: 0;
 }
+/* #banner {
+  height: 48rem;
+  min-width: 100%;
+  position: relative;
+  top: 0;
+} */
 
-#banner > div {
+.each-fade {
+  display: flex;
+  height: inherit;
+  width: 100%;
+}
+
+.react-slideshow-fade-images-wrap {
+  height: 40rem;
+}
+.each-fade > div {
+  width: 100%;
+}
+
+img.banner-image {
+  height: 80%;
+  width: 100%;
+}
+/* .each-fade > div img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+} */
+
+/* #banner > div {
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  top: 60%;
+} */
+
+#banner-text {
   text-align: center;
   color: white;
   position: absolute;
@@ -25,27 +64,33 @@ img.banner-image {
   top: 60%;
 }
 
-#banner > div h1 {
+#banner-text h1 {
   font-weight: 300;
   font-size: 3.5rem;
   letter-spacing: 0.24rem;
   padding: 3rem;
 }
+/* #banner > div h1 {
+  font-weight: 300;
+  font-size: 3.5rem;
+  letter-spacing: 0.24rem;
+  padding: 3rem;
+} */
 
-#banner h2 {
+#banner-text h2 {
   font-size: 1.2rem;
   font-weight: 200;
   letter-spacing: 0.4rem;
 }
 
-#banner h1,
-#banner h2 {
+#banner-text h1,
+#banner-text h2 {
   margin: 0;
   font-family: sans-serif;
   text-shadow: 3px 3px black;
 }
 
-img.hidden {
+/* img.hidden {
   opacity: 0;
   transition: opacity 3s;
-}
+} */
