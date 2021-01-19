@@ -2,16 +2,16 @@ import React from 'react';
 import '../public/SingleBook.css';
 
 const SingleBook = (props) => {
-  const book = props.book.volumeInfo;
+  const book = props.book;
   console.log(book, 'singleBook');
   function createDescription() {
-    return { __html: props.book.volumeInfo.description };
+    return { __html: props.book.description };
   }
 
   return (
     <div id="single-book">
       <div id="book-img-details">
-        {<img src={book.imageLinks.small}></img>}
+        {<img src={book.smallImg}></img>}
         <div id="book-details">
           <p>
             <span>Title: </span>
@@ -19,19 +19,19 @@ const SingleBook = (props) => {
           </p>
           <p>
             <span>Author: </span>
-            {book.authors[0]}
+            {book.author}
           </p>
           <p>
             <span>Year: </span>
-            {book.publishedDate.slice(0, 4)}
+            {book.year}
           </p>
           <p>
             <span>Pages: </span>
-            {book.pageCount}
+            {book.pages}
           </p>
           <p>
             <span>Genre: </span>
-            {book.categories[0]}
+            {book.genre}
           </p>
         </div>
       </div>

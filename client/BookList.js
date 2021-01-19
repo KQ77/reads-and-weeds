@@ -5,8 +5,8 @@ function BookList(props) {
   return (
     <div id="past-book-list">
       {props.books.map((book, idx) => (
-        <a href={book.volumeInfo.previewLink} key={idx}>
-          <img src={book.volumeInfo.imageLinks.thumbnail}></img>
+        <a href="">
+          <img src={book.thumbnail}></img>
         </a>
       ))}
     </div>

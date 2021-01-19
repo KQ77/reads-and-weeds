@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
-
+const currentId = 'SUdfDwAAQBAJ';
 router.get('/members', async (req, res, next) => {
   try {
     const members = await Member.findAll();
@@ -27,6 +27,29 @@ router.get('/members', async (req, res, next) => {
   }
 });
 
+router.get('/books', async (req, res, next) => {
+  await Book.update(
+    { isCurrent: true },
+    {
+      where: {
+        apiId: currentId,
+      },
+    }
+  );
+  const books = await Book.findAll();
+  console.log(books, 'books');
+  // const apiBooks = await Promise.all(
+  //   dbBooks.map(async (book) => {
+  //     let response = await axios.get(
+  //       `https://www.googleapis.com/books/v1/volumes/${book.apiId}?key=${apiKey}`
+  //     );
+  //     response = response.data;
+  //     response.isCurrent = book.isCurrent;
+  //     return response;
+  //   })
+  // );
+  res.status(200).send(books);
+});
 router.get('/volume/:id', async (req, res, next) => {
   try {
     const book = (
@@ -40,21 +63,6 @@ router.get('/volume/:id', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
-
-router.get('/books', async (req, res, next) => {
-  const dbBooks = await Book.findAll();
-  const apiBooks = await Promise.all(
-    dbBooks.map(async (book) => {
-      let response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes/${book.apiId}?key=${apiKey}`
-      );
-      response = response.data;
-      response.isCurrent = book.isCurrent;
-      return response;
-    })
-  );
-  res.status(200).send(apiBooks);
 });
 
 //any request to homepage of app will serve up the index.html page ?
