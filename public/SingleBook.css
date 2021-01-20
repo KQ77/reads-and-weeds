@@ -1,14 +1,22 @@
 #single-book {
   display: flex;
   justify-content: center;
-  flex-direction: row;
-}
-
-#book-details {
-  display: flex;
+  /* flex-direction: row; */
   flex-direction: column;
 }
 
+#book-details {
+  margin-bottom: 0.5rem;
+  /* justify-content: center; */
+  display: flex;
+  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
+#book-details p {
+  margin: 0.5rem;
+}
 #book-details span,
 div.description span {
   font-size: 1.1rem;
@@ -21,15 +29,18 @@ div.description {
 }
 
 #single-book img,
-#book-details,
 div.description {
   margin: 1rem;
 }
-
+div.row {
+  display: flex;
+}
 #book-img-details {
-  margin: 1rem;
-  padding-left: 5rem;
+  /* margin: 1rem;
+  padding-left: 5rem; */
 }
 #single-book img {
   border: 1px solid rgb(158, 151, 109);
+  margin: 0;
+  height: 90%;
 }

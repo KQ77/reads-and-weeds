@@ -1,6 +1,7 @@
 const { conn } = require('../server/db.js');
 const { BOOLEAN, STRING, TEXT, INTEGER, UUID, UUIDV4 } = conn.Sequelize;
 const Books = require('../server/Books.js');
+const { Comment } = require('../server/Comment.js');
 const Members = require('../server/Members.js');
 const { Book } = require('../server/Book');
 const axios = require('axios');
@@ -18,11 +19,7 @@ const Rating = conn.define('rating', {
     min: 1,
   },
 });
-const Comment = conn.define('comment', {
-  comment: {
-    type: TEXT,
-  },
-});
+
 const Member = conn.define('member', {
   id: {
     primaryKey: true,
@@ -54,6 +51,9 @@ const Member = conn.define('member', {
 });
 
 //define associations
+Comment.belongsTo(Book);
+Book.hasMany(Comment);
+
 const apiIds = [
   `PmpfDwAAQBAJ`,
   'RidvDwAAQBAJ',
@@ -68,6 +68,7 @@ const apiIds = [
 ];
 
 const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
+const currentId = 'SUdfDwAAQBAJ';
 
 const syncAndSeed = async () => {
   await conn.authenticate();
@@ -98,6 +99,14 @@ const syncAndSeed = async () => {
       thumbnail: book.volumeInfo.imageLinks.thumbnail,
       apiId: book.id,
     });
+    await Book.update(
+      { isCurrent: true },
+      {
+        where: {
+          apiId: currentId,
+        },
+      }
+    );
   });
   // const id = apiIds[0];
   // const bookInfo = (

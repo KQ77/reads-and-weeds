@@ -18,8 +18,22 @@ section > h1 {
   padding: 0.5rem;
   font-size: 4rem;
   font-family: 'Great Vibes', cursive;
-  text-align: center;
   color: black;
   width: 100%;
   font-weight: 100;
+}
+
+#main-app {
+  display: flex;
+}
+
+#right {
+  width: 80%;
+}
+
+#past-selections,
+#current-selection {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
 }

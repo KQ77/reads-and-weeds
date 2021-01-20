@@ -3,11 +3,14 @@ import '../public/App.css';
 import { Navbar } from './Navbar.js';
 import { Banner } from './Banner.js';
 import MemberList from './MemberList.js';
-import SingleBook from './SingeBook';
+import SingleBook from './SingleBook';
 import Comments from './Comments';
 import BookList from './BookList';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
+import Sidebar from './Sidebar';
+import Suggestions from './Suggestions';
+import Footer from './Footer.js';
 
 class App extends Component {
   constructor(props) {
@@ -34,29 +37,36 @@ class App extends Component {
           <Navbar></Navbar>
         </header>
         <Banner></Banner>
-        <section id="current-selection">
-          <h1>Current Selection</h1>
-          {this.state.currentBook.id ? (
-            <>
-              <SingleBook book={this.state.currentBook} />
-              <Comments book={this.state.currentBook} />
-            </>
-          ) : (
-            ''
-          )}
+        <section id="main-app">
+          <Sidebar />
+          <div id="right">
+            <section id="current-selection">
+              <h1>Current Selection</h1>
+              {this.state.currentBook.id ? (
+                <>
+                  <SingleBook book={this.state.currentBook} />
+                  <Comments book={this.state.currentBook} />
+                </>
+              ) : (
+                ''
+              )}
+            </section>
+            <section id="past-selections">
+              <h1>Past Selections</h1>
+              <BookList books={this.state.prevBooks} />
+            </section>
+            <Suggestions />
+            <section id="members">
+              <h1>Meet Our Members</h1>
+              {this.state.members.length ? (
+                <MemberList members={this.state.members} />
+              ) : (
+                ''
+              )}
+            </section>
+          </div>
         </section>
-        <section id="past-selections">
-          <h1>Past Selections</h1>
-          <BookList books={this.state.prevBooks} />
-        </section>
-        <section id="members">
-          <h1>Meet Our Members</h1>
-          {this.state.members.length ? (
-            <MemberList members={this.state.members} />
-          ) : (
-            ''
-          )}
-        </section>
+        <Footer />
       </div>
     );
   }

@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
-const currentId = 'SUdfDwAAQBAJ';
 router.get('/members', async (req, res, next) => {
   try {
     const members = await Member.findAll();
@@ -28,14 +27,6 @@ router.get('/members', async (req, res, next) => {
 });
 
 router.get('/books', async (req, res, next) => {
-  await Book.update(
-    { isCurrent: true },
-    {
-      where: {
-        apiId: currentId,
-      },
-    }
-  );
   const books = await Book.findAll();
   console.log(books, 'books');
   // const apiBooks = await Promise.all(

@@ -1,0 +1,17 @@
+#suggestions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(184, 218, 247);
+}
+
+#suggestions input {
+  width: 20%;
+  margin: 1rem;
+}
+label {
+  margin: 1rem;
+}
+#suggestions button {
+  width: 5rem;
+}

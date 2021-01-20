@@ -20,19 +20,31 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.css$|less/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|eot|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
       // {
-      //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
-      //   type: 'asset/resource',
+      //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]',
+      //         outputPath: 'fonts/',
+      //       },
+      //     },
+      //   ],
       // },
-      // {
-      //   test: /\.(jpg|png|jpeg)$/,
-      //   use: {
-      //     loader: 'url-loader',
-      //   },
-      // },
+      {
+        test: /\.(jpg|png|jpeg)$/,
+        use: {
+          loader: 'url-loader',
+        },
+      },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
