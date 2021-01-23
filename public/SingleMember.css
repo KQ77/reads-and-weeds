@@ -7,18 +7,16 @@ img.member-img {
   background-color: rgb(255, 192, 221);
 }
 
-/* entire members section div */
-#members {
-}
-
 /* member details, bio, name, etc */
 div.member-details {
   display: flex;
   flex-direction: column;
-  margin: 1rem 4rem;
-  width: 60%;
+  margin: 0;
+  justify-content: center;
+  padding-left: 2rem;
   height: inherit;
-  background-color: purple;
+  width: 100%;
+  background-color: #ead9ea;
 }
 
 /* div around member image itself */
@@ -52,7 +50,6 @@ div.member-details {
   margin: 2rem auto;
   width: 70%;
   align-items: center;
-  background-color: rgb(0, 153, 255);
 }
 
 .bold {

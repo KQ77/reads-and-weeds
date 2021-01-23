@@ -4,8 +4,8 @@ const Books = require('../server/Books.js');
 const { Comment } = require('../server/Comment.js');
 const Members = require('../server/Members.js');
 const { Book } = require('../server/Book');
+const { Member } = require('../server/Member');
 const axios = require('axios');
-//define Models
 
 const Rating = conn.define('rating', {
   id: {
@@ -20,39 +20,12 @@ const Rating = conn.define('rating', {
   },
 });
 
-const Member = conn.define('member', {
-  id: {
-    primaryKey: true,
-    type: UUID,
-    defaultValue: UUIDV4,
-  },
-  firstName: {
-    type: STRING(40),
-  },
-  lastName: {
-    type: STRING,
-  },
-  bio: {
-    type: TEXT,
-  },
-  imageUrl: {
-    type: STRING,
-    defaultValue: ``,
-  },
-  genre: {
-    type: STRING,
-  },
-  faveBook: {
-    type: STRING,
-  },
-  favePick: {
-    type: STRING,
-  },
-});
-
 //define associations
 Comment.belongsTo(Book);
 Book.hasMany(Comment);
+
+Comment.belongsTo(Member);
+Member.hasMany(Comment);
 
 const apiIds = [
   `PmpfDwAAQBAJ`,
@@ -74,20 +47,13 @@ const syncAndSeed = async () => {
   await conn.authenticate();
   console.log('database authenticated');
   await conn.sync({ force: true });
-  // const bookInfo = await Promise.all(
-  //   apiIds.map((id) =>
-  //     axios.get(
-  //       `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`
-  //     )
-  //   )
-  // ).data;
-  apiIds.forEach(async (id) => {
+  for (let i = 0; i < apiIds.length; i++) {
+    const id = apiIds[i];
     const book = (
       await axios.get(
         `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`
       )
     ).data;
-    console.log(book.volumeInfo.authors[0], 'book.author');
     await Book.create({
       title: book.volumeInfo.title,
       author: book.volumeInfo.authors[0],
@@ -99,37 +65,35 @@ const syncAndSeed = async () => {
       thumbnail: book.volumeInfo.imageLinks.thumbnail,
       apiId: book.id,
     });
-    await Book.update(
-      { isCurrent: true },
-      {
-        where: {
-          apiId: currentId,
-        },
-      }
-    );
-  });
-  // const id = apiIds[0];
-  // const bookInfo = (
-  //   await axios.get(
-  //     `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`
-  //   )
-  // ).data;
-  // console.log(bookInfo, '*******bookInfo***********');
+  }
+  await Book.update(
+    { isCurrent: true },
+    {
+      where: {
+        apiId: currentId,
+      },
+    }
+  );
+  // apiIds.forEach(async (id) => {
+  //   const book = (
+  //     await axios.get(
+  //       `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`
+  //     )
+  //   ).data;
+  //   console.log(book, 'book');
+  //   await Book.create({
+  //     title: book.volumeInfo.title,
+  //     author: book.volumeInfo.authors[0],
+  //     year: book.volumeInfo.publishedDate.slice(0, 4),
+  //     pages: book.volumeInfo.pageCount,
+  //     genre: book.volumeInfo.categories[0],
+  //     description: book.volumeInfo.description,
+  //     smallImg: book.volumeInfo.imageLinks.small,
+  //     thumbnail: book.volumeInfo.imageLinks.thumbnail,
+  //     apiId: book.id,
+  //   });
+  // });
 
-  // await Promise.all(
-  //   bookInfo.map((book) =>
-  //     Book.create({
-  //       title: book.volumeInfo.title,
-  //       author: book.volumeInfo.authors[0],
-  //       year: book.volumeInfo.publishedDate.slice(0, 4),
-  //       pages: book.volumeInfo.pageCount,
-  //       genre: book.volumeInfo.categories[0],
-  //       description: book.volumeInfo.description,
-  //       imgSrc: book.volumeInfo.imageLinks.small,
-  //       apiId: book.id,
-  //     })
-  //   )
-  // );
   await Promise.all(
     Members.map((member) =>
       Member.create({
@@ -144,5 +108,4 @@ const syncAndSeed = async () => {
     )
   );
 };
-
 module.exports = { Book, Rating, Comment, Member, syncAndSeed };

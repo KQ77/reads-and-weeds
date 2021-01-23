@@ -4,14 +4,6 @@ body {
   font-weight: 200;
 }
 
-header {
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  z-index: 3;
-  width: 100%;
-}
-
 section > h1 {
   margin: 0;
   letter-spacing: 0.4rem;

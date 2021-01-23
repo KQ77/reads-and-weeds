@@ -20,25 +20,14 @@ module.exports = {
         },
       },
       {
-        test: /\.css$|less/i,
+        test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|eot|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
-      // {
-      //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-      //   use: [
-      //     {
-      //       loader: 'file-loader',
-      //       options: {
-      //         name: '[name].[ext]',
-      //         outputPath: 'fonts/',
-      //       },
-      //     },
-      //   ],
-      // },
+
       {
         test: /\.(jpg|png|jpeg)$/,
         use: {

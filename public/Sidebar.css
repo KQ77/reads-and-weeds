@@ -1,4 +1,44 @@
 #sidebar {
   width: 20%;
+  text-align: center;
   background-color: rgb(204, 245, 204);
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+#sidebar li {
+  display: flex;
+  margin: 1rem 3rem;
+  align-items: center;
+  justify-content: space-between;
+}
+#sidebar img.member-img {
+  border-radius: 100%;
+  border: 1px solid black;
+}
+
+#sidebar .img-background {
+  background-color: rgb(219, 217, 218);
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+#sidebar a,
+#sidebar a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+#sidebar .member-name {
+  width: 50%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
 }

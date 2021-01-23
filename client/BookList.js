@@ -17,15 +17,6 @@ function BookList(props) {
           </div>
         ))}
       </Carousel>
-      {/* {props.books.map(function (book, idx) {
-        return (
-          <div key={idx}>
-            <a href="">
-              <img src={book.thumbnail}></img>
-            </a>
-          </div>
-        );
-      })} */}
     </div>
   );
 }

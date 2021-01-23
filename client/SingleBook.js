@@ -3,13 +3,13 @@ import '../public/SingleBook.css';
 
 const SingleBook = (props) => {
   const book = props.book;
-  console.log(book, 'singleBook');
   function createDescription() {
     return { __html: props.book.description };
   }
 
   return (
-    <div id="single-book">
+    <section id="single-book">
+      {book.isCurrent ? <h1>Current Selection</h1> : ''}
       <div id="book-img-details">
         <div id="book-details">
           <p>
@@ -62,7 +62,7 @@ const SingleBook = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
