@@ -1,6 +1,7 @@
 const { conn } = require('../server/db.js');
 const { BOOLEAN, STRING, TEXT, INTEGER, UUID, UUIDV4 } = conn.Sequelize;
 const Books = require('../server/Books.js');
+const { Suggestion } = require('../server/db/Suggestion.js');
 const { Comment } = require('../server/Comment.js');
 const Members = require('../server/Members.js');
 const { Book } = require('../server/Book');
@@ -26,6 +27,9 @@ Book.hasMany(Comment);
 
 Comment.belongsTo(Member);
 Member.hasMany(Comment);
+
+Suggestion.belongsTo(Member);
+Member.hasMany(Suggestion);
 
 const apiIds = [
   `PmpfDwAAQBAJ`,
