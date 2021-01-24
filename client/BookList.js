@@ -1,7 +1,7 @@
 import React from 'react';
 import '../public/BookList.css';
 import Carousel from 'react-elastic-carousel';
-
+import { Link } from 'react-router-dom';
 function BookList(props) {
   console.log(props.books, 'props.books');
   const properties = {
@@ -13,7 +13,9 @@ function BookList(props) {
       <Carousel {...properties}>
         {props.books.map((book, idx) => (
           <div key={idx}>
-            <img src={book.thumbnail}></img>
+            <Link to={`/books/${book.id}`}>
+              <img src={book.thumbnail}></img>
+            </Link>
           </div>
         ))}
       </Carousel>

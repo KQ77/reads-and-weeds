@@ -1,21 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../public/Suggestions.css';
 
 const Suggestions = (props) => {
-  return (
-    <div id="suggestions">
-      <label>
-        <h3>Suggest A Book</h3>
-      </label>
-      <br></br>
-      <input
-        type="
-  text"
-        placeholder="search for a book"
-      ></input>
-      <button type="submit">Search</button>
-    </div>
-  );
+  const [suggestions, setSuggestions] = useState([]);
+
+  return <div id="suggestions"></div>;
 };
 
 export default Suggestions;

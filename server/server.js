@@ -27,7 +27,7 @@ router.get('/members', async (req, res, next) => {
 });
 
 router.get('/books', async (req, res, next) => {
-  const books = await Book.findAll();
+  const books = await Book.findAll({ include: [Comment] });
   console.log(books, 'books');
   // const apiBooks = await Promise.all(
   //   dbBooks.map(async (book) => {

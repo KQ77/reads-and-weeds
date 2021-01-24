@@ -1,7 +1,6 @@
 /* member photo itself */
 img.member-img {
   height: 100%;
-  width: 20rem;
   border-radius: 12px 0 0 12px;
   overflow: hidden;
   background-color: rgb(255, 192, 221);
@@ -48,7 +47,7 @@ div.member-details {
 /* entire div around picture, member info, etc */
 .member-wrapper {
   margin: 2rem auto;
-  width: 70%;
+  width: 85%;
   align-items: center;
 }
 

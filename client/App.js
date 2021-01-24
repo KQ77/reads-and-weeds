@@ -10,7 +10,7 @@ import PastSelections from './PastSelections';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
 import Sidebar from './Sidebar';
-import Suggestions from './Suggestions';
+import SuggestForm from './SuggestForm';
 import SingleMember from './SingleMember';
 import Footer from './Footer.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -19,6 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      allBooks: [],
       currentBook: '',
       prevBooks: [],
       members: [],
@@ -26,16 +27,17 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const books = (await axios.get('/api/books')).data;
+    const allBooks = (await axios.get('/api/books')).data;
     const members = (await axios.get('api/members')).data;
     members.sort((a, b) => a.firstName.localeCompare(b.firstName));
-    const prevBooks = books.filter((book) => book.isCurrent === false);
-    const currentBook = books.filter((book) => book.isCurrent === true)[0];
-    this.setState({ members, prevBooks, currentBook });
+    const prevBooks = allBooks.filter((book) => book.isCurrent === false);
+    const currentBook = allBooks.filter((book) => book.isCurrent === true)[0];
+    this.setState({ allBooks, members, prevBooks, currentBook });
   }
   render() {
     const { members } = this.state;
     const current = this.state.currentBook;
+    const books = this.state.allBooks;
     return (
       <Router>
         <div className="App">
@@ -55,16 +57,10 @@ class App extends Component {
                     path="/"
                     render={(props) => (
                       <SingleBook
+                        id={this.state.currentBook.id}
                         isCurrent={current.isCurrent}
-                        book={this.state.currentBook}
+                        books={books}
                       />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path="/"
-                    render={(props) => (
-                      <Comments book={this.state.currentBook} />
                     )}
                   />
                 </>
@@ -79,15 +75,7 @@ class App extends Component {
                   <PastSelections books={this.state.prevBooks} />
                 )}
               />
-              <Route exact path="/" component={Suggestions} />
-              {/* <section id="members">
-                <h1>Meet Our Members</h1>
-                {this.state.members.length ? (
-                  <MemberList members={this.state.members} />
-                ) : (
-                  ''
-                )}
-              </section> */}
+              <Route exact path="/" component={SuggestForm} />
             </div>
           </section>
           <Route
@@ -98,6 +86,13 @@ class App extends Component {
                 id={props.match.params.memberId}
                 members={members}
               />
+            )}
+          />
+          <Route
+            exact
+            path="/books/:bookId"
+            render={(props) => (
+              <SingleBook books={books} id={props.match.params.bookId * 1} />
             )}
           />
           <Footer />

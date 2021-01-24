@@ -1,14 +1,17 @@
 import React from 'react';
 import '../public/SingleBook.css';
+import Comments from './Comments';
 
 const SingleBook = (props) => {
-  const book = props.book;
+  const { id } = props;
+  const book = props.books.find((book) => book.id === id);
+  console.log(book, 'singlebook');
   function createDescription() {
-    return { __html: props.book.description };
+    return { __html: book.description };
   }
 
   return (
-    <section id="single-book">
+    <div id="single-book">
       {book.isCurrent ? <h1>Current Selection</h1> : ''}
       <div id="book-img-details">
         <div id="book-details">
@@ -34,35 +37,20 @@ const SingleBook = (props) => {
           </p>
         </div>
         <div className="row">
-          {<img src={book.smallImg}></img>}
-          {/* <div id="book-details">
-          <p>
-            <span>Title: </span>
-            {book.title}
-          </p>
-          <p>
-            <span>Author: </span>
-            {book.author}
-          </p>
-          <p>
-            <span>Year: </span>
-            {book.year}
-          </p>
-          <p>
-            <span>Pages: </span>
-            {book.pages}
-          </p>
-          <p>
-            <span>Genre: </span>
-            {book.genre}
-          </p>
-        </div> */}
+          {
+            <img
+              className={book.isCurrent ? 'current' : 'single-book'}
+              src={book.smallImg}
+            ></img>
+          }
+
           <div className="description">
             <p dangerouslySetInnerHTML={createDescription()} />
           </div>
         </div>
       </div>
-    </section>
+      <Comments book={book} />
+    </div>
   );
 };
 

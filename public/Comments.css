@@ -1,0 +1,13 @@
+#comments {
+  background-color: rgb(229 246 255);
+  width: 100%;
+  min-height: 10rem;
+  border-style: ridge;
+  border: 2px solid rgb(206, 206, 206);
+}
+
+#comments > p {
+  text-align: center;
+  margin-top: 3rem;
+  font-style: italic;
+}

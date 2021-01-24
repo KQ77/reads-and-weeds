@@ -24,23 +24,29 @@ div.description span {
 }
 
 div.description {
-  margin: 0 auto;
   padding: 0 3rem;
-}
-
-#single-book img,
-div.description {
   margin: 1rem;
+  font-size: 0.9rem;
+  padding: 0 1.5rem;
+}
+div.description p {
+  margin: 0.4rem;
+  line-height: 1.4rem;
 }
 div.row {
   display: flex;
+  align-items: center;
 }
-#book-img-details {
-  /* margin: 1rem;
-  padding-left: 5rem; */
-}
+
 #single-book img {
   border: 1px solid rgb(158, 151, 109);
   margin: 0;
-  height: 90%;
+}
+
+#single-book img.current {
+  width: 100%;
+  margin-left: 1rem;
+}
+
+#single-book img.single-book {
 }

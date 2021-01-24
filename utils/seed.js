@@ -61,7 +61,7 @@ const syncAndSeed = async () => {
       pages: book.volumeInfo.pageCount,
       genre: book.volumeInfo.categories[0],
       description: book.volumeInfo.description,
-      smallImg: book.volumeInfo.imageLinks.small,
+      smallImg: book.volumeInfo.imageLinks.smallThumbnail,
       thumbnail: book.volumeInfo.imageLinks.thumbnail,
       apiId: book.id,
     });

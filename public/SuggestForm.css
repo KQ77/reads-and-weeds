@@ -1,0 +1,20 @@
+#suggest-form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(184, 218, 247);
+}
+
+#suggest-form input {
+  width: 20%;
+}
+#suggest-form h3 {
+  margin: 0;
+}
+
+#suggest-form button {
+  width: 5rem;
+  margin: 1rem;
+}
