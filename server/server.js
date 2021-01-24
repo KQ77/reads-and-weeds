@@ -4,6 +4,7 @@ const router = express.Router();
 const PORT = process.env.PORT || 1337;
 const path = require('path');
 const axios = require('axios');
+const { Suggestion } = require('./db/Suggestion.js');
 const { Member, Rating, Comment, Book } = require('../utils/seed.js');
 app.use('/api', router);
 
@@ -55,10 +56,23 @@ router.get('/volume/:id', async (req, res, next) => {
     next(err);
   }
 });
+router.get('/suggestions', async (req, res, next) => {
+  try {
+    const suggestions = await Suggestion.findAll();
+    res.status(200).send(suggestions);
+  } catch (err) {
+    next(err);
+  }
+});
 
 //any request to homepage of app will serve up the index.html page ?
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
+// error handling middleware
+app.use((err, req, res, next) => {
+  if (process.env.NODE_ENV !== 'test') console.error(err.stack);
+  res.status(err.status || 500).send(err.message || 'Internal server error');
+});
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
