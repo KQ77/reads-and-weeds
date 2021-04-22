@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../public/SingleMember.css';
+import '../../public/SingleMember.css';
 import axios from 'axios';
 
-const SingleMember = (props) => {
+export const SingleMember = (props) => {
   const [member, setMember] = useState({});
   const { id } = props;
   useEffect(async () => {
@@ -47,5 +47,3 @@ const SingleMember = (props) => {
     );
   }
 };
-
-export default SingleMember;

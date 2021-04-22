@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const MemberLogin = (props) => {
   const [input, setInput] = useState('');

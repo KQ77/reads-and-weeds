@@ -1,8 +1,8 @@
 import React from 'react';
-import '../public/SingleBook.css';
+import '../../public/SingleBook.css';
 import Comments from './Comments';
 
-const SingleBook = (props) => {
+export const SingleBook = (props) => {
   const { id } = props;
   const book = props.books.find((book) => book.id === id);
   console.log(book, 'singlebook');
@@ -53,5 +53,3 @@ const SingleBook = (props) => {
     </div>
   );
 };
-
-export default SingleBook;

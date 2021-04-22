@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import '../public/Suggestions.css';
+import '../../public/Suggestions.css';
 import axios from 'axios';
 
 const Suggestions = (props) => {

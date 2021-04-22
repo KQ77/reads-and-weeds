@@ -1,5 +1,5 @@
 import React from 'react';
-import '../public/Comments.css';
+import '../../public/Comments.css';
 
 function Comments(props) {
   const { comments } = props.book;

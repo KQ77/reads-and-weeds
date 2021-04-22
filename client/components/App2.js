@@ -17,7 +17,7 @@ import Footer from './Footer.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MemberLogin from './MemberLogin';
 
-class App extends Component {
+class App2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -106,4 +106,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App2;

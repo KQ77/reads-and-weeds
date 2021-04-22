@@ -1,8 +1,8 @@
 import React from 'react';
-import '../public/Sidebar.css';
+import '../../public/Sidebar.css';
 import { Link } from 'react-router-dom';
 
-const Sidebar = (props) => {
+export const Sidebar = (props) => {
   const { members } = props;
   return (
     <div id="sidebar">
@@ -30,5 +30,3 @@ const Sidebar = (props) => {
     </div>
   );
 };
-
-export default Sidebar;
