@@ -27,6 +27,16 @@ router.get('/members', async (req, res, next) => {
   }
 });
 
+router.get('/members/:memberId', async (req, res, next) => {
+  try {
+    const member = await Member.findByPk(req.params.memberId);
+
+    res.status(200).send(member);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/books', async (req, res, next) => {
   const books = await Book.findAll({ include: [Comment] });
   console.log(books, 'books');

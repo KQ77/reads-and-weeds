@@ -3,7 +3,6 @@ import '../public/BookList.css';
 import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
 function BookList(props) {
-  console.log(props.books, 'props.books');
   const properties = {
     itemsToShow: 5,
     itemsToScroll: 2,

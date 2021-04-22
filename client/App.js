@@ -7,6 +7,7 @@ import SingleBook from './SingleBook';
 import Comments from './Comments';
 import BookList from './BookList';
 import PastSelections from './PastSelections';
+import Suggestions from './Suggestions';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
 import Sidebar from './Sidebar';
@@ -14,6 +15,7 @@ import SuggestForm from './SuggestForm';
 import SingleMember from './SingleMember';
 import Footer from './Footer.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import MemberLogin from './MemberLogin';
 
 class App extends Component {
   constructor(props) {
@@ -76,6 +78,8 @@ class App extends Component {
                 )}
               />
               <Route exact path="/" component={SuggestForm} />
+              <Route exact path="/" component={Suggestions} />
+              <Route exact path="/" component={MemberLogin} />
             </div>
           </section>
           <Route
