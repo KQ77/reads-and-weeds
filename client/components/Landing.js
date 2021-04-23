@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Nav from './Nav';
-import '../../public/Landing.css';
+import '../../public/css/Landing.css';
 
 const _Landing = (props) => {
   return (
     <div id="landing">
       <Nav />
-
-      <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>
+      <div id="hero">
+        <section>{/* <img src="/images/coffeebook.jpg" /> */}</section>
+      </div>
     </div>
   );
 };

@@ -13,7 +13,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Static middleware
-app.use(express.static(path.join(__dirname, '..', 'public')));
+
+const PUBLIC_PATH = path.join(__dirname, '../public');
+const DIST_PATH = path.join(__dirname, '../dist');
+app.use(express.static(PUBLIC_PATH));
+app.use(express.static(DIST_PATH));
 
 const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
 router.get('/members', async (req, res, next) => {

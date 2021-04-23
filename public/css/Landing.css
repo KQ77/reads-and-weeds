@@ -1,0 +1,6 @@
+#hero {
+  height: 40rem;
+  background-image: url('../images/coffeebook.jpg');
+  background-size: cover;
+  background-position: center;
+}
