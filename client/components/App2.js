@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import '../public/App.css';
-import { Navbar } from './Navbar.js';
+import { default as Navbar2 } from './Navbar2.js';
 import { Banner } from './Banner.js';
 import MemberList from './MemberList.js';
 import SingleBook from './SingleBook';
 import Comments from './Comments';
 import BookList from './BookList';
 import PastSelections from './PastSelections';
+import Suggestions from './Suggestions';
 import 'regenerator-runtime/runtime.js';
 import axios from 'axios';
 import Sidebar from './Sidebar';
@@ -14,8 +15,9 @@ import SuggestForm from './SuggestForm';
 import SingleMember from './SingleMember';
 import Footer from './Footer.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import MemberLogin from './MemberLogin';
 
-class App extends Component {
+class App2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +43,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/" component={Navbar} />
+          <Route exact path="/" component={Navbar2} />
           <Route exact path="/" component={Banner} />
           <section id="main-app">
             <Route
@@ -76,6 +78,8 @@ class App extends Component {
                 )}
               />
               <Route exact path="/" component={SuggestForm} />
+              <Route exact path="/" component={Suggestions} />
+              <Route exact path="/" component={MemberLogin} />
             </div>
           </section>
           <Route
@@ -102,4 +106,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App2;

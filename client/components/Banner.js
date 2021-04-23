@@ -1,5 +1,5 @@
 import React from 'react';
-import '../public/Banner.css';
+import '../../public/Banner.css';
 import 'react-slideshow-image/dist/styles.css';
 import { Fade } from 'react-slideshow-image';
 

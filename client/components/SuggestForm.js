@@ -1,7 +1,7 @@
 import React from 'react';
-import '../public/SuggestForm.css';
+import '../../public/SuggestForm.css';
 
-const SuggestForm = (props) => {
+export const SuggestForm = (props) => {
   return (
     <div id="suggest-form">
       <label>
@@ -17,5 +17,3 @@ const SuggestForm = (props) => {
     </div>
   );
 };
-
-export default SuggestForm;

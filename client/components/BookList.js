@@ -1,9 +1,8 @@
 import React from 'react';
-import '../public/BookList.css';
+import '../../public/BookList.css';
 import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
-function BookList(props) {
-  console.log(props.books, 'props.books');
+export function BookList(props) {
   const properties = {
     itemsToShow: 5,
     itemsToScroll: 2,
@@ -22,5 +21,3 @@ function BookList(props) {
     </div>
   );
 }
-
-export default BookList;
