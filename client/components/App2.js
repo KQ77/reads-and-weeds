@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../public/App.css';
-import { Navbar } from './Navbar.js';
+import { default as Navbar2 } from './Navbar2.js';
 import { Banner } from './Banner.js';
 import MemberList from './MemberList.js';
 import SingleBook from './SingleBook';
@@ -43,7 +43,7 @@ class App2 extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/" component={Navbar} />
+          <Route exact path="/" component={Navbar2} />
           <Route exact path="/" component={Banner} />
           <section id="main-app">
             <Route

@@ -1,12 +1,14 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Landing, BookClub } from './index';
 
 const App = (props) => {
   return (
     <div id="app">
-      <Route exact path="/" component={Landing} />
-      <Route exact path="/bookclubs/:id" component={BookClub} />
+      <Switch>
+        <Route path="/" component={Landing} />
+        <Route path="/bookclubs/:id" component={BookClub} />
+      </Switch>
     </div>
   );
 };
