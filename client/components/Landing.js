@@ -8,9 +8,7 @@ const _Landing = (props) => {
     <div id="landing">
       <Nav />
 
-      <section id="hero">
-        <img src="/images/coffeebook.jpg" />
-      </section>
+      <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>
     </div>
   );
 };
