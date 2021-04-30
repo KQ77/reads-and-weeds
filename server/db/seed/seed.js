@@ -1,25 +1,14 @@
-const { conn } = require('../server/db.js');
+const { conn } = require('../db.js');
 const { BOOLEAN, STRING, TEXT, INTEGER, UUID, UUIDV4 } = conn.Sequelize;
-const Books = require('../server/Books.js');
-const { Suggestion } = require('../server/db/Suggestion.js');
-const { Comment } = require('../server/Comment.js');
-const Members = require('../server/Members.js');
-const { Book } = require('../server/Book');
-const { Member } = require('../server/Member');
-const axios = require('axios');
+const Books = require('./Books.js');
+const { Suggestion } = require('../Models/Suggestion.js');
+const { Comment } = require('../Models/Comment.js');
+const Members = require('./Members.js');
+const { Book } = require('../Models/Book');
+const { Member } = require('../Models/Member');
+const { Rating } = require('../Models/Rating');
 
-const Rating = conn.define('rating', {
-  id: {
-    primaryKey: true,
-    type: UUID,
-    defaultValue: UUIDV4,
-  },
-  rating: {
-    type: INTEGER,
-    max: 10,
-    min: 1,
-  },
-});
+const axios = require('axios');
 
 //define associations
 Comment.belongsTo(Book);
@@ -31,6 +20,9 @@ Member.hasMany(Comment);
 Suggestion.belongsTo(Member);
 Member.hasMany(Suggestion);
 
+//Book has many rating?
+//member has many rating
+//rating belongs to member
 const apiIds = [
   `PmpfDwAAQBAJ`,
   'RidvDwAAQBAJ',
@@ -112,4 +104,4 @@ const syncAndSeed = async () => {
     )
   );
 };
-module.exports = { Book, Rating, Comment, Member, syncAndSeed };
+module.exports = { Book, Rating, Comment, Member, Suggestion, syncAndSeed };

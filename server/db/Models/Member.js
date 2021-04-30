@@ -1,4 +1,4 @@
-const { conn } = require('./db');
+const { conn } = require('../db');
 const { STRING, TEXT } = require('sequelize');
 
 const Member = conn.define('member', {

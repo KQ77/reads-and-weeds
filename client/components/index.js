@@ -4,7 +4,7 @@ export { Banner } from './Banner';
 export { BookList } from './BookList';
 export { Footer } from './Footer';
 export { MemberList } from './MemberList';
-export { default as Navbar2 } from './Navbar2';
+export { Navbar2 } from './Navbar2';
 export { SingleBook } from './SingleBook';
 export { PastSelections } from './PastSelections';
 export { Sidebar } from './Sidebar';

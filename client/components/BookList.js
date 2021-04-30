@@ -2,6 +2,7 @@ import React from 'react';
 import '../../public/BookList.css';
 import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
+
 export function BookList(props) {
   const properties = {
     itemsToShow: 5,

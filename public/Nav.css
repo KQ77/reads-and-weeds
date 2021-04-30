@@ -1,3 +1,8 @@
 .color-nav {
+  height: 4rem;
   background-color: rgb(250, 109, 109);
+}
+
+#searchbar {
+  width: 20rem;
 }
