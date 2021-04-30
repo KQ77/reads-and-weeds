@@ -7,11 +7,15 @@ const _Landing = (props) => {
   return (
     <div id="landing">
       <Nav />
-      <div id="hero">
-        <section>{/* <img src="/images/coffeebook.jpg" /> */}</section>
-      </div>
+
+      <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>
+      <section id="your-clubs">{/* <ClubList clubs={clubs} /> */}</section>
     </div>
   );
 };
 
+//setAuth if someone signed in still
+//once component mounts & auth is set - fetch user's bookclubs
+//how to auth? JWT? firebase?
+const mapState = (state, routeProps) => {};
 export const Landing = connect((state) => state)(_Landing);

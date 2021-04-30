@@ -1,4 +1,4 @@
-const { conn } = require('./db.js');
+const { conn } = require('../db.js');
 const { STRING, BOOLEAN, INTEGER, TEXT } = require('sequelize');
 
 const Book = conn.define('book', {

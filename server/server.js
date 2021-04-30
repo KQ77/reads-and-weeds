@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const PORT = process.env.PORT || 1337;
+// const PORT = process.env.PORT || 1337;
 const path = require('path');
 const axios = require('axios');
-const { Suggestion } = require('./db/Suggestion.js');
-const { Member, Rating, Comment, Book } = require('../utils/seed.js');
+const {
+  Member,
+  Rating,
+  Comment,
+  Book,
+  Suggestion,
+} = require('./db/seed/seed.js');
 app.use('/api', router);
 
 //body parsing middleware
@@ -89,4 +94,6 @@ app.use((err, req, res, next) => {
   if (process.env.NODE_ENV !== 'test') console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error');
 });
-app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
+// app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
+
+module.exports = app;
