@@ -1,30 +1,30 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-// const PORT = process.env.PORT || 1337;
 const path = require('path');
-const axios = require('axios');
-const {
-  Member,
-  Rating,
-  Comment,
-  Book,
-  Suggestion,
-} = require('./db/seed/seed.js');
-app.use('/api', router);
+// const axios = require('axios');
+// const {
+//   Member,
+//   Rating,
+//   Comment,
+//   Book,
+//   Suggestion,
+// } = require('./db/seed/seed.js');
+
+//mount api router
+app.use('/api', require('./api'));
 
 //body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Static middleware
-
 const PUBLIC_PATH = path.join(__dirname, '../public');
 const DIST_PATH = path.join(__dirname, '../dist');
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
 
-const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
+// const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
 router.get('/members', async (req, res, next) => {
   try {
     const members = await Member.findAll();

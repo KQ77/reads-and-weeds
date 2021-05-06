@@ -10,7 +10,7 @@
     "build": "webpack -p",
     "seed": "node utils/seedRunner.js",
     "start:dev": "npm run start-server & npm run build-watch",
-    "start-server": "nodemon server/server.js --ignore public --ignore client"
+    "start-server": "nodemon server --ignore public --ignore client"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +18,9 @@
   "dependencies": {
     "axios": "^0.21.0",
     "bootstrap": "^4.6.0",
+    "cookie-parser": "^1.4.5",
     "core-js-bundle": "^3.8.0",
+    "dotenv": "^9.0.0",
     "express": "^4.17.1",
     "pg": "^8.5.1",
     "react": "^17.0.1",
