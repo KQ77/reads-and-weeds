@@ -29,8 +29,22 @@ const _Nav = (props) => {
 
         <Nav className="ml-auto">
           <Nav.Link>+ Create club</Nav.Link>
-          <Nav.Link>Log In</Nav.Link>
-          <Nav.Link>Sign Up</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              props.setShow();
+              props.setAuthType('login');
+            }}
+          >
+            Log In
+          </Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              props.setShow();
+              props.setAuthType('register');
+            }}
+          >
+            Sign Up
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
