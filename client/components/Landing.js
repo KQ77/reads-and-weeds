@@ -10,10 +10,11 @@ const _Landing = (props) => {
   const [authType, setAuthType] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   return (
     <div id="landing">
       <Nav setAuthType={setAuthType} setShow={() => handleShow()} />
-      <Modal show={show}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
             {authType === 'login' ? 'Log In' : 'Register'}
@@ -26,9 +27,12 @@ const _Landing = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+          {/* <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
           <Button variant="primary" onClick={handleClose}>
             Save Changes
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
       <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>
