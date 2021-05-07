@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Nav from './Nav';
 import '../../public/css/Landing.css';
 import { Modal, Button } from 'react-bootstrap';
-import { Login } from './AuthForm';
+import { Login, Register } from './AuthForm';
 
 const _Landing = (props) => {
   const [show, setShow] = useState(false);
@@ -21,7 +21,7 @@ const _Landing = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login />
+          {authType === 'login' ? <Login /> : <Register />}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

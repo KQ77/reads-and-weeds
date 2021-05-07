@@ -10,6 +10,10 @@ const Member = conn.define('member', {
   lastName: {
     type: STRING,
   },
+  email: {
+    type: STRING,
+    allowNull: false,
+  },
   bio: {
     type: TEXT,
   },
@@ -28,10 +32,14 @@ const Member = conn.define('member', {
   },
 });
 
-Member.authenticate = async function (email, password) {
-  const user = await Member.findOne({ where: { email } });
-  if (user && (await bcrypt.compare(password, user.password))) {
-    return jwt.sign({ id: user.id }, process.env.JWT);
+Member.prototype.generateToken = function () {
+  return jwt.sign({ id: this.id }, process.env.JWT_SECRET);
+};
+
+Member.authenticate = async function ({ email, password }) {
+  const member = await Member.findOne({ where: { email } });
+  if (member && (await bcrypt.compare(password, member.password))) {
+    return member.generateToken();
   }
   const error = Error('invalid login credentials');
   error.status = 401;
@@ -40,7 +48,7 @@ Member.authenticate = async function (email, password) {
 
 Member.findByToken = async function (token) {
   try {
-    const { id } = await jwt.verify(token, process.env.JWT);
+    const { id } = await jwt.verify(token, process.env.JWT_SECRET);
     const member = await Member.findByPk(id, {
       attributes: { exclude: ['password'] },
     });
@@ -51,7 +59,7 @@ Member.findByToken = async function (token) {
     error.status = 401;
     throw error;
   } catch (err) {
-    const error = Error('bad credentials');
+    const error = Error('invalid credentials');
     error.status = 401;
     throw error;
   }

@@ -2,15 +2,13 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 1337;
-
 require('dotenv').config();
+//body parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //mount api router
 app.use('/api', require('./api'));
-
-//body parsing middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Static middleware
 const PUBLIC_PATH = path.join(__dirname, '../public');

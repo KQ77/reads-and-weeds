@@ -1,16 +1,14 @@
-//constants
+import axios from 'axios';
 
-import { async } from 'regenerator-runtime';
-
+//action constants
 const SET_AUTH = 'SET_AUTH';
 
 //action creator
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 export const authenticateUser = (formData, method) => async (dispatch) => {
-  console.log(formData, 'formData');
-  console.log(method, 'method');
-  dispatch(setAuth(formData));
+  await axios.post(`/api/auth/${method}`, formData);
+  //   dispatch(setAuth(formData));
 };
 
 export const auth = (state = {}, action) => {

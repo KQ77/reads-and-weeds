@@ -90,18 +90,18 @@ const syncAndSeed = async () => {
   //   });
   // });
 
-  await Promise.all(
-    Members.map((member) =>
-      Member.create({
-        firstName: member.firstName,
-        lastName: member.lastName,
-        genre: member.genre,
-        faveBook: member.faveBook,
-        favePick: member.favePick,
-        imageUrl: member.imageUrl,
-        bio: member.bio,
-      })
-    )
-  );
+  // await Promise.all(
+  //   Members.map((member) =>
+  //     Member.create({
+  //       firstName: member.firstName,
+  //       lastName: member.lastName,
+  //       genre: member.genre,
+  //       faveBook: member.faveBook,
+  //       favePick: member.favePick,
+  //       imageUrl: member.imageUrl,
+  //       bio: member.bio,
+  //     })
+  //   )
+  // );
 };
 module.exports = { Book, Rating, Comment, Member, Suggestion, syncAndSeed };
