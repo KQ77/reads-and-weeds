@@ -7,7 +7,8 @@ const Members = require('./Members.js');
 const { Book } = require('../Models/Book');
 const { Member } = require('../Models/Member');
 const { Rating } = require('../Models/Rating');
-
+const { Club } = require('../Models/Club');
+const { ClubMembers } = require('../Models/ClubMembers');
 const axios = require('axios');
 
 //define associations
@@ -19,6 +20,9 @@ Member.hasMany(Comment);
 
 Suggestion.belongsTo(Member);
 Member.hasMany(Suggestion);
+
+Member.belongsToMany(Club, { through: ClubMembers, foreignKey: 'memberId' });
+Club.belongsToMany(Member, { through: ClubMembers, foreignKey: 'clubId' });
 
 //Book has many rating?
 //member has many rating
@@ -104,4 +108,12 @@ const syncAndSeed = async () => {
   //   )
   // );
 };
-module.exports = { Book, Rating, Comment, Member, Suggestion, syncAndSeed };
+module.exports = {
+  Book,
+  Rating,
+  Comment,
+  Member,
+  Suggestion,
+  Club,
+  syncAndSeed,
+};

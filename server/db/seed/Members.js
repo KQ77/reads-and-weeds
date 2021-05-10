@@ -11,7 +11,7 @@ const members = [
   {
     firstName: 'Melissa M',
     lastName: 'Mahon',
-    bio: `Charismatic lover of life, extrovert that is married to an introvert with  2 highly adored spunky children,
+    bio: `Charismatic lover of life, extrovert that is married to an introvert with 2 highly adored spunky children,
     and a communication expert who couldn't survive this thing called life without the fabulous village around her.`,
     genre: `Psychological Thriller/ Mystery`,
     imageUrl: `/melm2.jpg`,
