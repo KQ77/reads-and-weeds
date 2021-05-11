@@ -14,6 +14,10 @@ const Member = conn.define('member', {
     type: STRING,
     allowNull: false,
   },
+  password: {
+    type: STRING,
+    allowNull: false,
+  },
   bio: {
     type: TEXT,
   },
@@ -32,12 +36,19 @@ const Member = conn.define('member', {
   },
 });
 
+Member.addHook('beforeSave', async (member) => {
+  if (member.changed('password')) {
+    member.password = await bcrypt.hash(member.password, 5);
+  }
+});
+
 Member.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT_SECRET);
 };
 
 Member.authenticate = async function ({ email, password }) {
   const member = await Member.findOne({ where: { email } });
+  console.log(await bcrypt.compare(password, member.password));
   if (member && (await bcrypt.compare(password, member.password))) {
     return member.generateToken();
   }

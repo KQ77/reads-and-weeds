@@ -32,7 +32,7 @@ Club.hasMany(Book);
 //rating belongs to member
 
 // const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
-const currentId = 'SUdfDwAAQBAJ';
+// const currentId = 'SUdfDwAAQBAJ';
 
 const syncAndSeed = async () => {
   await conn.authenticate();
@@ -53,7 +53,6 @@ const syncAndSeed = async () => {
     members.map((member) => Member.create(member))
   );
   await RW.setMembers(rwmembers);
-  console.log(await RW.getMembers());
   //for (let i = 0; i < apiIds.length; i++) {
   //   const id = apiIds[i];
   //   const book = (

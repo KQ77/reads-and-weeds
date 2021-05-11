@@ -1,11 +1,9 @@
 const router = require('express').Router();
 const { Member } = require('../db/seed/seed');
-// const express = require('express');
-// router.use(express.json());
 
 router.post('/login', async (req, res, next) => {
   try {
-    res.cookie('JWT', await Member.authenticate(req.body), {
+    res.cookie('token', await Member.authenticate(req.body), {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production' ? true : false,
     });
@@ -29,10 +27,11 @@ router.post('/register', async (req, res, next) => {
     //else create new member and generate JWT
     member = await Member.create({ email, password });
     const token = await member.generateToken();
-    //set httponly cookie in response
-    res.cookie('JWT', token, {
+    //set httpOnly cookie in response
+    res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production' ? true : false,
+      // secure: process.env.NODE_ENV === 'production' ? true : false,
+      secure: true,
     });
     res.send();
   } catch (err) {
@@ -40,15 +39,20 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
+//GET api/auth/member
 router.get('/member', async (req, res, next) => {
   try {
-    const token = req.cookies.JWT;
-    console.log(token, 'token');
+    const token = req.cookies.token;
     //send back the member associated with that token
     res.send(await Member.findByToken(token));
   } catch (err) {
     next(err);
   }
+});
+
+router.get('/logout', async (req, res, next) => {
+  req.clearCookie('token');
+  res.send();
 });
 
 module.exports = router;
