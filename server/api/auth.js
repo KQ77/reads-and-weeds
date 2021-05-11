@@ -43,8 +43,10 @@ router.post('/register', async (req, res, next) => {
 router.get('/member', async (req, res, next) => {
   try {
     const token = req.cookies.token;
-    //send back the member associated with that token
-    res.send(await Member.findByToken(token));
+    if (token) {
+      //send back the member associated with that token
+      res.send(await Member.findByToken(token));
+    }
   } catch (err) {
     next(err);
   }

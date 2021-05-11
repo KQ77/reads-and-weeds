@@ -21,7 +21,11 @@ const _Landing = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {authType === 'login' ? <Login /> : <Register />}
+          {authType === 'login' ? (
+            <Login handleClose={handleClose} />
+          ) : (
+            <Register handleClose={handleClose} />
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

@@ -10,13 +10,13 @@ const AuthForm = (props) => {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-
     //html5 method
     if (form.checkValidity() === false) {
       //   event.preventDefault();
       event.stopPropagation();
     }
     props.authenticate({ email, password }, props.formName);
+    props.handleClose();
   };
   return (
     <div id="authform">
