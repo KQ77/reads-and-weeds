@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../public/css/Nav.css';
 import { InputGroup, FormControl, Nav, Button, Form } from 'react-bootstrap';
+import { logout } from '../redux/auth';
 
 const _Nav = (props) => {
   const { isLoggedIn } = props;
@@ -12,9 +13,7 @@ const _Nav = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav>
-          <Navbar.Text>Welcome {props.auth.firstName || ''}!</Navbar.Text>
-
-          <Nav.Link>+ Create club</Nav.Link>
+          <Navbar.Text>Welcome {props.auth.firstName || ''}</Navbar.Text>
           {!isLoggedIn ? (
             <Nav.Link
               onClick={() => {
@@ -27,6 +26,13 @@ const _Nav = (props) => {
           ) : (
             ''
           )}
+          {isLoggedIn ? (
+            <Nav.Link onClick={() => props.logout()}>Log Out</Nav.Link>
+          ) : (
+            ''
+          )}
+          <Nav.Link>+ Create club</Nav.Link>
+
           <Nav.Link
             onClick={() => {
               props.setShow();
@@ -58,6 +64,8 @@ const mapState = (state) => {
 };
 
 const mapDispatch = (dispatch) => {
-  return {};
+  return {
+    logout: () => dispatch(logout()),
+  };
 };
-export default connect(mapState)(_Nav);
+export default connect(mapState, mapDispatch)(_Nav);

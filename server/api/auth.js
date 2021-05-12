@@ -54,9 +54,9 @@ router.get('/member', async (req, res, next) => {
   }
 });
 
-router.get('/logout', async (req, res, next) => {
-  req.clearCookie('token');
-  res.send();
+router.post('/logout', async (req, res, next) => {
+  res.clearCookie('token');
+  res.status(204).send();
 });
 
 module.exports = router;
