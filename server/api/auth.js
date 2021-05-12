@@ -46,6 +46,8 @@ router.get('/member', async (req, res, next) => {
     if (token) {
       //send back the member associated with that token
       res.send(await Member.findByToken(token));
+    } else {
+      res.send({});
     }
   } catch (err) {
     next(err);
