@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../public/SingleMember.css';
+import '../../public/css/SingleMember.css';
 import axios from 'axios';
 
 export const SingleMember = (props) => {

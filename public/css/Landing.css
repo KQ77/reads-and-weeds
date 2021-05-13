@@ -1,6 +1,18 @@
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 #hero {
   height: 50rem;
   background-image: url('../images/coffeebook.jpg');
   background-size: cover;
   background-position: center;
+}
+
+#member-clubs {
+  min-height: 30rem;
+  background-color: rgb(185 215 228);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }

@@ -4,10 +4,12 @@ import Nav from './Nav';
 import '../../public/css/Landing.css';
 import { Modal, Button } from 'react-bootstrap';
 import { Login, Register } from './AuthForm';
+import { ClubList } from './ClubList';
 
 const _Landing = (props) => {
   const [show, setShow] = useState(false);
   const [authType, setAuthType] = useState('');
+  const [clubs, setClubs] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -34,7 +36,9 @@ const _Landing = (props) => {
         </Modal.Footer>
       </Modal>
       <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>
-      <section id="your-clubs">{/* <ClubList clubs={clubs} /> */}</section>
+      <section id="member-clubs">
+        <ClubList clubs={clubs} />
+      </section>
     </div>
   );
 };

@@ -1,8 +1,3 @@
-/* .color-nav {
-  height: 4rem;
-  background-color: rgb(250, 109, 109);
-} */
-
 #searchbar {
   width: 20rem;
 }
@@ -10,9 +5,14 @@
 #navbar {
   font-size: 1.2rem;
   height: 4rem;
-  background-color: rgb(250, 109, 109);
+  background-color: rgb(7 11 55);
 }
 
 #navbar a {
   margin: auto 1rem;
+}
+
+#navbar-text,
+#navbar a {
+  color: #d9d8d8c7;
 }
