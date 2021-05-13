@@ -1,40 +1,72 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
-import '../../public/Nav.css';
+import '../../public/css/Nav.css';
 import { InputGroup, FormControl, Nav, Button, Form } from 'react-bootstrap';
-import NavItem from 'react-bootstrap/NavItem';
-import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse';
+import { logout } from '../redux/auth';
 
 const _Nav = (props) => {
+  const { isLoggedIn } = props;
   return (
     <Navbar id="navbar" className="color-nav" expand="lg">
       <Navbar.Brand href="/">Q-Books</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Form inline>
-          <InputGroup id="searchbar">
-            {/* <InputGroup.Prepend>
-          <InputGroup.Text>search</InputGroup.Text>
-        </InputGroup.Prepend> */}
-            <FormControl
-              type="text"
-              placeholder="find a group"
-              aria-label="group"
-              aria-describedby="basic-addon1"
-            />
-            <Button variant="info">Search</Button>
-          </InputGroup>
-        </Form>
-
-        <Nav className="ml-auto">
+        <Nav>
+          <Navbar.Text>Welcome {props.auth.firstName || ''}</Navbar.Text>
+          {!isLoggedIn ? (
+            <>
+              <Nav.Link
+                onClick={() => {
+                  props.setShow();
+                  props.setAuthType('login');
+                }}
+              >
+                Log In
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  props.setShow();
+                  props.setAuthType('register');
+                }}
+              >
+                Sign Up
+              </Nav.Link>
+            </>
+          ) : (
+            ''
+          )}
+          {isLoggedIn ? (
+            <Nav.Link onClick={() => props.logout()}>Log Out</Nav.Link>
+          ) : (
+            ''
+          )}
           <Nav.Link>+ Create club</Nav.Link>
-          <Nav.Link>Log In</Nav.Link>
-          <Nav.Link>Sign Up</Nav.Link>
         </Nav>
+        <InputGroup className="justify-content-center" id="searchbar">
+          <FormControl
+            type="text"
+            placeholder="find a group"
+            aria-label="group"
+            aria-describedby="basic-addon1"
+          />
+          <Button variant="info">Search</Button>
+        </InputGroup>
       </Navbar.Collapse>
     </Navbar>
   );
 };
 
-export default connect((state) => state)(_Nav);
+const mapState = (state) => {
+  return {
+    auth: state.auth,
+    isLoggedIn: state.auth.id ? true : false,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  };
+};
+export default connect(mapState, mapDispatch)(_Nav);

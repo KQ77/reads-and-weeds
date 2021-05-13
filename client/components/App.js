@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Landing, BookClub } from './index';
+import { connect } from 'react-redux';
+import { setAuth } from '../redux/auth';
 
-const App = (props) => {
+const _App = (props) => {
+  useEffect(() => {
+    props.setAuth();
+  }, []);
   return (
     <div id="app">
       <Switch>
@@ -13,4 +18,9 @@ const App = (props) => {
   );
 };
 
-export default App;
+const mapDispatch = (dispatch) => {
+  return {
+    setAuth: () => dispatch(setAuth()),
+  };
+};
+export const App = connect((state) => state, mapDispatch)(_App);
