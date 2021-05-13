@@ -32,7 +32,7 @@ const AuthForm = (props) => {
   }, [props.auth]);
   return (
     <div id="authform">
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form xs="auto" noValidate validated={validated} onSubmit={handleSubmit}>
         {props.formName === 'register' ? (
           <Form.Group>
             <Form.Label>First Name</Form.Label>
