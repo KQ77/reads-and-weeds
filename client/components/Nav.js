@@ -15,14 +15,24 @@ const _Nav = (props) => {
         <Nav>
           <Navbar.Text>Welcome {props.auth.firstName || ''}</Navbar.Text>
           {!isLoggedIn ? (
-            <Nav.Link
-              onClick={() => {
-                props.setShow();
-                props.setAuthType('login');
-              }}
-            >
-              Log In
-            </Nav.Link>
+            <>
+              <Nav.Link
+                onClick={() => {
+                  props.setShow();
+                  props.setAuthType('login');
+                }}
+              >
+                Log In
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  props.setShow();
+                  props.setAuthType('register');
+                }}
+              >
+                Sign Up
+              </Nav.Link>
+            </>
           ) : (
             ''
           )}
@@ -32,15 +42,6 @@ const _Nav = (props) => {
             ''
           )}
           <Nav.Link>+ Create club</Nav.Link>
-
-          <Nav.Link
-            onClick={() => {
-              props.setShow();
-              props.setAuthType('register');
-            }}
-          >
-            Sign Up
-          </Nav.Link>
         </Nav>
         <InputGroup className="justify-content-center" id="searchbar">
           <FormControl

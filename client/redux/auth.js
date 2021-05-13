@@ -21,8 +21,12 @@ export const setAuth = () => {
 };
 export const authenticateUser = (formData, method) => async (dispatch) => {
   //this route creates a token for the user and stores it in a cookie
-  await axios.post(`/api/auth/${method}`, formData);
-  dispatch(setAuth());
+  try {
+    await axios.post(`/api/auth/${method}`, formData);
+    dispatch(setAuth());
+  } catch (err) {
+    dispatch(_setAuth({ error: err.response.data }));
+  }
 };
 export const logout = () => async (dispatch) => {
   console.log('logging out');

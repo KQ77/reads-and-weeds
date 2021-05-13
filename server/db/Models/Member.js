@@ -13,6 +13,9 @@ const Member = conn.define('member', {
   email: {
     type: STRING,
     allowNull: false,
+    validate: {
+      isEmail: true,
+    },
   },
   password: {
     type: STRING,
@@ -48,6 +51,11 @@ Member.prototype.generateToken = function () {
 
 Member.authenticate = async function ({ email, password }) {
   const member = await Member.findOne({ where: { email } });
+  if (!member) {
+    const error = new Error('a user with that email does not exist');
+    error.status = 401;
+    throw error;
+  }
   console.log(await bcrypt.compare(password, member.password));
   if (member && (await bcrypt.compare(password, member.password))) {
     return member.generateToken();

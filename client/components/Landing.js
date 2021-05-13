@@ -22,21 +22,15 @@ const _Landing = (props) => {
         </Modal.Header>
         <Modal.Body>
           {authType === 'login' ? (
-            <Login handleClose={handleClose} />
+            <Login handleShow={handleShow} handleClose={handleClose} />
           ) : (
-            <Register handleClose={handleClose} />
+            <Register handleShow={handleShow} handleClose={handleClose} />
           )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button> */}
         </Modal.Footer>
       </Modal>
       <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>

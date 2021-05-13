@@ -15,7 +15,7 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, firstName, lastName } = req.body;
     //check if member already exists
     let member = await Member.findOne({ where: { email } });
     //if member exists, throw error saying so
@@ -25,7 +25,7 @@ router.post('/register', async (req, res, next) => {
       throw error;
     }
     //else create new member and generate JWT
-    member = await Member.create({ email, password });
+    member = await Member.create({ email, password, firstName, lastName });
     const token = await member.generateToken();
     //set httpOnly cookie in response
     res.cookie('token', token, {
