@@ -7,6 +7,7 @@ import { Login, Register } from './AuthForm';
 import { ClubList } from './ClubList';
 import { fetchMemberClubs } from '../redux/memberClubs';
 import { CardGroup, Card } from 'react-bootstrap';
+import { Footer } from './Footer';
 
 const _Landing = (props) => {
   const [show, setShow] = useState(false);
@@ -75,6 +76,7 @@ const _Landing = (props) => {
       ) : (
         ''
       )}
+      <Footer />
     </div>
   );
 };
