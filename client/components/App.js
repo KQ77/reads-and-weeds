@@ -10,10 +10,8 @@ const _App = (props) => {
   }, []);
   return (
     <div id="app">
-      <Switch>
-        <Route path="/" component={Landing} />
-        <Route path="/bookclubs/:id" component={BookClub} />
-      </Switch>
+      <Route exact path="/" component={Landing} />
+      <Route path="/bookclubs/:id" component={BookClub} />
     </div>
   );
 };

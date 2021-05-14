@@ -16,7 +16,7 @@ const Club = conn.define('club', {
     type: BOOLEAN,
     allowNull: false,
   },
-  imgSrc: {
+  displayImage: {
     type: STRING,
     defaultValue: '/images/defaultClub.jpeg',
   },

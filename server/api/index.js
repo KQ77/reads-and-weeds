@@ -5,6 +5,7 @@ router.use('/members', require('./members'));
 router.use('/clubs', require('./clubs'));
 
 router.use((req, res, next) => {
+  console.log('route not found');
   const error = new Error('Not Found');
   error.status = 404;
   next(error);

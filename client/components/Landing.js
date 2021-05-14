@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Nav from './Nav';
+import { Link } from 'react-router-dom';
 import '../../public/css/Landing.css';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Card, CardGroup } from 'react-bootstrap';
 import { Login, Register } from './AuthForm';
 import { ClubList } from './ClubList';
 import { fetchMemberClubs } from '../redux/memberClubs';
-import { CardGroup, Card } from 'react-bootstrap';
 import { Footer } from './Footer';
 
 const _Landing = (props) => {
@@ -28,7 +28,6 @@ const _Landing = (props) => {
     props.fetchClubs(props.auth.id);
   }, [props.auth.id]);
   const clubs = props.memberClubs;
-  console.log(clubs, 'clubs');
   return (
     <div id="landing">
       <Nav setAuthType={setAuthType} setShow={() => handleShow()} />
@@ -59,14 +58,16 @@ const _Landing = (props) => {
           {clubs.map((club, idx) => (
             <React.Fragment key={idx}>
               <Card style={{ width: '15rem' }}>
-                <Card.Img variant="top" src={club.imgSrc}></Card.Img>
+                <Card.Img variant="top" src={club.displayImage}></Card.Img>
                 <Card.Body>
                   <Card.Title>{club.name}</Card.Title>
                   <Card.Text>{club.location}</Card.Text>
                   <Card.Text>{club.tagline}</Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                  <button>Visit</button>
+                  <Link to={`/bookclubs/${club.id}`}>
+                    <Button variant="info">Visit</Button>
+                  </Link>
                 </Card.Footer>
               </Card>
             </React.Fragment>

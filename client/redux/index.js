@@ -5,11 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { allClubsReducer } from './clubs';
 import { auth } from './auth';
 import { memberClubsReducer } from './memberClubs';
+import { bookclubReducer } from './bookclub';
 
 const reducer = combineReducers({
-  bookclubs: allClubsReducer,
+  allClubs: allClubsReducer,
   auth,
   memberClubs: memberClubsReducer,
+  bookclub: bookclubReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

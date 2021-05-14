@@ -90,4 +90,6 @@ const rwBooks = [
   { gbId: 'xmC9DwAAQBAJ', number: 13, isCurrent: true },
 ];
 
-module.exports = { members, rwBooks };
+const rwImages = [{ src: '/images/hike.jpg' }, { src: '/images/library.jpg' }];
+
+module.exports = { members, rwBooks, rwImages };

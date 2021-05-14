@@ -3,13 +3,13 @@ const { BOOLEAN, STRING, TEXT, INTEGER, UUID, UUIDV4 } = conn.Sequelize;
 const Books = require('./Books.js');
 const { Suggestion } = require('../Models/Suggestion.js');
 const { Comment } = require('../Models/Comment.js');
-// const Members = require('./Members.js');
+const { Image } = require('../Models/Image');
 const { Book } = require('../Models/Book');
 const { Member } = require('../Models/Member');
 const { Rating } = require('../Models/Rating');
 const { Club } = require('../Models/Club');
 const { ClubMembers } = require('../Models/ClubMembers');
-const { members, rwBooks } = require('./readsweedseed');
+const { members, rwBooks, rwImages } = require('./readsweedseed');
 const axios = require('axios');
 
 //define associations
@@ -31,6 +31,9 @@ Club.hasMany(Book);
 //member has many rating
 //rating belongs to member
 
+Image.belongsTo(Club);
+Club.hasMany(Image);
+
 // const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
 // const currentId = 'SUdfDwAAQBAJ';
 
@@ -38,23 +41,29 @@ const syncAndSeed = async () => {
   await conn.authenticate();
   console.log('database authenticated');
   await conn.sync({ force: true });
-
-  //seed R&W club
+  //**RW CLUB** //
+  //seed club
   const RW = await Club.create({
     name: 'Reads and Weeds',
     location: 'Trumbull, CT',
     tagline: 'Read. Meet. Weed. Eat. Repeat.',
     private: false,
-    imgSrc: '/images/library.jpg',
+    displayImage: '/images/library.jpg',
   });
+  //seed books
   const books = await Promise.all(rwBooks.map((book) => Book.create(book)));
   await RW.setBooks(books);
-  // await Promise.all(books.map((book) => book.update({ clubId: RW.id })));
-
+  //seed members
   const rwmembers = await Promise.all(
     members.map((member) => Member.create(member))
   );
   await RW.setMembers(rwmembers);
+  //seed club images
+  const images = await Promise.all(
+    rwImages.map((image) => Image.create(image))
+  );
+  await RW.setImages(images);
+
   //for (let i = 0; i < apiIds.length; i++) {
   //   const id = apiIds[i];
   //   const book = (
@@ -123,5 +132,6 @@ module.exports = {
   Member,
   Suggestion,
   Club,
+  Image,
   syncAndSeed,
 };
