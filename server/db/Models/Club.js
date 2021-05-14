@@ -16,6 +16,10 @@ const Club = conn.define('club', {
     type: BOOLEAN,
     allowNull: false,
   },
+  imgSrc: {
+    type: STRING,
+    defaultValue: '/images/defaultClub.jpeg',
+  },
 });
 
 module.exports = { Club };

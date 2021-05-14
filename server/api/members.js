@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Member, Club } = require('../db/seed/seed');
+const { Member, Club, Book } = require('../db/seed/seed');
 const { isLoggedIn } = require('../middleware');
 
 //GET /api/members/:memberId/clubs

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { async } from 'regenerator-runtime';
 
 //constants
 const SET_CLUBS = 'SET_CLUBS';
@@ -15,6 +14,11 @@ export const setClubs = () => {
   };
 };
 
+// export const fetchMemberClubs = () => {
+//   return async (dispatch) => {
+//     const clubs = await axios.get('/api/members/clubs').data;
+//   };
+// };
 //reducer for all bookclubs
 export const allClubsReducer = (state = [], action) => {
   if (action.type === SET_CLUBS) {

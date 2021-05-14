@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Nav from './Nav';
 import '../../public/css/Landing.css';
 import { Modal, Button } from 'react-bootstrap';
 import { Login, Register } from './AuthForm';
 import { ClubList } from './ClubList';
+// import { fetchClubs } from '../redux/clubs';
+import axios from 'axios';
+import { CardGroup, Card } from 'react-bootstrap';
 
 const _Landing = (props) => {
   const [show, setShow] = useState(false);
@@ -12,6 +15,17 @@ const _Landing = (props) => {
   const [clubs, setClubs] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  useEffect(() => {
+    async function fetchMemberClubs() {
+      const clubs = (await axios.get(`/api/members/${props.auth.id}/clubs`))
+        .data;
+      console.log(clubs, 'clubs');
+      setClubs(clubs);
+    }
+    if (props.auth.id) {
+      fetchMemberClubs();
+    }
+  }, [props.auth]);
 
   return (
     <div id="landing">
@@ -37,7 +51,24 @@ const _Landing = (props) => {
       </Modal>
       <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>
       <section id="member-clubs">
-        <ClubList clubs={clubs} />
+        <h1>Your Clubs</h1>
+
+        {clubs.map((club, idx) => (
+          <React.Fragment key={idx}>
+            <Card style={{ width: '15rem' }}>
+              <Card.Img variant="top" src={club.imgSrc}></Card.Img>
+              <Card.Body>
+                <Card.Title>{club.name}</Card.Title>
+                <Card.Text>{club.location}</Card.Text>
+                <Card.Text>{club.tagline}</Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <button>Visit</button>
+              </Card.Footer>
+            </Card>
+          </React.Fragment>
+        ))}
+        {/* <ClubList clubs={clubs} /> */}
       </section>
     </div>
   );
@@ -46,4 +77,9 @@ const _Landing = (props) => {
 //setAuth if someone signed in still
 //once component mounts & auth is set - fetch user's bookclubs
 const mapState = (state, routeProps) => {};
+const mapDispatch = (dispatch) => {
+  return {
+    fetchClubs: () => dispatch(fetchMemberClubs()),
+  };
+};
 export const Landing = connect((state) => state)(_Landing);
