@@ -31,10 +31,13 @@ div.description {
 }
 div.description p {
   margin: 0.4rem;
+  font-size: 1.2rem;
   line-height: 1.4rem;
 }
 div.row {
+  margin: 0;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
 }
 
@@ -44,9 +47,13 @@ div.row {
 }
 
 #single-book img.current {
+  height: 20rem;
+  border: 1px solid blue;
+}
+/* #single-book img.current {
   width: 100%;
   margin-left: 1rem;
-}
+} */
 
 #single-book img.single-book {
 }

@@ -3,14 +3,6 @@ import '../../public/css/Sidebar.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 const _Sidebar = (props) => {
-  // const [members, setMembers] = useState([]);
-  // useEffect(() => {
-  //   console.log('props the bookclub changed?');
-  //   if (props.bookclub) {
-  //     setMembers(props.bookclub.members);
-  //   }
-  // }, [props.bookclub]);
-  console.log(props, 'props of sidebar');
   const { members } = props.bookclub;
   return (
     <div id="sidebar">

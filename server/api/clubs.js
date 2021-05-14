@@ -1,4 +1,4 @@
-const { Club, Member, Image } = require('../db/seed/seed');
+const { Club, Member, Image, Book } = require('../db/seed/seed');
 
 const router = require('express').Router();
 
@@ -8,6 +8,7 @@ router.get('/:clubId', async (req, res, next) => {
       include: [
         { model: Member, attributes: { exclude: ['password'] } },
         { model: Image },
+        { model: Book },
       ],
     });
     if (!club.private) {

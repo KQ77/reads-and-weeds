@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchClub } from '../redux/bookclub';
-import { Sidebar, Banner } from './index';
+import { Sidebar, Banner, SingleBook } from './index';
+import '../../public/css/BookClub.css';
 
 const _BookClub = (props) => {
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
   }, []);
   if (props.bookclub.name) {
-    console.log(props.bookclub, 'props.bookclub');
+    const current = props.bookclub.books.find((book) => book.isCurrent);
     return (
       <div id="bookclub">
         <Banner />
-        <Sidebar />
+        <div className="flex-container">
+          <Sidebar />
+          <div id="right">
+            <section id="current-selection">
+              <h1>Current Selection</h1>
+              <SingleBook book={current} />
+            </section>
+          </div>
+        </div>
       </div>
     );
   } else {

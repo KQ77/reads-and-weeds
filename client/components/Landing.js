@@ -16,17 +16,9 @@ const _Landing = (props) => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    // async function fetchMemberClubs() {
-    //   const clubs = (await axios.get(`/api/members/${props.auth.id}/clubs`))
-    //     .data;
-    //   console.log(clubs, 'clubs');
-    //   setClubs(clubs);
-    // }
-    // if (props.auth.id) {
-    //   fetchMemberClubs();
-    // }
     props.fetchClubs(props.auth.id);
   }, [props.auth.id]);
+
   const clubs = props.memberClubs;
   return (
     <div id="landing">
