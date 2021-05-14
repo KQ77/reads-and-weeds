@@ -39,7 +39,13 @@ const _Nav = (props) => {
             ''
           )}
           {isLoggedIn ? (
-            <Nav.Link onClick={() => props.logout()}>Log Out</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                props.logout();
+              }}
+            >
+              Log Out
+            </Nav.Link>
           ) : (
             ''
           )}

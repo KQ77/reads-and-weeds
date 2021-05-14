@@ -14,11 +14,6 @@ export const setClubs = () => {
   };
 };
 
-// export const fetchMemberClubs = () => {
-//   return async (dispatch) => {
-//     const clubs = await axios.get('/api/members/clubs').data;
-//   };
-// };
 //reducer for all bookclubs
 export const allClubsReducer = (state = [], action) => {
   if (action.type === SET_CLUBS) {
