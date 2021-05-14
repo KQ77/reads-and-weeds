@@ -7,7 +7,6 @@ const setClub = (club) => ({ type: SET_CLUB, club });
 export const fetchClub = (clubId) => {
   return async (dispatch) => {
     const club = (await axios.get(`/api/clubs/${clubId}`)).data;
-    console.log(club, 'club');
     dispatch(setClub(club));
   };
 };
