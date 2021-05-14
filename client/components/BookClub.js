@@ -17,7 +17,7 @@ const _BookClub = (props) => {
           <Sidebar />
           <div id="right">
             <section id="current-selection">
-              <h1>Current Selection</h1>
+              <h1 className="section-heading">Current Selection</h1>
               <SingleBook book={current} />
             </section>
           </div>

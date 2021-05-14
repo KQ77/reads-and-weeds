@@ -6,3 +6,7 @@
 .flex-container {
   display: flex;
 }
+
+.section-heading {
+  font-family: cursive;
+}
