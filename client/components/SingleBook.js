@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../public/SingleBook.css';
+import '../../public/css/SingleBook.css';
 import Comments from './Comments';
 
 export const SingleBook = (props) => {

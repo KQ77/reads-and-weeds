@@ -4,8 +4,13 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { allClubsReducer } from './clubs';
 import { auth } from './auth';
+import { memberClubsReducer } from './memberClubs';
 
-const reducer = combineReducers({ bookclubs: allClubsReducer, auth });
+const reducer = combineReducers({
+  bookclubs: allClubsReducer,
+  auth,
+  memberClubs: memberClubsReducer,
+});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

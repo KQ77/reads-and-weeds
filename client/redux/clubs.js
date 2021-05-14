@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { async } from 'regenerator-runtime';
 
 //constants
 const SET_CLUBS = 'SET_CLUBS';

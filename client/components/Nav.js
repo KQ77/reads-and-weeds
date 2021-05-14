@@ -13,7 +13,9 @@ const _Nav = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav>
-          <Navbar.Text>Welcome {props.auth.firstName || ''}</Navbar.Text>
+          <Navbar.Text id="navbar-text">
+            Welcome {props.auth.firstName || ''}
+          </Navbar.Text>
           {!isLoggedIn ? (
             <>
               <Nav.Link
@@ -37,7 +39,13 @@ const _Nav = (props) => {
             ''
           )}
           {isLoggedIn ? (
-            <Nav.Link onClick={() => props.logout()}>Log Out</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                props.logout();
+              }}
+            >
+              Log Out
+            </Nav.Link>
           ) : (
             ''
           )}

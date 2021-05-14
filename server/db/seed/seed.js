@@ -45,6 +45,7 @@ const syncAndSeed = async () => {
     location: 'Trumbull, CT',
     tagline: 'Read. Meet. Weed. Eat. Repeat.',
     private: false,
+    imgSrc: '/images/library.jpg',
   });
   const books = await Promise.all(rwBooks.map((book) => Book.create(book)));
   await RW.setBooks(books);

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../public/SuggestForm.css';
+import '../../public/css/SuggestForm.css';
 
 export const SuggestForm = (props) => {
   return (

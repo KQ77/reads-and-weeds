@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../public/Sidebar.css';
+import '../../public/css/Sidebar.css';
 import { Link } from 'react-router-dom';
 
 export const Sidebar = (props) => {

@@ -1,7 +1,7 @@
 const members = [
   {
     firstName: 'Melissa V',
-    email: 'melissaveloz4197',
+    email: 'melissaveloz4197@gmail.com',
     lastName: 'Veloz',
     password: 'weed',
     bio: `Just trying to get by...`,
@@ -24,7 +24,7 @@ const members = [
   },
   {
     firstName: 'Laura',
-    email: 'lyarusavage',
+    email: 'lyarusavage@gmail.com',
     lastName: 'Yarusavage',
     password: 'weed',
     bio: `Age 42, enjoys long walks in the woods, is AN EDUCATOR IN THIS TOWN, has 3 douchey kids, and a husband 
