@@ -10,3 +10,10 @@
 .section-heading {
   font-family: cursive;
 }
+
+#bookclub section {
+  margin: 1rem;
+  padding: 0.5rem;
+  min-height: 15rem;
+  border: 1px ridge silver;
+}

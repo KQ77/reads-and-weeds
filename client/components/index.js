@@ -9,5 +9,5 @@ export { SingleBook } from './SingleBook';
 export { PastSelections } from './PastSelections';
 export { Sidebar } from './Sidebar';
 export { SingleMember } from './SingleMember';
-export { default as Suggestions } from './Suggestions';
+export { Suggestions } from './Suggestions';
 export { SuggestForm } from './SuggestForm';

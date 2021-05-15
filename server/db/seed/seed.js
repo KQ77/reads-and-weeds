@@ -22,6 +22,9 @@ Member.hasMany(Comment);
 Suggestion.belongsTo(Member);
 Member.hasMany(Suggestion);
 
+Suggestion.belongsTo(Club);
+Club.hasMany(Suggestion);
+
 Member.belongsToMany(Club, { through: ClubMembers, foreignKey: 'memberId' });
 Club.belongsToMany(Member, { through: ClubMembers, foreignKey: 'clubId' });
 
