@@ -19,7 +19,7 @@ app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
 
 //any request to homepage of app will serve up the index.html page ?
-app.get('/', (req, res, next) => {
+app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 

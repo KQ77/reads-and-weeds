@@ -23,17 +23,14 @@ const _BookList = (props) => {
     }
   }, [props]);
   if (books.length) {
-    console.log(books, 'books');
     return (
       <div id="past-book-list">
         <Carousel {...properties}>
           {books.map((book, idx) => (
             <div key={idx}>
-              <img src={book.volumeInfo.imageLinks.thumbnail}></img>
-
-              {/* <Link to={`/books/${book.id}`}>
-                <img src={book.thumbnail}></img>
-              </Link> */}
+              <a href={`https://www.google.com/books/edition/_/${book.id}`}>
+                <img src={book.volumeInfo.imageLinks.thumbnail}></img>
+              </a>
             </div>
           ))}
         </Carousel>
