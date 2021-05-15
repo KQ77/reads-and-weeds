@@ -7,7 +7,6 @@ const setBook = (book) => ({ type: SET_BOOK, book });
 export const fetchGoogleBook = (bookId) => {
   return async (dispatch) => {
     const book = (await axios.get(`/api/books/gbooks/${bookId}`)).data;
-    console.log(book, 'book in store');
     dispatch(setBook(book));
   };
 };

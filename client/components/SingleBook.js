@@ -13,7 +13,6 @@ const _SingleBook = (props) => {
     //fetch book info from google books api (first hitting our api)
     props.fetchBook(bookId);
   }, []);
-  console.log(props, 'props of single book');
   if (props.singleBook.id) {
     const book = props.singleBook.volumeInfo;
     return (
