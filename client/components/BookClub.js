@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
 import { Sidebar, Banner, SingleBook, BookList, Suggestions } from './index';
 import '../../public/css/BookClub.css';
+import { Button } from 'react-bootstrap';
 
 const _BookClub = (props) => {
   useEffect(() => {
@@ -22,7 +24,12 @@ const _BookClub = (props) => {
               <SingleBook book={current} />
             </section>
             <section id="suggestions">
-              <h1 className="section-heading">Suggestions</h1>
+              <div className="flex-row">
+                <h1 className="section-heading">Suggestions</h1>
+                <Link to={`/bookclubs/${props.bookclub.id}/suggestions/search`}>
+                  <Button variant="info">+ add a book</Button>
+                </Link>
+              </div>
               <Suggestions />
             </section>
             <section id="past-selections">

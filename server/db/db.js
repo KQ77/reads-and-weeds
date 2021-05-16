@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 // const Books = require('./Books');
 const conn = new Sequelize(
   process.env.DATABASE_URL || 'postgres://localhost/bookclub',
-  { logging: false }
+  { logging: true }
 );
 
 module.exports = {

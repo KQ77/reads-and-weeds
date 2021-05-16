@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Landing, BookClub } from './index';
+import { Landing, BookClub, SuggestionSearch } from './index';
 import { connect } from 'react-redux';
 import { setAuth } from '../redux/auth';
 
@@ -11,7 +11,11 @@ const _App = (props) => {
   return (
     <div id="app">
       <Route exact path="/" component={Landing} />
-      <Route path="/bookclubs/:id" component={BookClub} />
+      <Route exact path="/bookclubs/:id" component={BookClub} />
+      <Route
+        path="/bookclubs/:id/suggestions/search"
+        component={SuggestionSearch}
+      />
     </div>
   );
 };

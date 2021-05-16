@@ -2,32 +2,41 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import '../../public/css/Suggestions.css';
 import { connect } from 'react-redux';
-import { Form, Button } from 'react-bootstrap';
+import { Container, Button, Card, Image } from 'react-bootstrap';
+import { fetchSuggestions } from '../redux/suggestions';
 
 const _Suggestions = (props) => {
-  const [suggestions, setSuggestions] = useState([]);
-  // useEffect(async () => {
-  //   const suggestions = (await axios.get('/api/suggestions')).data;
-  //   setSuggestions(suggestions);
-  //   return () => '';
-  // }, [suggestions]);
-  const handleSearch = async (text) => {
-    const results = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${text}`
-    ).data;
-  };
-
-  //have a button for "add suggestion" which takes you to new page where you can search..then results pop up under the
-  //search area.you can select a book to suggest, then it will direct you back to bookclub page
-  //see how amazon bookclubs handles this
-  const [bookToSearch, setBookToSearch] = useState('');
-  return (
-    <div id="suggestions">
-      <h4>
-        Suggested By This Club's Members <span>{suggestions.length}</span>
-      </h4>
-    </div>
-  );
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      props.fetchSuggestions(
+        props.bookclub.suggestions.map((suggestion) => suggestion.bookId)
+      );
+    }
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  const { suggestions } = props;
+  if (suggestions.length) {
+    return (
+      <div id="suggestions">
+        <h4>
+          Suggested By This Club's Members <span>{suggestions.length}</span>
+          {suggestions.map((suggestion, idx) => (
+            <Container key={idx}>{suggestion.volumeInfo.title}</Container>
+          ))}
+        </h4>
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
-export const Suggestions = connect((state) => state)(_Suggestions);
+const mapDispatch = (dispatch) => {
+  return {
+    fetchSuggestions: (bookIdArray) => dispatch(fetchSuggestions(bookIdArray)),
+  };
+};
+export const Suggestions = connect((state) => state, mapDispatch)(_Suggestions);

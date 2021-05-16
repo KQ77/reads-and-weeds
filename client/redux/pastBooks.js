@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const SET_BOOKS = 'SET_BOOKS';
+const SET_PAST_BOOKS = 'SET_BOOKS';
 
-const setBooks = (books) => ({ type: SET_BOOKS, books });
+const setBooks = (books) => ({ type: SET_PAST_BOOKS, books });
 
 export const fetchPastBooks = (bookIds) => {
   return async (dispatch) => {
@@ -12,7 +12,7 @@ export const fetchPastBooks = (bookIds) => {
 };
 
 export const pastBooksReducer = (state = [], action) => {
-  if (action.type === SET_BOOKS) {
+  if (action.type === SET_PAST_BOOKS) {
     return action.books;
   }
   return state;

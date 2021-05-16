@@ -17,3 +17,10 @@
   min-height: 15rem;
   border: 1px ridge silver;
 }
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+}
+#suggestions button {
+}

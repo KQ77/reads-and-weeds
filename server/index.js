@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const { Member } = require('./db/seed/seed');
 
 const PORT = process.env.PORT || 1337;
 require('dotenv').config();
@@ -9,6 +10,20 @@ require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(async (req, res, next) => {
+  if (!req.cookies.token) {
+    return next();
+  }
+  try {
+    const member = await Member.findByToken(req.cookies.token);
+    req.member = member;
+  } catch (err) {
+    next(err);
+  }
+  return next();
+});
+
 //mount api router
 app.use('/api', require('./api'));
 

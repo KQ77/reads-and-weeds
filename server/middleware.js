@@ -3,18 +3,30 @@
 //if not able to validate - throw error - set error on front end in state
 const { Member } = require('./db/seed/seed');
 
+// const isLoggedIn = async (req, res, next) => {
+//   try {
+//     if (req.cookies.token) {
+//       const member = await Member.findByToken(req.cookies.token);
+//       if (member) return next();
+//     }
+//     //if there is not a token...
+//     else {
+//       const error = new Error('Not authorized. Please log in to continue');
+//       error.status = 401;
+//       throw error;
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 const isLoggedIn = async (req, res, next) => {
   try {
-    if (req.cookies.token) {
-      const member = await Member.findByToken(req.cookies.token);
-      if (member) return next();
+    if (req.member) {
+      return next();
     }
-    //if there is not a token...
-    else {
-      const error = new Error('Not authorized. Please log in to continue');
-      error.status = 401;
-      throw error;
-    }
+    const error = new Error('Not authorized');
+    error.status = 401;
+    throw error;
   } catch (err) {
     next(err);
   }

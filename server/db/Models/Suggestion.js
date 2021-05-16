@@ -1,10 +1,8 @@
 const { conn } = require('../db.js');
-const { TEXT } = require('sequelize');
+const { STRING } = require('sequelize');
 
 const Suggestion = conn.define('suggestion', {
-  text: {
-    type: TEXT,
-  },
+  bookId: STRING,
 });
 
 module.exports = { Suggestion };

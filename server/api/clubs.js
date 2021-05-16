@@ -43,4 +43,15 @@ router.get('/:clubId', async (req, res, next) => {
   }
 });
 
+// router.put('/:clubId/suggestions', async (req, res, next) => {
+//   console.log(req.member, 'req.member');
+//   console.log(req.body, 'req.body');
+//   try {
+//     const club = await club.findByPk(req.params.clubId);
+
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 module.exports = router;

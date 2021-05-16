@@ -8,6 +8,7 @@ import { memberClubsReducer } from './memberClubs';
 import { bookclubReducer } from './bookclub';
 import { singleBookReducer } from './singleBook';
 import { pastBooksReducer } from './pastBooks';
+import suggestionReducer from './suggestions';
 
 const reducer = combineReducers({
   allClubs: allClubsReducer,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   bookclub: bookclubReducer,
   singleBook: singleBookReducer,
   pastBooks: pastBooksReducer,
+  suggestions: suggestionReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

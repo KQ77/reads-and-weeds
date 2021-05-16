@@ -34,7 +34,7 @@ div.description p {
   font-size: 1.2rem;
   line-height: 1.4rem;
 }
-div.row {
+#single-book div.row {
   margin: 0;
   display: flex;
   flex-wrap: nowrap;
