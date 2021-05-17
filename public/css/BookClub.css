@@ -1,0 +1,24 @@
+#right {
+  width: 80%;
+  margin: 1rem;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.section-heading {
+  font-family: cursive;
+}
+
+#bookclub section {
+  margin: 1rem;
+  padding: 0.5rem;
+  min-height: 15rem;
+  border: 1px ridge silver;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+}

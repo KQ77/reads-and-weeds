@@ -1,10 +1,20 @@
 const { conn } = require('../db.js');
 const { STRING, BOOLEAN, INTEGER, TEXT } = require('sequelize');
+const { Member } = require('./Member');
+const { Comment } = require('./Comment');
+const { Rating } = require('./Rating');
 
 const Book = conn.define('book', {
   number: {
     type: INTEGER,
     allowNull: false,
+  },
+  title: {
+    type: STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
   isCurrent: {
     type: BOOLEAN,
@@ -13,32 +23,10 @@ const Book = conn.define('book', {
   gbId: {
     type: STRING,
   },
-  // year: {
-  //   type: INTEGER,
-  // },
-  // pages: {
-  //   type: INTEGER,
-  // },
-  // genre: {
-  //   type: STRING,
-  // },
-  // description: {
-  //   type: TEXT,
-  // },
-  // title: {
-  //   type: STRING,
-  //   allowNull: false,
-  // },
-  // author: {
-  //   type: STRING,
-  //   allowNull: false,
-  // },
-  // smallImg: {
-  //   type: TEXT,
-  // },
-  // thumbnail: {
-  //   type: TEXT,
-  // },
 });
+
+Book.prototype.getAllData = async () => {
+  //this will be instance
+};
 
 module.exports = { Book };

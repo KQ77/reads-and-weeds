@@ -1,21 +1,63 @@
-import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import '../../public/css/Suggestions.css';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { Container, Button, Card } from 'react-bootstrap';
+import { fetchSuggestions, removeSuggestion } from '../redux/suggestions';
+import '../../public/css/Suggestions.css';
 
-const Suggestions = (props) => {
-  const [suggestions, setSuggestions] = useState([]);
-  useEffect(async () => {
-    const suggestions = (await axios.get('/api/suggestions')).data;
-    setSuggestions(suggestions);
-    return () => '';
-  }, [suggestions]);
-  return (
-    <div id="suggestions">
-      <h1>Current Suggested Books</h1>
-      <p>{suggestions.length}</p>
-    </div>
-  );
+const _Suggestions = (props) => {
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      props.fetchSuggestions(props.bookclub.id);
+    }
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  const { suggestions } = props;
+  if (suggestions.length) {
+    console.log(suggestions, 'suggestions');
+    return (
+      <div>
+        <h4>Suggested By This Club's Members</h4>
+        <Container id="suggestion-row">
+          {suggestions.map((suggestion, idx) => (
+            <Card key={idx} style={{ width: '15rem' }}>
+              <Card.Img
+                variant="top"
+                src={suggestion.volumeInfo.imageLinks.smallThumbnail}
+              ></Card.Img>
+              <Card.Text>{suggestion.volumeInfo.title}</Card.Text>
+              <Card.Text>Suggested By {suggestion.member.firstName}</Card.Text>
+              <Card.Footer>
+                {suggestion.member.id === props.auth.id ? (
+                  <Button
+                    variant="light"
+                    onClick={() =>
+                      props.removeSuggestion(suggestion.suggestionId)
+                    }
+                  >
+                    - remove suggestion
+                  </Button>
+                ) : (
+                  ''
+                )}
+              </Card.Footer>
+            </Card>
+          ))}
+        </Container>
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
-export default Suggestions;
+const mapDispatch = (dispatch) => {
+  return {
+    fetchSuggestions: (clubId) => dispatch(fetchSuggestions(clubId)),
+    removeSuggestion: (id) => dispatch(removeSuggestion(id)),
+  };
+};
+export const Suggestions = connect((state) => state, mapDispatch)(_Suggestions);

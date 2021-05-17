@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../public/css/Sidebar.css';
 import { Link } from 'react-router-dom';
-
-export const Sidebar = (props) => {
-  const { members } = props;
+import { connect } from 'react-redux';
+const _Sidebar = (props) => {
+  const { members } = props.bookclub;
   return (
     <div id="sidebar">
       <h2>Members ({members.length})</h2>
@@ -30,3 +30,5 @@ export const Sidebar = (props) => {
     </div>
   );
 };
+
+export const Sidebar = connect((state) => state)(_Sidebar);

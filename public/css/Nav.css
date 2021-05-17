@@ -16,3 +16,8 @@
 #navbar a {
   color: #d9d8d8c7;
 }
+
+#navbar .btn {
+  background-color: #e1e1e1;
+  margin: auto 0.5rem;
+}

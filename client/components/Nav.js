@@ -58,7 +58,7 @@ const _Nav = (props) => {
             aria-label="group"
             aria-describedby="basic-addon1"
           />
-          <Button variant="info">Search</Button>
+          <Button variant="light">Search</Button>
         </InputGroup>
       </Navbar.Collapse>
     </Navbar>

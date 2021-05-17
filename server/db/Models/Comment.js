@@ -2,7 +2,7 @@ const { conn } = require('../db.js');
 const { TEXT } = require('sequelize');
 
 const Comment = conn.define('comment', {
-  comment: {
+  text: {
     type: TEXT,
   },
 });

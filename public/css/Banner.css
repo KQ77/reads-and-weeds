@@ -78,7 +78,6 @@ img.banner-image {
 } */
 
 #banner-text h2 {
-  font-size: 1.2rem;
   font-weight: 200;
   letter-spacing: 0.4rem;
 }
@@ -87,7 +86,7 @@ img.banner-image {
 #banner-text h2 {
   margin: 0;
   font-family: sans-serif;
-  text-shadow: 3px 3px black;
+  text-shadow: 2px 2px 3px black;
 }
 
 /* img.hidden {
