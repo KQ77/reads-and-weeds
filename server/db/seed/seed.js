@@ -6,11 +6,16 @@ const { Comment } = require('../Models/Comment.js');
 const { Image } = require('../Models/Image');
 const { Book } = require('../Models/Book');
 const { Member } = require('../Models/Member');
-const { Rating } = require('../Models/Rating');
+const Rating = require('../Models/Rating');
 const { Club } = require('../Models/Club');
 const { ClubMembers } = require('../Models/ClubMembers');
-const { members, rwBooks, rwImages } = require('./readsweedseed');
-const axios = require('axios');
+const {
+  members,
+  rwBooks,
+  rwImages,
+  rwComments,
+  rwRatings,
+} = require('./readsweedseed');
 
 //define associations
 Comment.belongsTo(Book);
@@ -30,9 +35,12 @@ Club.belongsToMany(Member, { through: ClubMembers, foreignKey: 'clubId' });
 
 Book.belongsTo(Club);
 Club.hasMany(Book);
-//Book has many rating?
-//member has many rating
-//rating belongs to member
+
+Rating.belongsTo(Book);
+Book.hasMany(Rating);
+
+Rating.belongsTo(Member);
+Member.hasMany(Rating);
 
 Image.belongsTo(Club);
 Club.hasMany(Image);
@@ -67,67 +75,11 @@ const syncAndSeed = async () => {
   );
   await RW.setImages(images);
 
-  //for (let i = 0; i < apiIds.length; i++) {
-  //   const id = apiIds[i];
-  //   const book = (
-  //     await axios.get(
-  //       `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`
-  //     )
-  //   ).data;
-  //   await Book.create({
-  //     title: book.volumeInfo.title,
-  //     author: book.volumeInfo.authors[0],
-  //     year: book.volumeInfo.publishedDate.slice(0, 4),
-  //     pages: book.volumeInfo.pageCount,
-  //     genre: book.volumeInfo.categories[0],
-  //     description: book.volumeInfo.description,
-  //     smallImg: book.volumeInfo.imageLinks.smallThumbnail,
-  //     thumbnail: book.volumeInfo.imageLinks.thumbnail,
-  //     apiId: book.id,
-  //   });
-  // }
-  // await Book.update(
-  //   { isCurrent: true },
-  //   {
-  //     where: {
-  //       apiId: currentId,
-  //     },
-  //   }
-  // );
-  // apiIds.forEach(async (id) => {
-  //   const book = (
-  //     await axios.get(
-  //       `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`
-  //     )
-  //   ).data;
-  //   console.log(book, 'book');
-  //   await Book.create({
-  //     title: book.volumeInfo.title,
-  //     author: book.volumeInfo.authors[0],
-  //     year: book.volumeInfo.publishedDate.slice(0, 4),
-  //     pages: book.volumeInfo.pageCount,
-  //     genre: book.volumeInfo.categories[0],
-  //     description: book.volumeInfo.description,
-  //     smallImg: book.volumeInfo.imageLinks.small,
-  //     thumbnail: book.volumeInfo.imageLinks.thumbnail,
-  //     apiId: book.id,
-  //   });
-  // });
-
-  // await Promise.all(
-  //   Members.map((member) =>
-  //     Member.create({
-  //       firstName: member.firstName,
-  //       lastName: member.lastName,
-  //       genre: member.genre,
-  //       faveBook: member.faveBook,
-  //       favePick: member.favePick,
-  //       imageUrl: member.imageUrl,
-  //       bio: member.bio,
-  //     })
-  //   )
-  // );
+  // seed comments and ratings
+  await Promise.all(rwComments.map((comment) => Comment.create(comment)));
+  await Promise.all(rwRatings.map((rating) => Rating.create(rating)));
 };
+
 module.exports = {
   Book,
   Rating,

@@ -14,14 +14,15 @@ router.put('/', isLoggedIn, async (req, res, next) => {
     });
     if (suggestion) {
       await suggestion.destroy();
+      res.status(204).send();
     } else {
       await Suggestion.create({
         clubId: req.body.clubId,
         bookId: req.body.bookId,
         memberId: req.member.id,
       });
+      res.status(201).send();
     }
-    res.status(204).send();
   } catch (err) {
     next(err);
   }

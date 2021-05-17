@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../public/css/SingleBook.css';
-import Comments from './Comments';
 import { connect } from 'react-redux';
-import { fetchGoogleBook } from '../redux/singleBook';
+import { fetchBook } from '../redux/singleBook';
 
 const _SingleBook = (props) => {
   const bookId = props.book.gbId;
@@ -53,7 +52,6 @@ const _SingleBook = (props) => {
             </div>
           </div>
         </div>
-        {/* <Comments book={book} /> */}
       </div>
     );
   } else {
@@ -63,7 +61,7 @@ const _SingleBook = (props) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchBook: (bookId) => dispatch(fetchGoogleBook(bookId)),
+    fetchBook: (bookId) => dispatch(fetchBook(bookId)),
   };
 };
 export const SingleBook = connect((state) => state, mapDispatch)(_SingleBook);

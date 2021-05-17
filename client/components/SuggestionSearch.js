@@ -21,9 +21,7 @@ const _SuggestionSearch = (props) => {
   };
   const [suggestedIds, setSuggestedIds] = useState([]);
   const toggleSuggestion = async (bookId) => {
-    //PUT to /api/suggestions/:clubId //will need userId, bookId, club Id
     await axios.put(`/api/suggestions/`, { clubId: props.bookclub.id, bookId });
-
     if (suggestedIds.includes(bookId)) {
       setSuggestedIds(suggestedIds.filter((id) => id !== bookId));
     } else {
@@ -76,6 +74,9 @@ const _SuggestionSearch = (props) => {
                   </span>
                   <br></br>
                   <Button
+                    className={
+                      suggestedIds.includes(result.id) ? 'suggested' : ''
+                    }
                     onClick={(e) => {
                       toggleSuggestion(result.id);
                     }}
@@ -83,6 +84,7 @@ const _SuggestionSearch = (props) => {
                   >
                     <span>
                       <img height="30" width="30" src="/images/thumb.png"></img>
+
                       {suggestedIds.includes(result.id)
                         ? 'Suggested'
                         : 'Suggest'}

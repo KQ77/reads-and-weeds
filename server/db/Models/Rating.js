@@ -1,5 +1,6 @@
 const { conn } = require('../db');
 const { UUID, UUIDV4, INTEGER } = conn.Sequelize;
+
 const Rating = conn.define('rating', {
   id: {
     primaryKey: true,

@@ -4,9 +4,9 @@ const SET_BOOK = 'SET_BOOK';
 
 const setBook = (book) => ({ type: SET_BOOK, book });
 
-export const fetchGoogleBook = (bookId) => {
+export const fetchBook = (bookId) => {
   return async (dispatch) => {
-    const book = (await axios.get(`/api/books/gbooks/${bookId}`)).data;
+    const book = (await axios.get(`/api/books/${bookId}`)).data;
     dispatch(setBook(book));
   };
 };

@@ -12,3 +12,4 @@ export { SingleMember } from './SingleMember';
 export { Suggestions } from './Suggestions';
 export { SuggestForm } from './SuggestForm';
 export { SuggestionSearch } from './SuggestionSearch';
+export { BookFeedback } from './BookFeedback';

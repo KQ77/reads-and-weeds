@@ -63,7 +63,6 @@ router.get('/:clubId/suggestions', async (req, res, next) => {
     book.suggestionId = suggestion.id;
     book.member = suggestion.member;
   });
-  console.log(books, 'books');
   res.status(200).send(books);
 });
 // router.put('/:clubId/suggestions', async (req, res, next) => {

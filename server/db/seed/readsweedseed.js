@@ -75,21 +75,93 @@ const members = [
 ];
 
 const rwBooks = [
-  { gbId: `PmpfDwAAQBAJ`, number: 1 },
-  { gbId: 'RidvDwAAQBAJ', number: 2 },
-  { gbId: '9-GCDwAAQBAJ', number: 3 },
-  { gbId: `wKFaDwAAQBAJ`, number: 4 },
-  { gbId: `ey-BDwAAQBAJ`, number: 5 },
-  { gbId: `FkiSDwAAQBAJ`, number: 6 },
-  { gbId: `gt7EQgH8-b4C`, number: 7 },
-  { gbId: `dAzJCwAAQBAJ`, number: 8 },
-  { gbId: `rQumDwAAQBAJ`, number: 9 },
-  { gbId: 'SUdfDwAAQBAJ', number: 10 },
-  { gbId: 'nNjTDwAAQBAJ', number: 11 },
-  { gbId: 'wq7eDwAAQBAJ', number: 12 },
-  { gbId: 'xmC9DwAAQBAJ', number: 13, isCurrent: true },
+  { gbId: `PmpfDwAAQBAJ`, number: 1, title: 'A Woman Is No Man' },
+  { gbId: 'RidvDwAAQBAJ', number: 2, title: 'The Things We Cannot Say' },
+  { gbId: '9-GCDwAAQBAJ', number: 3, title: 'The Immortalists' },
+  { gbId: `wKFaDwAAQBAJ`, number: 4, title: 'The Mother-In-Law' },
+  { gbId: `ey-BDwAAQBAJ`, number: 5, title: 'Ask Again, Yes' },
+  { gbId: `FkiSDwAAQBAJ`, number: 6, title: 'American Dirt' },
+  { gbId: `gt7EQgH8-b4C`, number: 7, title: 'Into Thin Air' },
+  {
+    gbId: `dAzJCwAAQBAJ`,
+    number: 8,
+    title: `
+  Born A Crime: Stories from a South African Childhood`,
+  },
+  { gbId: `rQumDwAAQBAJ`, number: 9, title: 'Untamed' },
+  { gbId: 'SUdfDwAAQBAJ', number: 10, title: 'The Hunting Party' },
+  { gbId: 'nNjTDwAAQBAJ', number: 11, title: 'The Midnight Library' },
+  { gbId: 'wq7eDwAAQBAJ', number: 12, title: 'This Tender Land' },
+  { gbId: 'xmC9DwAAQBAJ', number: 13, isCurrent: true, title: 'Playing Nice' },
+];
+
+//seed some comments and ratings
+const rwComments = [
+  {
+    text: 'This was an awesome book',
+    memberId: 6,
+    bookId: 6,
+  },
+  {
+    text: 'This was okay',
+    memberId: 6,
+    bookId: 2,
+  },
+  {
+    text: 'This was a horrible book',
+    memberId: 6,
+    bookId: 5,
+  },
+  {
+    text: 'This was crap',
+    memberId: 2,
+    bookId: 13,
+  },
+  {
+    text: `Best book I've ever read`,
+    memberId: 1,
+    bookId: 13,
+  },
+  {
+    text: `Best book I've ever read`,
+    memberId: 1,
+    bookId: 12,
+  },
+];
+
+const rwRatings = [
+  {
+    rating: 7,
+    bookId: 3,
+    memberId: 6,
+  },
+  {
+    rating: 9,
+    bookId: 13,
+    memberId: 6,
+  },
+  {
+    rating: 8,
+    bookId: 3,
+    memberId: 2,
+  },
+  {
+    rating: 4,
+    bookId: 3,
+    memberId: 1,
+  },
+  {
+    rating: 4,
+    bookId: 12,
+    memberId: 4,
+  },
+  {
+    rating: 4,
+    bookId: 12,
+    memberId: 1,
+  },
 ];
 
 const rwImages = [{ src: '/images/hike.jpg' }, { src: '/images/library.jpg' }];
 
-module.exports = { members, rwBooks, rwImages };
+module.exports = { members, rwBooks, rwImages, rwComments, rwRatings };

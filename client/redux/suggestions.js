@@ -10,9 +10,7 @@ const _removeSuggestion = (id) => ({ type: REMOVE_SUGGESTION, id });
 
 export const fetchSuggestions = (clubId) => {
   return async (dispatch) => {
-    // const suggestedBooks = (await axios.post(`/api/books/gbooks`, { bookIds })).data;
     const books = (await axios.get(`/api/clubs/${clubId}/suggestions`)).data;
-    console.log(books, 'suggested books');
     dispatch(setSuggestions(books));
   };
 };
