@@ -27,4 +27,18 @@ router.put('/:clubId', isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
+router.delete('/:clubId/:bookId', isLoggedIn, async (req, res, next) => {
+  try {
+    const { bookId, clubId } = req.params;
+    const memberId = req.member.id;
+    const suggestion = await Suggestion.findOne({
+      where: { bookId, clubId, memberId },
+    });
+    await suggestion.destroy();
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+});
 module.exports = router;
