@@ -2,13 +2,12 @@ const router = require('express').Router();
 const { Suggestion, Club } = require('../db/seed/seed');
 const { isLoggedIn } = require('../middleware');
 
-router.put('/:clubId', isLoggedIn, async (req, res, next) => {
+// /api/suggestions
+router.put('/', isLoggedIn, async (req, res, next) => {
   try {
     const suggestion = await Suggestion.findOne({
       where: {
-        //find the suggestion where the clubId is the clubId and the bookId is the bookId
-        //if it exists, delete it - if it doesn't add it
-        clubId: req.params.clubId,
+        clubId: req.body.clubId,
         bookId: req.body.bookId,
         memberId: req.member.id,
       },
@@ -17,7 +16,7 @@ router.put('/:clubId', isLoggedIn, async (req, res, next) => {
       await suggestion.destroy();
     } else {
       await Suggestion.create({
-        clubId: req.params.clubId,
+        clubId: req.body.clubId,
         bookId: req.body.bookId,
         memberId: req.member.id,
       });
@@ -28,13 +27,10 @@ router.put('/:clubId', isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.delete('/:clubId/:bookId', isLoggedIn, async (req, res, next) => {
+router.delete('/:id', isLoggedIn, async (req, res, next) => {
   try {
-    const { bookId, clubId } = req.params;
-    const memberId = req.member.id;
-    const suggestion = await Suggestion.findOne({
-      where: { bookId, clubId, memberId },
-    });
+    const { id } = req.params;
+    const suggestion = await Suggestion.findByPk(id);
     await suggestion.destroy();
     res.status(204).send();
   } catch (err) {

@@ -9,10 +9,10 @@ const _Suggestions = (props) => {
   useEffect(() => {
     let mounted = true;
     if (mounted) {
-      props.fetchSuggestions(
-        props.bookclub.suggestions.map((suggestion) => suggestion.bookId)
-      );
-      // props.fetchSuggestions(props.bookclub.suggestions);
+      // props.fetchSuggestions(
+      //   props.bookclub.suggestions.map((suggestion) => suggestion.bookId)
+      // );
+      props.fetchSuggestions(props.bookclub.id);
     }
     return () => {
       mounted = false;
@@ -34,6 +34,7 @@ const _Suggestions = (props) => {
   //these will be a list of books with all info from google books api
   const { suggestions } = props;
   if (suggestions.length) {
+    console.log(suggestions, 'suggestions');
     return (
       <div>
         <h4>
@@ -47,12 +48,15 @@ const _Suggestions = (props) => {
                 src={suggestion.volumeInfo.imageLinks.smallThumbnail}
               ></Card.Img>
               <Card.Text>{suggestion.volumeInfo.title}</Card.Text>
-              <Card.Text>
-                Suggested By {getMemberName(suggestion.id, props)}
-              </Card.Text>
+              <Card.Text>Suggested By {suggestion.member.firstName}</Card.Text>
               <Card.Footer>
-                {getMemberName(suggestion.id, props).toLowerCase() === 'you' ? (
-                  <Button onClick={() => props.removeSuggestion(suggestion.id)}>
+                {suggestion.member.id === props.auth.id ? (
+                  <Button
+                    variant="light"
+                    onClick={() =>
+                      props.removeSuggestion(suggestion.suggestionId)
+                    }
+                  >
                     - remove suggestion
                   </Button>
                 ) : (
@@ -71,8 +75,8 @@ const _Suggestions = (props) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchSuggestions: (bookIdArray) => dispatch(fetchSuggestions(bookIdArray)),
-    removeSuggestion: (bookId) => dispatch(removeSuggestion(bookId)),
+    fetchSuggestions: (clubId) => dispatch(fetchSuggestions(clubId)),
+    removeSuggestion: (id) => dispatch(removeSuggestion(id)),
   };
 };
 export const Suggestions = connect((state) => state, mapDispatch)(_Suggestions);

@@ -8,3 +8,7 @@
   flex: 0 0 18%;
   margin: 2rem;
 }
+
+#suggestions .btn {
+  padding: 0.3rem;
+}

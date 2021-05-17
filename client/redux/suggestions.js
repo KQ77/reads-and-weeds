@@ -8,9 +8,11 @@ const setSuggestions = (books) => ({
 });
 const _removeSuggestion = (id) => ({ type: REMOVE_SUGGESTION, id });
 
-export const fetchSuggestions = (bookIds) => {
+export const fetchSuggestions = (clubId) => {
   return async (dispatch) => {
-    const books = (await axios.post(`/api/books/gbooks`, { bookIds })).data;
+    // const suggestedBooks = (await axios.post(`/api/books/gbooks`, { bookIds })).data;
+    const books = (await axios.get(`/api/clubs/${clubId}/suggestions`)).data;
+    console.log(books, 'suggested books');
     dispatch(setSuggestions(books));
   };
 };
@@ -26,7 +28,7 @@ export default (state = [], action) => {
     return action.books;
   }
   if (action.type === REMOVE_SUGGESTION) {
-    return state.suggestions.filter((s) => s.id !== action.id);
+    return state.filter((s) => s.suggestionId !== action.id);
   }
   return state;
 };

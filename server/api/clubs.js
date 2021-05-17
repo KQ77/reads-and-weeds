@@ -1,6 +1,7 @@
 const { Club, Member, Image, Book, Suggestion } = require('../db/seed/seed');
-
+const axios = require('axios');
 const router = require('express').Router();
+const { fetchBook } = require('./helpers');
 
 router.get('/:clubId', async (req, res, next) => {
   try {
@@ -43,6 +44,28 @@ router.get('/:clubId', async (req, res, next) => {
   }
 });
 
+//GET all of a club's suggestions ( with google books data for each suggestion)
+router.get('/:clubId/suggestions', async (req, res, next) => {
+  //get all of club's suggestions from DB
+  const suggestions = await Suggestion.findAll({
+    where: { clubId: req.params.clubId },
+    include: [Member],
+  });
+  //for each suggestion, fetch google books data about that book
+  const books = await Promise.all(
+    suggestions.map((suggestion) => {
+      return fetchBook(suggestion.bookId);
+    })
+  );
+  //combine gbooks data with DB suggestions data
+  books.forEach((book, idx) => {
+    const suggestion = suggestions[idx];
+    book.suggestionId = suggestion.id;
+    book.member = suggestion.member;
+  });
+  console.log(books, 'books');
+  res.status(200).send(books);
+});
 // router.put('/:clubId/suggestions', async (req, res, next) => {
 //   console.log(req.member, 'req.member');
 //   console.log(req.body, 'req.body');
