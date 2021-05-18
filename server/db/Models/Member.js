@@ -26,7 +26,7 @@ const Member = conn.define('member', {
   },
   imageUrl: {
     type: STRING,
-    defaultValue: ``,
+    defaultValue: '/images/defaultProfile.png',
   },
   genre: {
     type: STRING,

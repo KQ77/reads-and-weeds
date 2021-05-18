@@ -31,7 +31,8 @@ div.member-details {
   font-size: 2.8rem;
   font-weight: 100;
 }
-#single-member .flex-row {
+
+.member-wrapper {
   border: 1px solid lightgray;
   height: 25rem;
   border-radius: 12px;
@@ -39,6 +40,14 @@ div.member-details {
   align-items: center;
   background-color: rgb(255, 255, 255);
 }
+/* #single-member .flex-row {
+  border: 1px solid lightgray;
+  height: 25rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+} */
 
 .member-details span {
   font-size: 1.1rem;
