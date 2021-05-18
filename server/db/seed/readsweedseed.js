@@ -54,7 +54,6 @@ const members = [
     password: 'weed',
     bio: `Single Dad to two amazing kids, lover of life and all things Jo-Jo Siwa.  `,
     genre: `Twilight Fan Fiction`,
-    imageUrl: ``,
     faveBook: `Are You There, God? It's Me, Margaret.`,
     favePick: `Whichever one I picked`,
   },

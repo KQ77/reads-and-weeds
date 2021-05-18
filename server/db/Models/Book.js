@@ -25,8 +25,4 @@ const Book = conn.define('book', {
   },
 });
 
-Book.prototype.getAllData = async () => {
-  //this will be instance
-};
-
 module.exports = { Book };

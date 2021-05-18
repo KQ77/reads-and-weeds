@@ -44,6 +44,21 @@ router.get('/:clubId', async (req, res, next) => {
   }
 });
 
+//GET all of a club's books' google book data
+router.post(`/:clubId/books`, async (req, res, next) => {
+  //get all books from the club
+  let books = await Book.findAll({ where: { clubId: req.params.clubId } });
+  console.log(req.body, 'req.body');
+  if (req.body.past) {
+    books = books.filter((book) => book.isCurrent === false);
+  }
+  const gbooks = await Promise.all(books.map((book) => fetchBook(book.gbId)));
+  //add DB book Id to gbook data
+  gbooks.forEach((gbook, idx) => {
+    gbook.bookId = books[idx].id;
+  });
+  res.send(gbooks);
+});
 //GET all of a club's suggestions ( with google books data for each suggestion)
 router.get('/:clubId/suggestions', async (req, res, next) => {
   //get all of club's suggestions from DB

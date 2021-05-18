@@ -3,18 +3,17 @@ import '../../public/css/BookList.css';
 import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPastBooks } from '../redux/pastBooks';
+import { fetchBookData } from '../redux/pastBooks';
 
 const _BookList = (props) => {
   const properties = {
     itemsToShow: 5,
     itemsToScroll: 2,
   };
-  const bookIds = props.books.map((book) => book.gbId);
+  //array of all ids to pass to fetchBooks()
+  // const bookIds = props.books.map((book) => book.id);
   useEffect(() => {
-    if (props.past) {
-      props.fetchPastBooks(bookIds);
-    }
+    props.fetchBookInfo(props.clubId);
   }, []);
   const [books, setBooks] = useState([]);
   useEffect(() => {
@@ -24,13 +23,13 @@ const _BookList = (props) => {
   }, [props]);
   if (books.length) {
     return (
-      <div id="past-book-list">
+      <div id="book-list">
         <Carousel {...properties}>
           {books.map((book, idx) => (
             <div key={idx}>
-              <a href={`https://www.google.com/books/edition/_/${book.id}`}>
+              <Link to={`/bookclubs/${props.bookclub.id}/books/${book.bookId}`}>
                 <img src={book.volumeInfo.imageLinks.thumbnail}></img>
-              </a>
+              </Link>
             </div>
           ))}
         </Carousel>
@@ -43,7 +42,7 @@ const _BookList = (props) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchPastBooks: (bookIds) => dispatch(fetchPastBooks(bookIds)),
+    fetchBookInfo: (clubId) => dispatch(fetchBookData(clubId)),
   };
 };
 

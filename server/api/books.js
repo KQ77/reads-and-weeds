@@ -7,37 +7,32 @@ const { Member } = require('../db/Models/Member');
 const { fetchBook } = require('./helpers');
 
 //  api/books
-//post??
-router.post('/gbooks', async (req, res, next) => {
-  try {
-    const gbIds = req.body.bookIds;
-    const fetchBook = async (bookId) => {
-      return (
-        await axios.get(
-          `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${process.env.API_KEY}`
-        )
-      ).data;
-    };
-    const books = await Promise.all(gbIds.map((id) => fetchBook(id)));
-    res.send(books);
-  } catch (err) {
-    next(err);
-  }
-});
+// router.post('/', async (req, res, next) => {
+//   try {
+//     const { bookId } = req.body;
+//     //find all books =
+//     const books = await Promise.all(bookId.map((id) => fetchBook(id)));
+//     // books.forEach((book, idx) => )
+//     res.send(books);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 router.get('/:bookId', async (req, res, next) => {
   try {
-    // const book = await Book.findByPk(req.params.bookId, {
-    //   include: [{ model: Rating }, { model: Comment, include: [Member] }],
-    // });
-    // res.send(await book.getAllData());
-    const gbook = await fetchBook(req.params.bookId);
+    const book = await Book.findByPk(req.params.bookId);
+    //   include: [{ model: Rating }, { model: Comment, include: [Member] }]
+
+    //fetch book takes a gbId
+    const gbook = await fetchBook(book.gbId);
+    gbook.bookId = req.params.bookId;
     res.status(200).send(gbook);
   } catch (err) {
+    console.log(err.response.data.error.errors, 'err.data');
     next(err);
   }
 });
-
 router.get('/:bookId/feedback', async (req, res, next) => {
   try {
     const book = await Book.findByPk(req.params.bookId, {

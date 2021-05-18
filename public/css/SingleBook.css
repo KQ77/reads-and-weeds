@@ -41,19 +41,17 @@ div.description p {
   align-items: center;
 }
 
-#single-book img {
-  border: 1px solid rgb(158, 151, 109);
-  margin: 0;
-}
-
 #single-book img.current {
   height: 20rem;
-  border: 1px solid blue;
+  border: 1px ridge black;
 }
 /* #single-book img.current {
   width: 100%;
   margin-left: 1rem;
 } */
 
-#single-book img.single-book {
+img.single-book {
+  border: 1px solid rgb(158, 151, 109);
+  margin: 0;
+  height: 18rem;
 }
