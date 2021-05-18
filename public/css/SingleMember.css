@@ -1,69 +1,74 @@
 /* member photo itself */
 img.member-img {
-  height: 100%;
+  border: 4px solid white;
+  width: 15rem;
+  height: 15rem;
   border-radius: 12px 0 0 12px;
   overflow: hidden;
-  background-color: rgb(255, 192, 221);
+  background-color: rgb(133, 126, 201);
+  position: absolute;
+  top: 7rem;
+  left: 18rem;
 }
 
 /* member details, bio, name, etc */
-div.member-details {
+.member-details {
+  min-height: 25rem;
+  margin: 2rem auto;
   display: flex;
-  flex-direction: column;
-  margin: 0;
-  justify-content: center;
-  padding-left: 2rem;
-  height: inherit;
-  width: 100%;
-  background-color: #ead9ea;
 }
 
-/* div around member image itself */
-.member-img-wrapper {
-  height: 100%;
+.member-details > div > span {
+  font-size: 1.2rem;
+  color: rgb(20, 20, 148);
 }
+.member-details > div p > span {
+  padding-right: 0.5rem;
+  font-weight: bold;
+}
+
 #past-book-list img:hover {
   border: 1px solid seagreen;
-}
-.member-details h2 {
-  margin: 0;
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.8rem;
-  font-weight: 100;
-}
-
-.member-wrapper {
-  border: 1px solid lightgray;
-  height: 25rem;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  background-color: rgb(255, 255, 255);
-}
-/* #single-member .flex-row {
-  border: 1px solid lightgray;
-  height: 25rem;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  background-color: rgb(255, 255, 255);
-} */
-
-.member-details span {
-  font-size: 1.1rem;
-}
-
-/* entire div around picture, member info, etc */
-.member-wrapper {
-  margin: 2rem auto;
-  width: 85%;
-  align-items: center;
 }
 
 .bold {
   font-weight: bold;
 }
 
-.large {
+.profile-bg {
+  height: 10rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px ridge #bebfcd;
+}
+
+.profile-bg,
+.member-details {
+  width: 70%;
+}
+
+.profile-bg > span {
   font-size: 2rem;
+}
+.shaded {
+  background-color: rgb(177 202 228);
+}
+
+.img-background {
+  height: 15rem;
+  width: 15rem;
+}
+
+.member-details > div {
+  padding: 1rem;
+  width: 50%;
+  border: 2px dotted rgb(177 202 228);
+  min-height: 10rem;
+}
+
+#single-member > .container {
+  border: 1px ridge silver;
 }

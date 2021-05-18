@@ -1,61 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import '../../public/css/SingleMember.css';
-// import axios from 'axios';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { Footer } from './index';
+import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const _SingleMember = (props) => {
-  // const [member, setMember] = useState({});
-  // const { id } = props;
-  // useEffect(async () => {
-  //   const member = (await axios.get(`/api/members/${id}`)).data;
-  //   setMember(member);
-  // }, []);
+  const [member, setMember] = useState({});
+  useEffect(() => {
+    let mounted = true;
+    const fetchMember = async (id) => {
+      const member = (await axios.get(`/api/members/${id}`)).data;
+      setMember(member);
+    };
+    if (mounted) {
+      fetchMember(props.match.params.id * 1);
+    }
+    return () => {
+      mounted = false;
+    };
+  }, []);
   const isMember = (props) => {
-    return props.member.id === props.auth.id;
+    return member.id === props.auth.id;
   };
-  const { member } = props;
   if (!member) {
     return null;
   } else {
     return (
       <div id="single-member">
         <p>add back to home link here</p>
-        <div className="member-wrapper">
-          <div className="member-img-wrapper">
-            <img className="member-img" src={member.imageUrl} />
+
+        <Image
+          className="member-img"
+          src={member.imageUrl}
+          roundedCircle
+        ></Image>
+        <div className="profile-bg shaded"></div>
+        <div className="profile-bg">
+          <span>{member.firstName}</span>
+
+          {isMember(props) ? (
+            <Link to={`/members/${member.id}/profile/edit`}>edit profile</Link>
+          ) : (
+            ''
+          )}
+        </div>
+        <div className="member-details">
+          <div className="member-bio">
+            <span className="bold">Bio</span>
+            <p>{member.bio}</p>
           </div>
-          <div className="member-details">
-            <h2 className="heading bold">{member.firstName}</h2>
+          <div>
+            <span className="bold">Favorites</span>
             <p>
-              <span className="bold">Favorite Genre </span>
-              <br></br>
-              {member.genre}
-            </p>
-            <p>
-              <span className="bold">Favorite Book</span>
-              <br></br>
+              <span>Book: </span>
               {member.faveBook}
             </p>
             <p>
-              <span className="bold">Favorite Book Club Pick </span>
-              <br></br>
+              <span>Book Club Selection: </span>
               {member.favePick}
             </p>
-            <p className="bio">
-              <span className="bold">Bio: </span> <br></br>
-              {member.bio}
+            <p>
+              <span>Genre: </span>
+              {member.genre}
             </p>
-            {isMember(props) ? (
-              <Link
-                to={`/bookclubs/${props.bookclub.id}/members/${member.id}/profile/edit`}
-              >
-                edit profile
-              </Link>
-            ) : (
-              ''
-            )}
           </div>
         </div>
 
@@ -64,14 +73,5 @@ const _SingleMember = (props) => {
     );
   }
 };
-const mapState = (state, routeProps) => {
-  const member = state.bookclub.members.find(
-    (member) => member.id === routeProps.match.params.id * 1
-  );
-  return {
-    auth: state.auth,
-    bookclub: state.bookclub,
-    member,
-  };
-};
-export const SingleMember = connect(mapState)(_SingleMember);
+
+export const SingleMember = connect((state) => state)(_SingleMember);
