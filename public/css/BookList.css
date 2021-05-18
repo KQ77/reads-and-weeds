@@ -1,9 +1,9 @@
-#past-book-list {
+#book-list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-#past-book-list img {
+#book-list img {
   margin: 1rem;
 }

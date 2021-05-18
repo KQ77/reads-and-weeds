@@ -5,6 +5,7 @@ const SET_BOOK = 'SET_BOOK';
 const setBook = (book) => ({ type: SET_BOOK, book });
 
 export const fetchBook = (bookId) => {
+  //bookId here is a sequelize ID
   return async (dispatch) => {
     const book = (await axios.get(`/api/books/${bookId}`)).data;
     dispatch(setBook(book));

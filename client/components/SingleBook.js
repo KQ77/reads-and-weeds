@@ -1,57 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '../../public/css/SingleBook.css';
 import { connect } from 'react-redux';
 import { fetchBook } from '../redux/singleBook';
+import { BookFeedback } from './index';
 
 const _SingleBook = (props) => {
-  const bookId = props.book.gbId;
+  const bookId = props.bookId || props.match.params.bookId;
   function createDescription(book) {
     return { __html: book.description };
   }
+  console.log(props, 'props');
   useEffect(() => {
-    //fetch book info from google books api (first hitting our api)
+    //bookId here is a sequelize ID
     props.fetchBook(bookId);
   }, []);
   if (props.singleBook.id) {
+    console.log(props.singleBook.volumeInfo.title);
     const book = props.singleBook.volumeInfo;
     return (
       <div id="single-book">
-        <div id="book-img-details">
-          <div id="book-details">
-            <p>
-              <span>Title: </span>
-              {book.title}
-            </p>
-            <p>
-              <span>Author: </span>
-              {book.authors[0]}
-            </p>
-            <p>
-              <span>Year: </span>
-              {book.publishedDate.slice(0, 4)}
-            </p>
-            <p>
-              <span>Pages: </span>
-              {book.printedPageCount}
-            </p>
-            <p>
-              <span>Genre: </span>
-              {book.categories[0]}
-            </p>
-          </div>
-          <div className="row ">
-            {
-              <img
-                className={props.book.isCurrent ? 'current' : 'single-book'}
-                src={book.imageLinks.smallThumbnail}
-              ></img>
-            }
-
-            <div className="description">
-              <p dangerouslySetInnerHTML={createDescription(book)} />
-            </div>
+        <div id="book-details">
+          <p>
+            <span>Title: </span>
+            {book.title}
+          </p>
+          <p>
+            <span>Author: </span>
+            {book.authors[0]}
+          </p>
+          <p>
+            <span>Year: </span>
+            {book.publishedDate.slice(0, 4)}
+          </p>
+          <p>
+            <span>Pages: </span>
+            {book.printedPageCount}
+          </p>
+          <p>
+            <span>Genre: </span>
+            {book.categories[0]}
+          </p>
+        </div>
+        <div className="row ">
+          {
+            <img
+              className={props.landing ? 'landing' : 'single-book'}
+              src={book.imageLinks.smallThumbnail}
+            ></img>
+          }
+          <div className="description">
+            <p dangerouslySetInnerHTML={createDescription(book)} />
           </div>
         </div>
+        <BookFeedback {...props} />
       </div>
     );
   } else {

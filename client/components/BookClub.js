@@ -8,7 +8,6 @@ import {
   SingleBook,
   BookList,
   Suggestions,
-  BookFeedback,
   Footer,
 } from './index';
 import '../../public/css/BookClub.css';
@@ -32,9 +31,7 @@ const _BookClub = (props) => {
           <div id="right">
             <section id="current-selection">
               <h1 className="section-heading">Current Selection</h1>
-              <SingleBook book={current} />
-              {/* <span>What Members Think</span> */}
-              <BookFeedback book={current} />
+              <SingleBook landing={true} bookId={current.id} />
               {/* {isMember ? <Link>add feedback</Link> : ''} */}
             </section>
             <section id="suggestions">
@@ -44,12 +41,17 @@ const _BookClub = (props) => {
                   <Button variant="info">+ add a book</Button>
                 </Link>
               </div>
-              {/* <Suggestions /> */}
+              <Suggestions />
             </section>
-            {/* <section id="past-selections">
-              <h1 className="section-heading">Past Selections</h1>
-              <BookList past={true} books={pastBooks} />
-            </section> */}
+            <section id="past-selections">
+              <div>
+                <h1 className="section-heading">Past Selections</h1>
+                <Link to={`/bookclubs/${props.bookclub.id}/feedback/add`}>
+                  rate/review past selections
+                </Link>
+              </div>
+              <BookList past={true} clubId={props.bookclub.id} />
+            </section>
           </div>
         </div>
         <Footer />

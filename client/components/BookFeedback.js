@@ -4,10 +4,12 @@ import { fetchFeedback } from '../redux/feedback';
 import '../../public/css/BookFeedback.css';
 
 const _BookFeedback = (props) => {
+  console.log(props, 'props of bookfeedback');
   useEffect(() => {
     let mounted = true;
     if (mounted) {
-      props.fetchFeedback(props.book.id);
+      console.log(props.singleBook.volumeInfo.title, 'title of singlebook');
+      props.fetchFeedback(props.bookId || props.match.params.bookId);
     }
     return () => (mounted = false);
   }, []);
@@ -24,7 +26,8 @@ const _BookFeedback = (props) => {
           {ratings.length ? getAverage(ratings) : 'not yet rated by members'}
         </span>
         <span style={{ fontSize: '1rem' }}>
-          (based on {ratings.length} rating{ratings.length > 1 ? 's' : ''})
+          (based on {ratings.length} rating
+          {ratings.length > 1 || ratings.length === 0 ? 's' : ''})
         </span>
         <div id="comments">
           <h4>Member Reviews</h4>
