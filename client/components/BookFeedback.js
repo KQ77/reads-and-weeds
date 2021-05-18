@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchFeedback } from '../redux/feedback';
+import '../../public/css/BookFeedback.css';
 
 const _BookFeedback = (props) => {
   useEffect(() => {
@@ -18,14 +19,15 @@ const _BookFeedback = (props) => {
   if (comments) {
     return (
       <div id="book-feedback">
-        <h2 style={{ fontSize: '1.2rem' }}>
-          Average Member Rating:{' '}
+        <h2>Member Feedback</h2> Average Member Rating:{' '}
+        <span style={{ color: 'green', padding: '.5rem' }}>
           {ratings.length ? getAverage(ratings) : 'not yet rated by members'}
-          <span style={{ fontSize: '1rem' }}>
-            (based on {ratings.length} rating{ratings.length > 1 ? 's' : ''})
-          </span>
-        </h2>
+        </span>
+        <span style={{ fontSize: '1rem' }}>
+          (based on {ratings.length} rating{ratings.length > 1 ? 's' : ''})
+        </span>
         <div id="comments">
+          <h4>Member Reviews</h4>
           {comments.length ? (
             comments.map((comment, idx) => (
               <div key={idx}>

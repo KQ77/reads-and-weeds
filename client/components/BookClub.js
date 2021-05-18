@@ -9,6 +9,7 @@ import {
   BookList,
   Suggestions,
   BookFeedback,
+  Footer,
 } from './index';
 import '../../public/css/BookClub.css';
 import { Button } from 'react-bootstrap';
@@ -32,7 +33,7 @@ const _BookClub = (props) => {
             <section id="current-selection">
               <h1 className="section-heading">Current Selection</h1>
               <SingleBook book={current} />
-              <h2>What Our Members Think</h2>
+              {/* <span>What Members Think</span> */}
               <BookFeedback book={current} />
               {/* {isMember ? <Link>add feedback</Link> : ''} */}
             </section>
@@ -51,6 +52,7 @@ const _BookClub = (props) => {
             </section> */}
           </div>
         </div>
+        <Footer />
       </div>
     );
   } else {
