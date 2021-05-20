@@ -4,11 +4,9 @@ import { fetchFeedback } from '../redux/feedback';
 import '../../public/css/BookFeedback.css';
 
 const _BookFeedback = (props) => {
-  console.log(props, 'props of bookfeedback');
   useEffect(() => {
     let mounted = true;
     if (mounted) {
-      console.log(props.singleBook.volumeInfo.title, 'title of singlebook');
       props.fetchFeedback(props.bookId || props.match.params.bookId);
     }
     return () => (mounted = false);

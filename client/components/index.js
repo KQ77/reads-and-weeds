@@ -14,3 +14,4 @@ export { SuggestForm } from './SuggestForm';
 export { SuggestionSearch } from './SuggestionSearch';
 export { BookFeedback } from './BookFeedback';
 export { AddFeedback } from './AddFeedback';
+export { EditFeedback } from './EditFeedback';

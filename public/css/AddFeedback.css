@@ -1,0 +1,11 @@
+#add-feedback {
+  min-height: 100vh;
+}
+
+#add-feedback li {
+  cursor: pointer;
+  color: purple;
+}
+#add-feedback li:hover {
+  text-decoration: underline;
+}

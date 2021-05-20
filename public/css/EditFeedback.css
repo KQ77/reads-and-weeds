@@ -1,0 +1,14 @@
+#edit-feedback {
+  width: 50%;
+}
+
+.member-rating {
+  width: 20%;
+  display: inline;
+}
+
+.member-rating select {
+  width: 5rem;
+  margin: 1rem;
+  display: inline;
+}
