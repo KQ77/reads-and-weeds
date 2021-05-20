@@ -1,4 +1,11 @@
-const { Club, Member, Image, Book, Suggestion } = require('../db/seed/seed');
+const {
+  Club,
+  Member,
+  Image,
+  Book,
+  Suggestion,
+  Comment,
+} = require('../db/seed/seed');
 const axios = require('axios');
 const router = require('express').Router();
 const { fetchBook } = require('./helpers');
@@ -9,7 +16,7 @@ router.get('/:clubId', async (req, res, next) => {
       include: [
         { model: Member, attributes: { exclude: ['password'] } },
         { model: Image },
-        { model: Book },
+        { model: Book, include: [Comment] },
         { model: Suggestion, include: [Member] },
       ],
     });

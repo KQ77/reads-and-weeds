@@ -1,5 +1,5 @@
 const { conn } = require('../db');
-const { UUID, UUIDV4, INTEGER } = conn.Sequelize;
+const { UUID, UUIDV4, INTEGER, DECIMAL } = conn.Sequelize;
 
 const Rating = conn.define('rating', {
   id: {
@@ -8,7 +8,7 @@ const Rating = conn.define('rating', {
     defaultValue: UUIDV4,
   },
   rating: {
-    type: INTEGER,
+    type: DECIMAL,
     max: 10,
     min: 1,
   },
