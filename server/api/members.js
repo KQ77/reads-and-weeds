@@ -7,9 +7,35 @@ router.get('/:memberId', async (req, res, next) => {
   try {
     res.send(
       await Member.findByPk(req.params.memberId, {
-        include: [Comment, Rating, Club],
+        attributes: { exclude: ['password'] },
       })
     );
+    // res.send(
+    //   await Member.findByPk(req.params.memberId, {
+    //     include: [Comment, Rating, Club],
+    //   })
+    // );
+  } catch (err) {
+    next(err);
+  }
+});
+
+//only that member should be able to update the member
+router.put('/:memberId', isLoggedIn, async (req, res, next) => {
+  try {
+    // if a different member is trying to acess this route - make additional middleware for this potentially?
+    if (req.member.id !== req.params.memberId * 1) {
+      console.log(typeof req.member.id, typeof req.params.memberId);
+      const error = new Error(
+        'Not authorized to make these changes. Only the member associated with this account can update the profile information'
+      );
+      error.status = 401;
+      throw error;
+    }
+
+    const member = await Member.findByPk(req.params.memberId);
+    await member.update(req.body);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

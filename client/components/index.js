@@ -15,3 +15,4 @@ export { SuggestionSearch } from './SuggestionSearch';
 export { BookFeedback } from './BookFeedback';
 export { AddFeedback } from './AddFeedback';
 export { EditFeedback } from './EditFeedback';
+export { EditProfile } from './EditProfile';

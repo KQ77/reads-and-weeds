@@ -1,7 +1,7 @@
 const { conn } = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { STRING, TEXT } = require('sequelize');
+const { Sequelize, STRING, TEXT } = require('sequelize');
 
 const Member = conn.define('member', {
   firstName: {
@@ -9,6 +9,10 @@ const Member = conn.define('member', {
   },
   lastName: {
     type: STRING,
+  },
+  displayName: {
+    type: STRING,
+    defaultValue: '',
   },
   email: {
     type: STRING,
@@ -23,6 +27,7 @@ const Member = conn.define('member', {
   },
   bio: {
     type: TEXT,
+    defaultValue: '',
   },
   imageUrl: {
     type: STRING,
@@ -30,12 +35,15 @@ const Member = conn.define('member', {
   },
   genre: {
     type: STRING,
+    defaultValue: '',
   },
   faveBook: {
     type: STRING,
+    defaultValue: '',
   },
   favePick: {
     type: STRING,
+    defaultValue: '',
   },
 });
 
@@ -74,10 +82,11 @@ Member.findByToken = async function (token) {
     if (member) {
       return member;
     }
-    const error = Error('invalid token');
-    error.status = 401;
-    throw error;
+    // const error = Error('invalid token');
+    // error.status = 401;
+    // throw error;
   } catch (err) {
+    console.log(err, 'err');
     const error = Error('invalid credentials');
     error.status = 401;
     throw error;

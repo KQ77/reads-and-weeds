@@ -1,0 +1,21 @@
+#edit-profile h1 {
+  text-align: center;
+}
+
+/* #edit-profile {
+  padding: 2rem;
+} */
+
+#edit-profile form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#edit-profile img {
+  height: 20rem;
+}
+
+#edit-profile form > div:nth-child(1) {
+  width: fit-content;
+  position: relative;
+}

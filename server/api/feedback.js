@@ -4,8 +4,6 @@ const router = require('express').Router();
 //body will have bookId, comment text, and rating #
 router.post('/:bookId', isLoggedIn, async (req, res, next) => {
   try {
-    console.log(req.body, 'req.body');
-
     await Comment.create({
       memberId: req.member.id,
       bookId: req.params.bookId,
@@ -24,7 +22,6 @@ router.post('/:bookId', isLoggedIn, async (req, res, next) => {
 
 router.put('/:bookId', async (req, res, next) => {
   try {
-    console.log(req.body, 'req.body');
     const comment = await Comment.findOne({
       where: { memberId: req.member.id, bookId: req.body.bookId },
     });

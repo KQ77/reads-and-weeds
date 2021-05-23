@@ -26,6 +26,7 @@ const isLoggedIn = async (req, res, next) => {
     }
     const error = new Error('Not authorized');
     error.status = 401;
+    res.clearCookie('token');
     throw error;
   } catch (err) {
     next(err);
