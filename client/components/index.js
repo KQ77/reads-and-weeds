@@ -18,3 +18,4 @@ export { EditFeedback } from './EditFeedback';
 export { EditProfile } from './EditProfile';
 export { PhotoReel } from './PhotoReel';
 export { AllBooks } from './AllBooks';
+export { AllPhotos } from './AllPhotos';

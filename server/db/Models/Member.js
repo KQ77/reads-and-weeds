@@ -2,6 +2,7 @@ const { conn } = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Sequelize, STRING, TEXT } = require('sequelize');
+const { Club } = require('./Club');
 
 const Member = conn.define('member', {
   firstName: {
@@ -77,6 +78,7 @@ Member.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT_SECRET);
     const member = await Member.findByPk(id, {
+      include: { model: Club },
       attributes: { exclude: ['password'] },
     });
     if (member) {

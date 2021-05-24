@@ -9,6 +9,7 @@ import {
   AddFeedback,
   EditProfile,
   AllBooks,
+  AllPhotos,
 } from './index';
 import { connect } from 'react-redux';
 import { setAuth } from '../redux/auth';
@@ -30,6 +31,7 @@ const _App = (props) => {
       <Route path="/bookclubs/:id/feedback/add" component={AddFeedback} />
       <Route path="/members/:id/profile/edit" component={EditProfile} />
       <Route path="/bookclubs/:id/books" component={AllBooks} />
+      <Route path="/bookclubs/:id/photos" component={AllPhotos} />
     </div>
   );
 };

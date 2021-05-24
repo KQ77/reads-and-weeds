@@ -65,7 +65,7 @@ const _BookClub = (props) => {
                   view all
                 </Link>
               </div>
-              <PhotoReel photos={props.bookclub.images} />
+              {/* <PhotoReel photos={props.bookclub.images} /> */}
             </section>
           </div>
         </div>

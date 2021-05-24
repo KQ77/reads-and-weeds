@@ -1,0 +1,11 @@
+#all-photos img {
+  height: 10rem;
+  width: 15rem;
+  border: 1px solid grey;
+  margin: 1rem;
+}
+
+#all-photos {
+  display: flex;
+  flex-wrap: wrap;
+}

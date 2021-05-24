@@ -9,6 +9,7 @@ const {
 const axios = require('axios');
 const router = require('express').Router();
 const { fetchBook } = require('./helpers');
+const { hasAccess } = require('../middleware');
 
 router.get('/:clubId', async (req, res, next) => {
   try {
@@ -55,7 +56,6 @@ router.get('/:clubId', async (req, res, next) => {
 router.get(`/:clubId/books`, async (req, res, next) => {
   //get all books from the club
   let books = await Book.findAll({ where: { clubId: req.params.clubId } });
-  console.log(req.body, 'req.body');
   if (req.body.past) {
     books = books.filter((book) => book.isCurrent === false);
   }
@@ -65,6 +65,18 @@ router.get(`/:clubId/books`, async (req, res, next) => {
     gbook.bookId = books[idx].id;
   });
   res.send(gbooks);
+});
+
+router.get('/:clubId/photos', hasAccess, async (req, res, next) => {
+  //check if club is private -if so - don't send photos - make middleware for this 'isMember' meaning user is a member of that club if private
+  try {
+    const photos = await Image.findAll({
+      where: { clubId: req.params.clubId },
+    });
+    res.send(photos);
+  } catch (err) {
+    next(err);
+  }
 });
 //GET all of a club's suggestions ( with google books data for each suggestion)
 router.get('/:clubId/suggestions', async (req, res, next) => {
