@@ -19,6 +19,7 @@ app.use(async (req, res, next) => {
     const member = await Member.findByToken(req.cookies.token);
     req.member = member;
   } catch (err) {
+    console.log(err, 'err.data');
     next(err);
   }
   return next();

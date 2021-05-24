@@ -6,14 +6,17 @@ import axios from 'axios';
 
 const _EditFeedback = (props) => {
   if (!props.book) return null;
-  const ratings = [
+  const ratingsArr = [
     1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10,
   ];
-  const { comments } = props.book;
+  const { comments, ratings } = props.book;
   let memberComment =
     comments.find((comment) => comment.memberId === props.auth.id) || '';
+  const memberRating = ratings.find(
+    (rating) => rating.memberId === props.auth.id || ''
+  );
   const [comment, setComment] = useState(memberComment.text || '');
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState(memberRating || null);
   const isRated = props.book.comments.some(
     (comment) => comment.memberId === props.auth.id
   );
@@ -46,7 +49,7 @@ const _EditFeedback = (props) => {
             }}
           >
             <option>---</option>
-            {ratings.map((_rating, idx) => (
+            {ratingsArr.map((_rating, idx) => (
               <option value={_rating} key={idx}>
                 {_rating}
               </option>

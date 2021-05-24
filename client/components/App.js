@@ -7,6 +7,7 @@ import {
   SingleMember,
   SingleBook,
   AddFeedback,
+  EditProfile,
 } from './index';
 import { connect } from 'react-redux';
 import { setAuth } from '../redux/auth';
@@ -23,9 +24,10 @@ const _App = (props) => {
         path="/bookclubs/:id/suggestions/search"
         component={SuggestionSearch}
       />
-      <Route path="/members/:id" component={SingleMember} />
+      <Route exact path="/members/:id" component={SingleMember} />
       <Route path="/bookclubs/:id/books/:bookId" component={SingleBook} />
       <Route path="/bookclubs/:id/feedback/add" component={AddFeedback} />
+      <Route path="/members/:id/profile/edit" component={EditProfile} />
     </div>
   );
 };

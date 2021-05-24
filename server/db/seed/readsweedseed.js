@@ -130,32 +130,32 @@ const rwComments = [
 
 const rwRatings = [
   {
-    rating: 7,
+    rating: 7.0,
     bookId: 3,
     memberId: 6,
   },
   {
-    rating: 9,
+    rating: 9.0,
     bookId: 13,
     memberId: 6,
   },
   {
-    rating: 8,
+    rating: 8.0,
     bookId: 3,
     memberId: 2,
   },
   {
-    rating: 4,
+    rating: 4.0,
     bookId: 3,
     memberId: 1,
   },
   {
-    rating: 4,
+    rating: 4.0,
     bookId: 12,
     memberId: 4,
   },
   {
-    rating: 4,
+    rating: 4.0,
     bookId: 12,
     memberId: 1,
   },

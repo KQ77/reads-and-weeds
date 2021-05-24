@@ -15,3 +15,6 @@ export { SuggestionSearch } from './SuggestionSearch';
 export { BookFeedback } from './BookFeedback';
 export { AddFeedback } from './AddFeedback';
 export { EditFeedback } from './EditFeedback';
+export { EditProfile } from './EditProfile';
+export { PhotoReel } from './PhotoReel';
+export { AllBooks } from './AllBooks';

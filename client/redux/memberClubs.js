@@ -4,6 +4,7 @@ const SET_MEMBER_CLUBS = 'SET_MEMBER_CLUBS';
 
 const setClubs = (clubs) => ({ type: SET_MEMBER_CLUBS, clubs });
 
+//fetch all clubs associated with a memberId
 export const fetchMemberClubs = (id) => {
   return async (dispatch) => {
     if (!id) {

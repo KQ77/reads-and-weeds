@@ -1,0 +1,1 @@
+const SET_MEMBER = 'SET_MEMBER';
