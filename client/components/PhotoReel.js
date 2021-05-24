@@ -8,7 +8,7 @@ export const PhotoReel = (props) => {
   return (
     <div id="photo-reel">
       {photos.map((photo) => (
-        <Figure>
+        <Figure key={idx}>
           <Figure.Image src={photo.src}></Figure.Image>
           <Figure.Caption>{photo.caption || ''}</Figure.Caption>
         </Figure>

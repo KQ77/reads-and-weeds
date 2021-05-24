@@ -1,19 +1,19 @@
 import axios from 'axios';
 
-const SET_PAST_BOOKS = 'SET_BOOKS';
+const SET_BOOKS = 'SET_BOOKS';
 
-const setBooks = (books) => ({ type: SET_PAST_BOOKS, books });
+const setBooks = (books) => ({ type: SET_BOOKS, books });
 
 export const fetchBookData = (clubId) => {
   return async (dispatch) => {
     const books = (
-      await axios.post(`/api/clubs/${clubId}/books`, { past: true })
+      await axios.get(`/api/clubs/${clubId}/books`, { past: true })
     ).data;
     dispatch(setBooks(books));
   };
 };
-export const pastBooksReducer = (state = [], action) => {
-  if (action.type === SET_PAST_BOOKS) {
+export const booksReducer = (state = [], action) => {
+  if (action.type === SET_BOOKS) {
     return action.books;
   }
   return state;

@@ -7,7 +7,7 @@ import { auth } from './auth';
 import { memberClubsReducer } from './memberClubs';
 import { bookclubReducer } from './bookclub';
 import { singleBookReducer } from './singleBook';
-import { pastBooksReducer } from './pastBooks';
+import { booksReducer } from './books';
 import suggestionReducer from './suggestions';
 import { feedbackReducer } from './feedback';
 
@@ -17,7 +17,7 @@ const reducer = combineReducers({
   memberClubs: memberClubsReducer,
   bookclub: bookclubReducer,
   singleBook: singleBookReducer,
-  pastBooks: pastBooksReducer,
+  books: booksReducer,
   suggestions: suggestionReducer,
   feedback: feedbackReducer,
 });

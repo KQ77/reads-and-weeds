@@ -8,6 +8,7 @@ import {
   SingleBook,
   AddFeedback,
   EditProfile,
+  AllBooks,
 } from './index';
 import { connect } from 'react-redux';
 import { setAuth } from '../redux/auth';
@@ -28,6 +29,7 @@ const _App = (props) => {
       <Route path="/bookclubs/:id/books/:bookId" component={SingleBook} />
       <Route path="/bookclubs/:id/feedback/add" component={AddFeedback} />
       <Route path="/members/:id/profile/edit" component={EditProfile} />
+      <Route path="/bookclubs/:id/books" component={AllBooks} />
     </div>
   );
 };

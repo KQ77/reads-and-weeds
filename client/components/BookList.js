@@ -3,7 +3,7 @@ import '../../public/css/BookList.css';
 import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchBookData } from '../redux/pastBooks';
+import { fetchBookData } from '../redux/books';
 
 const _BookList = (props) => {
   const properties = {
@@ -17,8 +17,8 @@ const _BookList = (props) => {
   }, []);
   const [books, setBooks] = useState([]);
   useEffect(() => {
-    if (props.pastBooks.length) {
-      setBooks(props.pastBooks);
+    if (props.books.length) {
+      setBooks(props.books);
     }
   }, [props]);
   if (books.length) {

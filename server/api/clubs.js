@@ -52,7 +52,7 @@ router.get('/:clubId', async (req, res, next) => {
 });
 
 //GET all of a club's books' google book data
-router.post(`/:clubId/books`, async (req, res, next) => {
+router.get(`/:clubId/books`, async (req, res, next) => {
   //get all books from the club
   let books = await Book.findAll({ where: { clubId: req.params.clubId } });
   console.log(req.body, 'req.body');
