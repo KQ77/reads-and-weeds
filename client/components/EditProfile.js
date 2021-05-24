@@ -5,23 +5,16 @@ import axios from 'axios';
 import '../../public/css/EditProfile.css';
 
 const _EditProfile = (props) => {
-  //fetch member info  /api/members/:id/
   const [member, setMember] = useState({});
-  // const [name, setName] = useState(member.firstName);
-  // const [bio, setBio] = useState(member.bio.text || '')
-  // const [book, setBook] = useState(member.faveBook || '')
-  // const [genre, setGenre = useState(member.genre || '')]
-  // const [pick, setPick] = useState(member.favePick || '')
+
   useEffect(() => {
     let mounted = true;
     async function fetchProfile(id) {
       const member = (await axios.get(`/api/members/${id}`)).data;
       setMember({ ...member });
-      //   setName(member.firstName)
-      //   setBio(member.bio.text)
-      //   setBook(member.faveBook)
     }
     if (mounted) {
+      //fetch member info  /api/members/:id/
       fetchProfile(props.match.params.id * 1);
     }
     return () => (mounted = false);
@@ -30,10 +23,6 @@ const _EditProfile = (props) => {
     setMember((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
   };
   const handleSubmit = async (e, props) => {
-    //   e.preventDefault();
-    console.log(props);
-    console.log(member, 'member');
-    //update member in redux state?
     await axios.put(`/api/members/${member.id}`, member);
     props.history.push(`/members/${member.id}`);
   };

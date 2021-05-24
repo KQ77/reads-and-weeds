@@ -9,6 +9,7 @@ import {
   BookList,
   Suggestions,
   Footer,
+  PhotoReel,
 } from './index';
 import '../../public/css/BookClub.css';
 import { Button } from 'react-bootstrap';
@@ -22,7 +23,7 @@ const _BookClub = (props) => {
   }, []);
   if (props.bookclub.name) {
     const current = props.bookclub.books.find((book) => book.isCurrent);
-    const pastBooks = props.bookclub.books.filter((book) => !book.isCurrent);
+    // const pastBooks = props.bookclub.books.filter((book) => !book.isCurrent);
     return (
       <div id="bookclub">
         <Banner />
@@ -31,7 +32,7 @@ const _BookClub = (props) => {
           <div id="right">
             <section id="current-selection">
               <h1 className="section-heading">Current Selection</h1>
-              <SingleBook landing={true} bookId={current.id} />
+              {/* <SingleBook landing={true} bookId={current.id} /> */}
               {/* {isMember ? <Link>add feedback</Link> : ''} */}
             </section>
             <section id="suggestions">
@@ -41,7 +42,7 @@ const _BookClub = (props) => {
                   <Button variant="info">+ add a book</Button>
                 </Link>
               </div>
-              <Suggestions />
+              {/* <Suggestions /> */}
             </section>
             <section id="past-selections">
               <div>
@@ -49,8 +50,22 @@ const _BookClub = (props) => {
                 <Link to={`/bookclubs/${props.bookclub.id}/feedback/add`}>
                   rate/review past selections
                 </Link>
+                <Link to={`/bookclubs/${props.bookclub.id}/books`}>
+                  view all
+                </Link>
               </div>
-              <BookList past={true} clubId={props.bookclub.id} />
+              {/* <BookList past={true} clubId={props.bookclub.id} /> */}
+            </section>
+            <section id="photos">
+              {/* link to see all photos /bookclubs/:id/photos; other link maybe opens a modal - to form that adds photos */}
+              <h1 className="section-heading">Photos</h1>
+              <div>
+                <Button variant="info">+ add photos</Button>
+                <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
+                  view all
+                </Link>
+              </div>
+              <PhotoReel photos={props.bookclub.images} />
             </section>
           </div>
         </div>
