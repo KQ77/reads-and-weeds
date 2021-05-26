@@ -18,24 +18,7 @@ const _AllPhotos = (props) => {
       fetchPhotos();
     }
   }, []);
-  //   const [files, setFiles] = useState([]);
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     const id = props.match.params.id;
-  //     const formData = new FormData();
-  //     console.log(files, 'files');
-  //     formData.append('files', files);
-  //     await axios.post(
-  //       `/api/clubs/${id}/photos`,
-  //       { formData },
-  //       { headers: { 'content-type': 'multipart/form-data' } }
-  //     );
-  //     // const photos = (await axios.get(`/api/clubs/${id}/photos`)).data;
-  //     // setPhotos(photos);
-  //     for (var pair of formData.entries()) {
-  //       console.log(pair[0] + ', ' + pair[1]);
-  //     }
-  //   };
+
   if (photos.length) {
     return (
       <div>

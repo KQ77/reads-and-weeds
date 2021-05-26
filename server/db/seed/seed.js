@@ -45,6 +45,9 @@ Member.hasMany(Rating);
 Image.belongsTo(Club);
 Club.hasMany(Image);
 
+Image.belongsTo(Member);
+Member.hasMany(Image);
+
 // const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
 // const currentId = 'SUdfDwAAQBAJ';
 

@@ -104,13 +104,23 @@ router.post(
   async (req, res, next) => {
     try {
       for (let i = 0; i < req.files.length; i++) {
-        const file = req.files[0];
+        const file = req.files[i];
         const uploadParams = {
           Bucket: 'bookclub-site-images',
           Key: `${uuidv4()}${file.originalname}`,
           Body: file.buffer,
-          ContentType: 'image/jpeg',
+          ContentType: file.mimetype,
         };
+        //create entry in DB for each image with src pointing to AWS url
+        await Promise.all(
+          req.files.map((file) =>
+            Image.create({
+              clubId: req.params.clubId,
+              memberId: req.member.id,
+              src: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+            })
+          )
+        );
         s3.upload(uploadParams, function (err, data) {
           if (err) {
             console.log('Error', err);
@@ -120,6 +130,7 @@ router.post(
           }
         });
       }
+      res.status(201).redirect(`/bookclubs/${req.params.clubId}/photos`);
     } catch (err) {
       next(err);
     }
