@@ -6,6 +6,7 @@ router.use('/clubs', require('./clubs'));
 router.use('/books', require('./books'));
 router.use('/suggestions', require('./suggestions'));
 router.use('/feedback', require('./feedback'));
+router.use('/bucket', require('./bucket'));
 
 router.use((req, res, next) => {
   console.log('route not found');

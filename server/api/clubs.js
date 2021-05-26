@@ -1,3 +1,6 @@
+const router = require('express').Router();
+
+//models
 const {
   Club,
   Member,
@@ -6,8 +9,13 @@ const {
   Suggestion,
   Comment,
 } = require('../db/seed/seed');
-const axios = require('axios');
-const router = require('express').Router();
+
+//s3
+const uuid = require('uuid');
+const multer = require('multer');
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
+
 const { fetchBook } = require('./helpers');
 const { hasAccess } = require('../middleware');
 
@@ -67,8 +75,8 @@ router.get(`/:clubId/books`, async (req, res, next) => {
   res.send(gbooks);
 });
 
+//GET all of a club's photos
 router.get('/:clubId/photos', hasAccess, async (req, res, next) => {
-  //check if club is private -if so - don't send photos - make middleware for this 'isMember' meaning user is a member of that club if private
   try {
     const photos = await Image.findAll({
       where: { clubId: req.params.clubId },
@@ -78,6 +86,45 @@ router.get('/:clubId/photos', hasAccess, async (req, res, next) => {
     next(err);
   }
 });
+
+//set storage engine
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+//POST photos to club
+router.post(
+  '/:clubId/photos',
+  upload.array('photos'),
+  hasAccess,
+  async (req, res, next) => {
+    try {
+      for (let i = 0; i < req.files.length; i++) {
+        const file = req.files[0];
+        const uploadParams = {
+          Bucket: 'bookclub-site-images',
+          Key: `${uuidv4()}${file.originalname}`,
+          Body: file.buffer,
+          ContentType: 'image/jpeg',
+        };
+        s3.upload(uploadParams, function (err, data) {
+          if (err) {
+            console.log('Error', err);
+          }
+          if (data) {
+            console.log('Upload Success', data.Location);
+          }
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 //GET all of a club's suggestions ( with google books data for each suggestion)
 router.get('/:clubId/suggestions', async (req, res, next) => {
   //get all of club's suggestions from DB
