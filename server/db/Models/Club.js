@@ -1,5 +1,5 @@
 const { conn } = require('../db.js');
-const { TEXT, STRING, BOOLEAN } = require('sequelize');
+const { TEXT, STRING, BOOLEAN, TIME } = require('sequelize');
 
 const Club = conn.define('club', {
   name: {
@@ -8,6 +8,13 @@ const Club = conn.define('club', {
   },
   location: {
     type: STRING,
+  },
+  meetDate: {
+    type: STRING,
+    defaultValue: 'TBD',
+  },
+  meetTime: {
+    type: TIME,
   },
   tagline: {
     type: STRING,

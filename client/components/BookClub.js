@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 import {
   Sidebar,
   Banner,
@@ -13,14 +16,38 @@ import {
 } from './index';
 import '../../public/css/BookClub.css';
 import { Button } from 'react-bootstrap';
+import Axios from 'axios';
 
 const _BookClub = (props) => {
+  const clubId = props.match.params.id;
   const isMember = (props) => {
     return props.bookclub.members.find((member) => member.id === props.auth.id);
   };
+  const [startDate, setStartDate] = useState(new Date());
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
   }, []);
+
+  const saveDate = async (e) => {
+    console.log(startDate, 'start date');
+    const hour =
+      startDate.getHours() > 12
+        ? startDate.getHours() - 12
+        : startDate.getHours();
+    const minutes =
+      startDate.getMinutes() !== 0 ? startDate.getMinutes() : '00';
+    let tod;
+    if (startDate.getHours() === 24 || startDate.getHours() < 12) tod = 'AM';
+    else tod = 'PM';
+
+    const date = `${startDate.toLocaleDateString()} @ ${hour}:${minutes}${tod}`;
+    console.log(date, 'date');
+
+    await axios.put(`/api/clubs/${clubId}`, {
+      meetDate: date,
+    });
+    props.fetchClub(clubId);
+  };
   if (props.bookclub.name) {
     const current = props.bookclub.books.find((book) => book.isCurrent);
     // const pastBooks = props.bookclub.books.filter((book) => !book.isCurrent);
@@ -30,6 +57,17 @@ const _BookClub = (props) => {
         <div className="flex-container">
           <Sidebar />
           <div id="right">
+            <div>
+              <h2>Next Meet-Up Date: {props.bookclub.meetDate}</h2>
+              Edit Date
+              <DatePicker
+                showTimeSelect
+                dateFormat="MMMM d, yyyy h:mmaa"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+              <Button onClick={(e) => saveDate(e)}>Save Date</Button>
+            </div>
             <section id="current-selection">
               <h1 className="section-heading">Current Selection</h1>
               {/* <SingleBook landing={true} bookId={current.id} /> */}

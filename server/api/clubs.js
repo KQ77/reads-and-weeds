@@ -19,6 +19,7 @@ const { v4: uuidv4 } = require('uuid');
 const { fetchBook } = require('./helpers');
 const { hasAccess } = require('../middleware');
 
+//GET bookclub
 router.get('/:clubId', async (req, res, next) => {
   try {
     const club = await Club.findByPk(req.params.clubId, {
@@ -55,6 +56,18 @@ router.get('/:clubId', async (req, res, next) => {
         throw error;
       }
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+//update club
+router.put('/:clubId', hasAccess, async (req, res, next) => {
+  try {
+    const club = await Club.findByPk(req.params.clubId);
+    console.log(req.body, 'req.body');
+    await club.update(req.body);
+    res.status(204).send();
   } catch (err) {
     next(err);
   }
