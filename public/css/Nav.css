@@ -21,3 +21,12 @@
   background-color: #e1e1e1;
   margin: auto 0.5rem;
 }
+
+.dropdown > a {
+  display: flex;
+  align-items: center;
+}
+
+#dropdown-item {
+  color: black;
+}

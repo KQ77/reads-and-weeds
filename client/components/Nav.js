@@ -1,8 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../public/css/Nav.css';
-import { InputGroup, FormControl, Nav, Button, Form } from 'react-bootstrap';
+
+import {
+  InputGroup,
+  FormControl,
+  Nav,
+  Image,
+  Button,
+  NavDropdown,
+  Form,
+} from 'react-bootstrap';
 import { logout } from '../redux/auth';
 
 const _Nav = (props) => {
@@ -13,9 +23,49 @@ const _Nav = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav>
-          <Navbar.Text id="navbar-text">
-            Welcome {props.auth.firstName || ''}
-          </Navbar.Text>
+          {props.auth.id ? (
+            <NavDropdown
+              id="nav-dropdown"
+              title={
+                <span>
+                  <img
+                    style={{ borderRadius: '100%', border: '1px solid white' }}
+                    height="35"
+                    width="35"
+                    src={props.auth.imageUrl}
+                  />{' '}
+                  {props.auth.firstName}
+                </span>
+              }
+            >
+              <NavDropdown.Item
+                style={{ color: 'black' }}
+                href={`/members/${props.auth.id}`}
+              >
+                Profile
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                style={{ color: 'black' }}
+                href={`/members/${props.auth.id}/clubs}`}
+              >
+                Your Clubs
+              </NavDropdown.Item>
+
+              <NavDropdown.Divider />
+              <NavDropdown.Item
+                style={{ color: 'black' }}
+                onClick={() => console.log('logging out')}
+                href="#"
+              >
+                Log Out
+              </NavDropdown.Item>
+            </NavDropdown>
+          ) : (
+            ''
+          )}
+          {/* <Navbar.Text id="navbar-text">
+            {props.auth.firstName || ''}
+          </Navbar.Text> */}
           {!isLoggedIn ? (
             <>
               <Nav.Link

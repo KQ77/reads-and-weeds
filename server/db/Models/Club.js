@@ -13,9 +13,6 @@ const Club = conn.define('club', {
     type: STRING,
     defaultValue: 'TBD',
   },
-  meetTime: {
-    type: TIME,
-  },
   tagline: {
     type: STRING,
   },

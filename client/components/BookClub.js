@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
 import DatePicker from 'react-datepicker';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import {
@@ -13,10 +14,10 @@ import {
   Suggestions,
   Footer,
   PhotoReel,
+  Burger,
 } from './index';
 import '../../public/css/BookClub.css';
 import { Button } from 'react-bootstrap';
-import Axios from 'axios';
 
 const _BookClub = (props) => {
   const clubId = props.match.params.id;
@@ -29,7 +30,6 @@ const _BookClub = (props) => {
   }, []);
 
   const saveDate = async (e) => {
-    console.log(startDate, 'start date');
     const hour =
       startDate.getHours() > 12
         ? startDate.getHours() - 12
@@ -41,7 +41,6 @@ const _BookClub = (props) => {
     else tod = 'PM';
 
     const date = `${startDate.toLocaleDateString()} @ ${hour}:${minutes}${tod}`;
-    console.log(date, 'date');
 
     await axios.put(`/api/clubs/${clubId}`, {
       meetDate: date,
@@ -53,20 +52,27 @@ const _BookClub = (props) => {
     // const pastBooks = props.bookclub.books.filter((book) => !book.isCurrent);
     return (
       <div id="bookclub">
+        <Burger {...props} />
         <Banner />
         <div className="flex-container">
           <Sidebar />
           <div id="right">
             <div>
               <h2>Next Meet-Up Date: {props.bookclub.meetDate}</h2>
-              Edit Date
-              <DatePicker
-                showTimeSelect
-                dateFormat="MMMM d, yyyy h:mmaa"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-              <Button onClick={(e) => saveDate(e)}>Save Date</Button>
+              {isMember ? (
+                <div>
+                  Edit Date
+                  <DatePicker
+                    showTimeSelect
+                    dateFormat="MMMM d, yyyy h:mmaa"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                  />
+                  <Button onClick={(e) => saveDate(e)}>Save Date</Button>
+                </div>
+              ) : (
+                ''
+              )}
             </div>
             <section id="current-selection">
               <h1 className="section-heading">Current Selection</h1>
@@ -76,6 +82,7 @@ const _BookClub = (props) => {
             <section id="suggestions">
               <div className="flex-row">
                 <h1 className="section-heading">Suggestions</h1>
+                <h2>Books added by members for consideration</h2>
                 <Link to={`/bookclubs/${props.bookclub.id}/suggestions/search`}>
                   <Button variant="info">+ add a book</Button>
                 </Link>
