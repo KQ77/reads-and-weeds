@@ -20,10 +20,6 @@ const isLoggedIn = async (req, res, next) => {
 const hasAccess = async (req, res, next) => {
   try {
     const club = await Club.findByPk(req.params.clubId);
-    // if (club.private === false) {
-    //   return next();
-    // }
-    //if club is private, must be a member of the club to continue
     if (club.private) {
       if (club.members.find((member) => member.id === req.member.id)) {
         return next();
@@ -35,11 +31,27 @@ const hasAccess = async (req, res, next) => {
         throw error;
       }
     }
+    return next();
   } catch (err) {
     next(err);
   }
 };
-
-const isAdmin = async (req, res, next) => {};
+//checks to see that req.user.role is 'admin'
+const isAdmin = async (req, res, next) => {
+  console.log(req.member, 'req.user');
+  try {
+    if (req.member.role === 'admin') {
+      return next();
+    } else {
+      const error = new Error(
+        'Unauthorized. Must be group administrator to perform this action'
+      );
+      error.status = 401;
+      throw error;
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = { isLoggedIn, hasAccess, isAdmin };

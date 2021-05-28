@@ -84,7 +84,10 @@ const syncAndSeed = async () => {
     rwImages.map((image) => Image.create(image))
   );
   await RW.setImages(images);
-
+  //add adminId
+  const adminId = rwmembers.find((member) => member.firstName === 'Kate').id;
+  console.log(adminId, 'adminId');
+  await RW.update({ adminId });
   // seed comments and ratings
   await Promise.all(rwComments.map((comment) => Comment.create(comment)));
   await Promise.all(rwRatings.map((rating) => Rating.create(rating)));

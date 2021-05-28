@@ -30,9 +30,6 @@ const Member = conn.define('member', {
     type: TEXT,
     defaultValue: '',
   },
-  role: {
-    type: ENUM('admin', 'member'),
-  },
   imageUrl: {
     type: STRING,
     defaultValue: '/images/defaultProfile.png',

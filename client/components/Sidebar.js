@@ -8,9 +8,11 @@ const _Sidebar = (props) => {
   const isMember = (props) => {
     return props.bookclub.members.find((member) => member.id === props.auth.id);
   };
+  const isAdmin = (props) => props.auth.id === props.bookclub.adminId;
+
   //write function to check if request has been sent
   const requested = () => {};
-  const leaveClub = (props) => {
+  const leaveClub = async (props) => {
     // what to do  first and then what? update in redux state at all?
     await axios.delete(`/api/clubmembers/:clubId/:memberId`);
     props.fetchClub(props.match.params.id);
@@ -41,7 +43,16 @@ const _Sidebar = (props) => {
             + {props.bookclub.private ? 'ask to join' : 'join'}
           </button>
         ) : (
-          <button onClick={() => leaveClub()}>- leave club</button>
+          <button onClick={() => leaveClub()}>Leave Club</button>
+        )}
+        {isAdmin(props) ? (
+          <div>
+            <Link to={`/bookclubs/${props.bookclub.id}/requests`}>
+              approve join requests
+            </Link>
+          </div>
+        ) : (
+          ''
         )}
       </div>
       <h2>Members ({members.length})</h2>
