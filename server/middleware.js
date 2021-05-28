@@ -16,26 +16,30 @@ const isLoggedIn = async (req, res, next) => {
     next(err);
   }
 };
-
+//if a club is private, checks to see if requesting member is a member of that club
 const hasAccess = async (req, res, next) => {
   try {
     const club = await Club.findByPk(req.params.clubId);
-    if (club.private === false) {
-      return next();
-    }
-    //if club is private, but the member making a request is a member of the club, then continue
-    if (club.members.find((member) => member.id === req.member.id)) {
-      return next();
-    } else {
-      const error = new Error(
-        `Unauthorized. This club's information is available only to club members`
-      );
-      error.status = 401;
-      throw error;
+    // if (club.private === false) {
+    //   return next();
+    // }
+    //if club is private, must be a member of the club to continue
+    if (club.private) {
+      if (club.members.find((member) => member.id === req.member.id)) {
+        return next();
+      } else {
+        const error = new Error(
+          `Unauthorized. Must be a member of this club to perform this action`
+        );
+        error.status = 401;
+        throw error;
+      }
     }
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = { isLoggedIn, hasAccess };
+const isAdmin = async (req, res, next) => {};
+
+module.exports = { isLoggedIn, hasAccess, isAdmin };

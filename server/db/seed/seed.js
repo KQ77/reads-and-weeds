@@ -7,6 +7,7 @@ const { Image } = require('../Models/Image');
 const { Book } = require('../Models/Book');
 const { Member } = require('../Models/Member');
 const Rating = require('../Models/Rating');
+const { Request } = require('../Models/Request');
 const { Club } = require('../Models/Club');
 const { ClubMembers } = require('../Models/ClubMembers');
 const {
@@ -47,6 +48,12 @@ Club.hasMany(Image);
 
 Image.belongsTo(Member);
 Member.hasMany(Image);
+
+Request.belongsTo(Member);
+Member.hasMany(Request);
+
+Request.belongsTo(Club);
+Club.hasMany(Request);
 
 // const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
 // const currentId = 'SUdfDwAAQBAJ';
@@ -91,5 +98,6 @@ module.exports = {
   Suggestion,
   Club,
   Image,
+  Request,
   syncAndSeed,
 };

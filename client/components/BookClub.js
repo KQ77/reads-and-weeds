@@ -28,7 +28,9 @@ const _BookClub = (props) => {
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
   }, []);
-
+  //add check for if no props.auth.id ? then fetch auth and set ID?
+  //ppl access this page should only be logged in --
+  //if person is member of club or page is public - show full page , otherwise show more generic page
   const saveDate = async (e) => {
     const hour =
       startDate.getHours() > 12
@@ -55,7 +57,7 @@ const _BookClub = (props) => {
         <Burger {...props} />
         <Banner />
         <div className="flex-container">
-          <Sidebar />
+          <Sidebar {...props} />
           <div id="right">
             <div>
               <h2>Next Meet-Up Date: {props.bookclub.meetDate}</h2>

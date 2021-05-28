@@ -1,7 +1,7 @@
 const { conn } = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Sequelize, STRING, TEXT } = require('sequelize');
+const { Sequelize, STRING, TEXT, ENUM } = require('sequelize');
 const { Club } = require('./Club');
 
 const Member = conn.define('member', {
@@ -29,6 +29,9 @@ const Member = conn.define('member', {
   bio: {
     type: TEXT,
     defaultValue: '',
+  },
+  role: {
+    type: ENUM('admin', 'member'),
   },
   imageUrl: {
     type: STRING,

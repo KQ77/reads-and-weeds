@@ -8,6 +8,7 @@ const {
   Book,
   Suggestion,
   Comment,
+  Request,
 } = require('../db/seed/seed');
 
 //s3
@@ -17,10 +18,10 @@ const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 
 const { fetchBook } = require('./helpers');
-const { hasAccess } = require('../middleware');
+const { hasAccess, isLoggedIn } = require('../middleware');
 
 //GET bookclub
-router.get('/:clubId', async (req, res, next) => {
+router.get('/:clubId', isLoggedIn, async (req, res, next) => {
   try {
     const club = await Club.findByPk(req.params.clubId, {
       include: [
@@ -61,7 +62,7 @@ router.get('/:clubId', async (req, res, next) => {
   }
 });
 
-//update club
+//update club -- have to be a member to do this
 router.put('/:clubId', hasAccess, async (req, res, next) => {
   try {
     const club = await Club.findByPk(req.params.clubId);
@@ -73,7 +74,7 @@ router.put('/:clubId', hasAccess, async (req, res, next) => {
   }
 });
 
-//GET all of a club's books' google book data
+//GET all of a club's books' google book data -- put a check for if club is private or not?
 router.get(`/:clubId/books`, async (req, res, next) => {
   //get all books from the club
   let books = await Book.findAll({ where: { clubId: req.params.clubId } });
@@ -169,6 +170,18 @@ router.get('/:clubId/suggestions', async (req, res, next) => {
     book.member = suggestion.member;
   });
   res.status(200).send(books);
+});
+
+//POST A REQUEST
+//user must be logged in -- check on front and back? if not -redirect to log in page?
+router.post('/:clubId/requests', isLoggedIn, async (req, res, next) => {
+  try {
+    const { memberId, clubId } = req.body;
+    await Request.create({ memberId, clubId });
+    res.sendStatus(201);
+  } catch (err) {
+    next(err);
+  }
 });
 // router.put('/:clubId/suggestions', async (req, res, next) => {
 //   console.log(req.member, 'req.member');
