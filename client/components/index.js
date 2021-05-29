@@ -20,3 +20,4 @@ export { PhotoReel } from './PhotoReel';
 export { AllBooks } from './AllBooks';
 export { AllPhotos } from './AllPhotos';
 export { Burger } from './Menu';
+export { AllClubs } from './AllClubs';

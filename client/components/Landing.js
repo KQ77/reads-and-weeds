@@ -43,6 +43,7 @@ const _Landing = (props) => {
         </Modal.Footer>
       </Modal>
       <section id="hero">{/* <img src="/images/coffeebook.jpg" /> */}</section>
+      <Link to="/explore">explore all clubs</Link>
       {props.auth.id ? (
         <section id="member-clubs">
           <h1>Your Clubs</h1>

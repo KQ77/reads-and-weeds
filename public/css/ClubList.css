@@ -1,0 +1,21 @@
+#card-text {
+  display: flex;
+  align-items: center;
+}
+
+#card-text p {
+  margin: 0.5rem;
+}
+
+#card-text span {
+  color: lightgray;
+}
+
+#clublist span#about {
+  text-decoration: underline;
+  color: purple;
+}
+
+#popover-title {
+  font-weight: 600;
+}

@@ -11,7 +11,10 @@ const _Sidebar = (props) => {
   const isAdmin = (props) => props.auth.id === props.bookclub.adminId;
 
   //write function to check if request has been sent
-  const requested = () => {};
+  const requested = (props) => {
+    const { requests } = props.bookclub;
+    return requests.find((request) => request.memberId === props.auth.id);
+  };
   const leaveClub = async (props) => {
     // what to do  first and then what? update in redux state at all?
     await axios.delete(`/api/clubmembers/:clubId/:memberId`);
@@ -39,8 +42,13 @@ const _Sidebar = (props) => {
         <span>{props.bookclub.location}</span>
         <span>{props.bookclub.private ? 'private' : 'public'}</span>
         {!isMember(props) ? (
-          <button onClick={() => addMember(props)}>
-            + {props.bookclub.private ? 'ask to join' : 'join'}
+          <button disabled={requested(props)} onClick={() => addMember(props)}>
+            +
+            {props.bookclub.private
+              ? requested(props)
+                ? 'request sent'
+                : 'ask to join'
+              : 'join'}
           </button>
         ) : (
           <button onClick={() => leaveClub()}>Leave Club</button>

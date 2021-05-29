@@ -7,9 +7,9 @@ const SET_CLUBS = 'SET_CLUBS';
 const _setClubs = (clubs) => ({ type: SET_CLUBS, clubs });
 
 //thunk middleware functions
-export const setClubs = () => {
+export const fetchClubs = () => {
   return async (dispatch) => {
-    const clubs = (await axios.get('/api/bookclubs')).data;
+    const clubs = (await axios.get('/api/clubs')).data;
     dispatch(_setClubs(clubs));
   };
 };

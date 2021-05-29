@@ -67,7 +67,7 @@ const syncAndSeed = async () => {
   const RW = await Club.create({
     name: 'Reads and Weeds',
     location: 'Trumbull, CT',
-    tagline: 'Read. Meet. Weed. Eat. Repeat.',
+    description: 'Read. Meet. Weed. Eat. Repeat.',
     private: false,
     displayImage: '/images/library.jpg',
   });
@@ -86,7 +86,6 @@ const syncAndSeed = async () => {
   await RW.setImages(images);
   //add adminId
   const adminId = rwmembers.find((member) => member.firstName === 'Kate').id;
-  console.log(adminId, 'adminId');
   await RW.update({ adminId });
   // seed comments and ratings
   await Promise.all(rwComments.map((comment) => Comment.create(comment)));

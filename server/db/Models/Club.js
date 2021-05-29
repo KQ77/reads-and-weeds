@@ -16,7 +16,7 @@ const Club = conn.define('club', {
   adminId: {
     type: INTEGER,
   },
-  tagline: {
+  description: {
     type: STRING,
   },
   private: {

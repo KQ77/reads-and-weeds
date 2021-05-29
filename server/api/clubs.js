@@ -12,13 +12,21 @@ const {
 } = require('../db/seed/seed');
 
 //s3
-const uuid = require('uuid');
 const multer = require('multer');
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 
 const { fetchBook } = require('./helpers');
 const { hasAccess, isLoggedIn } = require('../middleware');
+
+//GET all clubs
+router.get('/', async (req, res, next) => {
+  try {
+    res.status(200).send(await Club.findAll({ include: [Member] }));
+  } catch (err) {
+    next(err);
+  }
+});
 
 //GET bookclub
 router.get('/:clubId', isLoggedIn, async (req, res, next) => {
