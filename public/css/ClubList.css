@@ -3,12 +3,9 @@
   align-items: center;
 }
 
-#card-text p {
-  margin: 0.5rem;
-}
-
 #card-text span {
   color: lightgray;
+  margin: auto 0.5rem;
 }
 
 #clublist span#about {

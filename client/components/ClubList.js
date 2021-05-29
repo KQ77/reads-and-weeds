@@ -16,7 +16,7 @@ export const ClubList = (props) => {
     <div id="clublist">
       {clubs.map((club, idx) => (
         <React.Fragment key={idx}>
-          <Card style={{ width: '15rem' }} key={idx}>
+          <Card style={{ width: '18rem' }} key={idx}>
             <Card.Img variant="top" src={club.displayImage}></Card.Img>
             <Card.Body>
               <Card.Title>
@@ -24,9 +24,11 @@ export const ClubList = (props) => {
               </Card.Title>
               <Card.Text>{club.location}</Card.Text>
               <div id="card-text">
-                <Card.Text>{club.private ? 'private' : 'public'}</Card.Text>
-                <span>|</span>
-                <Card.Text>{club.members.length} members</Card.Text>
+                <Card.Text>
+                  {club.private ? 'private' : 'public'}
+                  <span>|</span>
+                  {club.members.length} members
+                </Card.Text>
               </div>
               <OverlayTrigger
                 key="right"

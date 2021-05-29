@@ -20,7 +20,7 @@ const _AllClubs = (props) => {
       <div id="all-clubs">
         <h1>Explore All Clubs</h1>
         <Form.Control
-          style={{ width: '50rem', margin: '1rem .5rem' }}
+          style={{ width: '50rem', margin: '1rem 0' }}
           placeholder="search for a club"
           type="text"
         ></Form.Control>
