@@ -1,10 +1,11 @@
 import { slide as Menu } from 'react-burger-menu';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-
 import '../../public/css/Burger.css';
+import { logout } from '../redux/auth';
+import { connect } from 'react-redux';
 
-export const Burger = (props) => {
+const _Burger = (props) => {
   const [open, setOpen] = useState(false);
   return (
     <Menu id="burger">
@@ -21,6 +22,27 @@ export const Burger = (props) => {
       >
         Photos
       </Link>
+      <span
+        style={{
+          cursor: 'pointer',
+          color: 'white',
+        }}
+        onClick={() => {
+          props.logout();
+
+          props.history.push('/');
+        }}
+      >
+        Log Out
+      </span>
     </Menu>
   );
 };
+
+const mapDispatch = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  };
+};
+
+export const Burger = connect(null, mapDispatch)(_Burger);
