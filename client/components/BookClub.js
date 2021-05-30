@@ -39,7 +39,7 @@ const _BookClub = (props) => {
     }
     return () => (mounted = false);
   }, []);
-  //ppl access this page should only be logged in --
+  //ppl accessing this page should only be logged in --
   //if person is member of club or page is public - show full page , otherwise show more generic page
   const saveDate = async (e) => {
     const hour =

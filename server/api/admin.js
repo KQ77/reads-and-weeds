@@ -4,7 +4,7 @@ const { isAdmin, hasAccess } = require('../middleware');
 
 //GET /admin/requests/:clubId
 //get all requests to join a bookclub -  must be admin of club
-router.get('/requests/:clubId', hasAccess, isAdmin, async (req, res, next) => {
+router.get('/requests/:clubId', isAdmin, async (req, res, next) => {
   try {
     const requests = await Request.findAll({
       where: { clubId: req.params.clubId },
@@ -17,7 +17,7 @@ router.get('/requests/:clubId', hasAccess, isAdmin, async (req, res, next) => {
 });
 
 //route for admin to create member of a club (approve a join request)
-router.post('/club-members', hasAccess, isAdmin, async (req, res, next) => {
+router.post('/club-members', isAdmin, async (req, res, next) => {
   try {
     const { memberId, clubId } = req.body;
     await ClubMembers.create({ memberId, clubId });

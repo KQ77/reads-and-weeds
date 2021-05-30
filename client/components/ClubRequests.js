@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import '../../public/css/ClubRequests.css';
+import { Card, Button } from 'react-bootstrap';
 
 const _Requests = (props) => {
   const [requests, setRequests] = useState([]);
@@ -19,11 +20,21 @@ const _Requests = (props) => {
   }, []);
   return (
     <div id="club-requests">
-      {requests.map((req) => (
-        <div>{req.id}</div>
+      {requests.map((req, idx) => (
+        <div key={idx}>
+          <Card style={{ width: '8rem' }}>
+            <Card.Img src={req.member.imageUrl}></Card.Img>
+            <Card.Title>
+              {req.member.firstName} {req.member.lastName}
+            </Card.Title>
+
+            <Button>Approve</Button>
+            <Button>Delete</Button>
+          </Card>
+        </div>
       ))}
     </div>
   );
 };
 
-export const Requests = connect((state) => state)(_Requests);
+export const ClubRequests = connect((state) => state)(_Requests);

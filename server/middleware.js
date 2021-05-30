@@ -19,7 +19,7 @@ const isLoggedIn = async (req, res, next) => {
 //if a club is private, checks to see if requesting member is a member of that club
 const hasAccess = async (req, res, next) => {
   try {
-    const club = await Club.findByPk(req.params.clubId);
+    const club = await Club.findByPk(req.params.clubId, { include: [Member] });
     if (club.private) {
       if (club.members.find((member) => member.id === req.member.id)) {
         return next();
@@ -38,9 +38,10 @@ const hasAccess = async (req, res, next) => {
 };
 //checks to see that req.user.role is 'admin'
 const isAdmin = async (req, res, next) => {
-  console.log(req.member, 'req.user');
+  console.log(req.member, 'req.member');
   try {
-    if (req.member.role === 'admin') {
+    const club = await Club.findByPk(req.params.clubId);
+    if (club.adminId === req.member.id) {
       return next();
     } else {
       const error = new Error(
