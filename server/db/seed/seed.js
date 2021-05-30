@@ -68,7 +68,7 @@ const syncAndSeed = async () => {
     name: 'Reads and Weeds',
     location: 'Trumbull, CT',
     description: 'Read. Meet. Weed. Eat. Repeat.',
-    private: false,
+    private: true,
     displayImage: '/images/library.jpg',
   });
   //seed books

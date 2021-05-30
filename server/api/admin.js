@@ -2,14 +2,14 @@ const router = require('express').Router();
 const { Member, Request, ClubMembers } = require('../db/seed/seed');
 const { isAdmin, hasAccess } = require('../middleware');
 
-//POST /api/admin/members
-//route for admin to approve requests
-//make isAdmin middleware
-
+//GET /admin/requests/:clubId
 //get all requests to join a bookclub -  must be admin of club
-router.get('/requests', hasAccess, isAdmin, async (req, res, next) => {
+router.get('/requests/:clubId', hasAccess, isAdmin, async (req, res, next) => {
   try {
-    const requests = Request.findAll({ where: { clubId: req.body.clubId } });
+    const requests = await Request.findAll({
+      where: { clubId: req.params.clubId },
+      include: [Member],
+    });
     res.status(200).send(requests);
   } catch (err) {
     next(err);

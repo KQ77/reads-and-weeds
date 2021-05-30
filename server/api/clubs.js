@@ -22,7 +22,7 @@ const { hasAccess, isLoggedIn } = require('../middleware');
 //GET all clubs
 router.get('/', async (req, res, next) => {
   try {
-    res.status(200).send(await Club.findAll({ include: [Member] }));
+    res.status(200).send(await Club.findAll({ include: [Member, Request] }));
   } catch (err) {
     next(err);
   }

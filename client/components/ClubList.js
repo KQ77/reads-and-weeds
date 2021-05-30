@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../public/css/ClubList.css';
 import { Link } from 'react-router-dom';
 import { Card, Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import axios from 'axios';
+import { connect } from 'react-redux';
 
-export const ClubList = (props) => {
+const _ClubList = (props) => {
   const { clubs } = props;
-  const handleClick = () => {};
+  const requested = (props, club) => {
+    const { requests } = club;
+    if (requests.find((req) => req.memberId === props.auth.id)) return true;
+    else return false;
+  };
+  const handleClick = async (clubId) => {
+    //send request to /api/clubs/:clubId/requests
+    await axios.post(`/api/clubs/${clubId}/requests`, {
+      memberId: props.auth.id,
+      clubId,
+    });
+    props.fetchClubs();
+  };
   return (
     <div id="clublist">
       {clubs.map((club, idx) => (
@@ -42,9 +56,16 @@ export const ClubList = (props) => {
               </OverlayTrigger>
             </Card.Body>
             <Card.Footer>
-              <Button onClick={() => handleClick()} variant="info">
-                {club.private ? 'Request to join' : 'Join'}
-              </Button>
+              {/* //if not requested, display button, else display " request sent" */}
+              {requested(props, club) ? (
+                <p style={{ fontStyle: 'italic', color: 'lightgray' }}>
+                  Join Request Sent
+                </p>
+              ) : (
+                <Button onClick={() => handleClick(club.id)} variant="info">
+                  {club.private ? 'Request to join' : 'Join'}
+                </Button>
+              )}
             </Card.Footer>
           </Card>
         </React.Fragment>
@@ -52,3 +73,5 @@ export const ClubList = (props) => {
     </div>
   );
 };
+
+export const ClubList = connect((state) => state)(_ClubList);

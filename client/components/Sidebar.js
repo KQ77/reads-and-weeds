@@ -13,7 +13,7 @@ const _Sidebar = (props) => {
   //write function to check if request has been sent
   //bookclub may not always be in state
   const requested = (props) => {
-    console.log(props, 'props');
+    //check to see if this club's member
     const { requests } = props.bookclub;
     return requests.find((request) => request.memberId === props.auth.id);
   };
@@ -55,7 +55,6 @@ const _Sidebar = (props) => {
         ) : (
           <button
             onClick={() => {
-              console.log(props, 'props');
               leaveClub(props, props.bookclub.id, props.auth.id);
             }}
           >
