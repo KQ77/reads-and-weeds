@@ -38,9 +38,8 @@ const hasAccess = async (req, res, next) => {
 };
 //checks to see that req.user.role is 'admin'
 const isAdmin = async (req, res, next) => {
-  console.log(req.member, 'req.member');
   try {
-    const club = await Club.findByPk(req.params.clubId);
+    const club = await Club.findByPk(req.params.clubId || req.body.clubId);
     if (club.adminId === req.member.id) {
       return next();
     } else {
