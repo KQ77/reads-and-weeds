@@ -10,7 +10,7 @@ router.delete('/:clubId/:memberId', hasAccess, async (req, res, next) => {
       where: { clubId, memberId },
     });
     await clubmember.destroy();
-    res.status(204).redirect(`/bookclubs/${clubId}`);
+    res.status(204).send();
   } catch (err) {
     next(err);
   }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
 import DatePicker from 'react-datepicker';
+import { setAuth } from '../redux/auth';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
@@ -29,6 +30,15 @@ const _BookClub = (props) => {
     props.fetchClub(props.match.params.id * 1);
   }, []);
   //add check for if no props.auth.id ? then fetch auth and set ID?
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      if (!props.auth) {
+        props.setAuth();
+      }
+    }
+    return () => (mounted = false);
+  }, []);
   //ppl access this page should only be logged in --
   //if person is member of club or page is public - show full page , otherwise show more generic page
   const saveDate = async (e) => {
@@ -126,6 +136,7 @@ const _BookClub = (props) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchClub: (clubId) => dispatch(fetchClub(clubId)),
+    setAuth: () => dispatch(setAuth()),
   };
 };
 

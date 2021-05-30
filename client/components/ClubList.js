@@ -1,23 +1,19 @@
 import React from 'react';
 import '../../public/css/ClubList.css';
-import {
-  Card,
-  Button,
-  OverlayTrigger,
-  Tooltip,
-  Popover,
-} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Card, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
 export const ClubList = (props) => {
   const { clubs } = props;
   const handleClick = () => {};
-
   return (
     <div id="clublist">
       {clubs.map((club, idx) => (
         <React.Fragment key={idx}>
           <Card style={{ width: '18rem' }} key={idx}>
-            <Card.Img variant="top" src={club.displayImage}></Card.Img>
+            <Link to={`/bookclubs/${club.id}`}>
+              <Card.Img variant="top" src={club.displayImage}></Card.Img>
+            </Link>
             <Card.Body>
               <Card.Title>
                 <strong>{club.name}</strong>

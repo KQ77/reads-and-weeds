@@ -37,6 +37,7 @@ router.get('/:clubId', isLoggedIn, async (req, res, next) => {
         { model: Image },
         { model: Book, include: [Comment] },
         { model: Suggestion, include: [Member] },
+        { model: Request },
       ],
     });
     if (!club.private) {

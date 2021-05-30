@@ -24,7 +24,7 @@ const _AllClubs = (props) => {
           placeholder="search for a club"
           type="text"
         ></Form.Control>
-        <ClubList clubs={clubs} />
+        <ClubList clubs={clubs} {...props} />
       </div>
     );
   } else {

@@ -11,13 +11,15 @@ const _Sidebar = (props) => {
   const isAdmin = (props) => props.auth.id === props.bookclub.adminId;
 
   //write function to check if request has been sent
+  //bookclub may not always be in state
   const requested = (props) => {
+    console.log(props, 'props');
     const { requests } = props.bookclub;
     return requests.find((request) => request.memberId === props.auth.id);
   };
-  const leaveClub = async (props) => {
+  const leaveClub = async (props, clubId, memberId) => {
     // what to do  first and then what? update in redux state at all?
-    await axios.delete(`/api/clubmembers/:clubId/:memberId`);
+    await axios.delete(`/api/clubmembers/${clubId}/${memberId}`);
     props.fetchClub(props.match.params.id);
   };
   const addMember = async (props) => {
@@ -51,7 +53,14 @@ const _Sidebar = (props) => {
               : 'join'}
           </button>
         ) : (
-          <button onClick={() => leaveClub()}>Leave Club</button>
+          <button
+            onClick={() => {
+              console.log(props, 'props');
+              leaveClub(props, props.bookclub.id, props.auth.id);
+            }}
+          >
+            Leave Club
+          </button>
         )}
         {isAdmin(props) ? (
           <div>

@@ -8,6 +8,7 @@ router.use('/suggestions', require('./suggestions'));
 router.use('/feedback', require('./feedback'));
 router.use('/admin', require('./admin'));
 router.use('/clubmembers', require('./clubmembers'));
+
 router.use((req, res, next) => {
   console.log('route not found');
   const error = new Error('Not Found');

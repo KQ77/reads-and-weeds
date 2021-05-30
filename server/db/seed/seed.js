@@ -31,8 +31,8 @@ Member.hasMany(Suggestion);
 Suggestion.belongsTo(Club);
 Club.hasMany(Suggestion);
 
-Member.belongsToMany(Club, { through: ClubMembers, foreignKey: 'memberId' });
-Club.belongsToMany(Member, { through: ClubMembers, foreignKey: 'clubId' });
+Member.belongsToMany(Club, { through: ClubMembers });
+Club.belongsToMany(Member, { through: ClubMembers });
 
 Book.belongsTo(Club);
 Club.hasMany(Book);
@@ -101,5 +101,6 @@ module.exports = {
   Club,
   Image,
   Request,
+  ClubMembers,
   syncAndSeed,
 };

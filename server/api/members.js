@@ -75,9 +75,13 @@ router.post('/:memberId/clubs', isLoggedIn, async (req, res, next) => {
       error.status = 401;
       throw error;
     } else {
+      const member = await Member.findByPk(req.params.memberId);
+      // await club.addMember(member);
       await ClubMembers.create({ clubId, memberId });
+      res.sendStatus(201);
     }
   } catch (err) {
+    console.log(err, 'err');
     next(err);
   }
 });
