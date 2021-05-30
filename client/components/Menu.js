@@ -29,7 +29,6 @@ const _Burger = (props) => {
         }}
         onClick={() => {
           props.logout();
-
           props.history.push('/');
         }}
       >
