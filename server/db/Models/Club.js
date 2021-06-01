@@ -21,6 +21,7 @@ const Club = conn.define('club', {
   },
   private: {
     type: BOOLEAN,
+    defaultValue: false,
     allowNull: false,
   },
   displayImage: {

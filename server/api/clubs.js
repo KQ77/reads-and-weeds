@@ -9,6 +9,7 @@ const {
   Suggestion,
   Comment,
   Request,
+  ClubMembers,
 } = require('../db/seed/seed');
 
 //s3
@@ -63,6 +64,18 @@ router.put('/:clubId', hasAccess, async (req, res, next) => {
     console.log(req.body, 'req.body');
     await club.update(req.body);
     res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Create a club - once created, redirect to homepage for the new club
+router.post('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const club = await Club.create(req.body);
+    await club.update({ adminId: req.member.id });
+    await ClubMembers.create({ memberId: req.member.id, clubId: club.id });
+    res.send(club);
   } catch (err) {
     next(err);
   }

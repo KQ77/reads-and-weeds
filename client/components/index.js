@@ -22,3 +22,4 @@ export { AllPhotos } from './AllPhotos';
 export { Burger } from './Menu';
 export { AllClubs } from './AllClubs';
 export { ClubRequests } from './ClubRequests';
+export { CreateClub } from './CreateClub';

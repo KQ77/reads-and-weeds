@@ -1,5 +1,5 @@
 #footer {
-  position: sticky;
+  position: absolute;
   bottom: 0;
   background: black;
   width: 100%;

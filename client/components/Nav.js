@@ -99,7 +99,8 @@ const _Nav = (props) => {
           ) : (
             ''
           )}
-          <Nav.Link>+ Create club</Nav.Link>
+
+          <Link to="/create">+Create club</Link>
         </Nav>
         <InputGroup className="justify-content-center" id="searchbar">
           <FormControl

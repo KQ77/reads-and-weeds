@@ -1,0 +1,23 @@
+#create-club {
+  display: flex;
+  width: 90%;
+  border: 2px solid black;
+  padding: 1.5rem;
+}
+
+.club-image-upload {
+  height: 20rem;
+  border: 2px solid rgb(218, 74, 175);
+  width: 30%;
+}
+
+#create-club div.form {
+  width: 65%;
+  margin-left: 3rem;
+}
+
+#create-club button {
+  background-color: peru;
+  width: 7rem;
+  padding: 0.3rem;
+}
