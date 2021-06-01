@@ -5,7 +5,6 @@ import { Fade } from 'react-slideshow-image';
 import { connect } from 'react-redux';
 
 const _Banner = (props) => {
-  // const fadeImages = ['./hike.jpg', './library.jpg'];
   const fadeImages = props.bookclub.images
     ? props.bookclub.images.map((img) => img.src)
     : null;

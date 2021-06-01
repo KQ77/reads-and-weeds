@@ -9,7 +9,6 @@ const _Sidebar = (props) => {
     return props.bookclub.members.find((member) => member.id === props.auth.id);
   };
   const isAdmin = (props) => props.auth.id === props.bookclub.adminId;
-
   //write function to check if request has been sent
   //bookclub may not always be in state
   const requested = (props) => {
@@ -62,9 +61,12 @@ const _Sidebar = (props) => {
           </button>
         )}
         {isAdmin(props) ? (
-          <div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Link to={`/bookclubs/${props.bookclub.id}/requests`}>
               approve join requests
+            </Link>
+            <Link to={`/bookclubs/${props.bookclub.id}/edit`}>
+              edit club info
             </Link>
           </div>
         ) : (

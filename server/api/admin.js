@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Member, Request, ClubMembers } = require('../db/seed/seed');
+const { Member, Request, ClubMembers, Club } = require('../db/seed/seed');
 const { isAdmin, hasAccess } = require('../middleware');
 
 //GET /admin/requests/:clubId
@@ -16,13 +16,20 @@ router.get('/clubs/:clubId/requests/', isAdmin, async (req, res, next) => {
   }
 });
 
+//route for admin to update club info
+router.put('/clubs/:clubId', isAdmin, async (req, res, next) => {
+  try {
+    const club = await Club.findByPk(req.params.clubId);
+    await club.update(req.body);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
 //route for admin to create member of a club
 router.post('/members/:id/clubs', isAdmin, async (req, res, next) => {
   try {
     const { memberId, clubId, requestId } = req.body;
-    console.log(memberId, 'memberId');
-    console.log(clubId, 'clubId');
-
     //create new member
     await ClubMembers.create({ memberId, clubId });
     //delete join request

@@ -1,4 +1,5 @@
-#create-club {
+#create-club,
+#edit-club {
   display: flex;
   width: 90%;
   border: 2px solid black;
@@ -11,7 +12,8 @@
   width: 30%;
 }
 
-#create-club div.form {
+#create-club div.form,
+#edit-club div.form {
   width: 65%;
   margin-left: 3rem;
 }

@@ -13,6 +13,7 @@ import {
   AllClubs,
   ClubRequests,
   CreateClub,
+  EditClub,
 } from './index';
 import { connect } from 'react-redux';
 import { setAuth } from '../redux/auth';
@@ -36,6 +37,8 @@ const _App = (props) => {
       <Route path="/bookclubs/:id/books" component={AllBooks} />
       <Route path="/bookclubs/:id/photos" component={AllPhotos} />
       <Route path="/bookclubs/:id/requests" component={ClubRequests} />
+      <Route path="/bookclubs/:id/edit" component={EditClub} />
+
       <Route path="/create" component={CreateClub} />
       <Route path="/explore" component={AllClubs} />
     </div>
