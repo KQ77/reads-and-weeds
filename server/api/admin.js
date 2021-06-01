@@ -1,6 +1,16 @@
 const router = require('express').Router();
-const { Member, Request, ClubMembers, Club } = require('../db/seed/seed');
+const {
+  Member,
+  Request,
+  ClubMembers,
+  Club,
+  Image,
+} = require('../db/seed/seed');
 const { isAdmin, hasAccess } = require('../middleware');
+//s3
+const multer = require('multer');
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 
 //GET /admin/requests/:clubId
 //get all requests to join a bookclub -  must be admin of club
@@ -16,16 +26,56 @@ router.get('/clubs/:clubId/requests/', isAdmin, async (req, res, next) => {
   }
 });
 
-//route for admin to update club info
-router.put('/clubs/:clubId', isAdmin, async (req, res, next) => {
-  try {
-    const club = await Club.findByPk(req.params.clubId);
-    await club.update(req.body);
-    res.sendStatus(204);
-  } catch (err) {
-    next(err);
-  }
+//set storage engine
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
+
+//route for admin to update club info
+router.post(
+  '/clubs/:clubId',
+  isAdmin,
+  upload.single('image'),
+  async (req, res, next) => {
+    try {
+      const { file } = req;
+      const uploadParams = {
+        Bucket: 'bookclub-site-images',
+        Key: `${uuidv4()}${file.originalname}`,
+        Body: file.buffer,
+        ContentType: file.mimetype,
+      };
+      //make entry in image model for this new display image
+      await Image.create({
+        clubId: req.params.clubId,
+        memberId: req.member.id,
+        src: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+      });
+      //upload image to s3 bucket
+      s3.upload(uploadParams, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        }
+        if (data) {
+          console.log('Upload Success', data.Location);
+        }
+      });
+      //update club info with req.body data
+      const club = await Club.findByPk(req.params.clubId);
+      await club.update(req.body);
+      await club.update({
+        displayImage: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+      });
+      res.status(201).redirect(`/bookclubs/${req.params.clubId}`);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 //route for admin to create member of a club
 router.post('/members/:id/clubs', isAdmin, async (req, res, next) => {
   try {

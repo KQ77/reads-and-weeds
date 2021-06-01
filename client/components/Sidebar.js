@@ -39,6 +39,7 @@ const _Sidebar = (props) => {
   return (
     <div id="sidebar">
       <div>
+        <img src={props.bookclub.displayImage} />
         <h3>{props.bookclub.name}</h3>
         <span>{props.bookclub.location}</span>
         <span>{props.bookclub.private ? 'private' : 'public'}</span>

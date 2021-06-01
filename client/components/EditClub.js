@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Image } from 'react-bootstrap';
 import '../../public/css/CreateClub.css';
 import { fetchClub } from '../redux/bookclub';
 import axios from 'axios';
@@ -13,10 +13,13 @@ const _EditClub = (props) => {
     location: '',
     private: false,
   });
+  const [src, setSrc] = useState('');
+
   const fetchClub = async () => {
     const club = (await axios.get(`/api/clubs/${props.match.params.id}`)).data;
     const { name, description, location } = club;
     setClubData({ name, description, location, private: club.private });
+    setSrc(club.displayImage);
   };
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +28,17 @@ const _EditClub = (props) => {
   const updateClub = async (e) => {
     e.preventDefault();
     console.log(clubData, 'clubdata');
+
+    const formData = new FormData(e.target);
+    console.log(formData.get('name'));
     const { id } = props.match.params;
-    await axios.put(`/api/admin/clubs/${id}`, clubData);
-    props.history.push(`/bookclubs/${id}`);
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+    };
+
+    await axios.post(`/api/admin/clubs/${id}`, formData, config);
+    // await axios.put(`/api/admin/clubs/${id}`, clubData);
+    // props.history.push(`/bookclubs/${id}`);
   };
 
   useEffect(() => {
@@ -40,7 +51,18 @@ const _EditClub = (props) => {
   return (
     <div id="edit-club">
       <div className="form">
-        <Form onSubmit={(e) => updateClub(e)}>
+        <img src={src} />
+
+        <Form
+          action={`/api/admin/clubs/${props.match.params.id}/`}
+          encType="multipart/form-data"
+          method="POST"
+        >
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Upload new image</Form.Label>
+            <Form.Control name="image" type="file" />
+          </Form.Group>
+          {/* <Form.File name="image"></Form.File> */}
           <Form.Group>
             <Form.Label>Edit Club Name</Form.Label>
             <Form.Control

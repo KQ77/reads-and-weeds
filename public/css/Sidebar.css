@@ -63,3 +63,7 @@ ul {
   border: none;
   background-color: rgb(233, 233, 233);
 }
+
+#sidebar > div img {
+  width: 100%;
+}
