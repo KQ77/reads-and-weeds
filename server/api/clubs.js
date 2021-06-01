@@ -75,6 +75,11 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     const club = await Club.create(req.body);
     await club.update({ adminId: req.member.id });
     await ClubMembers.create({ memberId: req.member.id, clubId: club.id });
+    await Image.create({
+      clubId: club.id,
+      memberId: req.member.id,
+      src: req.body.displayImage,
+    });
     res.send(club);
   } catch (err) {
     next(err);

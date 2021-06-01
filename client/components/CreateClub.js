@@ -23,7 +23,6 @@ const _CreateClub = (props) => {
     const club = (await axios.post('/api/clubs', clubData)).data;
     props.history.push(`/bookclubs/${club.id}`);
   };
-  console.log(clubData, 'clubData');
   return (
     <div id="create-club">
       <div className="club-image-upload">

@@ -17,28 +17,56 @@ const _Banner = (props) => {
     infinite: true,
   };
   if (fadeImages) {
-    return (
-      <div className="slide-container">
-        <Fade {...fadeProperties}>
+    console.log(fadeImages, 'fade images');
+    if (fadeImages.length > 1) {
+      return (
+        <div className="slide-container">
+          <div id="text-container">
+            <div id="banner-text">
+              <h1>{props.bookclub.name} </h1>{' '}
+              <h2>{props.bookclub.description} </h2>
+            </div>
+          </div>
+          <Fade {...fadeProperties}>
+            {fadeImages.map((image) => (
+              <div className="each-fade">
+                <div>
+                  <img className="banner-image" src={image} />
+                </div>
+              </div>
+            ))}
+          </Fade>
+          {/* <div id="banner-text">
+          <h1>{props.bookclub.name} </h1> <h2>{props.bookclub.tagline} </h2>
+        </div> */}
+        </div>
+      );
+    } else
+      return (
+        <div className="slide-container">
+          <div id="text-container">
+            <div id="banner-text">
+              <h1>{props.bookclub.name} </h1>{' '}
+              <h2>{props.bookclub.description} </h2>
+            </div>
+          </div>
           <div className="each-fade">
             <div>
               <img className="banner-image" src={fadeImages[0]} />
             </div>
           </div>
-          <div className="each-fade">
-            <div>
-              <img className="banner-image" src={fadeImages[1]} />
-            </div>
-          </div>
-        </Fade>
-        <div id="banner-text">
-          <h1>{props.bookclub.name} </h1> <h2>{props.bookclub.tagline} </h2>
         </div>
-      </div>
-    );
+      );
   } else {
     return null;
   }
 };
+{
+  /* <div className="each-fade">
+<div>
+  <img className="banner-image" src={fadeImages[0]}></img>
+</div>
+</div> */
+}
 
 export const Banner = connect((state) => state)(_Banner);
