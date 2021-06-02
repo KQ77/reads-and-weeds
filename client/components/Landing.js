@@ -8,6 +8,7 @@ import { Login, Register } from './AuthForm';
 import { ClubList } from './ClubList';
 import { fetchMemberClubs } from '../redux/memberClubs';
 import { Footer } from './Footer';
+import Axios from 'axios';
 
 const _Landing = (props) => {
   const [show, setShow] = useState(false);

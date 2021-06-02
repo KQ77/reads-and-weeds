@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
 import DatePicker from 'react-datepicker';
 import { setAuth } from '../redux/auth';
+import { CreateInvite } from './CreateInvite';
 import { LimitedViewClub } from './LimitedViewClub';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
@@ -18,7 +19,7 @@ import {
   Burger,
 } from './index';
 import '../../public/css/BookClub.css';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 const _BookClub = (props) => {
   const clubId = props.match.params.id;
@@ -26,6 +27,9 @@ const _BookClub = (props) => {
     return props.bookclub.members.find((member) => member.id === props.auth.id);
   };
   const [startDate, setStartDate] = useState(new Date());
+  const [showInvite, setShowInvite] = useState(false);
+  const handleClose = () => setShowInvite(false);
+
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
   }, []);
@@ -49,7 +53,6 @@ const _BookClub = (props) => {
       props.bookclub.private &&
       props.bookclub.members.find((member) => member.id === props.auth.id)
     ) {
-      console.log('has access');
       return true;
     } else {
       return false;
@@ -90,14 +93,36 @@ const _BookClub = (props) => {
                 <h2>Next Meet-Up Date: {props.bookclub.meetDate}</h2>
                 {isMember ? (
                   <div>
-                    Edit Date
-                    <DatePicker
-                      showTimeSelect
-                      dateFormat="MMMM d, yyyy h:mmaa"
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
-                    />
-                    <Button onClick={(e) => saveDate(e)}>Save Date</Button>
+                    <div>
+                      Edit Date
+                      <DatePicker
+                        showTimeSelect
+                        dateFormat="MMMM d, yyyy h:mmaa"
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                      />
+                      <Button onClick={(e) => saveDate(e)}>Save Date</Button>
+                    </div>
+                    <Button onClick={() => setShowInvite(true)}>
+                      + Invite a friend
+                    </Button>
+                    <Modal show={showInvite} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Invite a member</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <CreateInvite
+                          handleClose={handleClose}
+                          clubId={props.bookclub.id}
+                          {...props}
+                        />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 ) : (
                   ''

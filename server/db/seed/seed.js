@@ -5,6 +5,7 @@ const { Suggestion } = require('../Models/Suggestion.js');
 const { Comment } = require('../Models/Comment.js');
 const { Image } = require('../Models/Image');
 const { Book } = require('../Models/Book');
+const { Invite } = require('../Models/Invite');
 const { Member } = require('../Models/Member');
 const Rating = require('../Models/Rating');
 const { Request } = require('../Models/Request');
@@ -55,13 +56,14 @@ Member.hasMany(Request);
 Request.belongsTo(Club);
 Club.hasMany(Request);
 
-// const apiKey = 'AIzaSyCkkHyRp__65PWLfn50WMtKrIncdJwdcBc';
-// const currentId = 'SUdfDwAAQBAJ';
+Invite.belongsTo(Club);
+Club.hasMany(Invite);
 
 const syncAndSeed = async () => {
   await conn.authenticate();
   console.log('database authenticated');
   await conn.sync({ force: true });
+
   //**RW CLUB** //
   //seed club
   const RW = await Club.create({
@@ -102,5 +104,6 @@ module.exports = {
   Image,
   Request,
   ClubMembers,
+  Invite,
   syncAndSeed,
 };

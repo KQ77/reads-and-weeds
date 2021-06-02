@@ -7,15 +7,18 @@
 } */
 
 #edit-profile form {
-  width: 50%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
 }
 
 #edit-profile img {
-  height: 20rem;
+  height: 15rem;
+  width: 15em;
 }
 
 #edit-profile form > div:nth-child(1) {
-  width: fit-content;
+  text-align: center;
   position: relative;
 }

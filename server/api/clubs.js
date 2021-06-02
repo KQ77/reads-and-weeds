@@ -9,6 +9,7 @@ const {
   Suggestion,
   Comment,
   Request,
+  Invite,
   ClubMembers,
 } = require('../db/seed/seed');
 
@@ -19,6 +20,12 @@ const { v4: uuidv4 } = require('uuid');
 
 const { fetchBook } = require('./helpers');
 const { hasAccess, isLoggedIn } = require('../middleware');
+
+//sgrid emal sdk
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+//ROUTES//
 
 //GET all clubs
 router.get('/', async (req, res, next) => {
@@ -162,11 +169,44 @@ router.post(
     }
   }
 );
+
+//POST an invite to a club (club member can invite another member -- must be a member of the club)
+router.post('/:clubId/invites', hasAccess, async (req, res, next) => {
+  try {
+    const { clubId, email } = req.body;
+    const club = await Club.findByPk(clubId);
+
+    //create new invite in DB
+    const invite = await Invite.create(req.body);
+    //make email
+    const msg = {
+      to: email, // Change to your recipient
+      from: 'qbooks@q-sites.org', // Change to your verified sender
+      subject: 'You have an invite :-)',
+      content: [
+        {
+          type: 'text/html',
+          value: `You have been invited to join the book club, ${club.name}!<br></br> http://localhost:1337/invites/${invite.id}`,
+        },
+      ],
+      // text: `You have been invited to join ${club.name} book club. Follow the link to join your friends.`,
+      // html: `
+      //     <a href="">click here</a>`,
+    };
+    await sgMail.send(msg);
+    console.log('Invite sent!!');
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err.response.body.errors, 'err');
+    next(err);
+  }
+});
+
 //GET all of a club's suggestions ( with google books data for each suggestion)
-router.get('/:clubId/suggestions', async (req, res, next) => {
+router.get('/:clubId/suggestions', hasAccess, async (req, res, next) => {
   //get all of club's suggestions from DB
   const suggestions = await Suggestion.findAll({
-    where: { clubId: req.params.clubId },
+    where: { clubId: req.params.id },
     include: [Member],
   });
   //for each suggestion, fetch google books data about that book

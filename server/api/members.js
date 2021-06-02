@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
   Member,
   Club,
+  Image,
   Book,
   Comment,
   Rating,
@@ -9,6 +10,12 @@ const {
 } = require('../db/seed/seed');
 const { isLoggedIn } = require('../middleware');
 
+//s3
+const multer = require('multer');
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
+
+//GET member info
 router.get('/:memberId', async (req, res, next) => {
   //should anyone be able to get this info about a member?
   try {
@@ -32,7 +39,6 @@ router.put('/:memberId', isLoggedIn, async (req, res, next) => {
   try {
     // if a different member is trying to acess this route - make additional middleware for this potentially?
     if (req.member.id !== req.params.memberId * 1) {
-      console.log(typeof req.member.id, typeof req.params.memberId);
       const error = new Error(
         'Not authorized to make these changes. Only the member associated with this account can update the profile information'
       );
@@ -47,7 +53,62 @@ router.put('/:memberId', isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+//make middleware for isSameMember ??
 
+//set storage engine
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+//upload new profile pic
+
+router.post(
+  '/:id/upload',
+  upload.single('image'),
+  isLoggedIn,
+  async (req, res, next) => {
+    try {
+      //is member sending request the member to be updated?
+      if (req.member.id !== req.params.id * 1) {
+        const error = new Error(
+          'Not authorized to make these changes. Only the member associated with this account can update the profile information'
+        );
+        error.status = 401;
+        throw error;
+      }
+      //DRY this out later
+      const { file } = req;
+      const uploadParams = {
+        Bucket: 'bookclub-site-images',
+        Key: `${uuidv4()}${file.originalname}`,
+        Body: file.buffer,
+        ContentType: file.mimetype,
+      };
+      //upload image to s3 bucket
+      s3.upload(uploadParams, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        }
+        if (data) {
+          console.log('Upload Success', data.Location);
+        }
+      });
+      //update member imageUrl to new s3 url
+      const member = await Member.findByPk(req.params.id);
+      console.log('going to update member now');
+
+      await member.update({
+        imageUrl: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+      });
+      res.sendStatus(204);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 //GET /api/members/:memberId/clubs
 router.get('/:memberId/clubs', isLoggedIn, async (req, res, next) => {
   try {

@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.4",
     "aws-sdk": "^2.913.0",
     "axios": "^0.21.0",
     "bcrypt": "^5.0.1",

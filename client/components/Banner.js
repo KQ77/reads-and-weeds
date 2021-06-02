@@ -16,7 +16,6 @@ const _Banner = (props) => {
     infinite: true,
   };
   if (fadeImages) {
-    console.log(fadeImages, 'fade images');
     if (fadeImages.length > 1) {
       return (
         <div className="slide-container">
@@ -27,8 +26,8 @@ const _Banner = (props) => {
             </div>
           </div>
           <Fade {...fadeProperties}>
-            {fadeImages.map((image) => (
-              <div className="each-fade">
+            {fadeImages.map((image, idx) => (
+              <div key={idx} className="each-fade">
                 <div>
                   <img className="banner-image" src={image} />
                 </div>

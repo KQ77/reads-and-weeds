@@ -27,6 +27,7 @@ const _SingleMember = (props) => {
   if (!member) {
     return null;
   } else {
+    console.log(member, 'member');
     return (
       <div id="single-member">
         <p>add back to home link here</p>
