@@ -43,7 +43,7 @@ router.post(
   async (req, res, next) => {
     try {
       const club = await Club.findByPk(req.params.clubId);
-
+      console.log(req.body, 'req.body');
       if (req.file) {
         const { file } = req;
         const uploadParams = {

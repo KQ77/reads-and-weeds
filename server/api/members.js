@@ -63,12 +63,12 @@ const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
-//upload new profile pic
 
+//upload new profile pic
 router.post(
-  '/:id/upload',
-  upload.single('image'),
+  '/:id/update',
   isLoggedIn,
+  upload.single('image'),
   async (req, res, next) => {
     try {
       //is member sending request the member to be updated?
@@ -79,31 +79,34 @@ router.post(
         error.status = 401;
         throw error;
       }
-      //DRY this out later
-      const { file } = req;
-      const uploadParams = {
-        Bucket: 'bookclub-site-images',
-        Key: `${uuidv4()}${file.originalname}`,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-      };
-      //upload image to s3 bucket
-      s3.upload(uploadParams, function (err, data) {
-        if (err) {
-          console.log('Error', err);
-        }
-        if (data) {
-          console.log('Upload Success', data.Location);
-        }
-      });
-      //update member imageUrl to new s3 url
       const member = await Member.findByPk(req.params.id);
-      console.log('going to update member now');
 
-      await member.update({
-        imageUrl: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
-      });
-      res.sendStatus(204);
+      //DRY this out later
+      console.log(req.body, 'req.body');
+      if (req.file) {
+        const { file } = req;
+        const uploadParams = {
+          Bucket: 'bookclub-site-images',
+          Key: `${uuidv4()}${file.originalname}`,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+        };
+        //upload image to s3 bucket
+        s3.upload(uploadParams, function (err, data) {
+          if (err) {
+            console.log('Error', err);
+          }
+          if (data) {
+            console.log('Upload Success', data.Location);
+          }
+        });
+        //update member imageUrl to new s3 url
+        await member.update({
+          imageUrl: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+        });
+      }
+      await member.update(req.body);
+      res.status(204).redirect(`/members/${member.id}`);
     } catch (err) {
       next(err);
     }

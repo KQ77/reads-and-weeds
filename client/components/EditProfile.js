@@ -55,45 +55,50 @@ const _EditProfile = (props) => {
   const updateMember = (e) => {
     setMember((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = async (e, props) => {
-    const { id } = props.match.params;
-    await axios.put(`/api/members/${id}`, member);
-    props.history.push(`/members/${id}`);
-  };
+  // const handleSubmit = async (e, props) => {
+  //   const { id } = props.match.params;
+  //   await axios.put(`/api/members/${id}`, member);
+  //   props.history.push(`/members/${id}`);
+  // };
   return (
     <div id="edit-profile">
       <h1>Edit Your Info</h1>
-      <EditPhoto {...props} profile={true} />
-      {/* <Form>
-        <div>
-          <Image
-            style={{
-              border: '1px solid black',
-              top: '75%',
-              left: '5.5rem',
-              height: '3.5rem',
-              position: 'absolute',
-            }}
-            roundedCircle
-            src="/images/camera.png"
-          />
-          <Image thumbnail src={member.imageUrl}></Image>
-        </div> */}
-      {/* <Form method="post" action="`/api/members/:memberId/update"> */}
-      <Form className="edit-profile">
-        {/* <Image thumbnail roundedCircle src={preview} /> */}
-        {/* <Form.Group controlId="formFile" className="mb-3">
+      {/* <EditPhoto {...props} profile={true} /> */}
+      {/* <Form className="edit-profile"> */}
+      {/* <div> */}
+      {/* <Image
+          style={{
+            border: '1px solid black',
+            top: '75%',
+            left: '5.5rem',
+            height: '3.5rem',
+            position: 'absolute',
+          }}
+          roundedCircle
+          src="/images/camera.png"
+        />
+        <Image thumbnail src={preview}></Image> */}
+      {/* </div> */}
+      <Form
+        method="post"
+        encType="multipart/form-data"
+        action={`/api/members/${props.match.params.id}/update`}
+      >
+        {/* <Form className="edit-profile"> */}
+        <Image thumbnail roundedCircle src={preview} />
+        <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Upload new image</Form.Label>
           <Form.Control
             onChange={(e) => handleFileChange(e)}
             name="image"
             type="file"
           />
-        </Form.Group> */}
+        </Form.Group>
         <Form.Row>
           <Form.Group>
             <Form.Label> First Name</Form.Label>
             <Form.Control
+              type="text"
               placeholder="first name"
               name="firstName"
               value={member.firstName || ''}
@@ -103,6 +108,7 @@ const _EditProfile = (props) => {
           <Form.Group>
             <Form.Label>Last name</Form.Label>
             <Form.Control
+              type="text"
               placeholder="last name"
               name="lastName"
               value={member.lastName || ''}
@@ -147,8 +153,8 @@ const _EditProfile = (props) => {
             ></Form.Control>
           </Form.Group>
         </Form.Row>
-        <Button onClick={(e) => handleSubmit(e, props)}>SAVE CHANGES</Button>
-        {/* <Button type="submit">SAVE CHANGES</Button> */}
+        {/* <Button onClick={(e) => handleSubmit(e, props)}>SAVE CHANGES</Button> */}
+        <Button type="submit">SAVE CHANGES</Button>
       </Form>
     </div>
   );
