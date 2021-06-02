@@ -36,6 +36,7 @@ const _Sidebar = (props) => {
     }
     props.fetchClub(props.match.params.id);
   };
+  console.log(props.bookclub.displayImage, 'display image props.bookclub');
   return (
     <div id="sidebar">
       <div>

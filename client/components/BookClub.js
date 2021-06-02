@@ -47,7 +47,6 @@ const _BookClub = (props) => {
   //if person is member of club or page is public - show full page , otherwise show more generic page
   const hasAccess = () => {
     if (props.bookclub.private === false) {
-      console.log('club is public - has access');
       return true;
     } else if (
       props.bookclub.private &&

@@ -13,32 +13,38 @@ const _EditClub = (props) => {
     location: '',
     private: false,
   });
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
   const [src, setSrc] = useState('');
+
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
 
   const fetchClub = async () => {
     const club = (await axios.get(`/api/clubs/${props.match.params.id}`)).data;
     const { name, description, location } = club;
     setClubData({ name, description, location, private: club.private });
-    setSrc(club.displayImage);
+    // setSrc(club.displayImage);
+    setPreview(club.displayImage);
+  };
+  const handleFileChange = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+    setSelectedFile(e.target.files[0]);
   };
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setClubData((prevData) => ({ ...prevData, [name]: value }));
-  };
-  const updateClub = async (e) => {
-    e.preventDefault();
-    console.log(clubData, 'clubdata');
-
-    const formData = new FormData(e.target);
-    console.log(formData.get('name'));
-    const { id } = props.match.params;
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' },
-    };
-
-    await axios.post(`/api/admin/clubs/${id}`, formData, config);
-    // await axios.put(`/api/admin/clubs/${id}`, clubData);
-    // props.history.push(`/bookclubs/${id}`);
   };
 
   useEffect(() => {
@@ -51,7 +57,7 @@ const _EditClub = (props) => {
   return (
     <div id="edit-club">
       <div className="form">
-        <img src={src} />
+        <img src={preview} />
 
         <Form
           action={`/api/admin/clubs/${props.match.params.id}/`}
@@ -60,9 +66,12 @@ const _EditClub = (props) => {
         >
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Upload new image</Form.Label>
-            <Form.Control name="image" type="file" />
+            <Form.Control
+              onChange={(e) => handleFileChange(e)}
+              name="image"
+              type="file"
+            />
           </Form.Group>
-          {/* <Form.File name="image"></Form.File> */}
           <Form.Group>
             <Form.Label>Edit Club Name</Form.Label>
             <Form.Control

@@ -189,9 +189,6 @@ router.post('/:clubId/invites', hasAccess, async (req, res, next) => {
           value: `You have been invited to join the book club, ${club.name}!<br></br> http://localhost:1337/invites/${invite.id}`,
         },
       ],
-      // text: `You have been invited to join ${club.name} book club. Follow the link to join your friends.`,
-      // html: `
-      //     <a href="">click here</a>`,
     };
     await sgMail.send(msg);
     console.log('Invite sent!!');

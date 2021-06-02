@@ -21,6 +21,9 @@ const _LimitedView = (props) => {
       memberId: props.auth.id,
       clubId: club.id,
     });
+    if (props.inviteView) {
+      await axios.delete(`/api/invites/:id`);
+    }
     setRequested(true);
   };
   return (

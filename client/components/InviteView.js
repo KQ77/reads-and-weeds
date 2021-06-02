@@ -14,7 +14,7 @@ export const InviteView = (props) => {
   }, []);
 
   if (invite.club) {
-    return <LimitedViewClub club={invite.club} />;
+    return <LimitedViewClub inviteView={true} club={invite.club} />;
   } else {
     return null;
   }

@@ -42,35 +42,39 @@ router.post(
   upload.single('image'),
   async (req, res, next) => {
     try {
-      const { file } = req;
-      const uploadParams = {
-        Bucket: 'bookclub-site-images',
-        Key: `${uuidv4()}${file.originalname}`,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-      };
-      //make entry in image model for this new display image
-      await Image.create({
-        clubId: req.params.clubId,
-        memberId: req.member.id,
-        src: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
-      });
-      //upload image to s3 bucket
-      s3.upload(uploadParams, function (err, data) {
-        if (err) {
-          console.log('Error', err);
-        }
-        if (data) {
-          console.log('Upload Success', data.Location);
-        }
-      });
-      //update club info with req.body data
       const club = await Club.findByPk(req.params.clubId);
+
+      if (req.file) {
+        const { file } = req;
+        const uploadParams = {
+          Bucket: 'bookclub-site-images',
+          Key: `${uuidv4()}${file.originalname}`,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+        };
+        //make entry in image model for this new display image
+        await Image.create({
+          clubId: req.params.clubId,
+          memberId: req.member.id,
+          src: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+        });
+        //upload image to s3 bucket
+        s3.upload(uploadParams, function (err, data) {
+          if (err) {
+            console.log('Error', err);
+          }
+          if (data) {
+            console.log('Upload Success', data.Location);
+          }
+        });
+        await club.update({
+          displayImage: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+        });
+      }
       await club.update(req.body);
-      await club.update({
-        displayImage: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
-      });
+
       res.status(201).redirect(`/bookclubs/${req.params.clubId}`);
+      // res.sendStatus(201);
     } catch (err) {
       next(err);
     }
