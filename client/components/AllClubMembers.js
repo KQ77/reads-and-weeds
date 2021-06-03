@@ -12,16 +12,17 @@ export const AllClubMembers = (props) => {
   };
   useEffect(() => {
     fetchMembers();
-  });
+  }, []);
   if (members.length) {
     return (
       <div id="all-members">
         {members.map((member, idx) => (
-          <Card>
+          <Card key={idx} style={{ width: '10rem', height: 'fit-content' }}>
+            <Card.Img style={{ height: '8' }} src={member.imageUrl}></Card.Img>
             <Card.Title>{member.firstName}</Card.Title>
             <Card.Body>
               card body
-              <Card.Text></Card.Text>
+              <Card.Text>Join Date: {member.clubmembers.joinDate}</Card.Text>
             </Card.Body>
             <Card.Footer>card footer</Card.Footer>
           </Card>
