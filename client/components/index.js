@@ -25,3 +25,4 @@ export { ClubRequests } from './ClubRequests';
 export { CreateClub } from './CreateClub';
 export { EditClub } from './EditClub';
 export { InviteView } from './InviteView';
+export { AllClubMembers } from './AllClubMembers';

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../public/css/Sidebar.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+
 const _Sidebar = (props) => {
   const { members } = props.bookclub;
   const isMember = (props) => {
@@ -36,7 +37,6 @@ const _Sidebar = (props) => {
     }
     props.fetchClub(props.match.params.id);
   };
-  console.log(props.bookclub.displayImage, 'display image props.bookclub');
   return (
     <div id="sidebar">
       <div>
@@ -96,6 +96,7 @@ const _Sidebar = (props) => {
           </li>
         ))}
       </ul>
+      <Link to={`/bookclubs/${props.match.params.id}/members`}>see all</Link>
     </div>
   );
 };

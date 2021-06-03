@@ -25,12 +25,27 @@ const { hasAccess, isLoggedIn } = require('../middleware');
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-//ROUTES//
-
 //GET all clubs
 router.get('/', async (req, res, next) => {
   try {
     res.status(200).send(await Club.findAll({ include: [Member, Request] }));
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Create a club - once created, redirect to homepage for the new club
+router.post('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const club = await Club.create(req.body);
+    await club.update({ adminId: req.member.id });
+    await ClubMembers.create({ memberId: req.member.id, clubId: club.id });
+    await Image.create({
+      clubId: club.id,
+      memberId: req.member.id,
+      src: req.body.displayImage,
+    });
+    res.send(club);
   } catch (err) {
     next(err);
   }
@@ -71,23 +86,6 @@ router.put('/:clubId', hasAccess, async (req, res, next) => {
     console.log(req.body, 'req.body');
     await club.update(req.body);
     res.status(204).send();
-  } catch (err) {
-    next(err);
-  }
-});
-
-//Create a club - once created, redirect to homepage for the new club
-router.post('/', isLoggedIn, async (req, res, next) => {
-  try {
-    const club = await Club.create(req.body);
-    await club.update({ adminId: req.member.id });
-    await ClubMembers.create({ memberId: req.member.id, clubId: club.id });
-    await Image.create({
-      clubId: club.id,
-      memberId: req.member.id,
-      src: req.body.displayImage,
-    });
-    res.send(club);
   } catch (err) {
     next(err);
   }
@@ -169,6 +167,17 @@ router.post(
     }
   }
 );
+
+//GET all of a club's members
+router.get('/:clubId/members', hasAccess, async (req, res, next) => {
+  try {
+    const club = await Club.findByPk(req.params.clubId, { include: [Member] });
+    const { members } = club;
+    res.status(200).send(members);
+  } catch (err) {
+    next(err);
+  }
+});
 
 //POST an invite to a club (club member can invite another member -- must be a member of the club)
 router.post('/:clubId/invites', hasAccess, async (req, res, next) => {
