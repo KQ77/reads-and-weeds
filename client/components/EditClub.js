@@ -15,7 +15,7 @@ const _EditClub = (props) => {
   });
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-  const [src, setSrc] = useState('');
+  // const [src, setSrc] = useState('');
 
   useEffect(() => {
     if (!selectedFile) {
@@ -43,7 +43,10 @@ const _EditClub = (props) => {
     setSelectedFile(e.target.files[0]);
   };
   const handleFormChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (value === 'false') value = false;
+    if (value === 'true') value = true;
+    console.log(typeof value, 'type of value');
     setClubData((prevData) => ({ ...prevData, [name]: value }));
   };
 
@@ -107,11 +110,13 @@ const _EditClub = (props) => {
             label="public"
             type="radio"
             name="private"
+            checked={!clubData.private}
             value={false}
           ></Form.Check>
           <Form.Check
             label="private"
             name="private"
+            checked={clubData.private}
             onChange={(e) => handleFormChange(e)}
             type="radio"
             value={true}
