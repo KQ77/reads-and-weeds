@@ -42,7 +42,7 @@ const _SingleMember = (props) => {
           <span>{member.firstName}</span>
 
           {isMember(props) ? (
-            <Link to={`/members/${member.id}/profile/edit`}>edit profile</Link>
+            <Link to={`/members/${member.id}/profile/edit`}>edit</Link>
           ) : (
             ''
           )}

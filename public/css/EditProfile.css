@@ -5,7 +5,10 @@
 /* #edit-profile {
   padding: 2rem;
 } */
-
+#edit-profile {
+  width: 70vw;
+  margin: auto;
+}
 #edit-profile form {
   width: 60%;
   display: flex;
@@ -21,4 +24,8 @@
 #edit-profile form > div:nth-child(1) {
   text-align: center;
   position: relative;
+}
+#edit-profile form > div:nth-child(2) {
+  padding: 1rem;
+  justify-content: space-around;
 }

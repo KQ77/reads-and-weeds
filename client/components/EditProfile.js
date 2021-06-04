@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Form, Image, Button } from 'react-bootstrap';
+import { Form, Image, Button, Row } from 'react-bootstrap';
 import axios from 'axios';
 import '../../public/css/EditProfile.css';
 import { EditPhoto } from './EditPhoto';
@@ -85,15 +85,28 @@ const _EditProfile = (props) => {
         action={`/api/members/${props.match.params.id}/update`}
       >
         {/* <Form className="edit-profile"> */}
-        <Image thumbnail roundedCircle src={preview} />
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Upload new image</Form.Label>
-          <Form.Control
-            onChange={(e) => handleFileChange(e)}
-            name="image"
-            type="file"
-          />
-        </Form.Group>
+        <Form.Row>
+          <Image thumbnail roundedCircle src={preview} />
+          <Form.Group
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '3rem',
+            }}
+            className="file-input"
+            controlId="formFile"
+          >
+            <Form.Label>Upload new image</Form.Label>
+            <Form.Control
+              style={{ display: 'flex' }}
+              onChange={(e) => handleFileChange(e)}
+              name="image"
+              type="file"
+            />
+          </Form.Group>
+        </Form.Row>
         <Form.Row>
           <Form.Group>
             <Form.Label> First Name</Form.Label>
@@ -116,10 +129,9 @@ const _EditProfile = (props) => {
             ></Form.Control>
           </Form.Group>
         </Form.Row>
-        <Form.Group style={{ width: '60%' }}>
+        <Form.Group>
           <Form.Label> Bio</Form.Label>
           <Form.Control
-            style={{ minHeight: '8rem' }}
             placeholder="a little about yourself..."
             name="bio"
             as="textarea"
