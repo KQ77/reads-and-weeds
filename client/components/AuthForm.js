@@ -10,6 +10,7 @@ const AuthForm = (props) => {
   const [lastName, setLastName] = useState('');
   const [validated, setValidated] = useState(true);
   const [error, setError] = useState('');
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -19,9 +20,12 @@ const AuthForm = (props) => {
     }
     props.authenticate(
       { email, password, firstName, lastName },
-      props.formName
+      props.formName,
+      props.redirectUrl
     );
-    props.handleClose();
+    if (!props.redirectUrl) {
+      props.handleClose();
+    }
   };
 
   useEffect(() => {
@@ -30,6 +34,7 @@ const AuthForm = (props) => {
       props.handleShow();
     }
   }, [props.auth]);
+  console.log(props, 'props');
   return (
     <div id="authform">
       <Form xs="auto" noValidate validated={validated} onSubmit={handleSubmit}>
@@ -97,10 +102,10 @@ const mapRegister = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
-    authenticate: (formData, method) =>
-      dispatch(authenticateUser(formData, method)),
+    authenticate: (formData, method, url, history) =>
+      dispatch(authenticateUser(formData, method, url, history)),
   };
 };
 

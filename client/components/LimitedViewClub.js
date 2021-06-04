@@ -22,7 +22,7 @@ const _LimitedView = (props) => {
       clubId: club.id,
     });
     if (props.inviteView) {
-      await axios.delete(`/api/invites/:id`);
+      await axios.delete(`/api/invites/${props.match.params.id}`);
     }
     setRequested(true);
   };
@@ -34,7 +34,7 @@ const _LimitedView = (props) => {
         <h2>{club.private ? 'private' : 'public'}</h2>
       </div>
       <button disabled={requested} onClick={() => sendRequest()}>
-        Request To Join
+        {requested ? 'Request send' : 'Request To Join'}
       </button>
     </div>
   );

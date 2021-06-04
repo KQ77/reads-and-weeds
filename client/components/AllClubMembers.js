@@ -1,6 +1,8 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import '../../public/css/AllClubMembers.css';
 
 export const AllClubMembers = (props) => {
   const [members, setMembers] = useState([]);
@@ -16,10 +18,13 @@ export const AllClubMembers = (props) => {
   if (members.length) {
     return (
       <div id="all-members">
+        <h1>All Members({members.length})</h1>
         {members.map((member, idx) => (
-          <Card key={idx} style={{ width: '10rem', height: 'fit-content' }}>
-            <Card.Img style={{ height: '8' }} src={member.imageUrl}></Card.Img>
-            <Card.Title>{member.firstName}</Card.Title>
+          <Card key={idx}>
+            <Card.Img src={member.imageUrl}></Card.Img>
+            <Card.Title>
+              <Link to={`/members/${member.id}`}>{member.firstName}</Link>
+            </Card.Title>
             <Card.Body>
               card body
               <Card.Text>Join Date: {member.clubmembers.joinDate}</Card.Text>

@@ -44,10 +44,13 @@ router.get('/member', async (req, res, next) => {
   try {
     const token = req.cookies.token;
     if (token) {
+      console.log('there is a token here');
       //send back the member associated with that token
       res.send(await Member.findByToken(token));
     } else {
-      res.send({});
+      console.log('there is no token');
+      //if no token -- res.redirect to auth?  try this first
+      res.status(200).send({});
     }
   } catch (err) {
     next(err);

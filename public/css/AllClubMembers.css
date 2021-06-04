@@ -1,0 +1,9 @@
+#all-members {
+  display: flex;
+}
+
+#all-members > div {
+  margin: 1rem;
+  display: flex;
+  width: 10rem;
+}

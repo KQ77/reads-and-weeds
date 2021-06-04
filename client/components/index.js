@@ -26,3 +26,4 @@ export { CreateClub } from './CreateClub';
 export { EditClub } from './EditClub';
 export { InviteView } from './InviteView';
 export { AllClubMembers } from './AllClubMembers';
+export { Login, Register } from './AuthForm';
