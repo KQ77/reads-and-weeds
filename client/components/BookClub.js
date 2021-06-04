@@ -90,7 +90,7 @@ const _BookClub = (props) => {
     return (
       <div id="bookclub">
         <Burger {...props} />
-        <Banner />
+        {hasAccess() && <Banner />}
         {hasAccess() ? (
           <div className="flex-container">
             <Sidebar {...props} />

@@ -1,9 +1,18 @@
-import { Form, Button, Container, Image, Row, Col } from 'react-bootstrap';
+import {
+  Form,
+  Button,
+  Container,
+  Image,
+  Popover,
+  OverlayTrigger,
+  Col,
+} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import '../../public/css/SuggestionSearch.css';
 import { fetchClub } from '../redux/bookclub';
 import axios from 'axios';
+import { Burger } from './index';
 
 const _SuggestionSearch = (props) => {
   useEffect(() => {
@@ -16,9 +25,9 @@ const _SuggestionSearch = (props) => {
         `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
       )
     ).data;
-    console.log(results.items, 'results');
     setResults(results.items);
   };
+
   const [suggestedIds, setSuggestedIds] = useState([]);
   const toggleSuggestion = async (bookId) => {
     await axios.put(`/api/suggestions/`, { clubId: props.bookclub.id, bookId });
@@ -32,70 +41,96 @@ const _SuggestionSearch = (props) => {
   };
   const [searchTerm, setSearchTerm] = useState('');
 
-  console.log(suggestedIds, 'suggested Ids');
+  //popover
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Description</Popover.Title>
+      <Popover.Content>result.volumeInfo.description</Popover.Content>
+    </Popover>
+  );
   return (
-    <div id="suggestion-search">
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSearch(searchTerm);
-        }}
-      >
-        <Form.Control
-          type="text"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          required
-          placeholder="search for a book"
-        ></Form.Control>
-        <Button type="submit">search</Button>
-      </Form>
-      <div id="search-results">
-        {results.length
-          ? results.map((result, idx) => (
-              <Container key={idx} id="search-result-row">
-                <Image
-                  src={
-                    result.volumeInfo.imageLinks
-                      ? result.volumeInfo.imageLinks.smallThumbnail
-                      : '/images/noImage.jpeg'
-                  }
-                />
-
-                <Col>
-                  <span style={{ fontSize: '1.5rem' }}>
-                    {result.volumeInfo.title}
-                  </span>
-                  <br></br>
-                  <span> by</span>{' '}
-                  <span style={{ fontSize: '1.3rem' }}>
-                    {result.volumeInfo.authors
-                      ? result.volumeInfo.authors[0]
-                      : ''}
-                  </span>
-                  <br></br>
-                  <Button
-                    className={
-                      suggestedIds.includes(result.id) ? 'suggested' : ''
+    <>
+      <Burger {...props} />
+      <div id="suggestion-search">
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch(searchTerm);
+          }}
+        >
+          <Form.Control
+            type="text"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            required
+            placeholder="search for a book"
+          ></Form.Control>
+          <Button type="submit">search</Button>
+        </Form>
+        <div id="search-results">
+          {results.length
+            ? results.map((result, idx) => (
+                <Container key={idx} id="search-result-row">
+                  <OverlayTrigger
+                    trigger="hover"
+                    placement="right"
+                    overlay={
+                      <Popover id="popover-basic">
+                        <Popover.Title as="h3">Description</Popover.Title>
+                        <Popover.Content style={{ width: 'fit-content' }}>
+                          {result.volumeInfo.description}
+                        </Popover.Content>
+                      </Popover>
                     }
-                    onClick={(e) => {
-                      toggleSuggestion(result.id);
-                    }}
-                    variant="light"
                   >
-                    <span>
-                      <img height="30" width="30" src="/images/thumb.png"></img>
+                    <Image
+                      src={
+                        result.volumeInfo.imageLinks
+                          ? result.volumeInfo.imageLinks.smallThumbnail
+                          : '/images/noImage.jpeg'
+                      }
+                    />
+                  </OverlayTrigger>
 
-                      {suggestedIds.includes(result.id)
-                        ? 'Suggested'
-                        : 'Suggest'}
+                  <Col>
+                    <span style={{ fontSize: '1.5rem' }}>
+                      {result.volumeInfo.title}
                     </span>
-                  </Button>
-                </Col>
-              </Container>
-            ))
-          : ''}
+                    <br></br>
+                    <span> by</span>{' '}
+                    <span style={{ fontSize: '1.3rem' }}>
+                      {result.volumeInfo.authors
+                        ? result.volumeInfo.authors[0]
+                        : ''}
+                    </span>
+                    <br></br>
+                    <Button
+                      className={
+                        suggestedIds.includes(result.id) ? 'suggested' : ''
+                      }
+                      onClick={(e) => {
+                        toggleSuggestion(result.id);
+                      }}
+                      variant="light"
+                    >
+                      <span>
+                        <img
+                          height="30"
+                          width="30"
+                          src="/images/thumb.png"
+                        ></img>
+
+                        {suggestedIds.includes(result.id)
+                          ? 'Suggested'
+                          : 'Suggest'}
+                      </span>
+                    </Button>
+                  </Col>
+                </Container>
+              ))
+            : ''}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
