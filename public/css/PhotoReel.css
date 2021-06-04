@@ -1,6 +1,11 @@
 #photo-reel img {
-  height: 15rem;
+  height: 12rem;
   line-height: 1;
   margin: 1rem;
   border: 1px solid black;
+}
+
+#photo-reel {
+  display: flex;
+  overflow-y: scroll;
 }

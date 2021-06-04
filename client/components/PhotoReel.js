@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel, Figure } from 'react-bootstrap';
+import { Carousel, Figure, Image } from 'react-bootstrap';
 import '../../public/css/PhotoReel.css';
 
 export const PhotoReel = (props) => {
@@ -7,11 +7,8 @@ export const PhotoReel = (props) => {
   const { photos } = props;
   return (
     <div id="photo-reel">
-      {photos.map((photo) => (
-        <Figure key={idx}>
-          <Figure.Image src={photo.src}></Figure.Image>
-          <Figure.Caption>{photo.caption || ''}</Figure.Caption>
-        </Figure>
+      {photos.map((photo, idx) => (
+        <Image key={idx} src={photo.src}></Image>
       ))}
 
       {/* <Carousel>

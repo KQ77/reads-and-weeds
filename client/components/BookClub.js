@@ -32,7 +32,6 @@ const _BookClub = (props) => {
   const handleClose = () => setShowInvite(false);
 
   useEffect(() => {
-    console.log('fetching club');
     props.fetchClub(props.match.params.id * 1);
   }, []);
   // if no props.auth.id, then fetch auth and set ID
@@ -160,10 +159,9 @@ const _BookClub = (props) => {
                     view all
                   </Link>
                 </div>
-                {/* <BookList past={true} clubId={props.bookclub.id} /> */}
+                <BookList past={true} clubId={props.bookclub.id} />
               </section>
               <section id="photos">
-                {/* link to see all photos /bookclubs/:id/photos; other link maybe opens a modal - to form that adds photos */}
                 <h1 className="section-heading">Photos</h1>
                 <div>
                   <Button variant="info">+ add photos</Button>
@@ -171,7 +169,7 @@ const _BookClub = (props) => {
                     view all
                   </Link>
                 </div>
-                {/* <PhotoReel photos={props.bookclub.images} /> */}
+                <PhotoReel photos={props.bookclub.images} />
               </section>
             </div>
           </div>
