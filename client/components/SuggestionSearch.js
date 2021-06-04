@@ -6,12 +6,14 @@ import {
   Popover,
   OverlayTrigger,
   Col,
+  Row,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import '../../public/css/SuggestionSearch.css';
 import { fetchClub } from '../redux/bookclub';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Burger } from './index';
 
 const _SuggestionSearch = (props) => {
@@ -41,16 +43,12 @@ const _SuggestionSearch = (props) => {
   };
   const [searchTerm, setSearchTerm] = useState('');
 
-  //popover
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Description</Popover.Title>
-      <Popover.Content>result.volumeInfo.description</Popover.Content>
-    </Popover>
-  );
   return (
     <>
       <Burger {...props} />
+      <Row style={{ margin: '4rem' }}>
+        <Link to={`/bookclubs/${props.match.params.id}`}> back to club</Link>
+      </Row>
       <div id="suggestion-search">
         <Form
           onSubmit={(e) => {

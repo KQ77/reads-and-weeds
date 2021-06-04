@@ -90,8 +90,8 @@ router.put('/:clubId', hasAccess, async (req, res, next) => {
   }
 });
 
-//GET all of a club's books' google book data -- put a check for if club is private or not?
-router.get(`/:clubId/books`, async (req, res, next) => {
+//GET all of a club's books' google book data
+router.get(`/:clubId/books`, hasAccess, async (req, res, next) => {
   //get all books from the club
   let books = await Book.findAll({ where: { clubId: req.params.clubId } });
   if (req.body.past) {
@@ -141,16 +141,14 @@ router.post(
           Body: file.buffer,
           ContentType: file.mimetype,
         };
+        console.log(req.files.length, 'req.files.length');
         //create entry in DB for each image with src pointing to AWS url
-        await Promise.all(
-          req.files.map((file) =>
-            Image.create({
-              clubId: req.params.clubId,
-              memberId: req.member.id,
-              src: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
-            })
-          )
-        );
+        await Image.create({
+          clubId: req.params.clubId,
+          memberId: req.member.id,
+          src: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+        });
+
         s3.upload(uploadParams, function (err, data) {
           if (err) {
             console.log('Error', err);

@@ -1,11 +1,33 @@
-#all-photos img {
+#club-photos img {
   height: 10rem;
   width: 15rem;
   border: 1px solid grey;
   margin: 1rem;
 }
 
-#all-photos {
+#club-photos {
+  justify-content: center;
+  width: 100vw;
   display: flex;
   flex-wrap: wrap;
+}
+#club-photos > div {
+  width: 'fit-content';
+}
+
+#all-photos > h2 {
+  text-align: center;
+}
+
+#all-photos form {
+  display: flex;
+  margin: 2rem;
+}
+
+#all-photos > div.row {
+  justify-content: center;
+}
+
+#all-photos {
+  padding-top: 5rem;
 }
