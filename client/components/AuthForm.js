@@ -23,8 +23,10 @@ const AuthForm = (props) => {
       props.formName,
       props.redirectUrl
     );
-    if (!props.redirectUrl) {
+    if (props.handleClose) {
       props.handleClose();
+    } else {
+      props.history.push(props.location.search.split('=')[1]);
     }
   };
 

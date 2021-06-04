@@ -15,6 +15,7 @@ const isLoggedIn = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+  //need a component with both login/sign up if u click a link it switches what it shows -- then
 };
 //if a club is private, checks to see if requesting member is a member of that club
 const hasAccess = async (req, res, next) => {

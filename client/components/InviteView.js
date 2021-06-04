@@ -17,7 +17,6 @@ const _InviteView = (props) => {
     setInvite(invite);
   };
   useEffect(() => {
-    console.log('h');
     if (!props.auth) {
       props.setAuth();
     }

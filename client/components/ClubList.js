@@ -25,7 +25,13 @@ const _ClubList = (props) => {
       {clubs.map((club, idx) => (
         <React.Fragment key={idx}>
           <Card style={{ width: '18rem' }} key={idx}>
-            <Link to={`/bookclubs/${club.id}`}>
+            <Link
+              to={
+                props.auth.id
+                  ? `/bookclubs/${club.id}`
+                  : `/login/redirect?url=/bookclubs/${club.id}`
+              }
+            >
               <Card.Img variant="top" src={club.displayImage}></Card.Img>
             </Link>
             <Card.Body>

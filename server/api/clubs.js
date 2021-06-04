@@ -53,7 +53,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 
 //GET bookclub
 //if a club is public, send all info; if it's private - if person is member - send all, otherwise send just main club info
-router.get('/:id', isLoggedIn, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const club = await Club.findByPk(req.params.id, {
       include: [
@@ -64,15 +64,14 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         { model: Request },
       ],
     });
-    if (
+    // if no one logged in
+    if (!req.member) {
+      res.send(await Club.findByPk(req.params.id, { include: [Member] }));
+    } else if (
       !club.private ||
       club.members.find((member) => member.id === req.member.id)
     ) {
       res.status(200).send(club);
-    } else {
-      res
-        .status(200)
-        .send(await Club.findByPk(req.params.id, { include: [Member] }));
     }
   } catch (err) {
     next(err);

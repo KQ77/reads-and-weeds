@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
 import DatePicker from 'react-datepicker';
 import { setAuth } from '../redux/auth';
+import { Login } from './index';
 import { CreateInvite } from './CreateInvite';
 import { LimitedViewClub } from './LimitedViewClub';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -31,6 +32,7 @@ const _BookClub = (props) => {
   const handleClose = () => setShowInvite(false);
 
   useEffect(() => {
+    console.log('fetching club');
     props.fetchClub(props.match.params.id * 1);
   }, []);
   // if no props.auth.id, then fetch auth and set ID
@@ -80,6 +82,11 @@ const _BookClub = (props) => {
     // const pastBooks = props.bookclub.books.filter((book) => !book.isCurrent);
   }
   if (props.bookclub) {
+    // {
+    //   !props.auth.id && (
+    //     <Login {...props} redirectUrl={`/bookclubs/${props.bookclub.id}`} />
+    //   );
+    // }
     return (
       <div id="bookclub">
         <Burger {...props} />
@@ -169,7 +176,7 @@ const _BookClub = (props) => {
             </div>
           </div>
         ) : (
-          <LimitedViewClub club={props.bookclub} />
+          <LimitedViewClub {...props} club={props.bookclub} />
         )}
         <Footer />
       </div>

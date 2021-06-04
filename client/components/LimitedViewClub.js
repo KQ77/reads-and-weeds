@@ -6,7 +6,9 @@ import { setAuth } from '../redux/auth';
 
 const _LimitedView = (props) => {
   const { club } = props;
+  const isLoggedIn = () => !!props.auth.id;
   const [requested, setRequested] = useState(false);
+
   useEffect(() => {
     let mounted = true;
     if (mounted) {
@@ -26,12 +28,14 @@ const _LimitedView = (props) => {
     }
     setRequested(true);
   };
+
   return (
     <div id="limited-club">
       <div>
+        <img height="100" src={club.displayImage} width="150" />
         <h1>{club.name}</h1>
         <h2>{club.location}</h2>
-        <h2>{club.private ? 'private' : 'public'}</h2>
+        <h2>{club.private === true ? 'private' : 'public'}</h2>
       </div>
       <button disabled={requested} onClick={() => sendRequest()}>
         {requested ? 'Request send' : 'Request To Join'}
