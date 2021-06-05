@@ -1,11 +1,17 @@
 #add-feedback {
   min-height: 100vh;
+  padding: 6rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 50rem;
+}
+
+#add-feedback h2 {
+  text-align: center;
 }
 
 #add-feedback li {
   cursor: pointer;
   color: purple;
-}
-#add-feedback li:hover {
-  text-decoration: underline;
 }

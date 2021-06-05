@@ -9,6 +9,8 @@ const {
   Suggestion,
   Comment,
   Request,
+  Rating,
+  Review,
   Invite,
   ClubMembers,
 } = require('../db/seed/seed');
@@ -59,7 +61,7 @@ router.get('/:id', async (req, res, next) => {
       include: [
         { model: Member, attributes: { exclude: ['password'] } },
         { model: Image },
-        { model: Book, include: [Comment] },
+        { model: Book, include: [Review] },
         { model: Suggestion, include: [Member] },
         { model: Request },
       ],
@@ -117,6 +119,15 @@ router.get('/:clubId/photos', hasAccess, async (req, res, next) => {
   }
 });
 
+//route to update a review
+router.put(
+  '/:clubId/feedback/:bookId',
+  hasAccess,
+  async (req, res, next) => {}
+);
+
+//route to create review for a book
+router.post('/:clubId/feedback/', hasAccess, async (req, res, next) => {});
 //set storage engine
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });

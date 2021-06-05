@@ -95,72 +95,91 @@ const rwBooks = [
 ];
 
 //seed some comments and ratings
-const rwComments = [
+const rwReviews = [
   {
     text: 'This was an awesome book',
+    rating: 7,
     memberId: 6,
     bookId: 6,
   },
   {
     text: 'This was okay',
+    rating: 5,
     memberId: 6,
     bookId: 2,
   },
   {
     text: 'This was a horrible book',
+    rating: 1,
     memberId: 6,
     bookId: 5,
   },
   {
     text: 'This was crap',
+    rating: 1,
     memberId: 2,
     bookId: 13,
   },
   {
     text: `Best book I've ever read`,
+    rating: 10,
     memberId: 1,
     bookId: 13,
   },
   {
-    text: `Best book I've ever read`,
+    text: `Really cool premise`,
+    rating: 8,
     memberId: 1,
     bookId: 12,
+  },
+  {
+    text: `Garbage`,
+    rating: 1,
+    memberId: 1,
+    bookId: 9,
   },
 ];
 
-const rwRatings = [
-  {
-    rating: 7.0,
-    bookId: 3,
-    memberId: 6,
-  },
-  {
-    rating: 9.0,
-    bookId: 13,
-    memberId: 6,
-  },
-  {
-    rating: 8.0,
-    bookId: 3,
-    memberId: 2,
-  },
-  {
-    rating: 4.0,
-    bookId: 3,
-    memberId: 1,
-  },
-  {
-    rating: 4.0,
-    bookId: 12,
-    memberId: 4,
-  },
-  {
-    rating: 4.0,
-    bookId: 12,
-    memberId: 1,
-  },
-];
+// const rwRatings = [
+//   {
+//     rating: 7.0,
+//     bookId: 3,
+//     memberId: 6,
+//   },
+//   {
+//     rating: 9.0,
+//     bookId: 13,
+//     memberId: 6,
+//   },
+//   {
+//     rating: 8.0,
+//     bookId: 3,
+//     memberId: 2,
+//   },
+//   {
+//     rating: 4.0,
+//     bookId: 3,
+//     memberId: 1,
+//   },
+//   {
+//     rating: 4.0,
+//     bookId: 12,
+//     memberId: 4,
+//   },
+//   {
+//     rating: 4.0,
+//     bookId: 12,
+//     memberId: 1,
+//   },
+// ];
 
 const rwImages = [{ src: '/images/hike.jpg' }, { src: '/images/library.jpg' }];
 
-module.exports = { members, rwBooks, rwImages, rwComments, rwRatings };
+module.exports = {
+  members,
+  rwBooks,
+  rwImages,
+  // rwComments,
+  // rwRatings,
+  rwReviews,
+};
