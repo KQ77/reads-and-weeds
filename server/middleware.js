@@ -20,7 +20,9 @@ const isLoggedIn = async (req, res, next) => {
 //if a club is private, checks to see if requesting member is a member of that club
 const hasAccess = async (req, res, next) => {
   try {
-    const club = await Club.findByPk(req.params.clubId, { include: [Member] });
+    const club = await Club.findByPk(req.params.clubId || req.body.clubId, {
+      include: [Member],
+    });
     if (club.private) {
       if (club.members.find((member) => member.id === req.member.id)) {
         return next();

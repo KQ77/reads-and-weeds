@@ -9,6 +9,7 @@ router.use('/feedback', require('./feedback'));
 router.use('/admin', require('./admin'));
 router.use('/clubmembers', require('./clubmembers'));
 router.use('/invites', require('./invites'));
+router.use('/reviews', require('./reviews'));
 
 router.use((req, res, next) => {
   console.log('route not found');

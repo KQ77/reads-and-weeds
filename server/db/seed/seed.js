@@ -11,20 +11,36 @@ const Rating = require('../Models/Rating');
 const { Request } = require('../Models/Request');
 const { Club } = require('../Models/Club');
 const { ClubMembers } = require('../Models/ClubMembers');
+const { Review } = require('../Models/Review.js');
+
 const {
   members,
   rwBooks,
   rwImages,
+  rwReviews,
   rwComments,
   rwRatings,
 } = require('./readsweedseed');
 
 //define associations
-Comment.belongsTo(Book);
-Book.hasMany(Comment);
 
-Comment.belongsTo(Member);
-Member.hasMany(Comment);
+// Comment.belongsTo(Book);
+// Book.hasMany(Comment);
+
+// Comment.belongsTo(Member);
+// Member.hasMany(Comment);
+
+// Rating.belongsTo(Book);
+// Book.hasMany(Rating);
+
+// Rating.belongsTo(Member);
+// Member.hasMany(Rating);
+
+Review.belongsTo(Member);
+Member.hasMany(Review);
+
+Review.belongsTo(Book);
+Book.hasMany(Review);
 
 Suggestion.belongsTo(Member);
 Member.hasMany(Suggestion);
@@ -37,12 +53,6 @@ Club.belongsToMany(Member, { through: ClubMembers });
 
 Book.belongsTo(Club);
 Club.hasMany(Book);
-
-Rating.belongsTo(Book);
-Book.hasMany(Rating);
-
-Rating.belongsTo(Member);
-Member.hasMany(Rating);
 
 Image.belongsTo(Club);
 Club.hasMany(Image);
@@ -89,9 +99,12 @@ const syncAndSeed = async () => {
   //add adminId
   const adminId = rwmembers.find((member) => member.firstName === 'Kate').id;
   await RW.update({ adminId });
+
+  //seed reviews
+  await Promise.all(rwReviews.map((review) => Review.create(review)));
   // seed comments and ratings
-  await Promise.all(rwComments.map((comment) => Comment.create(comment)));
-  await Promise.all(rwRatings.map((rating) => Rating.create(rating)));
+  // await Promise.all(rwComments.map((comment) => Comment.create(comment)));
+  // await Promise.all(rwRatings.map((rating) => Rating.create(rating)));
 };
 
 module.exports = {
@@ -105,5 +118,6 @@ module.exports = {
   Request,
   ClubMembers,
   Invite,
+  Review,
   syncAndSeed,
 };
