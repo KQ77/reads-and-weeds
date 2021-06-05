@@ -52,7 +52,7 @@ const _SingleBook = (props) => {
             <p dangerouslySetInnerHTML={createDescription(book)} />
           </div>
         </div>
-        <BookFeedback {...props} />
+        <BookFeedback {...props} bookId={bookId} />
       </div>
     );
   } else {

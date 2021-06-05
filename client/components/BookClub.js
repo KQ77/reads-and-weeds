@@ -79,8 +79,7 @@ const _BookClub = (props) => {
   if (props.bookclub.books) {
     const current = props.bookclub.books.find((book) => book.isCurrent);
     // const pastBooks = props.bookclub.books.filter((book) => !book.isCurrent);
-  }
-  if (props.bookclub) {
+
     // {
     //   !props.auth.id && (
     //     <Login {...props} redirectUrl={`/bookclubs/${props.bookclub.id}`} />
@@ -134,7 +133,14 @@ const _BookClub = (props) => {
                 )}
               </div>
               <section id="current-selection">
-                <h1 className="section-heading">Current Selection</h1>
+                {!current ? (
+                  <div>no current book - add info here</div>
+                ) : (
+                  <div>
+                    <h1 className="section-heading">Current Selection</h1>
+                    <SingleBook bookId={current.id} />
+                  </div>
+                )}
                 {/* {isMember ? <Link>add feedback</Link> : ''} */}
               </section>
               <section id="suggestions">

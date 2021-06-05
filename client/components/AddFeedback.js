@@ -9,6 +9,7 @@ import { Button, Form } from 'react-bootstrap';
 const _AddFeedback = (props) => {
   //this component will need access to the bookclub.books -- which will have ids and names
   const [selectedId, setSelectedId] = useState(undefined);
+  const [searchTerm, setSearchTerm] = useState('');
   const toggleSelection = (id) => {
     if (selectedId === id) setSelectedId(undefined);
     else setSelectedId(id);
@@ -42,9 +43,9 @@ const _AddFeedback = (props) => {
         <div id="add-feedback">
           <h2>Add/Edit Your Reviews</h2>
           <Form.Control
-            placeholder="search for a book"
+            placeholder="search books"
             type="text"
-            onChange={(e) => handleFilter(e)}
+            onChange={(e) => setSearchTerm(e.target.value)}
           ></Form.Control>
 
           {books.map((book, idx) => (

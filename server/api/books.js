@@ -1,9 +1,7 @@
 const router = require('express').Router();
-const axios = require('axios');
-const { Book } = require('../db/Models/Book');
-const Rating = require('../db/Models/Rating');
-const { Comment } = require('../db/Models/Comment');
-const { Member } = require('../db/Models/Member');
+// const Rating = require('../db/Models/Rating');
+// const { Comment } = require('../db/Models/Comment');
+const { Member, Review, Book } = require('../db/seed/seed');
 const { fetchBook } = require('./helpers');
 
 //  api/books
@@ -33,18 +31,31 @@ router.get('/:bookId', async (req, res, next) => {
     next(err);
   }
 });
-router.get('/:bookId/feedback', async (req, res, next) => {
+//GET a book's reviews
+router.get('/:bookId/reviews', async (req, res, next) => {
   try {
-    const book = await Book.findByPk(req.params.bookId, {
-      include: [
-        { model: Comment, include: [Member] },
-        { model: Rating, include: [Member] },
-      ],
+    const reviews = await Review.findAll({
+      where: { bookId: req.params.bookId },
+      include: [Member],
     });
-    res.status(200).send(book);
+    console.log(reviews, 'reviews');
+    res.status(200).send(reviews);
   } catch (err) {
     next(err);
   }
 });
+// router.get('/:bookId/feedback', async (req, res, next) => {
+//   try {
+//     const book = await Book.findByPk(req.params.bookId, {
+//       include: [
+//         { model: Comment, include: [Member] },
+//         { model: Rating, include: [Member] },
+//       ],
+//     });
+//     res.status(200).send(book);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = router;
