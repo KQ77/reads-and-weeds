@@ -24,27 +24,43 @@
 }
 
 #no-current {
-  background-image: url('../images/defaultClub.jpeg');
+  justify-content: center;
   background-size: cover;
-  min-height: 15rem;
-  background-repeat: no-repeat;
+  background-image: url('../images/blue_bg.jpeg');
 }
 
-#no-suggestions,
+#no-suggestions {
+  justify-content: flex-start;
+  background-image: url('../images/blue_pattern.jpeg');
+}
+
 #no-past-books {
+  justify-content: center;
+  background-color: #c6eaf2;
+  /* background-image: url('../images/abstract_blue.jpeg'); */
+  background-size: cover;
+}
+
+#no-photos {
+  justify-content: center;
+  background-image: url('../images/blue_bg.jpeg');
+  background-size: cover;
+}
+#no-suggestions,
+#no-past-books,
+#no-current,
+#no-photos {
   display: flex;
   min-height: 15rem;
-  justify-content: center;
   align-items: center;
-}
-#no-suggestions {
-  background-color: rgb(85, 85, 134);
 }
 
 #no-suggestions > div,
-#no-past-books > div {
+#no-past-books > div,
+#no-current > div,
+#no-photos > div {
   background-color: white;
-  width: 30%;
+  width: 40%;
   font-size: 1.1rem;
   border-radius: 12px;
   padding: 1rem;
@@ -53,7 +69,10 @@
   flex-direction: column;
   height: fit-content;
 }
+#no-suggestions > div {
+  margin-left: 2rem;
+}
 
-#no-past-books {
-  background-color: rgb(41, 13, 41);
+#no-past-books > div {
+  margin-left: 20rem;
 }

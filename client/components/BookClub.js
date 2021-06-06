@@ -132,15 +132,16 @@ const _BookClub = (props) => {
               <section id="current-selection">
                 {!current ? (
                   <div id="no-current">
-                    <p>
-                      Currently reading a book? Find it and select it as your
-                      current book
-                    </p>
-                    <Link
-                      to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
-                    >
-                      <Button>Find a book</Button>
-                    </Link>
+                    <div>
+                      <h3>Currently reading a book? </h3>
+                      <p>Find it and select it as your current book</p>
+
+                      <Link
+                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                      >
+                        <Button>Find a book</Button>
+                      </Link>
+                    </div>
                   </div>
                 ) : (
                   <div>
@@ -230,11 +231,13 @@ const _BookClub = (props) => {
                   </>
                 ) : (
                   <div id="no-photos">
-                    <h3> Remember the good times... </h3>
-                    <p>Add club photos here!</p>
-                    <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
-                      <Button>+ photos</Button>
-                    </Link>
+                    <div>
+                      <h3> Remember the good times... </h3>
+                      <p>Add club photos here!</p>
+                      <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
+                        <Button>+ photos</Button>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </section>
