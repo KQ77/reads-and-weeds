@@ -16,6 +16,7 @@ const _Banner = (props) => {
     infinite: true,
   };
   if (fadeImages) {
+    console.log(fadeImages, 'images');
     if (fadeImages.length > 1) {
       return (
         <div className="slide-container">
@@ -50,7 +51,7 @@ const _Banner = (props) => {
           </div>
           <div className="each-fade">
             <div>
-              <img className="banner-image" src={fadeImages[0]} />
+              <img className="banner-image" src={props.bookclub.displayImage} />
             </div>
           </div>
         </div>

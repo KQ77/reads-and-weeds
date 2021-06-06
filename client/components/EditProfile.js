@@ -69,25 +69,13 @@ const _EditProfile = (props) => {
         {/* <EditPhoto {...props} profile={true} /> */}
         {/* <Form className="edit-profile"> */}
         {/* <div> */}
-        {/* <Image
-          style={{
-            border: '1px solid black',
-            top: '75%',
-            left: '5.5rem',
-            height: '3.5rem',
-            position: 'absolute',
-          }}
-          roundedCircle
-          src="/images/camera.png"
-        />
-        <Image thumbnail src={preview}></Image> */}
+
         {/* </div> */}
         <Form
           method="post"
           encType="multipart/form-data"
           action={`/api/members/${props.match.params.id}/update`}
         >
-          {/* <Form className="edit-profile"> */}
           <Form.Row>
             <Image thumbnail roundedCircle src={preview} />
             <Form.Group
