@@ -9,13 +9,11 @@ const _SingleBook = (props) => {
   function createDescription(book) {
     return { __html: book.description };
   }
-  console.log(props, 'props');
   useEffect(() => {
     //bookId here is a sequelize ID
     props.fetchBook(bookId);
   }, []);
   if (props.singleBook.id) {
-    console.log(props.singleBook.volumeInfo.title);
     const book = props.singleBook.volumeInfo;
     return (
       <div id="single-book">

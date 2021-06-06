@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+
 import { Link, Redirect } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
 import DatePicker from 'react-datepicker';
 import { setAuth } from '../redux/auth';
-import { Login } from './index';
 import { CreateInvite } from './CreateInvite';
 import { LimitedViewClub } from './LimitedViewClub';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -131,7 +131,17 @@ const _BookClub = (props) => {
               </div>
               <section id="current-selection">
                 {!current ? (
-                  <div>no current book - add info here</div>
+                  <div id="no-current">
+                    <p>
+                      Currently reading a book? Find it and select it as your
+                      current book
+                    </p>
+                    <Link
+                      to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                    >
+                      <Button>Find a book</Button>
+                    </Link>
+                  </div>
                 ) : (
                   <div>
                     <h1 className="section-heading">Current Selection</h1>
@@ -155,23 +165,56 @@ const _BookClub = (props) => {
                     {/* <Suggestions /> */}
                   </>
                 ) : (
-                  <div>
-                    no suggestions -- start planning your your next bok button
-                    to suggest a book for your club to read
+                  <div id="no-suggestions">
+                    <div>
+                      <h3>Have a book idea?</h3>
+                      <p>
+                        Start planning for your next book. Share your book
+                        recommendations, and inspire each other
+                      </p>
+                      <Link
+                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                      >
+                        {' '}
+                        <Button>Find a book</Button>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </section>
               <section id="past-selections">
-                <div>
-                  <h1 className="section-heading">Past Selections</h1>
-                  <Link to={`/bookclubs/${props.bookclub.id}/feedback/add`}>
-                    rate/review past selections
-                  </Link>
-                  <Link to={`/bookclubs/${props.bookclub.id}/books`}>
-                    view all
-                  </Link>
-                </div>
-                <BookList past={true} clubId={props.bookclub.id} />
+                {props.bookclub.books.some(
+                  (book) => book.isCurrent === false
+                ) ? (
+                  <>
+                    <div>
+                      <h1 className="section-heading">Past Selections</h1>
+                      <Link to={`/bookclubs/${props.bookclub.id}/feedback/add`}>
+                        rate/review past selections
+                      </Link>
+                      <Link to={`/bookclubs/${props.bookclub.id}/books`}>
+                        view all
+                      </Link>
+                    </div>
+                    {/* <BookList past={true} clubId={props.bookclub.id} /> */}
+                  </>
+                ) : (
+                  <div id="no-past-books">
+                    <div>
+                      <h3>Track Your Progress</h3>
+
+                      <p>
+                        Add your club's completed books, and share your thoughts
+                        on each one...
+                      </p>
+                      <Link
+                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                      >
+                        <Button>Find a book</Button>
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </section>
               <section id="photos">
                 {props.bookclub.images.length ? (
@@ -183,10 +226,16 @@ const _BookClub = (props) => {
                         view all
                       </Link>
                     </div>
-                    <PhotoReel photos={props.bookclub.images} />
+                    {/* <PhotoReel photos={props.bookclub.images} /> */}
                   </>
                 ) : (
-                  <div>save your memores - add club photos here </div>
+                  <div id="no-photos">
+                    <h3> Remember the good times... </h3>
+                    <p>Add club photos here!</p>
+                    <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
+                      <Button>+ photos</Button>
+                    </Link>
+                  </div>
                 )}
               </section>
             </div>

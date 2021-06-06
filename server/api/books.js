@@ -38,24 +38,33 @@ router.get('/:bookId/reviews', async (req, res, next) => {
       where: { bookId: req.params.bookId },
       include: [Member],
     });
-    console.log(reviews, 'reviews');
     res.status(200).send(reviews);
   } catch (err) {
     next(err);
   }
 });
-// router.get('/:bookId/feedback', async (req, res, next) => {
-//   try {
-//     const book = await Book.findByPk(req.params.bookId, {
-//       include: [
-//         { model: Comment, include: [Member] },
-//         { model: Rating, include: [Member] },
-//       ],
-//     });
-//     res.status(200).send(book);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+
+//add a book to a club
+router.post('/', async (req, res, next) => {
+  try {
+    const { clubId, isCurrent, gbId } = req.body;
+
+    //if you're adding a current book, check if book has a current book already
+    if (isCurrent === true) {
+      const currentBook = await Book.findOne({
+        where: { clubId: clubId, isCurrent: true },
+      });
+      //if club has a current book, set it to not current
+      if (currentBook) {
+        await currentBook.update({ isCurrent: false });
+      }
+    }
+    //and make the newly added book the current book
+    await Book.create(req.body);
+    res.sendStatus(201);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

@@ -7,6 +7,8 @@ import {
   OverlayTrigger,
   Col,
   Row,
+  DropdownButton,
+  Dropdown,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import React, { useState, useEffect } from 'react';
@@ -20,7 +22,10 @@ const _SuggestionSearch = (props) => {
   useEffect(() => {
     props.fetchClub(props.match.params.id);
   }, []);
+
   const [results, setResults] = useState([]);
+  const [suggestedIds, setSuggestedIds] = useState([]);
+
   const handleSearch = async (searchTerm) => {
     const results = (
       await axios.get(
@@ -30,7 +35,6 @@ const _SuggestionSearch = (props) => {
     setResults(results.items);
   };
 
-  const [suggestedIds, setSuggestedIds] = useState([]);
   const toggleSuggestion = async (bookId) => {
     await axios.put(`/api/suggestions/`, { clubId: props.bookclub.id, bookId });
     if (suggestedIds.includes(bookId)) {
@@ -41,8 +45,26 @@ const _SuggestionSearch = (props) => {
       setSuggestedIds(idArray);
     }
   };
-  const [searchTerm, setSearchTerm] = useState('');
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
+
+  const isCurrentBook = (id) => {
+    const current = props.bookclub.books.find(
+      (book) => book.isCurrent === true
+    );
+    if (current) return current.gbId === id;
+    else return false;
+  };
+  const addBook = async (gbId, isCurrent, title) => {
+    const clubId = props.match.params.id;
+    if (props.bookclub.books.find((book) => book.gbId === gbId)) {
+      setError('book is already in your collection');
+    }
+    await axios.post(`/api/books`, { clubId, gbId, isCurrent, title });
+    props.fetchClub(props.match.params.id);
+    // props.history.push(`/bookclubs/${props.match.params.id`)
+  };
   return (
     <>
       <Burger {...props} />
@@ -64,12 +86,13 @@ const _SuggestionSearch = (props) => {
           ></Form.Control>
           <Button type="submit">search</Button>
         </Form>
+
         <div id="search-results">
           {results.length
             ? results.map((result, idx) => (
                 <Container key={idx} id="search-result-row">
                   <OverlayTrigger
-                    trigger="hover"
+                    trigger="hover, focus"
                     placement="right"
                     overlay={
                       <Popover id="popover-basic">
@@ -81,6 +104,7 @@ const _SuggestionSearch = (props) => {
                     }
                   >
                     <Image
+                      className="book-cover"
                       src={
                         result.volumeInfo.imageLinks
                           ? result.volumeInfo.imageLinks.smallThumbnail
@@ -89,12 +113,14 @@ const _SuggestionSearch = (props) => {
                     />
                   </OverlayTrigger>
 
-                  <Col>
+                  <Col style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span>
+                      <Link to={result.selfLink}>view on google books</Link>
+                    </span>
                     <span style={{ fontSize: '1.5rem' }}>
                       {result.volumeInfo.title}
                     </span>
-                    <br></br>
-                    <span> by</span>{' '}
+                    <span> by</span>
                     <span style={{ fontSize: '1.3rem' }}>
                       {result.volumeInfo.authors
                         ? result.volumeInfo.authors[0]
@@ -122,6 +148,36 @@ const _SuggestionSearch = (props) => {
                           : 'Suggest'}
                       </span>
                     </Button>
+                  </Col>
+                  <Col>
+                    <DropdownButton id="dropdown-item-button" title="Add Book">
+                      <Dropdown.ItemText>Add as current book</Dropdown.ItemText>
+                      <Dropdown.Item
+                        onClick={() =>
+                          addBook(result.id, true, result.volumeInfo.title)
+                        }
+                        as="button"
+                      >
+                        add as the book we are currently reading
+                      </Dropdown.Item>
+                      <Dropdown.ItemText>
+                        Add to books we've read
+                      </Dropdown.ItemText>
+                      <Dropdown.Item
+                        onClick={() =>
+                          addBook(result.id, false, result.volumeInfo.title)
+                        }
+                        as="button"
+                      >
+                        these are books we've finished reading
+                      </Dropdown.Item>
+                    </DropdownButton>
+                    <div style={{ color: 'green', fontSize: '1rem' }}>
+                      {isCurrentBook(result.id)
+                        ? `(this is your club's current selection)`
+                        : ''}
+                    </div>
+                    <div className="error">{error}</div>
                   </Col>
                 </Container>
               ))

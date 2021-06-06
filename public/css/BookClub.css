@@ -22,3 +22,38 @@
   display: flex;
   justify-content: space-between;
 }
+
+#no-current {
+  background-image: url('../images/defaultClub.jpeg');
+  background-size: cover;
+  min-height: 15rem;
+  background-repeat: no-repeat;
+}
+
+#no-suggestions,
+#no-past-books {
+  display: flex;
+  min-height: 15rem;
+  justify-content: center;
+  align-items: center;
+}
+#no-suggestions {
+  background-color: rgb(85, 85, 134);
+}
+
+#no-suggestions > div,
+#no-past-books > div {
+  background-color: white;
+  width: 30%;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: fit-content;
+}
+
+#no-past-books {
+  background-color: rgb(41, 13, 41);
+}

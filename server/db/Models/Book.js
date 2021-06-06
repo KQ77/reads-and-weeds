@@ -1,13 +1,14 @@
 const { conn } = require('../db.js');
-const { STRING, BOOLEAN, INTEGER, TEXT } = require('sequelize');
-const { Member } = require('./Member');
-const { Comment } = require('./Comment');
+const { STRING, BOOLEAN, INTEGER, TEXT, DATE } = require('sequelize');
 const { Rating } = require('./Rating');
 
 const Book = conn.define('book', {
-  number: {
-    type: INTEGER,
-    allowNull: false,
+  // number: {
+  //   type: INTEGER,
+  //   allowNull: false,
+  // },
+  dateFinished: {
+    type: DATE,
   },
   title: {
     type: STRING,

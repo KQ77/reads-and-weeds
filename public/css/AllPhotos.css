@@ -31,3 +31,19 @@
 #all-photos {
   padding-top: 5rem;
 }
+
+div.no-photos {
+  position: absolute;
+  width: 100%;
+}
+div.no-photos > div {
+  text-align: center;
+  height: 15rem;
+  background-color: #bbc5d7;
+  width: 60%;
+  margin: auto;
+  padding: 3rem;
+  font-size: 1.2rem;
+  box-shadow: 1px 3px 10px;
+  margin-top: 5rem;
+}

@@ -12,13 +12,9 @@
   display: flex;
   background-color: #dcf0ff;
   margin: 1rem;
-  height: 12rem;
-  /* padding: 1rem; */
+  height: 15rem;
 }
 
-#suggestion-search button {
-  margin-left: 1rem;
-}
 #search-results {
   font-size: 1.5rem;
   display: flex;
@@ -29,8 +25,8 @@
 #search-results span {
   font-size: 1.2rem;
 }
-#seach-results img {
-  min-width: 8rem;
+#search-results img.book-cover {
+  width: 12rem;
 }
 .col {
   padding: 1rem;
@@ -43,4 +39,10 @@
 
 .btn.suggested {
   background-color: grey;
+}
+
+#search-results div.error {
+  color: red;
+  font-size: 1rem;
+  font-style: italic;
 }

@@ -69,7 +69,9 @@ router.post('/', isLoggedIn, upload.single('image'), async (req, res, next) => {
           console.log('Upload Success', data.Location);
         }
       });
-      await club.update({ displayImage: uploadParams.Key });
+      await club.update({
+        displayImage: `https://bookclub-site-images.s3.amazonaws.com/${uploadParams.Key}`,
+      });
     }
     await club.update({ adminId: req.member.id });
 
@@ -101,7 +103,6 @@ router.get('/:id', async (req, res, next) => {
         .status(200)
         .send(await Club.findByPk(req.params.id, { include: [Member] }));
     } else if (!club.private || isMember(req.member.id)) {
-      console.log('club is public or person is a member');
       res.status(200).send(club);
     }
   } catch (err) {
