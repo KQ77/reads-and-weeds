@@ -48,17 +48,32 @@ router.get('/', async (req, res, next) => {
 });
 
 //Create a club - once created, redirect to homepage for the new club
-router.post('/', isLoggedIn, async (req, res, next) => {
+router.post('/', isLoggedIn, upload.single('image'), async (req, res, next) => {
   try {
     const club = await Club.create(req.body);
-    await club.update({ adminId: req.member.id });
     await ClubMembers.create({ memberId: req.member.id, clubId: club.id });
-    // await Image.create({
-    //   clubId: club.id,
-    //   memberId: req.member.id,
-    //   src: req.body.displayImage,
-    // });
-    res.send(club);
+    if (req.file) {
+      const { file } = req;
+      const uploadParams = {
+        Bucket: 'bookclub-site-images',
+        Key: `${uuidv4()}${file.originalname}`,
+        Body: file.buffer,
+        ContentType: file.mimetype,
+      };
+
+      s3.upload(uploadParams, function (err, data) {
+        if (err) {
+          console.log('Error', err);
+        }
+        if (data) {
+          console.log('Upload Success', data.Location);
+        }
+      });
+      await club.update({ displayImage: uploadParams.Key });
+    }
+    await club.update({ adminId: req.member.id });
+
+    res.status(201).redirect(`/bookclubs/${club.id}`);
   } catch (err) {
     next(err);
   }
@@ -68,7 +83,6 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 //if a club is public, send all info; if it's private - if person is member - send all, otherwise send just main club info
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log('request received');
     const club = await Club.findByPk(req.params.id, {
       include: [
         { model: Member, attributes: { exclude: ['password'] } },
@@ -134,16 +148,6 @@ router.get('/:clubId/photos', hasAccess, async (req, res, next) => {
   }
 });
 
-//route to update a review
-// router.put(
-//   '/:clubId/feedback/:bookId',
-//   hasAccess,
-//   async (req, res, next) => {}
-// );
-
-//route to create review for a book
-// router.post('/:clubId/feedback/', hasAccess, async (req, res, next) => {});
-
 //POST photos to club
 router.post(
   '/:clubId/photos',
@@ -159,7 +163,6 @@ router.post(
           Body: file.buffer,
           ContentType: file.mimetype,
         };
-        console.log(req.files.length, 'req.files.length');
         //create entry in DB for each image with src pointing to AWS url
         await Image.create({
           clubId: req.params.clubId,

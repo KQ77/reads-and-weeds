@@ -81,7 +81,6 @@ const _BookClub = (props) => {
     ? props.bookclub.books.find((book) => book.isCurrent)
     : undefined;
 
-  console.log(props, 'props in bookclub');
   if (props.bookclub.id) {
     return (
       <div id="bookclub">

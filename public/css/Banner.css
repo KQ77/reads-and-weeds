@@ -17,12 +17,6 @@
   justify-content: center;
   align-items: center;
 }
-/* #banner {
-  height: 48rem;
-  min-width: 100%;
-  position: relative;
-  top: 0;
-} */
 
 .each-fade {
   display: flex;
@@ -38,31 +32,17 @@
 }
 
 img.banner-image {
-  height: 40rem;
+  height: 30rem;
   width: 100%;
 }
-/* .each-fade > div img {
-  width: 100vw;
-  height: 100%;
-  object-fit: cover;
-} */
 
-/* #banner > div {
-  text-align: center;
-  color: white;
-  position: absolute;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  top: 60%;
-} */
 #text-container {
   height: fit-content;
   display: flex;
   justify-content: center;
 }
 #banner-text {
-  padding-top: 10rem;
+  padding-top: 6rem;
   color: white;
   position: absolute;
   z-index: 3;
