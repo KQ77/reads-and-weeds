@@ -34,6 +34,7 @@ const _BookClub = (props) => {
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
   }, []);
+
   // if no props.auth.id, then fetch auth and set ID
   useEffect(() => {
     let mounted = true;
@@ -44,8 +45,8 @@ const _BookClub = (props) => {
     }
     return () => (mounted = false);
   }, []);
-  //ppl accessing this page should be logged in --
-  //if person is member of club or page is public - show full page , otherwise show more generic page
+
+  //if club is private and person is not a member, see limited view - if public and user is a member, show full view
   const hasAccess = () => {
     if (props.bookclub.private === false) {
       return true;
@@ -76,15 +77,12 @@ const _BookClub = (props) => {
     });
     props.fetchClub(clubId);
   };
-  if (props.bookclub.books) {
-    const current = props.bookclub.books.find((book) => book.isCurrent);
-    // const pastBooks = props.bookclub.books.filter((book) => !book.isCurrent);
+  const current = props.bookclub.books
+    ? props.bookclub.books.find((book) => book.isCurrent)
+    : undefined;
 
-    // {
-    //   !props.auth.id && (
-    //     <Login {...props} redirectUrl={`/bookclubs/${props.bookclub.id}`} />
-    //   );
-    // }
+  console.log(props, 'props in bookclub');
+  if (props.bookclub.id) {
     return (
       <div id="bookclub">
         <Burger {...props} />
@@ -144,16 +142,25 @@ const _BookClub = (props) => {
                 {/* {isMember ? <Link>add feedback</Link> : ''} */}
               </section>
               <section id="suggestions">
-                <div className="flex-row">
-                  <h1 className="section-heading">Suggestions</h1>
-                  <h2>Books added by members for consideration</h2>
-                  <Link
-                    to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
-                  >
-                    <Button variant="info">+ add a book</Button>
-                  </Link>
-                </div>
-                {/* <Suggestions /> */}
+                {props.bookclub.suggestions.length ? (
+                  <>
+                    <div className="flex-row">
+                      <h1 className="section-heading">Suggestions</h1>
+                      <h2>Books added by members for consideration</h2>
+                      <Link
+                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                      >
+                        <Button variant="info">+ add a book</Button>
+                      </Link>
+                    </div>
+                    {/* <Suggestions /> */}
+                  </>
+                ) : (
+                  <div>
+                    no suggestions -- start planning your your next bok button
+                    to suggest a book for your club to read
+                  </div>
+                )}
               </section>
               <section id="past-selections">
                 <div>
@@ -168,14 +175,20 @@ const _BookClub = (props) => {
                 <BookList past={true} clubId={props.bookclub.id} />
               </section>
               <section id="photos">
-                <h1 className="section-heading">Photos</h1>
-                <div>
-                  <Button variant="info">+ add photos</Button>
-                  <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
-                    view all
-                  </Link>
-                </div>
-                <PhotoReel photos={props.bookclub.images} />
+                {props.bookclub.images.length ? (
+                  <>
+                    <h1 className="section-heading">Photos</h1>
+                    <div>
+                      <Button variant="info">+ add photos</Button>
+                      <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
+                        view all
+                      </Link>
+                    </div>
+                    <PhotoReel photos={props.bookclub.images} />
+                  </>
+                ) : (
+                  <div>save your memores - add club photos here </div>
+                )}
               </section>
             </div>
           </div>

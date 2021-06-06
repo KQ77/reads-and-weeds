@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { authenticateUser } from '../redux/auth';
+import { authenticateUser, setAuth } from '../redux/auth';
 
 const AuthForm = (props) => {
   const [email, setEmail] = useState('');
@@ -18,15 +18,20 @@ const AuthForm = (props) => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     }
-    props.authenticate(
-      { email, password, firstName, lastName },
-      props.formName,
-      props.redirectUrl
-    );
-    if (props.handleClose) {
-      props.handleClose();
-    } else {
-      props.history.push(props.location.search.split('=')[1]);
+    try {
+      props.authenticate(
+        { email, password, firstName, lastName },
+        props.formName,
+        props.redirectUrl
+      );
+      if (props.handleClose) {
+        props.handleClose();
+      } else {
+        props.history.push(props.location.search.split('=')[1]);
+      }
+    } catch (err) {
+      console.log(err, 'err');
+      setError(err);
     }
   };
 
@@ -36,7 +41,6 @@ const AuthForm = (props) => {
       props.handleShow();
     }
   }, [props.auth]);
-  console.log(props, 'props');
   return (
     <div id="authform">
       <Form xs="auto" noValidate validated={validated} onSubmit={handleSubmit}>

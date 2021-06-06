@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-// import { fetchFeedback } from '../redux/feedback';
 import '../../public/css/BookFeedback.css';
 import axios from 'axios';
 
@@ -11,17 +10,8 @@ const _BookFeedback = (props) => {
       .data;
     setReviews(reviews);
   };
-  // useEffect(() => {
-  //   let mounted = true;
-  //   if (mounted) {
-  //     props.fetchFeedback(props.bookId || props.match.params.bookId);
-  //   }
-  //   return () => (mounted = false);
-  // }, []);
+
   useEffect(() => {
-    console.log(
-      'use effect of bookfeedback - about to get reviews for the book'
-    );
     let mounted = true;
     if (mounted) {
       getReviews();
@@ -60,9 +50,4 @@ const _BookFeedback = (props) => {
   }
 };
 
-// const mapDispatch = (dispatch) => {
-//   return {
-//     fetchFeedback: (bookId) => dispatch(fetchFeedback(bookId)),
-//   };
-// };
 export const BookFeedback = connect((state) => state)(_BookFeedback);

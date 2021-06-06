@@ -27,6 +27,17 @@ const { hasAccess, isLoggedIn } = require('../middleware');
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+//set image storage engine
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+//ROUTES//
+
 //GET all clubs
 router.get('/', async (req, res, next) => {
   try {
@@ -42,11 +53,11 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     const club = await Club.create(req.body);
     await club.update({ adminId: req.member.id });
     await ClubMembers.create({ memberId: req.member.id, clubId: club.id });
-    await Image.create({
-      clubId: club.id,
-      memberId: req.member.id,
-      src: req.body.displayImage,
-    });
+    // await Image.create({
+    //   clubId: club.id,
+    //   memberId: req.member.id,
+    //   src: req.body.displayImage,
+    // });
     res.send(club);
   } catch (err) {
     next(err);
@@ -57,6 +68,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 //if a club is public, send all info; if it's private - if person is member - send all, otherwise send just main club info
 router.get('/:id', async (req, res, next) => {
   try {
+    console.log('request received');
     const club = await Club.findByPk(req.params.id, {
       include: [
         { model: Member, attributes: { exclude: ['password'] } },
@@ -66,13 +78,16 @@ router.get('/:id', async (req, res, next) => {
         { model: Request },
       ],
     });
-    // if no one logged in
-    if (!req.member) {
-      res.send(await Club.findByPk(req.params.id, { include: [Member] }));
-    } else if (
-      !club.private ||
-      club.members.find((member) => member.id === req.member.id)
-    ) {
+    const isMember = (id) => {
+      return club.members.find((member) => member.id === id);
+    };
+    // if no one logged in or person isn't a member
+    if (!req.member || !isMember(req.member.id)) {
+      res
+        .status(200)
+        .send(await Club.findByPk(req.params.id, { include: [Member] }));
+    } else if (!club.private || isMember(req.member.id)) {
+      console.log('club is public or person is a member');
       res.status(200).send(club);
     }
   } catch (err) {
@@ -120,22 +135,14 @@ router.get('/:clubId/photos', hasAccess, async (req, res, next) => {
 });
 
 //route to update a review
-router.put(
-  '/:clubId/feedback/:bookId',
-  hasAccess,
-  async (req, res, next) => {}
-);
+// router.put(
+//   '/:clubId/feedback/:bookId',
+//   hasAccess,
+//   async (req, res, next) => {}
+// );
 
 //route to create review for a book
-router.post('/:clubId/feedback/', hasAccess, async (req, res, next) => {});
-//set storage engine
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
+// router.post('/:clubId/feedback/', hasAccess, async (req, res, next) => {});
 
 //POST photos to club
 router.post(

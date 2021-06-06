@@ -28,7 +28,7 @@ const _LimitedView = (props) => {
     }
     setRequested(true);
   };
-
+  console.log(club, 'club');
   return (
     <div id="limited-club">
       <div>
