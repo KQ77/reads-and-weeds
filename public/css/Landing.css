@@ -3,16 +3,64 @@
 }
 
 #hero {
-  height: 50rem;
-  background-image: url('../images/coffeebook.jpg');
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40rem;
+  background-image: url('../images/open_book.jpg');
   background-size: cover;
   background-position: center;
 }
 
 #member-clubs {
-  min-height: 30rem;
-  background-color: rgb(185 215 228);
+  margin: 2rem;
+  min-height: 40rem;
+  background-color: rgb(238 238 238);
   text-align: center;
+  display: flex;
+  box-shadow: 1px 2px 12px;
+}
+
+#member-clubs div.card {
+  margin: 1rem;
+  height: fit-content;
+}
+
+#member-clubs img {
+  height: 12rem;
+}
+
+#landing h1 {
+  margin-left: 2rem;
+}
+
+#hero > div h1 {
+  font-size: 6rem;
+  text-shadow: 1px 1px black;
+}
+#hero > div > div:nth-child(1) {
+  height: fit-content;
+}
+#hero > div > div p {
+  font-weight: 100;
+  text-shadow: 1px 1px 2px black;
+  text-align: center;
+  font-size: 2rem;
+}
+#hero > div > div:nth-child(2) {
+  height: fit-content;
+  width: 20rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+#hero > div {
+  text-align: center;
+  justify-content: space-between;
+  height: 20rem;
+  align-items: center;
   display: flex;
   flex-direction: column;
 }

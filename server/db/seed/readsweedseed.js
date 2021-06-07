@@ -1,6 +1,6 @@
 const members = [
   {
-    firstName: 'Melissa V',
+    firstName: 'Melissa',
     email: 'melissaveloz4197@gmail.com',
     lastName: 'Veloz',
     password: 'weed',
@@ -11,7 +11,7 @@ const members = [
     favePick: ``,
   },
   {
-    firstName: 'Melissa M',
+    firstName: 'Melissa',
     lastName: 'Mahon',
     password: 'weed',
     email: 'melissamahon33@gmail.com',

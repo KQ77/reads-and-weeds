@@ -77,3 +77,13 @@ img.banner-image {
   opacity: 0;
   transition: opacity 3s;
 } */
+#banner-wrapper {
+  width: 80vw;
+  padding: 3rem 2rem;
+  margin: auto;
+}
+
+.react-slideshow-fade-wrapper .react-slideshow-fade-images-wrap {
+  height: 30rem;
+  border: 1px solid black;
+}

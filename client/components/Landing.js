@@ -8,7 +8,6 @@ import { Login, Register } from './AuthForm';
 import { ClubList } from './ClubList';
 import { fetchMemberClubs } from '../redux/memberClubs';
 import { Footer } from './Footer';
-import Axios from 'axios';
 
 const _Landing = (props) => {
   const [show, setShow] = useState(false);
@@ -43,31 +42,49 @@ const _Landing = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <section id="hero"></section>
+      <section id="hero">
+        <div>
+          <div>
+            <h1>Q-Books</h1>
+            <p>Explore. Create. Read. Meet. Discuss.</p>
+          </div>
+
+          <div>
+            <Link to="/explore">
+              <Button>explore</Button>
+            </Link>
+            <Link to="/create">
+              <Button>create</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
       <Link to="/explore">explore all clubs</Link>
       {props.auth.id ? (
-        <section id="member-clubs">
+        <>
           <h1>Your Clubs</h1>
 
-          {clubs.map((club, idx) => (
-            <React.Fragment key={idx}>
-              <Card style={{ width: '15rem' }}>
-                <Card.Img variant="top" src={club.displayImage}></Card.Img>
-                <Card.Body>
-                  <Card.Title>{club.name}</Card.Title>
-                  <Card.Text>{club.location}</Card.Text>
-                  <Card.Text>{club.tagline}</Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                  <Link to={`/bookclubs/${club.id}`}>
-                    <Button variant="info">Visit</Button>
-                  </Link>
-                </Card.Footer>
-              </Card>
-            </React.Fragment>
-          ))}
-          {/* <ClubList clubs={clubs} /> */}
-        </section>
+          <section id="member-clubs">
+            {clubs.map((club, idx) => (
+              <React.Fragment key={idx}>
+                <Card style={{ width: '15rem' }}>
+                  <Card.Img variant="top" src={club.displayImage}></Card.Img>
+                  <Card.Body>
+                    <Card.Title>{club.name}</Card.Title>
+                    <Card.Text>{club.location}</Card.Text>
+                    <Card.Text>{club.description}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <Link to={`/bookclubs/${club.id}`}>
+                      <Button variant="info">Visit</Button>
+                    </Link>
+                  </Card.Footer>
+                </Card>
+              </React.Fragment>
+            ))}
+            {/* <ClubList clubs={clubs} /> */}
+          </section>
+        </>
       ) : (
         ''
       )}

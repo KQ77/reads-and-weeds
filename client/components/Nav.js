@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../public/css/Nav.css';
+const { icon } = require('../../public/images/search_icon.png');
 
 import {
   InputGroup,
@@ -33,7 +34,7 @@ const _Nav = (props) => {
                     height="35"
                     width="35"
                     src={props.auth.imageUrl}
-                  />{' '}
+                  />
                   {props.auth.firstName}
                 </span>
               }
@@ -52,13 +53,13 @@ const _Nav = (props) => {
               </NavDropdown.Item>
 
               <NavDropdown.Divider />
-              <NavDropdown.Item
+              {/* <NavDropdown.Item
                 style={{ color: 'black' }}
                 onClick={() => console.log('logging out')}
                 href="#"
               >
                 Log Out
-              </NavDropdown.Item>
+              </NavDropdown.Item> */}
             </NavDropdown>
           ) : (
             ''
@@ -99,13 +100,14 @@ const _Nav = (props) => {
           ) : (
             ''
           )}
-
-          <Link to="/create">+Create club</Link>
+          <Nav.Link href="/create">Create</Nav.Link>
+          {/* <Link to="/create">+Create club</Link> */}
         </Nav>
         <InputGroup className="justify-content-center" id="searchbar">
           <FormControl
             type="text"
-            placeholder="find a group"
+            id="searchform"
+            placeholder="search for a club"
             aria-label="group"
             aria-describedby="basic-addon1"
           />
