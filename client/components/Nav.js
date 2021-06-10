@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../public/css/Nav.css';
+import { fetchResults } from '../redux/searchResults';
 const { icon } = require('../../public/images/search_icon.png');
 
 import {
@@ -18,6 +19,7 @@ import { logout } from '../redux/auth';
 
 const _Nav = (props) => {
   const { isLoggedIn } = props;
+  const [searchTerm, setSearchTerm] = useState([]);
   return (
     <Navbar id="navbar" expand="lg">
       <Navbar.Brand style={{ color: '#c1c2c9' }} href="/">
@@ -71,12 +73,10 @@ const _Nav = (props) => {
             )}
             {!isLoggedIn ? (
               <>
-                <NavDropdown.Item style={{ color: 'black' }} href={`/login`}>
+                <NavDropdown.Item id="login-link" href={`/login`}>
                   Login
                 </NavDropdown.Item>
-                <NavDropdown.Item style={{ textDecoration: 'underline' }}>
-                  Sign up
-                </NavDropdown.Item>
+                <NavDropdown.Item id="signup-link">Register</NavDropdown.Item>
               </>
             ) : (
               ''
@@ -119,14 +119,26 @@ const _Nav = (props) => {
           {/* <Link to="/create">+Create club</Link> */}
         </Nav>
         <InputGroup className="justify-content-center" id="searchbar">
+          <InputGroup.Prepend>
+            <InputGroup.Text>
+              <img height="20px" src="/images/search_icon.png" />
+            </InputGroup.Text>
+          </InputGroup.Prepend>
           <FormControl
             type="text"
             id="searchform"
             placeholder="search for a club"
             aria-label="group"
             aria-describedby="basic-addon1"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Button variant="light">Search</Button>
+          <Button
+            onClick={() => props.fetchResults(searchTerm)}
+            variant="light"
+          >
+            Search
+          </Button>
         </InputGroup>
       </Navbar.Collapse>
     </Navbar>
@@ -142,6 +154,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchResults: (term) => dispatch(fetchResults(term)),
     logout: () => dispatch(logout()),
   };
 };

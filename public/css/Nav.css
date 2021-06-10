@@ -30,13 +30,27 @@
 }
 
 #searchform {
-  padding-left: 3rem;
   background-position: left;
   background-repeat: no-repeat;
   background-size: 30px;
-  background-image: url('../images/search_icon.png');
+  /* background-image: url('../images/search_icon.png'); */
 }
 
 #nav-dropdown {
   color: #c1c2c9;
+}
+
+#login-link {
+  border-radius: 5px;
+  background: #875d81;
+}
+#login-link,
+#signup-link {
+  color: black;
+  width: 70%;
+  margin: 0 auto;
+}
+
+#signup-link {
+  text-decoration: underline;
 }

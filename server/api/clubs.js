@@ -260,6 +260,7 @@ router.post('/:clubId/requests', isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
 // router.put('/:clubId/suggestions', async (req, res, next) => {
 //   console.log(req.member, 'req.member');
 //   console.log(req.body, 'req.body');

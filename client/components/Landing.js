@@ -8,6 +8,7 @@ import { Login, Register } from './AuthForm';
 import { ClubList } from './ClubList';
 import { fetchMemberClubs } from '../redux/memberClubs';
 import { Footer } from './Footer';
+import { setAuth } from '../redux/auth';
 
 const _Landing = (props) => {
   const [show, setShow] = useState(false);
@@ -16,10 +17,17 @@ const _Landing = (props) => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
+    if (!props.auth) {
+      props.setAuth();
+    }
+  }, []);
+
+  useEffect(() => {
     props.fetchClubs(props.auth.id);
   }, [props.auth.id]);
 
   const clubs = props.memberClubs;
+  const { searchResults } = props;
   return (
     <div id="landing">
       <Nav setAuthType={setAuthType} setShow={() => handleShow()} />
@@ -59,34 +67,45 @@ const _Landing = (props) => {
           </div>
         </div>
       </section>
-      {props.auth.id ? (
-        <>
-          <h1>Your Clubs</h1>
+      <section id="club-search-results">
+        {searchResults.length ? (
+          <div>
+            <ClubList clubs={searchResults} />
+          </div>
+        ) : (
+          ''
+        )}
+      </section>
+      <section id="your-clubs">
+        {props.auth.id ? (
+          <>
+            <h1>Your Clubs</h1>
 
-          <section id="member-clubs">
-            {clubs.map((club, idx) => (
-              <React.Fragment key={idx}>
-                <Card style={{ width: '15rem' }}>
-                  <Card.Img variant="top" src={club.displayImage}></Card.Img>
-                  <Card.Body>
-                    <Card.Title>{club.name}</Card.Title>
-                    <Card.Text>{club.location}</Card.Text>
-                    <Card.Text>{club.description}</Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <Link to={`/bookclubs/${club.id}`}>
-                      <Button variant="info">Visit</Button>
-                    </Link>
-                  </Card.Footer>
-                </Card>
-              </React.Fragment>
-            ))}
-            {/* <ClubList clubs={clubs} /> */}
-          </section>
-        </>
-      ) : (
-        ''
-      )}
+            <section id="member-clubs">
+              {clubs.map((club, idx) => (
+                <React.Fragment key={idx}>
+                  <Card style={{ width: '15rem' }}>
+                    <Card.Img variant="top" src={club.displayImage}></Card.Img>
+                    <Card.Body>
+                      <Card.Title>{club.name}</Card.Title>
+                      <Card.Text>{club.location}</Card.Text>
+                      <Card.Text>{club.description}</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <Link to={`/bookclubs/${club.id}`}>
+                        <Button variant="info">Visit</Button>
+                      </Link>
+                    </Card.Footer>
+                  </Card>
+                </React.Fragment>
+              ))}
+              {/* <ClubList clubs={clubs} /> */}
+            </section>
+          </>
+        ) : (
+          ''
+        )}
+      </section>
       <Footer />
     </div>
   );
@@ -96,6 +115,7 @@ const _Landing = (props) => {
 //once component mounts & auth is set - fetch user's bookclubs
 const mapDispatch = (dispatch) => {
   return {
+    setAuth: () => dispatch(setAuth()),
     fetchClubs: (id) => dispatch(fetchMemberClubs(id)),
   };
 };
