@@ -1,17 +1,13 @@
 #single-book {
   display: flex;
   justify-content: center;
-  /* flex-direction: row; */
   flex-direction: column;
 }
 
 #book-details {
   margin-bottom: 0.5rem;
-  /* justify-content: center; */
   display: flex;
   flex-direction: row;
-  /* display: flex; */
-  /* flex-direction: column; */
 }
 
 #book-details p {
@@ -26,12 +22,14 @@ div.description span {
 div.description {
   padding: 0 3rem;
   margin: 1rem;
+  height: 20rem;
   font-size: 0.9rem;
   padding: 0 1.5rem;
+  overflow: scroll;
 }
 div.description p {
   margin: 0.4rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.4rem;
 }
 #single-book div.row {

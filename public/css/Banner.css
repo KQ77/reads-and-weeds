@@ -20,7 +20,7 @@
 
 .each-fade {
   display: flex;
-  height: inherit;
+  /* height: inherit; */
   width: 100%;
 }
 
@@ -31,10 +31,15 @@
   width: 100%;
 }
 
-img.banner-image {
+.each-fade > div img {
+  width: 100%;
+  height: 30rem;
+  /* object-fit: cover; */
+}
+/* img.banner-image {
   height: 30rem;
   width: 100%;
-}
+} */
 
 #text-container {
   height: fit-content;
@@ -73,17 +78,13 @@ img.banner-image {
   text-shadow: 2px 2px 3px black;
 }
 
-/* img.hidden {
-  opacity: 0;
-  transition: opacity 3s;
-} */
 #banner-wrapper {
   width: 80vw;
   padding: 3rem 2rem;
   margin: auto;
 }
 
-.react-slideshow-fade-wrapper .react-slideshow-fade-images-wrap {
+.react-slideshow-fade-wrapper {
   height: 30rem;
   border: 1px solid black;
 }

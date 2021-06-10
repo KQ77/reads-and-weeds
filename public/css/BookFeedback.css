@@ -1,3 +1,16 @@
 #reviews > div {
+  background: white;
+  border-radius: 5px;
   padding: 0.5rem;
+}
+
+#book-feedback {
+  box-shadow: 0px 0px 2px grey;
+  background: #ecfaff;
+  padding: 0.5rem;
+  border: 1px solid silver;
+}
+
+#book-feedback h2 {
+  font-family: cursive;
 }
