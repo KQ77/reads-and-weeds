@@ -39,7 +39,7 @@ const _InviteView = (props) => {
   console.log(invite, 'invite');
   return (
     <div id="invite">
-      {!props.auth.id && <Login {...props} redirectUrl={props.match.url} />}
+      {!props.auth.id && props.history.push('/login/redirect?url=')}
       {invite.club && (
         <LimitedViewClub {...props} inviteView={true} club={invite.club} />
       )}

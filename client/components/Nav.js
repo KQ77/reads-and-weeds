@@ -35,6 +35,7 @@ const _Nav = (props) => {
               <span>
                 <img
                   style={{
+                    marginRight: '.3rem',
                     borderRadius: '100%',
                     border: '1px solid white',
                   }}
@@ -56,7 +57,7 @@ const _Nav = (props) => {
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   style={{ color: 'black' }}
-                  href={`/members/${props.auth.id}/clubs}`}
+                  href={`/members/${props.auth.id}/clubs`}
                 >
                   Your Clubs
                 </NavDropdown.Item>
@@ -74,10 +75,12 @@ const _Nav = (props) => {
             )}
             {!isLoggedIn ? (
               <>
-                <NavDropdown.Item id="login-link" href={`/login`}>
+                <NavDropdown.Item id="login-link" href={`/login?redirect=`}>
                   Login
                 </NavDropdown.Item>
-                <NavDropdown.Item id="signup-link">Register</NavDropdown.Item>
+                <NavDropdown.Item id="signup-link" href={`/login?redirect=`}>
+                  Register
+                </NavDropdown.Item>
               </>
             ) : (
               ''

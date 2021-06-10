@@ -37,7 +37,10 @@ const _App = (props) => {
         path="/bookclubs/:id/suggestions/search"
         component={SuggestionSearch}
       />
-      <Route path="/login" render={(props) => <LoginForm {...props} />} />
+      <Route
+        path="/login"
+        render={(props) => <LoginForm login={true} {...props} />}
+      />
 
       <Route exact path="/members/:id" component={SingleMember} />
       <Route path="/bookclubs/:id/books/:bookId" component={SingleBook} />

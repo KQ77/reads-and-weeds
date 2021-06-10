@@ -29,7 +29,7 @@ const _ClubList = (props) => {
               to={
                 props.auth.id
                   ? `/bookclubs/${club.id}`
-                  : `/login/redirect?url=/bookclubs/${club.id}`
+                  : `/login/redirect?url=bookclubs/${club.id}`
               }
             >
               <Card.Img variant="top" src={club.displayImage}></Card.Img>
