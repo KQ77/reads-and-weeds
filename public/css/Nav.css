@@ -10,10 +10,10 @@
   background-color: transparent;
 }
 
-#navbar-text,
+/* #navbar-text,
 #navbar a {
   color: #d9d8d8c7;
-}
+} */
 
 #navbar .btn {
   background-color: #e1e1e1;
@@ -35,4 +35,8 @@
   background-repeat: no-repeat;
   background-size: 30px;
   background-image: url('../images/search_icon.png');
+}
+
+#nav-dropdown {
+  color: #c1c2c9;
 }

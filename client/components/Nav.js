@@ -19,55 +19,70 @@ import { logout } from '../redux/auth';
 const _Nav = (props) => {
   const { isLoggedIn } = props;
   return (
-    <Navbar id="navbar" className="color-nav" expand="lg">
-      <Navbar.Brand href="/">Q-Books</Navbar.Brand>
+    <Navbar id="navbar" expand="lg">
+      <Navbar.Brand style={{ color: '#c1c2c9' }} href="/">
+        Q-Books
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav>
-          {props.auth.id ? (
-            <NavDropdown
-              id="nav-dropdown"
-              title={
-                <span>
-                  <img
-                    style={{ borderRadius: '100%', border: '1px solid white' }}
-                    height="35"
-                    width="35"
-                    src={props.auth.imageUrl}
-                  />
-                  {props.auth.firstName}
-                </span>
-              }
-            >
-              <NavDropdown.Item
-                style={{ color: 'black' }}
-                href={`/members/${props.auth.id}`}
-              >
-                Profile
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                style={{ color: 'black' }}
-                href={`/members/${props.auth.id}/clubs}`}
-              >
-                Your Clubs
-              </NavDropdown.Item>
-
-              <NavDropdown.Divider />
-              {/* <NavDropdown.Item
-                style={{ color: 'black' }}
-                onClick={() => console.log('logging out')}
-                href="#"
-              >
-                Log Out
-              </NavDropdown.Item> */}
-            </NavDropdown>
-          ) : (
-            ''
-          )}
-          {/* <Navbar.Text id="navbar-text">
-            {props.auth.firstName || ''}
-          </Navbar.Text> */}
-          {!isLoggedIn ? (
+          <NavDropdown
+            id="nav-dropdown"
+            title={
+              <span>
+                <img
+                  style={{
+                    borderRadius: '100%',
+                    border: '1px solid white',
+                  }}
+                  height="35"
+                  width="35"
+                  src={props.auth.imageUrl || '/images/defaultProfile.png'}
+                />
+                {props.auth.firstName || ''}
+              </span>
+            }
+          >
+            {isLoggedIn ? (
+              <>
+                <NavDropdown.Item
+                  style={{ color: 'black' }}
+                  href={`/members/${props.auth.id}`}
+                >
+                  Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  style={{ color: 'black' }}
+                  href={`/members/${props.auth.id}/clubs}`}
+                >
+                  Your Clubs
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  onClick={() => {
+                    props.logout();
+                  }}
+                >
+                  Log Out
+                </NavDropdown.Item>
+              </>
+            ) : (
+              ''
+            )}
+            {!isLoggedIn ? (
+              <>
+                <NavDropdown.Item style={{ color: 'black' }} href={`/login`}>
+                  Login
+                </NavDropdown.Item>
+                <NavDropdown.Item style={{ textDecoration: 'underline' }}>
+                  Sign up
+                </NavDropdown.Item>
+              </>
+            ) : (
+              ''
+            )}
+          </NavDropdown>
+          {/* {!isLoggedIn ? (
             <>
               <Nav.Link
                 onClick={() => {
@@ -88,8 +103,8 @@ const _Nav = (props) => {
             </>
           ) : (
             ''
-          )}
-          {isLoggedIn ? (
+          )} */}
+          {/* {isLoggedIn ? (
             <Nav.Link
               onClick={() => {
                 props.logout();
@@ -99,8 +114,8 @@ const _Nav = (props) => {
             </Nav.Link>
           ) : (
             ''
-          )}
-          <Nav.Link href="/create">Create</Nav.Link>
+          )} */}
+          {/* <Nav.Link href="/create">Create</Nav.Link> */}
           {/* <Link to="/create">+Create club</Link> */}
         </Nav>
         <InputGroup className="justify-content-center" id="searchbar">
