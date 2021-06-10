@@ -1,19 +1,22 @@
 #searchbar {
-  width: 20rem;
+  width: 40rem;
+  margin: 0 auto;
 }
-
+#navbar-container {
+  padding: 1rem;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  /* background: purple; */
+  width: 100vw;
+  z-index: 1;
+}
 #navbar {
   font-size: 1.2rem;
   height: 4rem;
-  position: absolute;
-  z-index: 1;
+  width: fit-content;
   background-color: transparent;
 }
-
-/* #navbar-text,
-#navbar a {
-  color: #d9d8d8c7;
-} */
 
 #navbar .btn {
   background-color: #e1e1e1;

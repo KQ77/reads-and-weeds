@@ -21,12 +21,13 @@ const _Nav = (props) => {
   const { isLoggedIn } = props;
   const [searchTerm, setSearchTerm] = useState([]);
   return (
-    <Navbar id="navbar" expand="lg">
-      <Navbar.Brand style={{ color: '#c1c2c9' }} href="/">
-        Q-Books
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+    <div id="navbar-container">
+      <Navbar id="navbar" expand="lg">
+        <Navbar.Brand style={{ color: '#c1c2c9' }} href="/">
+          Q-Books
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        {/* <Navbar.Collapse id="basic-navbar-nav"> */}
         <Nav>
           <NavDropdown
             id="nav-dropdown"
@@ -118,30 +119,28 @@ const _Nav = (props) => {
           {/* <Nav.Link href="/create">Create</Nav.Link> */}
           {/* <Link to="/create">+Create club</Link> */}
         </Nav>
-        <InputGroup className="justify-content-center" id="searchbar">
-          <InputGroup.Prepend>
-            <InputGroup.Text>
-              <img height="20px" src="/images/search_icon.png" />
-            </InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            type="text"
-            id="searchform"
-            placeholder="search for a club"
-            aria-label="group"
-            aria-describedby="basic-addon1"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <Button
-            onClick={() => props.fetchResults(searchTerm)}
-            variant="light"
-          >
-            Search
-          </Button>
-        </InputGroup>
-      </Navbar.Collapse>
-    </Navbar>
+        {/* </Navbar.Collapse> */}
+      </Navbar>
+      <InputGroup className="justify-content-center" id="searchbar">
+        <InputGroup.Prepend>
+          <InputGroup.Text>
+            <img height="20px" src="/images/search_icon.png" />
+          </InputGroup.Text>
+        </InputGroup.Prepend>
+        <FormControl
+          type="text"
+          id="searchform"
+          placeholder="search clubs by name or location"
+          aria-label="group"
+          aria-describedby="basic-addon1"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Button onClick={() => props.fetchResults(searchTerm)} variant="light">
+          Search
+        </Button>
+      </InputGroup>
+    </div>
   );
 };
 
