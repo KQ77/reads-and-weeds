@@ -28,3 +28,4 @@ export { InviteView } from './InviteView';
 export { AllClubMembers } from './AllClubMembers';
 export { Login, Register } from './AuthForm';
 export { LoginForm } from './LoginForm';
+export { ClubList } from './ClubList';

@@ -59,7 +59,6 @@ const _Landing = (props) => {
           </div>
         </div>
       </section>
-      <Link to="/explore">explore all clubs</Link>
       {props.auth.id ? (
         <>
           <h1>Your Clubs</h1>

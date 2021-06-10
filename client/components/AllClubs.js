@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchClubs } from '../redux/clubs';
-import { ClubList } from './ClubList';
+import { Burger, ClubList } from './index';
 import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import '../../public/css/AllClubs.css';
@@ -17,15 +17,19 @@ const _AllClubs = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   if (clubs) {
     return (
-      <div id="all-clubs">
-        <h1>Explore All Clubs</h1>
-        <Form.Control
-          style={{ width: '50rem', margin: '1rem 0' }}
-          placeholder="search for a club"
-          type="text"
-        ></Form.Control>
-        <ClubList clubs={clubs} {...props} />
-      </div>
+      <>
+        <Burger {...props} />
+        <div id="all-clubs">
+          <h1>Explore All Clubs</h1>
+          <Form.Control
+            id="searchform"
+            style={{ width: '50rem', margin: '1rem 0' }}
+            placeholder="search for a club"
+            type="text"
+          ></Form.Control>
+          <ClubList clubs={clubs} {...props} />
+        </div>
+      </>
     );
   } else {
     return null;
