@@ -15,12 +15,15 @@ const _Burger = (props) => {
       <Link id="profile" className="menu-item" to={`/members/${props.auth.id}`}>
         Profile
       </Link>
-      <Link
+      {/* <Link
         id=""
         className="menu-item"
         to={`/bookclubs/${props.bookclub.id}/photos`}
       >
         Photos
+      </Link> */}
+      <Link className="menu-item" to="/explore">
+        Explore
       </Link>
       <span
         style={{

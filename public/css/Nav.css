@@ -44,16 +44,17 @@
 }
 
 #login-link {
+  color: white;
   border-radius: 5px;
-  background: #875d81;
+  background-color: #08165eed;
 }
 #login-link,
 #signup-link {
-  color: black;
   width: 70%;
   margin: 0 auto;
 }
 
 #signup-link {
   text-decoration: underline;
+  color: black;
 }

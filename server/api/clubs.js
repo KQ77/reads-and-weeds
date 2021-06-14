@@ -100,7 +100,9 @@ router.get('/:id', async (req, res, next) => {
     if (!req.member || !isMember(req.member.id)) {
       res
         .status(200)
-        .send(await Club.findByPk(req.params.id, { include: [Member] }));
+        .send(
+          await Club.findByPk(req.params.id, { include: [Member, Request] })
+        );
     } else if (!club.private || isMember(req.member.id)) {
       res.status(200).send(club);
     }

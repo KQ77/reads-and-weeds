@@ -85,209 +85,214 @@ const _BookClub = (props) => {
 
   if (props.bookclub.id) {
     return (
-      <div id="bookclub">
+      <>
         <Burger {...props} />
-        {hasAccess() && (
-          <div id="banner-wrapper">
-            <Banner />
-          </div>
-        )}
-        {hasAccess() ? (
-          <div className="flex-container">
-            <Sidebar {...props} />
-            <div id="right">
-              <div>
-                <h2>
-                  Next Meet-Up Date: <span>{props.bookclub.meetDate}</span>
-                </h2>
 
-                {isMember ? (
-                  <div>
+        <div id="bookclub">
+          {hasAccess() && (
+            <div id="banner-wrapper">
+              <Banner />
+            </div>
+          )}
+          {hasAccess() ? (
+            <div className="flex-container">
+              <Sidebar {...props} />
+              <div id="right">
+                <div>
+                  <h2>
+                    Next Meet-Up Date: <span>{props.bookclub.meetDate}</span>
+                  </h2>
+
+                  {isMember ? (
                     <div>
-                      Edit Date
-                      <DatePicker
-                        showTimeSelect
-                        dateFormat="MMMM d, yyyy h:mmaa"
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                      />
-                      <Button onClick={(e) => saveDate(e)}>Confirm</Button>
-                    </div>
-
-                    <Button
-                      className="invite"
-                      onClick={() => setShowInvite(true)}
-                    >
-                      + Invite a member
-                    </Button>
-                    <Col>
-                      <Toast
-                        id="toast"
-                        autohide
-                        duration={1500}
-                        className="rounded mr-2"
-                        onClose={() => setShowToast(false)}
-                        show={showToast}
-                      >
-                        <Toast.Header
-                          style={{ background: 'green', color: 'white' }}
-                        >
-                          Success
-                        </Toast.Header>
-                        <Toast.Body>Invite sent successfully!</Toast.Body>
-                      </Toast>
-                    </Col>
-                    <Modal show={showInvite} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Invite a member</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <CreateInvite
-                          showToast={() => setShowToast(true)}
-                          handleClose={handleClose}
-                          clubId={props.bookclub.id}
-                          {...props}
+                      <div>
+                        Edit Date
+                        <DatePicker
+                          showTimeSelect
+                          dateFormat="MMMM d, yyyy h:mmaa"
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
                         />
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
-              <section id="current-selection">
-                {!current ? (
-                  <div id="no-current">
-                    <div>
-                      <h3>Currently reading a book? </h3>
-                      <p>Find it and select it as your current book</p>
+                        <Button onClick={(e) => saveDate(e)}>Confirm</Button>
+                      </div>
 
-                      <Link
-                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                      <Button
+                        className="invite"
+                        onClick={() => setShowInvite(true)}
                       >
-                        <Button>Find a book</Button>
-                      </Link>
+                        + Invite a member
+                      </Button>
+                      <Col>
+                        <Toast
+                          id="toast"
+                          autohide
+                          duration={1500}
+                          className="rounded mr-2"
+                          onClose={() => setShowToast(false)}
+                          show={showToast}
+                        >
+                          <Toast.Header
+                            style={{ background: 'green', color: 'white' }}
+                          >
+                            Success
+                          </Toast.Header>
+                          <Toast.Body>Invite sent successfully!</Toast.Body>
+                        </Toast>
+                      </Col>
+                      <Modal show={showInvite} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Invite a member</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <CreateInvite
+                            showToast={() => setShowToast(true)}
+                            handleClose={handleClose}
+                            clubId={props.bookclub.id}
+                            {...props}
+                          />
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                     </div>
-                  </div>
-                ) : (
-                  <div>
-                    <div className="header">
-                      <h1 className="section-heading">Current Selection</h1>
-                      <Link
-                        to={`/bookclubs/${props.match.params.id}/suggestions/search`}
-                      >
-                        update current selection
-                      </Link>
-                    </div>
-                    <SingleBook bookId={current.id} />
-                  </div>
-                )}
-                {/* {isMember ? <Link>add feedback</Link> : ''} */}
-              </section>
-              <section id="suggestions">
-                {props.bookclub.suggestions.length ? (
-                  <>
-                    <div className="header flex-row">
-                      <h1 className="section-heading">Suggestions</h1>
-                      <Link
-                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
-                      >
-                        <Button>+ add a book</Button>
-                      </Link>
-                    </div>
-                    <h4>Books added by members for consideration</h4>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <section id="current-selection">
+                  {!current ? (
+                    <div id="no-current">
+                      <div>
+                        <h3>Currently reading a book? </h3>
+                        <p>Find it and select it as your current book</p>
 
-                    {/* <Suggestions /> */}
-                  </>
-                ) : (
-                  <div id="no-suggestions">
-                    <div>
-                      <h3>Have a book idea?</h3>
-                      <p>
-                        Start planning for your next book. Share your book
-                        recommendations, and inspire each other
-                      </p>
-                      <Link
-                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
-                      >
-                        {' '}
-                        <Button>Find a book</Button>
-                      </Link>
+                        <Link
+                          to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                        >
+                          <Button>Find a book</Button>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </section>
-              <section id="past-selections">
-                {props.bookclub.books.some(
-                  (book) => book.isCurrent === false
-                ) ? (
-                  <>
+                  ) : (
+                    <div>
+                      <div className="header">
+                        <h1 className="section-heading">Current Selection</h1>
+                        <Link
+                          to={`/bookclubs/${props.match.params.id}/suggestions/search`}
+                        >
+                          update current selection
+                        </Link>
+                      </div>
+                      <SingleBook bookId={current.id} />
+                    </div>
+                  )}
+                  {/* {isMember ? <Link>add feedback</Link> : ''} */}
+                </section>
+                <section id="suggestions">
+                  {props.bookclub.suggestions.length ? (
+                    <>
+                      <div className="header flex-row">
+                        <h1 className="section-heading">Suggestions</h1>
+                        <Link
+                          to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                        >
+                          <Button>+ add a book</Button>
+                        </Link>
+                      </div>
+                      <h4>Books added by members for consideration</h4>
+
+                      {/* <Suggestions /> */}
+                    </>
+                  ) : (
+                    <div id="no-suggestions">
+                      <div>
+                        <h3>Have a book idea?</h3>
+                        <p>
+                          Start planning for your next book. Share your book
+                          recommendations, and inspire each other
+                        </p>
+                        <Link
+                          to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                        >
+                          {' '}
+                          <Button>Find a book</Button>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </section>
+                <section id="past-selections">
+                  {props.bookclub.books.some(
+                    (book) => book.isCurrent === false
+                  ) ? (
+                    <>
+                      <div className="header">
+                        <h1 className="section-heading">Past Selections</h1>
+                        <Link
+                          to={`/bookclubs/${props.bookclub.id}/feedback/add`}
+                        >
+                          rate/review past selections
+                        </Link>
+                        <Link to={`/bookclubs/${props.bookclub.id}/books`}>
+                          view all
+                        </Link>
+                      </div>
+                      {/* <BookList past={true} clubId={props.bookclub.id} /> */}
+                    </>
+                  ) : (
+                    <div id="no-past-books">
+                      <div>
+                        <h3>Track Your Progress</h3>
+
+                        <p>
+                          Add your club's completed books, and share your
+                          thoughts on each one...
+                        </p>
+                        <Link
+                          to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
+                        >
+                          <Button>Find a book</Button>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </section>
+                <section id="photos">
+                  {props.bookclub.images.length ? (
                     <div className="header">
-                      <h1 className="section-heading">Past Selections</h1>
-                      <Link to={`/bookclubs/${props.bookclub.id}/feedback/add`}>
-                        rate/review past selections
-                      </Link>
-                      <Link to={`/bookclubs/${props.bookclub.id}/books`}>
+                      <h1 className="section-heading">Photos</h1>
+
+                      <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
                         view all
                       </Link>
-                    </div>
-                    {/* <BookList past={true} clubId={props.bookclub.id} /> */}
-                  </>
-                ) : (
-                  <div id="no-past-books">
-                    <div>
-                      <h3>Track Your Progress</h3>
+                      <Button>+ add photos</Button>
 
-                      <p>
-                        Add your club's completed books, and share your thoughts
-                        on each one...
-                      </p>
-                      <Link
-                        to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
-                      >
-                        <Button>Find a book</Button>
-                      </Link>
+                      {/* <PhotoReel photos={props.bookclub.images} /> */}
                     </div>
-                  </div>
-                )}
-              </section>
-              <section id="photos">
-                {props.bookclub.images.length ? (
-                  <div className="header">
-                    <h1 className="section-heading">Photos</h1>
-
-                    <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
-                      view all
-                    </Link>
-                    <Button>+ add photos</Button>
-
-                    {/* <PhotoReel photos={props.bookclub.images} /> */}
-                  </div>
-                ) : (
-                  <div id="no-photos">
-                    <div>
-                      <h3> Remember the good times... </h3>
-                      <p>Add club photos here!</p>
-                      <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
-                        <Button>+ photos</Button>
-                      </Link>
+                  ) : (
+                    <div id="no-photos">
+                      <div>
+                        <h3> Remember the good times... </h3>
+                        <p>Add club photos here!</p>
+                        <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
+                          <Button>+ photos</Button>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </section>
+                  )}
+                </section>
+              </div>
             </div>
-          </div>
-        ) : (
-          <LimitedViewClub {...props} club={props.bookclub} />
-        )}
+          ) : (
+            <LimitedViewClub {...props} club={props.bookclub} />
+          )}
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </>
     );
   } else {
     return null;

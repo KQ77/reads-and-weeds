@@ -1,0 +1,24 @@
+#limited-club {
+  width: 50vw;
+  margin: 6rem auto;
+  text-align: center;
+}
+
+#limited-club img {
+  border: 1px solid grey;
+  width: inherit;
+  box-shadow: 1px 1px 3px grey;
+}
+
+#limited-club span {
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+#limited-club button {
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 1rem;
+}

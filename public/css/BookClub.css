@@ -1,3 +1,7 @@
+#bookclub {
+  position: absolute;
+  width: 100vw;
+}
 #right {
   width: 80%;
   margin: 1rem;

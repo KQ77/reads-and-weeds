@@ -16,7 +16,7 @@
 
 #member-clubs {
   margin: 2rem;
-  min-height: 40rem;
+  min-height: 8rem;
   background-color: rgb(238 238 238);
   text-align: center;
   display: flex;
@@ -67,9 +67,40 @@
 
 #hero button {
   font-weight: 100;
-  border: 1px solid #162a542e;
-  background: white;
+  border: 1px solid #182d58a8;
+  background: #e8e8e8;
+  box-shadow: 1px 1px 3px black;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   color: black;
+}
+
+#hero button:hover {
+  background: white;
+}
+
+#no-clubs {
+  margin: 1.5rem;
+  padding: 3rem;
+  background-image: url('../images/mug-books.jpg');
+  background-size: cover;
+  min-height: 15rem;
+}
+
+#no-clubs > div {
+  padding: 0.5rem;
+  width: 60%;
+  margin: auto;
+  border-radius: 12px;
+  background: white;
+  color: black;
+  text-align: center;
+}
+
+#no-clubs > div p {
+  font-size: 1.5rem;
+}
+
+#no-clubs > div p > a {
+  text-decoration: underline;
 }

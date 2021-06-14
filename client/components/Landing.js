@@ -76,12 +76,12 @@ const _Landing = (props) => {
           ''
         )}
       </section>
-      <section id="your-clubs">
-        {props.auth.id ? (
-          <>
-            <h1>Your Clubs</h1>
-
+      {/* <section id="your-clubs"> */}
+      {props.auth.id ? (
+        <>
+          {clubs.length ? (
             <section id="member-clubs">
+              <h1>Your Clubs</h1>
               {clubs.map((club, idx) => (
                 <React.Fragment key={idx}>
                   <Card style={{ width: '15rem' }}>
@@ -99,13 +99,25 @@ const _Landing = (props) => {
                   </Card>
                 </React.Fragment>
               ))}
-              {/* <ClubList clubs={clubs} /> */}
             </section>
-          </>
-        ) : (
-          ''
-        )}
-      </section>
+          ) : (
+            <div id="no-clubs">
+              <div>
+                <h2>You are not currently a member of any club...</h2>
+                <p>
+                  <Link to="/explore">Explore all clubs</Link> to find a new
+                  adventure...
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* <ClubList clubs={clubs} /> */}
+        </>
+      ) : (
+        ''
+      )}
+      {/* </section> */}
       <Footer />
     </div>
   );
