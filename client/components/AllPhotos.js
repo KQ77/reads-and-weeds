@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Burger } from './index';
 import '../../public/css/AllPhotos.css';
 import { fetchClub } from '../redux/bookclub';
-
+import { Link } from 'react-router-dom';
 //url /bookclubs/:id/photos
 const _AllPhotos = (props) => {
   const [photos, setPhotos] = useState([]);
@@ -30,6 +30,9 @@ const _AllPhotos = (props) => {
     <>
       <Burger {...props} />
       <div id="all-photos">
+        <Row>
+          <Link to={`/bookclubs/${props.match.params.id}`}>back to club</Link>
+        </Row>
         <h2>
           {photos.length
             ? `${props.bookclub.name} Photos`

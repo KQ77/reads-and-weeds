@@ -1,5 +1,5 @@
 #searchbar {
-  width: 40rem;
+  width: 50rem;
   margin: 0 auto;
 }
 #navbar-container {
@@ -57,4 +57,8 @@
 #signup-link {
   text-decoration: underline;
   color: black;
+}
+
+#navbar > div {
+  margin-left: 2rem;
 }

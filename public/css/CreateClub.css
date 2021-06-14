@@ -1,7 +1,7 @@
 #create-club,
 #edit-club {
   display: flex;
-  width: 90%;
+  justify-content: center;
   border: 2px solid black;
   padding: 1.5rem;
 }

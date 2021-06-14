@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // const Rating = require('../db/Models/Rating');
 // const { Comment } = require('../db/Models/Comment');
-const { Member, Review, Book } = require('../db/seed/seed');
+const { Member, Review, Book, Club } = require('../db/seed/seed');
 const { fetchBook } = require('./helpers');
 
 //  api/books

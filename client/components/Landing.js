@@ -53,7 +53,7 @@ const _Landing = (props) => {
       <section id="hero">
         <div>
           <div>
-            <h1>Q-Books</h1>
+            <h1>Q Book Clubs</h1>
             <p>Explore. Create. Read. Meet. Discuss.</p>
           </div>
 

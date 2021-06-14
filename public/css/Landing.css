@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 40rem;
+  height: 45rem;
   background-image: url('../images/open_book.jpg');
   background-size: cover;
   background-position: center;
@@ -68,7 +68,7 @@
 #hero button {
   font-weight: 100;
   border: 1px solid #182d58a8;
-  background: #e8e8e8;
+  background: #e8e8e887;
   box-shadow: 1px 1px 3px black;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;

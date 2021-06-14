@@ -15,6 +15,7 @@ const _SingleBook = (props) => {
   }, []);
   if (props.singleBook.id) {
     const book = props.singleBook.volumeInfo;
+    console.log(book, 'book');
     return (
       <div id="single-book">
         <div id="book-details">
@@ -24,7 +25,7 @@ const _SingleBook = (props) => {
           </p>
           <p>
             <span>Author: </span>
-            {book.authors[0]}
+            {book.authors[0] || ''}
           </p>
           <p>
             <span>Year: </span>

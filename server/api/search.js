@@ -5,16 +5,20 @@ router.post('/clubs', async (req, res, next) => {
   try {
     const { searchTerm } = req.body;
     const clubs = await Club.findAll({ include: [Request, Member] });
-    const searchResults = clubs.filter(
-      (club) =>
-        club.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        club.location.includes(searchTerm)
-    );
-    console.log(searchResults, 'search results');
-    if (searchResults.length) {
-      res.status(200).send(searchResults);
+    if (searchTerm === ' ') {
+      res.send(clubs);
     } else {
-      res.status(200).send([]);
+      const searchResults = clubs.filter(
+        (club) =>
+          club.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          club.location.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      console.log(searchResults, 'search results');
+      if (searchResults.length) {
+        res.status(200).send(searchResults);
+      } else {
+        res.status(200).send([]);
+      }
     }
   } catch (err) {
     next(err);

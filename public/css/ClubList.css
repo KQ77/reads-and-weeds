@@ -8,6 +8,9 @@
   margin: auto 0.5rem;
 }
 
+#clublist .card-body {
+  text-align: left;
+}
 #clublist span#about {
   text-decoration: underline;
   color: purple;
