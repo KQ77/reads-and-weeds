@@ -55,7 +55,6 @@ const _Sidebar = (props) => {
           </button>
         ) : (
           <button
-            className="leave"
             onClick={() => {
               leaveClub(props, props.bookclub.id, props.auth.id);
             }}
@@ -64,18 +63,10 @@ const _Sidebar = (props) => {
           </button>
         )}
         {isAdmin(props) ? (
-          <div
-            className="admin"
-            style={{ display: 'flex', flexDirection: 'column' }}
-          >
-            <p>
-              <Link to={`/bookclubs/${props.bookclub.id}/requests`}>
-                approve join requests{' '}
-              </Link>{' '}
-              <span style={{ color: 'blue', margin: '0' }}>
-                ({props.bookclub.requests.length})
-              </span>
-            </p>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Link to={`/bookclubs/${props.bookclub.id}/requests`}>
+              approve join requests
+            </Link>
             <Link to={`/bookclubs/${props.bookclub.id}/edit`}>
               edit club info
             </Link>

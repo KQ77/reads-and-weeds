@@ -1,0 +1,9 @@
+#login-form {
+  margin: 6rem auto;
+  width: 40%;
+}
+
+#login-form span {
+  text-decoration: underline;
+  color: navy;
+}

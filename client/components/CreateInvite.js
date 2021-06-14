@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Form, Button, Modal } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 export const CreateInvite = (props) => {
   const [email, setEmail] = useState('');
@@ -21,6 +21,7 @@ export const CreateInvite = (props) => {
       });
       //send toast popup that invite was successfully sent and close the modal
       props.handleClose();
+      props.showToast();
     }
   };
   return (

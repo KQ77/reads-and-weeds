@@ -1,6 +1,7 @@
 #right {
   width: 80%;
   margin: 1rem;
+  position: relative;
 }
 
 .flex-container {
@@ -124,4 +125,24 @@ div.header {
 #bookclub section button {
   background: #08165eed;
   border: 1px solid black;
+}
+
+#toast {
+  background: white;
+  height: 15rem;
+  position: absolute;
+  max-width: 90vw;
+  height: 10rem;
+  background: #ecffec;
+  width: 50vw;
+}
+
+.toast-header {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+.toast-body {
+  font-size: 1rem;
 }

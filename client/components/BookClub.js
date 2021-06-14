@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
 import { Link, Redirect } from 'react-router-dom';
 import { fetchClub } from '../redux/bookclub';
 import DatePicker from 'react-datepicker';
@@ -20,7 +19,7 @@ import {
   Burger,
 } from './index';
 import '../../public/css/BookClub.css';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Toast, Col } from 'react-bootstrap';
 
 const _BookClub = (props) => {
   const clubId = props.match.params.id;
@@ -29,7 +28,10 @@ const _BookClub = (props) => {
   };
   const [startDate, setStartDate] = useState(new Date());
   const [showInvite, setShowInvite] = useState(false);
-  const handleClose = () => setShowInvite(false);
+  const [showToast, setShowToast] = useState(false);
+  const handleClose = () => {
+    setShowInvite(false);
+  };
 
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
@@ -118,13 +120,30 @@ const _BookClub = (props) => {
                     >
                       + Invite a member
                     </Button>
-
+                    <Col>
+                      <Toast
+                        id="toast"
+                        autohide
+                        duration={1500}
+                        className="rounded mr-2"
+                        onClose={() => setShowToast(false)}
+                        show={showToast}
+                      >
+                        <Toast.Header
+                          style={{ background: 'green', color: 'white' }}
+                        >
+                          Success
+                        </Toast.Header>
+                        <Toast.Body>Invite sent successfully!</Toast.Body>
+                      </Toast>
+                    </Col>
                     <Modal show={showInvite} onHide={handleClose}>
                       <Modal.Header closeButton>
                         <Modal.Title>Invite a member</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         <CreateInvite
+                          showToast={() => setShowToast(true)}
                           handleClose={handleClose}
                           clubId={props.bookclub.id}
                           {...props}
@@ -266,6 +285,7 @@ const _BookClub = (props) => {
         ) : (
           <LimitedViewClub {...props} club={props.bookclub} />
         )}
+
         <Footer />
       </div>
     );

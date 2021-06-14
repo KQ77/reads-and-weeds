@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Login, Register } from './index';
+import '../../public/css/LoginForm.css';
 
 export const LoginForm = (props) => {
   const [display, setDisplay] = useState('login');
