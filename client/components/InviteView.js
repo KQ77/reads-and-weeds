@@ -25,7 +25,6 @@ const _InviteView = (props) => {
   useEffect(() => {
     if (props.auth) {
       if (props.auth.id) {
-        console.log('there is someone logged in');
         getInvite(props.match.params.id);
         //   } else {
         //     console.log('must redirect to login now');

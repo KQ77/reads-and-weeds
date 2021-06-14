@@ -67,3 +67,12 @@ ul {
 #sidebar > div img {
   width: 100%;
 }
+
+#sidebar div.admin a {
+  text-decoration: underline;
+}
+
+button.leave:hover {
+  color: navy;
+  border: 1px solid navy;
+}

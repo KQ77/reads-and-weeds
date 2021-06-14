@@ -95,7 +95,10 @@ const _BookClub = (props) => {
             <Sidebar {...props} />
             <div id="right">
               <div>
-                <h2>Next Meet-Up Date: {props.bookclub.meetDate}</h2>
+                <h2>
+                  Next Meet-Up Date: <span>{props.bookclub.meetDate}</span>
+                </h2>
+
                 {isMember ? (
                   <div>
                     <div>
@@ -106,11 +109,16 @@ const _BookClub = (props) => {
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
                       />
-                      <Button onClick={(e) => saveDate(e)}>Save Date</Button>
+                      <Button onClick={(e) => saveDate(e)}>Confirm</Button>
                     </div>
-                    <Button onClick={() => setShowInvite(true)}>
-                      + Invite a friend
+
+                    <Button
+                      className="invite"
+                      onClick={() => setShowInvite(true)}
+                    >
+                      + Invite a member
                     </Button>
+
                     <Modal show={showInvite} onHide={handleClose}>
                       <Modal.Header closeButton>
                         <Modal.Title>Invite a member</Modal.Title>
@@ -149,7 +157,14 @@ const _BookClub = (props) => {
                   </div>
                 ) : (
                   <div>
-                    <h1 className="section-heading">Current Selection</h1>
+                    <div className="header">
+                      <h1 className="section-heading">Current Selection</h1>
+                      <Link
+                        to={`/bookclubs/${props.match.params.id}/suggestions/search`}
+                      >
+                        update current selection
+                      </Link>
+                    </div>
                     <SingleBook bookId={current.id} />
                   </div>
                 )}
@@ -158,15 +173,16 @@ const _BookClub = (props) => {
               <section id="suggestions">
                 {props.bookclub.suggestions.length ? (
                   <>
-                    <div className="flex-row">
+                    <div className="header flex-row">
                       <h1 className="section-heading">Suggestions</h1>
-                      <h2>Books added by members for consideration</h2>
                       <Link
                         to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
                       >
-                        <Button variant="info">+ add a book</Button>
+                        <Button>+ add a book</Button>
                       </Link>
                     </div>
+                    <h4>Books added by members for consideration</h4>
+
                     {/* <Suggestions /> */}
                   </>
                 ) : (
@@ -192,7 +208,7 @@ const _BookClub = (props) => {
                   (book) => book.isCurrent === false
                 ) ? (
                   <>
-                    <div>
+                    <div className="header">
                       <h1 className="section-heading">Past Selections</h1>
                       <Link to={`/bookclubs/${props.bookclub.id}/feedback/add`}>
                         rate/review past selections
@@ -223,16 +239,16 @@ const _BookClub = (props) => {
               </section>
               <section id="photos">
                 {props.bookclub.images.length ? (
-                  <>
+                  <div className="header">
                     <h1 className="section-heading">Photos</h1>
-                    <div>
-                      <Button variant="info">+ add photos</Button>
-                      <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
-                        view all
-                      </Link>
-                    </div>
+
+                    <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
+                      view all
+                    </Link>
+                    <Button>+ add photos</Button>
+
                     {/* <PhotoReel photos={props.bookclub.images} /> */}
-                  </>
+                  </div>
                 ) : (
                   <div id="no-photos">
                     <div>

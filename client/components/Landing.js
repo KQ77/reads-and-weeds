@@ -70,7 +70,7 @@ const _Landing = (props) => {
       <section id="club-search-results">
         {searchResults.length ? (
           <div>
-            <ClubList clubs={searchResults} />
+            <ClubList {...props} clubs={searchResults} />
           </div>
         ) : (
           ''

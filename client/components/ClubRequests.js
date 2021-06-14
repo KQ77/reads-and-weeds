@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import '../../public/css/ClubRequests.css';
 import { Card, Button } from 'react-bootstrap';
 import { setAuth } from '../redux/auth';
+import { Burger } from './index';
+import { Link } from 'react-router-dom';
 
 const _Requests = (props) => {
   const [requests, setRequests] = useState([]);
@@ -40,9 +42,11 @@ const _Requests = (props) => {
     fetchRequests();
   };
   return (
-    <div id="club-requests">
-      {requests.length
-        ? requests.map((req, idx) => (
+    <>
+      <Burger {...props} />
+      <div id="club-requests">
+        {requests.length ? (
+          requests.map((req, idx) => (
             <div key={idx}>
               <Card style={{ width: '8rem' }}>
                 <Card.Img src={req.member.imageUrl}></Card.Img>
@@ -63,8 +67,19 @@ const _Requests = (props) => {
               </Card>
             </div>
           ))
-        : 'All caught up!'}
-    </div>
+        ) : (
+          <div id="no-requests">
+            <h2>All caught up! </h2>
+            <h3>Currently there are no requests to join this club.</h3>
+            <p>
+              <Link to={`/bookclubs/${props.match.params.id}`}>
+                return to main club page
+              </Link>
+            </p>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -51,6 +51,8 @@ router.post('/', async (req, res, next) => {
 
     //if you're adding a current book, check if book has a current book already
     if (isCurrent === true) {
+      const club = await Club.findByPk(clubId);
+      await club.update({ meetDate: 'TBD' });
       const currentBook = await Book.findOne({
         where: { clubId: clubId, isCurrent: true },
       });

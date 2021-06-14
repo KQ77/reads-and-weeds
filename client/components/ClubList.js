@@ -4,20 +4,43 @@ import { Link } from 'react-router-dom';
 import { Card, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { setAuth } from '../redux/auth';
 
 const _ClubList = (props) => {
+  useEffect(() => {
+    if (!props.auth) {
+      props.setAuth();
+    }
+  }, []);
   const { clubs } = props;
   const requested = (props, club) => {
     const { requests } = club;
     if (requests.find((req) => req.memberId === props.auth.id)) return true;
     else return false;
   };
-  const handleClick = async (clubId) => {
-    //send request to /api/clubs/:clubId/requests
-    await axios.post(`/api/clubs/${clubId}/requests`, {
-      memberId: props.auth.id,
-      clubId,
-    });
+  const isMember = (memberId, club) => {
+    return club.members.some((member) => member.id === memberId);
+  };
+
+  const handleClick = async (club) => {
+    console.log(props, 'props');
+    if (!props.auth.id) {
+      props.history.push(`/login?redirect=explore`);
+    }
+    if (club.private === true) {
+      //send request to /api/clubs/:clubId/requests
+      console.log(club, 'club');
+      await axios.post(`/api/clubs/${club.id}/requests`, {
+        memberId: props.auth.id,
+        clubId: club.id,
+      });
+    } else {
+      await axios.post(`/api/clubs/${club.id}/members`, {
+        clubId: club.Id,
+        memberId: props.auth.id,
+      });
+      // await axios.post(`/api/members/${props.auth.id}/clubs`);
+    }
     props.fetchClubs();
   };
   return (
@@ -62,13 +85,29 @@ const _ClubList = (props) => {
               </OverlayTrigger>
             </Card.Body>
             <Card.Footer>
-              {/* //if not requested, display button, else display " request sent" */}
-              {requested(props, club) ? (
+              {isMember(props.auth.id, club) ? (
+                <div>
+                  <p
+                    style={{
+                      color: 'green',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <img
+                      height="15px"
+                      style={{ marginRight: '.5rem' }}
+                      src="/images/check.png"
+                    ></img>
+                    member
+                  </p>
+                </div>
+              ) : requested(props, club) ? (
                 <p style={{ fontStyle: 'italic', color: 'lightgray' }}>
                   Join Request Sent
                 </p>
               ) : (
-                <Button onClick={() => handleClick(club.id)} variant="info">
+                <Button onClick={() => handleClick(club)} variant="info">
                   {club.private ? 'Request to join' : 'Join'}
                 </Button>
               )}
@@ -80,4 +119,9 @@ const _ClubList = (props) => {
   );
 };
 
-export const ClubList = connect((state) => state)(_ClubList);
+const mapDispatch = (dispatch) => {
+  return {
+    setAuth: () => dispatch(setAuth()),
+  };
+};
+export const ClubList = connect((state) => state, mapDispatch)(_ClubList);
