@@ -37,11 +37,13 @@ const _BookFeedback = (props) => {
         </span>
         <div id="reviews">
           <h4>Member Reviews</h4>
-          {reviews.map((review, idx) => (
-            <div key={idx}>
-              {review.text} <span>- {review.member.firstName}</span>
-            </div>
-          ))}
+          <div>
+            {reviews.map((review, idx) => (
+              <div key={idx}>
+                {review.text} <span>- {review.member.firstName}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );

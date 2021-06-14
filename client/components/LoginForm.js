@@ -7,7 +7,6 @@ export const LoginForm = (props) => {
     if (display === 'login') setDisplay('register');
     else setDisplay('login');
   };
-  console.log('login form trying to render');
   return (
     <div id="login-form">
       {display === 'login' ? <Login {...props} /> : <Register {...props} />}

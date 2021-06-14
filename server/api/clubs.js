@@ -7,34 +7,33 @@ const {
   Image,
   Book,
   Suggestion,
-  Comment,
   Request,
-  Rating,
   Review,
   Invite,
   ClubMembers,
 } = require('../db/seed/seed');
 
 //s3
-const multer = require('multer');
 const AWS = require('aws-sdk');
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+//set image storage engine
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const { v4: uuidv4 } = require('uuid');
 
+//helpers
 const { fetchBook } = require('./helpers');
+//middleware
 const { hasAccess, isLoggedIn } = require('../middleware');
 
 //sgrid emal sdk
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-//set image storage engine
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
 
 //ROUTES//
 
@@ -198,6 +197,29 @@ router.get('/:clubId/members', hasAccess, async (req, res, next) => {
   }
 });
 
+//ADD a member to a public club
+router.post('/:clubId/members', isLoggedIn, async (req, res, next) => {
+  try {
+    const { clubId, memberId } = req.body;
+    const club = Club.findByPk(clubId);
+    if (club.private) {
+      const error = new Error(
+        'Unauthorized. Club is private - must request to join'
+      );
+      error.status = 401;
+      throw error;
+    } else {
+      // const member = await Member.findByPk(req.params.memberId);
+      // await club.addMember(member);
+      await ClubMembers.create({ clubId, memberId });
+      res.sendStatus(201);
+    }
+  } catch (err) {
+    console.log(err, 'err');
+    next(err);
+  }
+});
+
 //POST an invite to a club (club member can invite another member -- must be a member of the club)
 router.post('/:clubId/invites', hasAccess, async (req, res, next) => {
   try {
@@ -260,6 +282,7 @@ router.post('/:clubId/requests', isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
 // router.put('/:clubId/suggestions', async (req, res, next) => {
 //   console.log(req.member, 'req.member');
 //   console.log(req.body, 'req.body');

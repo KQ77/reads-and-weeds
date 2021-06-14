@@ -1,0 +1,14 @@
+#no-requests {
+  min-height: 20rem;
+  background: #e8e8e8;
+  width: 80%;
+  margin: 1rem auto;
+  text-align: center;
+  padding: 3rem;
+  border: 1px solid silver;
+}
+
+#no-requests h2,
+#no-requests h3 {
+  font-weight: 100;
+}

@@ -29,7 +29,7 @@ const _SuggestionSearch = (props) => {
   const handleSearch = async (searchTerm) => {
     const results = (
       await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=30`
       )
     ).data;
     setResults(results.items);
@@ -158,10 +158,10 @@ const _SuggestionSearch = (props) => {
                         }
                         as="button"
                       >
-                        add as the book we are currently reading
+                        add as the book you are currently reading
                       </Dropdown.Item>
                       <Dropdown.ItemText>
-                        Add to books we've read
+                        Add to books you've read
                       </Dropdown.ItemText>
                       <Dropdown.Item
                         onClick={() =>
@@ -169,7 +169,7 @@ const _SuggestionSearch = (props) => {
                         }
                         as="button"
                       >
-                        these are books we've finished reading
+                        these are books you've finished reading
                       </Dropdown.Item>
                     </DropdownButton>
                     <div style={{ color: 'green', fontSize: '1rem' }}>

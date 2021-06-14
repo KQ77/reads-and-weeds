@@ -15,6 +15,7 @@ const _AllClubs = (props) => {
   }, []);
   const clubs = props.allClubs;
   const [searchTerm, setSearchTerm] = useState('');
+  console.log(props, 'props');
   if (clubs) {
     return (
       <>

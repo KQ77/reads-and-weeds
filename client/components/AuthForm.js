@@ -27,7 +27,7 @@ const AuthForm = (props) => {
       if (props.handleClose) {
         props.handleClose();
       } else {
-        props.history.push(props.location.search.split('=')[1]);
+        props.history.push(`/${props.location.search.split('=')[1]}`);
       }
     } catch (err) {
       console.log(err, 'err');

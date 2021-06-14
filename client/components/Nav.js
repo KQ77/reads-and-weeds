@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../public/css/Nav.css';
+import { fetchResults } from '../redux/searchResults';
 const { icon } = require('../../public/images/search_icon.png');
 
 import {
@@ -18,56 +19,74 @@ import { logout } from '../redux/auth';
 
 const _Nav = (props) => {
   const { isLoggedIn } = props;
+  const [searchTerm, setSearchTerm] = useState([]);
   return (
-    <Navbar id="navbar" className="color-nav" expand="lg">
-      <Navbar.Brand href="/">Q-Books</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+    <div id="navbar-container">
+      <Navbar id="navbar" expand="lg">
+        <Navbar.Brand style={{ color: '#c1c2c9' }} href="/">
+          Q-Books
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        {/* <Navbar.Collapse id="basic-navbar-nav"> */}
         <Nav>
-          {props.auth.id ? (
-            <NavDropdown
-              id="nav-dropdown"
-              title={
-                <span>
-                  <img
-                    style={{ borderRadius: '100%', border: '1px solid white' }}
-                    height="35"
-                    width="35"
-                    src={props.auth.imageUrl}
-                  />
-                  {props.auth.firstName}
-                </span>
-              }
-            >
-              <NavDropdown.Item
-                style={{ color: 'black' }}
-                href={`/members/${props.auth.id}`}
-              >
-                Profile
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                style={{ color: 'black' }}
-                href={`/members/${props.auth.id}/clubs}`}
-              >
-                Your Clubs
-              </NavDropdown.Item>
-
-              <NavDropdown.Divider />
-              {/* <NavDropdown.Item
-                style={{ color: 'black' }}
-                onClick={() => console.log('logging out')}
-                href="#"
-              >
-                Log Out
-              </NavDropdown.Item> */}
-            </NavDropdown>
-          ) : (
-            ''
-          )}
-          {/* <Navbar.Text id="navbar-text">
-            {props.auth.firstName || ''}
-          </Navbar.Text> */}
-          {!isLoggedIn ? (
+          <NavDropdown
+            id="nav-dropdown"
+            title={
+              <span>
+                <img
+                  style={{
+                    marginRight: '.3rem',
+                    borderRadius: '100%',
+                    border: '1px solid white',
+                  }}
+                  height="35"
+                  width="35"
+                  src={props.auth.imageUrl || '/images/defaultProfile.png'}
+                />
+                {props.auth.firstName || ''}
+              </span>
+            }
+          >
+            {isLoggedIn ? (
+              <>
+                <NavDropdown.Item
+                  style={{ color: 'black' }}
+                  href={`/members/${props.auth.id}`}
+                >
+                  Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  style={{ color: 'black' }}
+                  href={`/members/${props.auth.id}/clubs`}
+                >
+                  Your Clubs
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  onClick={() => {
+                    props.logout();
+                  }}
+                >
+                  Log Out
+                </NavDropdown.Item>
+              </>
+            ) : (
+              ''
+            )}
+            {!isLoggedIn ? (
+              <>
+                <NavDropdown.Item id="login-link" href={`/login?redirect=`}>
+                  Login
+                </NavDropdown.Item>
+                <NavDropdown.Item id="signup-link" href={`/login?redirect=`}>
+                  Register
+                </NavDropdown.Item>
+              </>
+            ) : (
+              ''
+            )}
+          </NavDropdown>
+          {/* {!isLoggedIn ? (
             <>
               <Nav.Link
                 onClick={() => {
@@ -88,8 +107,8 @@ const _Nav = (props) => {
             </>
           ) : (
             ''
-          )}
-          {isLoggedIn ? (
+          )} */}
+          {/* {isLoggedIn ? (
             <Nav.Link
               onClick={() => {
                 props.logout();
@@ -99,22 +118,32 @@ const _Nav = (props) => {
             </Nav.Link>
           ) : (
             ''
-          )}
-          <Nav.Link href="/create">Create</Nav.Link>
+          )} */}
+          {/* <Nav.Link href="/create">Create</Nav.Link> */}
           {/* <Link to="/create">+Create club</Link> */}
         </Nav>
-        <InputGroup className="justify-content-center" id="searchbar">
-          <FormControl
-            type="text"
-            id="searchform"
-            placeholder="search for a club"
-            aria-label="group"
-            aria-describedby="basic-addon1"
-          />
-          <Button variant="light">Search</Button>
-        </InputGroup>
-      </Navbar.Collapse>
-    </Navbar>
+        {/* </Navbar.Collapse> */}
+      </Navbar>
+      <InputGroup className="justify-content-center" id="searchbar">
+        <InputGroup.Prepend>
+          <InputGroup.Text>
+            <img height="20px" src="/images/search_icon.png" />
+          </InputGroup.Text>
+        </InputGroup.Prepend>
+        <FormControl
+          type="text"
+          id="searchform"
+          placeholder="search clubs by name or location"
+          aria-label="group"
+          aria-describedby="basic-addon1"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Button onClick={() => props.fetchResults(searchTerm)} variant="light">
+          Search
+        </Button>
+      </InputGroup>
+    </div>
   );
 };
 
@@ -127,6 +156,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchResults: (term) => dispatch(fetchResults(term)),
     logout: () => dispatch(logout()),
   };
 };

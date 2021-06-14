@@ -25,7 +25,6 @@ const _InviteView = (props) => {
   useEffect(() => {
     if (props.auth) {
       if (props.auth.id) {
-        console.log('there is someone logged in');
         getInvite(props.match.params.id);
         //   } else {
         //     console.log('must redirect to login now');
@@ -39,7 +38,7 @@ const _InviteView = (props) => {
   console.log(invite, 'invite');
   return (
     <div id="invite">
-      {!props.auth.id && <Login {...props} redirectUrl={props.match.url} />}
+      {!props.auth.id && props.history.push('/login/redirect?url=')}
       {invite.club && (
         <LimitedViewClub {...props} inviteView={true} club={invite.club} />
       )}

@@ -10,7 +10,41 @@
 .section-heading {
   font-family: cursive;
 }
+#right > div {
+  margin: 1rem;
+  margin-top: 0;
+}
+#right h2 {
+  font-family: cursive;
+}
 
+#right h2 > span {
+  font-size: 1.5rem;
+  color: green;
+  margin-left: 1rem;
+}
+#right > div > div > div {
+  margin: 1rem 0;
+  display: flex;
+  width: 35%;
+  align-items: center;
+  justify-content: space-between;
+}
+#right > div > div > div button {
+  color: black;
+  background: rgb(227 235 238);
+  padding: 0.1rem 1rem;
+  border: 1px solid grey;
+}
+
+#bookclub button.invite {
+  background-color: #08165eed;
+  border: 1px solid black;
+}
+#bookclub button.invite:hover {
+  color: #08165eed;
+  background: white;
+}
 #bookclub section {
   margin: 1rem;
   padding: 0.5rem;
@@ -18,6 +52,16 @@
   border: 1px ridge silver;
 }
 
+div.header {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#suggestions div.header {
+  width: 90%;
+}
 .flex-row {
   display: flex;
   justify-content: space-between;
@@ -75,4 +119,9 @@
 
 #no-past-books > div {
   margin-left: 20rem;
+}
+
+#bookclub section button {
+  background: #08165eed;
+  border: 1px solid black;
 }
