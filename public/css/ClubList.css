@@ -19,3 +19,11 @@
 #popover-title {
   font-weight: 600;
 }
+
+#clublist {
+  display: flex;
+}
+
+#clublist > div {
+  margin: 1rem;
+}

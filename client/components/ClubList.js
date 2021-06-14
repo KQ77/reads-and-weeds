@@ -55,7 +55,11 @@ const _ClubList = (props) => {
                   : `/login/redirect?url=bookclubs/${club.id}`
               }
             >
-              <Card.Img variant="top" src={club.displayImage}></Card.Img>
+              <Card.Img
+                variant="top"
+                style={{ height: '12rem' }}
+                src={club.displayImage}
+              ></Card.Img>
             </Link>
             <Card.Body>
               <Card.Title>
@@ -66,7 +70,8 @@ const _ClubList = (props) => {
                 <Card.Text>
                   {club.private ? 'private' : 'public'}
                   <span>|</span>
-                  {club.members.length} members
+                  {club.members.length} member
+                  {club.members.length === 1 ? '' : 's'}
                 </Card.Text>
               </div>
               <OverlayTrigger
@@ -92,6 +97,7 @@ const _ClubList = (props) => {
                       color: 'green',
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                     }}
                   >
                     <img
