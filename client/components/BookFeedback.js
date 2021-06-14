@@ -24,27 +24,36 @@ const _BookFeedback = (props) => {
     const average = ratings.reduce((a, b) => a + b, 0) / ratings.length;
     return average > 0 ? average : 'not yet rated by members';
   };
-  if (reviews.length) {
+  if (reviews) {
     return (
       <div id="book-feedback">
-        <h2>Member Feedback</h2> Average Member Rating:{' '}
-        <span style={{ color: 'green', padding: '.5rem' }}>
-          {getAverage(reviews)}
-        </span>
-        <span style={{ fontSize: '1rem' }}>
-          (based on {reviews.length} rating
-          {reviews.length > 1 || reviews.length === 0 ? 's' : ''})
-        </span>
-        <div id="reviews">
-          <h4>Member Reviews</h4>
-          <div>
-            {reviews.map((review, idx) => (
-              <div key={idx}>
-                {review.text} <span>- {review.member.firstName}</span>
+        {reviews.length ? (
+          <>
+            <h2>Member Feedback</h2> Average Member Rating:{' '}
+            <span style={{ color: 'green', padding: '.5rem' }}>
+              {getAverage(reviews)}
+            </span>
+            <span style={{ fontSize: '1rem' }}>
+              (based on {reviews.length} rating
+              {reviews.length > 1 || reviews.length === 0 ? 's' : ''})
+            </span>
+            <div id="reviews">
+              <h4>Member Reviews</h4>
+              <div>
+                {reviews.map((review, idx) => (
+                  <div key={idx}>
+                    {review.text} <span>- {review.member.firstName}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </>
+        ) : (
+          <div>
+            <h2>Member Reviews</h2>No members have left reviews for this
+            selection yet
           </div>
-        </div>
+        )}
       </div>
     );
   } else {
