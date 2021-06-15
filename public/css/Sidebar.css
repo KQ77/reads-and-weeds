@@ -58,9 +58,10 @@ ul {
 }
 
 #sidebar button {
+  width: 6rem;
   padding: 0.3rem;
   margin: 1rem;
-  border: none;
+  border: 1px solid silver;
   background-color: rgb(233, 233, 233);
 }
 

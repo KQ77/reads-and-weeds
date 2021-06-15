@@ -15,6 +15,7 @@ const _ClubList = (props) => {
   const { clubs } = props;
   const requested = (props, club) => {
     const { requests } = club;
+    console.log(requests, 'requests');
     if (requests.find((req) => req.memberId === props.auth.id)) return true;
     else return false;
   };
@@ -23,7 +24,6 @@ const _ClubList = (props) => {
   };
 
   const handleClick = async (club) => {
-    console.log(props, 'props');
     if (!props.auth.id) {
       props.history.push(`/login?redirect=explore`);
     }

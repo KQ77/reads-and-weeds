@@ -4,7 +4,8 @@ import { LimitedViewClub } from './LimitedViewClub';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { setAuth } from '../redux/auth';
-import { Login } from './index';
+import { Login, Burger, BookClub } from './index';
+import '../../public/css/InviteView.css';
 
 const _InviteView = (props) => {
   const [show, setShow] = useState(false);
@@ -12,9 +13,11 @@ const _InviteView = (props) => {
   const [invite, setInvite] = useState({});
   const [redirect, setRedirect] = useState(false);
 
-  const getInvite = async (id) => {
-    const invite = (await axios.get(`/api/invites/${id}`)).data;
-    setInvite(invite);
+  const getInvite = async () => {
+    const id = props.match.params.id;
+    const _invite = (await axios.get(`/api/invites/${props.match.params.id}`))
+      .data;
+    setInvite(_invite);
   };
   useEffect(() => {
     if (!props.auth) {
@@ -23,27 +26,31 @@ const _InviteView = (props) => {
   }, []);
 
   useEffect(() => {
-    if (props.auth) {
-      if (props.auth.id) {
-        getInvite(props.match.params.id);
-        //   } else {
-        //     console.log('must redirect to login now');
-        //     setRedirect(true);
-        //   }
-        // }
-      }
-    }
-  }, [props.auth]);
-  console.log(props, 'props');
-  console.log(invite, 'invite');
-  return (
-    <div id="invite">
-      {!props.auth.id && props.history.push('/login/redirect?url=')}
-      {invite.club && (
-        <LimitedViewClub {...props} inviteView={true} club={invite.club} />
-      )}
-    </div>
-  );
+    getInvite();
+  }, []);
+
+  if (invite.id) {
+    return (
+      <>
+        <Burger {...props} />
+        <div id="invite">
+          {!props.auth.id &&
+            props.history.push(
+              `/login/redirect?url=${props.location.pathname.slice(1)}`
+            )}
+          {props.auth.id && props.history.push(`/bookclubs/${invite.clubId}`)}
+          {/* {invite.club && (
+            <LimitedViewClub {...props} inviteView={true} club={invite.club} />
+          )} */}
+          {/* {invite.club && (
+            <BookClub {...props} inviteView={true} club={invite.club} />
+          )} */}
+        </div>
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 const mapDispatch = (dispatch) => {

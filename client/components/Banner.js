@@ -16,7 +16,6 @@ const _Banner = (props) => {
     infinite: true,
   };
   if (fadeImages) {
-    console.log(fadeImages, 'images');
     if (fadeImages.length > 1) {
       return (
         <div className="slide-container">

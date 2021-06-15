@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Login, Register } from './index';
 import '../../public/css/LoginForm.css';
 
 export const LoginForm = (props) => {
+  console.log(props, 'props');
   const [display, setDisplay] = useState('login');
+  // useEffect(() => {
+
+  // }, []);
   const toggleDisplay = () => {
     if (display === 'login') setDisplay('register');
     else setDisplay('login');

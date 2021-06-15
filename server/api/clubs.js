@@ -82,7 +82,7 @@ router.post('/', isLoggedIn, upload.single('image'), async (req, res, next) => {
 
 //GET bookclub
 //if a club is public, send all info; if it's private - if person is member - send all, otherwise send just main club info
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', isLoggedIn, async (req, res, next) => {
   try {
     const club = await Club.findByPk(req.params.id, {
       include: [
@@ -97,14 +97,14 @@ router.get('/:id', async (req, res, next) => {
       return club.members.find((member) => member.id === id);
     };
     // if no one logged in or person isn't a member
-    if (!req.member || !isMember(req.member.id)) {
+    if (club.private === false || isMember(req.member.id)) {
+      res.status(200).send(club);
+    } else if (!req.member || !isMember(req.member.id)) {
       res
         .status(200)
         .send(
           await Club.findByPk(req.params.id, { include: [Member, Request] })
         );
-    } else if (!club.private || isMember(req.member.id)) {
-      res.status(200).send(club);
     }
   } catch (err) {
     next(err);
@@ -278,8 +278,15 @@ router.get('/:clubId/suggestions', hasAccess, async (req, res, next) => {
 router.post('/:clubId/requests', isLoggedIn, async (req, res, next) => {
   try {
     const { memberId, clubId } = req.body;
-    await Request.create({ memberId, clubId });
-    res.sendStatus(201);
+    const request = await Request.findOne({ where: { clubId, memberId } });
+    if (request) {
+      const error = new Error('you have already requested to join this club');
+      error.status = 401; // ?
+      throw error;
+    } else {
+      await Request.create({ memberId, clubId });
+      res.sendStatus(201);
+    }
   } catch (err) {
     next(err);
   }

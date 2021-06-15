@@ -192,7 +192,7 @@ const _BookClub = (props) => {
                   {/* {isMember ? <Link>add feedback</Link> : ''} */}
                 </section>
                 <section id="suggestions">
-                  {props.bookclub.suggestions.length ? (
+                  {props.suggestions.length ? (
                     <>
                       <div className="header flex-row">
                         <h1 className="section-heading">Suggestions</h1>

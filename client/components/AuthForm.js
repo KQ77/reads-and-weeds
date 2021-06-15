@@ -11,6 +11,9 @@ const AuthForm = (props) => {
   const [validated, setValidated] = useState(true);
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    props.setAuth();
+  }, []);
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -39,6 +42,9 @@ const AuthForm = (props) => {
     if (props.auth.error) {
       setError(props.auth.error);
       props.handleShow();
+    }
+    if (props.auth.id && props.location.search.split('=').length) {
+      props.history.push(`/${props.location.search.split('=')[1]}`);
     }
   }, [props.auth]);
   return (
@@ -110,6 +116,7 @@ const mapRegister = (state) => {
 
 const mapDispatch = (dispatch, { history }) => {
   return {
+    setAuth: () => dispatch(setAuth()),
     authenticate: (formData, method, url, history) =>
       dispatch(authenticateUser(formData, method, url, history)),
   };

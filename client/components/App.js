@@ -26,7 +26,6 @@ const _App = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   useEffect(() => {
-    console.log('hit the app useeffect');
     props.setAuth();
   }, []);
   return (
@@ -50,10 +49,10 @@ const _App = (props) => {
       <Route path="/bookclubs/:id/photos" component={AllPhotos} />
       <Route path="/bookclubs/:id/requests" component={ClubRequests} />
       <Route path="/bookclubs/:id/edit" component={EditClub} />
-      <Route path="/invites/:id">
-        {/* <InviteView {...props} /> */}
-        {/* {!props.auth.id ? <Redirect to="/login" /> : <InviteView {...props} />} */}
-      </Route>
+      {/* <Route path="/invites/:id"> */}
+      {/* <InviteView {...props} /> */}
+      {/* {!props.auth.id ? <Redirect to="/login" /> : <InviteView {...props} />} */}
+      {/* </Route> */}
 
       <Route path="/invites/:id/" component={InviteView} />
       <Route path="/bookclubs/:id/members" component={AllClubMembers} />

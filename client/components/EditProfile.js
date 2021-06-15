@@ -6,6 +6,7 @@ import { Burger } from './index';
 import '../../public/css/EditProfile.css';
 import { EditPhoto } from './EditPhoto';
 
+//old profile info is not persisting
 const _EditProfile = (props) => {
   const [member, setMember] = useState({
     firstName: '',
@@ -61,107 +62,112 @@ const _EditProfile = (props) => {
   //   await axios.put(`/api/members/${id}`, member);
   //   props.history.push(`/members/${id}`);
   // };
-  return (
-    <>
-      <Burger {...props} />
-      <div id="edit-profile">
-        <h1>Edit Your Info</h1>
-        {/* <EditPhoto {...props} profile={true} /> */}
-        {/* <Form className="edit-profile"> */}
-        {/* <div> */}
+  console.log(props, 'props');
+  if (member) {
+    return (
+      <>
+        <Burger {...props} />
+        <div id="edit-profile">
+          <h1>Edit Your Info</h1>
+          {/* <EditPhoto {...props} profile={true} /> */}
+          {/* <Form className="edit-profile"> */}
+          {/* <div> */}
 
-        {/* </div> */}
-        <Form
-          method="post"
-          encType="multipart/form-data"
-          action={`/api/members/${props.match.params.id}/update`}
-        >
-          <Form.Row>
-            <Image thumbnail roundedCircle src={preview} />
-            <Form.Group
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '3rem',
-              }}
-              className="file-input"
-              controlId="formFile"
-            >
-              <Form.Label>Upload new image</Form.Label>
-              <Form.Control
-                style={{ display: 'flex' }}
-                onChange={(e) => handleFileChange(e)}
-                name="image"
-                type="file"
-              />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
+          {/* </div> */}
+          <Form
+            method="post"
+            encType="multipart/form-data"
+            action={`/api/members/${props.match.params.id}/update`}
+          >
+            <Form.Row>
+              <Image thumbnail roundedCircle src={preview} />
+              <Form.Group
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '3rem',
+                }}
+                className="file-input"
+                controlId="formFile"
+              >
+                <Form.Label>Upload new image</Form.Label>
+                <Form.Control
+                  style={{ display: 'flex' }}
+                  onChange={(e) => handleFileChange(e)}
+                  name="image"
+                  type="file"
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group>
+                <Form.Label> First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="first name"
+                  name="firstName"
+                  value={member.firstName || ''}
+                  onChange={(e) => updateMember(e)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Last name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="last name"
+                  name="lastName"
+                  value={member.lastName || ''}
+                  onChange={(e) => updateMember(e)}
+                ></Form.Control>
+              </Form.Group>
+            </Form.Row>
             <Form.Group>
-              <Form.Label> First Name</Form.Label>
+              <Form.Label> Bio</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="first name"
-                name="firstName"
-                value={member.firstName || ''}
+                placeholder="a little about yourself..."
+                name="bio"
+                as="textarea"
+                value={member.bio || ''}
                 onChange={(e) => updateMember(e)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group>
-              <Form.Label>Last name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="last name"
-                name="lastName"
-                value={member.lastName || ''}
-                onChange={(e) => updateMember(e)}
-              ></Form.Control>
-            </Form.Group>
-          </Form.Row>
-          <Form.Group>
-            <Form.Label> Bio</Form.Label>
-            <Form.Control
-              placeholder="a little about yourself..."
-              name="bio"
-              as="textarea"
-              value={member.bio || ''}
-              onChange={(e) => updateMember(e)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Row style={{ justifyContent: 'space-between' }}>
-            <Form.Group>
-              <Form.Label> Favorite Genre</Form.Label>
-              <Form.Control
-                name="genre"
-                value={member.genre || ''}
-                onChange={(e) => updateMember(e)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label> Favorite Book Club Pick</Form.Label>
-              <Form.Control
-                name="favePick"
-                value={member.favePick || ''}
-                onChange={(e) => updateMember(e)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label> Favorite Book(s) Of All Time</Form.Label>
-              <Form.Control
-                name="faveBook"
-                value={member.faveBook || ''}
-                onChange={(e) => updateMember(e)}
-              ></Form.Control>
-            </Form.Group>
-          </Form.Row>
-          {/* <Button onClick={(e) => handleSubmit(e, props)}>SAVE CHANGES</Button> */}
-          <Button type="submit">SAVE CHANGES</Button>
-        </Form>
-      </div>
-    </>
-  );
+            <Form.Row style={{ justifyContent: 'space-between' }}>
+              <Form.Group>
+                <Form.Label> Favorite Genre</Form.Label>
+                <Form.Control
+                  name="genre"
+                  value={member.genre || ''}
+                  onChange={(e) => updateMember(e)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label> Favorite Book Club Pick</Form.Label>
+                <Form.Control
+                  name="favePick"
+                  value={member.favePick || ''}
+                  onChange={(e) => updateMember(e)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label> Favorite Book(s) Of All Time</Form.Label>
+                <Form.Control
+                  name="faveBook"
+                  value={member.faveBook || ''}
+                  onChange={(e) => updateMember(e)}
+                ></Form.Control>
+              </Form.Group>
+            </Form.Row>
+            {/* <Button onClick={(e) => handleSubmit(e, props)}>SAVE CHANGES</Button> */}
+            <Button type="submit">SAVE CHANGES</Button>
+          </Form>
+        </div>
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 // const mapDispatch = (dispatch) => {
