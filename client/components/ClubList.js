@@ -40,6 +40,7 @@ const _ClubList = (props) => {
       // await axios.post(`/api/members/${props.auth.id}/clubs`);
     }
     props.fetchClubs();
+    window.location.reload();
   };
   return (
     <div id="clublist">
