@@ -122,7 +122,9 @@ const _BookClub = (props) => {
                         >
                           INVITE A MEMBER
                         </Button>
-                        <Link to="/explore">
+                        <Link
+                          to={`/bookclubs/${props.match.params.id}/suggestions/search`}
+                        >
                           <Button className="main-top">ADD A BOOK</Button>
                         </Link>
                       </div>
@@ -196,7 +198,7 @@ const _BookClub = (props) => {
                   {/* {isMember ? <Link>add feedback</Link> : ''} */}
                 </section>
                 <section id="suggestions">
-                  {props.suggestions.length ? (
+                  {props.bookclub.suggestions.length ? (
                     <>
                       <div className="header flex-row">
                         <h1 className="section-heading">Suggestions</h1>
@@ -206,9 +208,9 @@ const _BookClub = (props) => {
                           <Button>+ add a book</Button>
                         </Link>
                       </div>
-                      <h4>Books added by members for consideration</h4>
+                      {/* <h4>Books added by members for consideration</h4> */}
 
-                      {/* <Suggestions /> */}
+                      <Suggestions {...props} />
                     </>
                   ) : (
                     <div id="no-suggestions">

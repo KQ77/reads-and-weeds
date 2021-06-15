@@ -255,7 +255,7 @@ router.post('/:clubId/invites', hasAccess, async (req, res, next) => {
 router.get('/:clubId/suggestions', hasAccess, async (req, res, next) => {
   //get all of club's suggestions from DB
   const suggestions = await Suggestion.findAll({
-    where: { clubId: req.params.id },
+    where: { clubId: req.params.clubId },
     include: [Member],
   });
   //for each suggestion, fetch google books data about that book
