@@ -63,6 +63,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .bm-item-list a {
   color: white;
+  font-size: 1.2rem;
 }
 /* Styling of overlay */
 .bm-overlay {
@@ -71,7 +72,17 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 #burger span {
   color: #b8b7ad;
+  font-size: 1.2rem;
+}
+#burger span:nth-child(1) {
+  /* text-decoration: underline; */
+  font-family: cursive;
   font-size: 1.5rem;
+  color: white;
+}
+#burger span:nth-child(1):hover {
+  color: white;
+  text-decoration: none;
 }
 #burger span:hover {
   color: blue;

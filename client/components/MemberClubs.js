@@ -19,7 +19,10 @@ const _MemberClubs = (props) => {
           {clubs.length ? (
             <div>
               {clubs.map((club) => (
-                <Card style={{ width: '15rem' }}>
+                <Card
+                  onClick={() => props.history.push(`/bookclubs/${club.id}`)}
+                  style={{ width: '15rem' }}
+                >
                   <Card.Img src={club.displayImage}></Card.Img>
                   <Card.Body>
                     <Card.Text>{club.name}</Card.Text>

@@ -246,7 +246,7 @@ const _BookClub = (props) => {
                           view all
                         </Link>
                       </div>
-                      {/* <BookList past={true} clubId={props.bookclub.id} /> */}
+                      <BookList past={true} clubId={props.bookclub.id} />
                     </>
                   ) : (
                     <div id="no-past-books">

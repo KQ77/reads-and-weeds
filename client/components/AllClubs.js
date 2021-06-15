@@ -17,7 +17,6 @@ const _AllClubs = (props) => {
     const clubs = (await axios.get('/api/clubs')).data;
     setClubs(clubs);
   };
-  //upon component mounting -set search results as all clubs in redux state
   useEffect(() => {
     let mounted = true;
     if (mounted) {

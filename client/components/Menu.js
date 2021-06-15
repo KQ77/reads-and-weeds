@@ -15,6 +15,7 @@ const _Burger = (props) => {
   console.log(props, 'props');
   return (
     <Menu id="burger">
+      <span>Welcome, {props.auth.firstName}</span>
       <Link id="home" className="menu-item" to="/">
         Home
       </Link>

@@ -19,12 +19,12 @@ const _Banner = (props) => {
     if (fadeImages.length > 1) {
       return (
         <div className="slide-container">
-          {/* <div id="text-container">
+          <div id="text-container">
             <div id="banner-text">
               <h1>{props.bookclub.name} </h1>{' '}
               <h2>{props.bookclub.description} </h2>
             </div>
-          </div> */}
+          </div>
           <Fade {...fadeProperties}>
             {fadeImages.map((image, idx) => (
               <div key={idx} className="each-fade">
