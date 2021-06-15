@@ -234,6 +234,10 @@ router.post('/:clubId/invites', hasAccess, async (req, res, next) => {
     //create new invite in DB
     const invite = await Invite.create(req.body);
     //make email
+    const url =
+      process.env.NODE_ENV === 'production'
+        ? 'https://q-bookclubs.herokuapp.com'
+        : 'http://localhost:1337';
     const msg = {
       to: email, // Change to your recipient
       from: 'qbooks@q-sites.org', // Change to your verified sender
@@ -241,7 +245,7 @@ router.post('/:clubId/invites', hasAccess, async (req, res, next) => {
       content: [
         {
           type: 'text/html',
-          value: `You have been invited to join the book club, ${club.name}!<br></br> http://localhost:1337/invites/${invite.id}`,
+          value: `You have been invited to join the book club, ${club.name}!<br></br> ${url}/invites/${invite.id}`,
         },
       ],
     };

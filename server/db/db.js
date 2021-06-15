@@ -5,13 +5,11 @@ const Sequelize = require('sequelize');
 const conn = new Sequelize(
   process.env.DATABASE_URL || 'postgres://localhost/bookclub',
   {
-    options: {
-      dialect: 'postgres',
+    dialect: 'postgres',
+    ssl: true,
+    logging: false,
+    dialectOptions: {
       ssl: true,
-      logging: false,
-      dialectOptions: {
-        ssl: true,
-      },
     },
   }
 );
