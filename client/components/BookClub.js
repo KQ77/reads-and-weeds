@@ -115,13 +115,17 @@ const _BookClub = (props) => {
                         />
                         <Button onClick={(e) => saveDate(e)}>Confirm</Button>
                       </div>
-
-                      <Button
-                        className="invite"
-                        onClick={() => setShowInvite(true)}
-                      >
-                        + Invite a member
-                      </Button>
+                      <div>
+                        <Button
+                          className="main-top"
+                          onClick={() => setShowInvite(true)}
+                        >
+                          INVITE A MEMBER
+                        </Button>
+                        <Link to="/explore">
+                          <Button className="main-top">ADD A BOOK</Button>
+                        </Link>
+                      </div>
                       <Col>
                         <Toast
                           id="toast"
@@ -270,7 +274,7 @@ const _BookClub = (props) => {
                       </Link>
                       <Button>+ add photos</Button>
 
-                      {/* <PhotoReel photos={props.bookclub.images} /> */}
+                      <PhotoReel photos={props.bookclub.images} />
                     </div>
                   ) : (
                     <div id="no-photos">

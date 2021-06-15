@@ -16,8 +16,13 @@
   font-family: cursive;
 }
 #right > div {
+  display: flex;
   margin: 1rem;
   margin-top: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 10rem;
 }
 #right h2 {
   font-family: cursive;
@@ -28,25 +33,40 @@
   color: green;
   margin-left: 1rem;
 }
-#right > div > div > div {
+#right > div > div > div:nth-child(1) {
   margin: 1rem 0;
   display: flex;
-  width: 35%;
+  width: 100%;
   align-items: center;
+  justify-content: center;
+}
+#right > div > div > div:nth-child(2) {
+  margin: 0 auto;
+  display: flex;
   justify-content: space-between;
 }
-#right > div > div > div button {
+#right > div > div > div:nth-child(1) input {
+  margin: 0 1rem;
+}
+#right > div > div > div:nth-child(2) button {
+  width: 20rem;
+  color: white;
+  height: 3.2rem;
+  margin: 0 4rem;
+}
+
+#right > div > div > div:nth-child(1) button {
   color: black;
   background: rgb(227 235 238);
   padding: 0.1rem 1rem;
   border: 1px solid grey;
 }
 
-#bookclub button.invite {
+#bookclub button.main-top {
   background-color: #08165eed;
   border: 1px solid black;
 }
-#bookclub button.invite:hover {
+#bookclub button.main-top:hover {
   color: #08165eed;
   background: white;
 }
@@ -132,6 +152,7 @@ div.header {
 }
 
 #toast {
+  padding: 0;
   background: white;
   height: 15rem;
   position: absolute;
