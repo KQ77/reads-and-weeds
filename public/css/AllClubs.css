@@ -6,7 +6,7 @@
 
 #all-clubs button {
   padding: 0.2rem;
-  width: 6rem;
+  width: fit-content;
 }
 
 #all-clubs .search-form {
