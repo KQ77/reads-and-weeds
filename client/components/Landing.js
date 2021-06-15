@@ -82,23 +82,28 @@ const _Landing = (props) => {
           {clubs.length ? (
             <section id="member-clubs">
               <h1>Your Clubs</h1>
-              {clubs.map((club, idx) => (
-                <React.Fragment key={idx}>
-                  <Card style={{ width: '15rem' }}>
-                    <Card.Img variant="top" src={club.displayImage}></Card.Img>
-                    <Card.Body>
-                      <Card.Title>{club.name}</Card.Title>
-                      <Card.Text>{club.location}</Card.Text>
-                      <Card.Text>{club.description}</Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <Link to={`/bookclubs/${club.id}`}>
-                        <Button variant="info">Visit</Button>
-                      </Link>
-                    </Card.Footer>
-                  </Card>
-                </React.Fragment>
-              ))}
+              <div>
+                {clubs.map((club, idx) => (
+                  <React.Fragment key={idx}>
+                    <Card style={{ width: '15rem' }}>
+                      <Card.Img
+                        variant="top"
+                        src={club.displayImage}
+                      ></Card.Img>
+                      <Card.Body>
+                        <Card.Title>{club.name}</Card.Title>
+                        <Card.Text>{club.location}</Card.Text>
+                        <Card.Text>{club.description}</Card.Text>
+                      </Card.Body>
+                      <Card.Footer>
+                        <Link to={`/bookclubs/${club.id}`}>
+                          <Button variant="info">Visit</Button>
+                        </Link>
+                      </Card.Footer>
+                    </Card>
+                  </React.Fragment>
+                ))}
+              </div>
             </section>
           ) : (
             <div id="no-clubs">

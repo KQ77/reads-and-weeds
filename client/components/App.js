@@ -46,7 +46,7 @@ const _App = (props) => {
       <Route path="/bookclubs/:id/books/:bookId" component={SingleBook} />
       <Route path="/bookclubs/:id/feedback/add" component={AddFeedback} />
       <Route path="/members/:id/profile/edit" component={EditProfile} />
-      <Route path="/bookclubs/:id/books" component={AllBooks} />
+      <Route exact path="/bookclubs/:id/books" component={AllBooks} />
       <Route path="/bookclubs/:id/photos" component={AllPhotos} />
       <Route path="/bookclubs/:id/requests" component={ClubRequests} />
       <Route path="/bookclubs/:id/edit" component={EditClub} />

@@ -18,9 +18,17 @@
   margin: 2rem;
   min-height: 8rem;
   background-color: rgb(238 238 238);
-  text-align: center;
   display: flex;
+  flex-direction: column;
   box-shadow: 1px 2px 12px;
+}
+
+#member-clubs > div {
+  display: flex;
+}
+#member-clubs div.card-title,
+#member-clubs div.card-footer {
+  text-align: center;
 }
 
 #member-clubs div.card {
