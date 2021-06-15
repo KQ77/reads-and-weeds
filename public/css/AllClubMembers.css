@@ -1,9 +1,24 @@
+#all-members-wrapper {
+  text-align: center;
+  padding: 2rem;
+  font-family: auto;
+}
+
 #all-members {
+  box-shadow: 1px 1px 3px grey;
+  /* background: #e5edf0; */
   display: flex;
+  padding: 3rem;
 }
 
 #all-members > div {
-  margin: 1rem;
+  margin: 2rem;
+  background: white;
   display: flex;
-  width: 10rem;
+  width: 12rem;
+  /* padding: 0.5rem; */
+}
+
+#all-members div.card img {
+  height: 10rem;
 }

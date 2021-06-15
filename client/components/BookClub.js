@@ -268,16 +268,18 @@ const _BookClub = (props) => {
                 </section>
                 <section id="photos">
                   {props.bookclub.images.length ? (
-                    <div className="header">
-                      <h1 className="section-heading">Photos</h1>
+                    <>
+                      <div className="header">
+                        <h1 className="section-heading">Photos</h1>
 
-                      <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
-                        view all
-                      </Link>
-                      <Button>+ add photos</Button>
+                        <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
+                          view all
+                        </Link>
+                        <Button>+ add photos</Button>
+                      </div>
 
                       <PhotoReel photos={props.bookclub.images} />
-                    </div>
+                    </>
                   ) : (
                     <div id="no-photos">
                       <div>

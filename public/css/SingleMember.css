@@ -19,8 +19,12 @@ img.member-img {
 }
 
 .member-details > div > span {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: rgb(20, 20, 148);
+}
+
+.member-details p {
+  font-size: 1.2rem;
 }
 .member-details > div p > span {
   padding-right: 0.5rem;

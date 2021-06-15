@@ -18,6 +18,7 @@ import {
   AllClubMembers,
   Login,
   LoginForm,
+  MemberClubs,
 } from './index';
 import { connect } from 'react-redux';
 import { setAuth } from '../redux/auth';
@@ -59,6 +60,7 @@ const _App = (props) => {
 
       <Route path="/create" component={CreateClub} />
       <Route path="/explore" component={AllClubs} />
+      <Route path="/members/:id/clubs" component={MemberClubs} />
     </div>
   );
 };

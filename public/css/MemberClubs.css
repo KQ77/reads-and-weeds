@@ -1,0 +1,20 @@
+#your-clubs div.card > img {
+  width: inherit;
+  height: 10rem;
+}
+
+#your-clubs > div > div {
+  display: flex;
+}
+
+#your-clubs div.card {
+  margin: 1rem;
+}
+
+#your-clubs div.card-body {
+  font-size: 1.2rem;
+}
+
+#your-clubs {
+  padding: 6rem;
+}

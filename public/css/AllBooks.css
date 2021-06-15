@@ -1,0 +1,20 @@
+#all-books {
+  padding: 3rem;
+  font-family: auto;
+}
+
+#all-books > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+#all-books div.card img {
+  height: 8rem;
+}
+
+#all-books input {
+  width: 50%;
+}
+
+#all-books > h1 {
+  text-align: center;
+}

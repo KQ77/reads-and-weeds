@@ -29,7 +29,6 @@ const _ClubList = (props) => {
     }
     if (club.private === true) {
       //send request to /api/clubs/:clubId/requests
-      console.log(club, 'club');
       await axios.post(`/api/clubs/${club.id}/requests`, {
         memberId: props.auth.id,
         clubId: club.id,
