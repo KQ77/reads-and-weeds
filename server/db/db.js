@@ -4,7 +4,16 @@ const Sequelize = require('sequelize');
 // const Books = require('./Books');
 const conn = new Sequelize(
   process.env.DATABASE_URL || 'postgres://localhost/bookclub',
-  { logging: false }
+  {
+    options: {
+      dialect: 'postgres',
+      ssl: true,
+      logging: false,
+      dialectOptions: {
+        ssl: true,
+      },
+    },
+  }
 );
 
 module.exports = {
