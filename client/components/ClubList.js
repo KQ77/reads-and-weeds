@@ -15,7 +15,6 @@ const _ClubList = (props) => {
   const { clubs } = props;
   const requested = (props, club) => {
     const { requests } = club;
-    console.log(requests, 'requests');
     if (requests.find((req) => req.memberId === props.auth.id)) return true;
     else return false;
   };
@@ -35,8 +34,8 @@ const _ClubList = (props) => {
       });
     } else {
       await axios.post(`/api/clubs/${club.id}/members`, {
-        clubId: club.Id,
         memberId: props.auth.id,
+        clubId: club.id,
       });
       // await axios.post(`/api/members/${props.auth.id}/clubs`);
     }
@@ -113,7 +112,7 @@ const _ClubList = (props) => {
                 </p>
               ) : (
                 <Button onClick={() => handleClick(club)} variant="info">
-                  {club.private ? 'Request to join' : 'Join'}
+                  {club.private === true ? 'Request to join' : 'Join'}
                 </Button>
               )}
             </Card.Footer>

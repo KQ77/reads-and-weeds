@@ -27,3 +27,7 @@
 #clublist > div {
   margin: 1rem;
 }
+
+#clublist div.card-footer {
+  height: 4rem;
+}

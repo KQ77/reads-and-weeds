@@ -202,7 +202,10 @@ router.get('/:clubId/members', hasAccess, async (req, res, next) => {
 //ADD a member to a public club
 router.post('/:clubId/members', isLoggedIn, async (req, res, next) => {
   try {
+    //check for invite and delete if present
     const { clubId, memberId } = req.body;
+    console.log(req.body, 'req.body');
+    console.log(clubId, 'clubId');
     const club = Club.findByPk(clubId);
     if (club.private) {
       const error = new Error(
