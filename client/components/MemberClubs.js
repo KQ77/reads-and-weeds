@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Burger } from './index';
+import { Burger, Footer } from './index';
 import { connect } from 'react-redux';
 import { fetchMemberClubs } from '../redux/memberClubs';
 import { Card } from 'react-bootstrap';
@@ -18,8 +18,9 @@ const _MemberClubs = (props) => {
         <div>
           {clubs.length ? (
             <div>
-              {clubs.map((club) => (
+              {clubs.map((club, idx) => (
                 <Card
+                  key={idx}
                   onClick={() => props.history.push(`/bookclubs/${club.id}`)}
                   style={{ width: '15rem' }}
                 >
@@ -40,6 +41,7 @@ const _MemberClubs = (props) => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

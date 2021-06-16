@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import '../../public/css/SingleBook.css';
 import { connect } from 'react-redux';
 import { fetchBook } from '../redux/singleBook';
-import { BookFeedback } from './index';
+import { BookFeedback, Footer, Burger } from './index';
 
 const _SingleBook = (props) => {
   const bookId = props.bookId || props.match.params.bookId;
@@ -17,6 +17,7 @@ const _SingleBook = (props) => {
     const book = props.singleBook.volumeInfo;
     return (
       <div id="single-book">
+        <Burger {...props} />
         <div id="book-details">
           <p>
             <span>Title: </span>
@@ -51,6 +52,7 @@ const _SingleBook = (props) => {
           </div>
         </div>
         <BookFeedback {...props} bookId={bookId} />
+        <Footer />
       </div>
     );
   } else {

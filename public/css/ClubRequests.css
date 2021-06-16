@@ -12,3 +12,24 @@
 #no-requests h3 {
   font-weight: 100;
 }
+
+#club-requests {
+  display: flex;
+  padding: 6rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+#request-wrapper {
+  display: flex;
+}
+
+#request-wrapper div.card > button.approve {
+  background: green;
+  border: 1px solid green;
+  margin: 0.2rem 0;
+}
+#request-wrapper div.card > button.ignore {
+  background: red;
+  border: none;
+}

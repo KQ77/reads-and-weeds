@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import '../../public/css/ClubRequests.css';
 import { Card, Button } from 'react-bootstrap';
 import { setAuth } from '../redux/auth';
-import { Burger } from './index';
+import { Burger, Footer } from './index';
 import { Link } from 'react-router-dom';
 
 const _Requests = (props) => {
@@ -44,29 +44,37 @@ const _Requests = (props) => {
   return (
     <>
       <Burger {...props} />
-      <div id="club-requests">
-        {requests.length ? (
-          requests.map((req, idx) => (
-            <div key={idx}>
-              <Card style={{ width: '8rem' }}>
-                <Card.Img src={req.member.imageUrl}></Card.Img>
-                <Card.Title>
-                  {req.member.firstName} {req.member.lastName}
-                </Card.Title>
 
-                <Button
-                  onClick={() =>
-                    approve(req.member.id, props.match.params.id, req.id)
-                  }
-                >
-                  Approve
-                </Button>
-                <Button onClick={() => remove(props.match.params.id, req.id)}>
-                  Delete
-                </Button>
-              </Card>
-            </div>
-          ))
+      <div id="club-requests">
+        <h2>Book Club Join Requests</h2>
+        {requests.length ? (
+          <div id="request-wrapper">
+            {requests.map((req, idx) => (
+              <div key={idx}>
+                <Card style={{ width: '8rem' }}>
+                  <Card.Img src={req.member.imageUrl}></Card.Img>
+                  <Card.Title>
+                    {req.member.firstName} {req.member.lastName}
+                  </Card.Title>
+
+                  <Button
+                    className="approve"
+                    onClick={() =>
+                      approve(req.member.id, props.match.params.id, req.id)
+                    }
+                  >
+                    Approve
+                  </Button>
+                  <Button
+                    className="ignore"
+                    onClick={() => remove(props.match.params.id, req.id)}
+                  >
+                    Ignore
+                  </Button>
+                </Card>
+              </div>
+            ))}
+          </div>
         ) : (
           <div id="no-requests">
             <h2>All caught up! </h2>
@@ -79,6 +87,7 @@ const _Requests = (props) => {
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 };
