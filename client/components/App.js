@@ -41,6 +41,7 @@ const _App = (props) => {
         path="/login"
         render={(props) => <LoginForm login={true} {...props} />}
       />
+      <Route path="/register" render={(props) => <LoginForm {...props} />} />
 
       <Route exact path="/members/:id" component={SingleMember} />
       <Route path="/bookclubs/:id/books/:bookId" component={SingleBook} />

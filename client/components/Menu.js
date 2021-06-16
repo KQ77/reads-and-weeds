@@ -67,4 +67,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export const Burger = connect(null, mapDispatch)(_Burger);
+export const Burger = connect((state) => state, mapDispatch)(_Burger);

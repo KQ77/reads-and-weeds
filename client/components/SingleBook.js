@@ -16,44 +16,47 @@ const _SingleBook = (props) => {
   if (props.singleBook.id) {
     const book = props.singleBook.volumeInfo;
     return (
-      <div id="single-book">
-        <Burger {...props} />
-        <div id="book-details">
-          <p>
-            <span>Title: </span>
-            {book.title}
-          </p>
-          <p>
-            <span>Author: </span>
-            {book.authors[0] || ''}
-          </p>
-          <p>
-            <span>Year: </span>
-            {book.publishedDate.slice(0, 4)}
-          </p>
-          <p>
-            <span>Pages: </span>
-            {book.printedPageCount}
-          </p>
-          <p>
-            <span>Genre: </span>
-            {book.categories[0]}
-          </p>
-        </div>
-        <div className="row ">
-          {
-            <img
-              className={props.landing ? 'landing' : 'single-book'}
-              src={book.imageLinks.smallThumbnail}
-            ></img>
-          }
-          <div className="description">
-            <p dangerouslySetInnerHTML={createDescription(book)} />
+      <>
+        <div id="single-book">
+          <Burger {...props} />
+          <div id="book-details">
+            <p>
+              <span>Title: </span>
+              {book.title}
+            </p>
+            <p>
+              <span>Author: </span>
+              {book.authors[0] || ''}
+            </p>
+            <p>
+              <span>Year: </span>
+              {book.publishedDate.slice(0, 4)}
+            </p>
+            <p>
+              <span>Pages: </span>
+              {book.printedPageCount}
+            </p>
+            <p>
+              <span>Genre: </span>
+              {book.categories[0]}
+            </p>
+          </div>
+          <div className="row ">
+            {
+              <img
+                className={props.landing ? 'landing' : 'single-book'}
+                src={book.imageLinks.smallThumbnail}
+              ></img>
+            }
+            <div className="description">
+              <p dangerouslySetInnerHTML={createDescription(book)} />
+            </div>
           </div>
         </div>
         <BookFeedback {...props} bookId={bookId} />
-        <Footer />
-      </div>
+
+        {props.clubView ? '' : <Footer />}
+      </>
     );
   } else {
     return null;

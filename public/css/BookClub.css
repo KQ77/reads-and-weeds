@@ -1,6 +1,7 @@
 #bookclub {
   position: absolute;
   width: 100vw;
+  z-index: 1;
 }
 #right {
   width: 80%;

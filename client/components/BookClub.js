@@ -197,7 +197,7 @@ const _BookClub = (props) => {
                           update current selection
                         </Link>
                       </div>
-                      <SingleBook bookId={current.id} />
+                      <SingleBook clubView={true} bookId={current.id} />
                     </div>
                   )}
                   {/* {isMember ? <Link>add feedback</Link> : ''} */}

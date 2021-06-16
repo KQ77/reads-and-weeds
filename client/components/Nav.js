@@ -78,7 +78,10 @@ const _Nav = (props) => {
                 <NavDropdown.Item id="login-link" href={`/login?redirect=`}>
                   Login
                 </NavDropdown.Item>
-                <NavDropdown.Item id="signup-link" href={`/login?redirect=`}>
+                {/* <NavDropdown.Item id="signup-link" href={`/login?redirect=`}>
+                  Register
+                </NavDropdown.Item> */}
+                <NavDropdown.Item id="signup-link" href={`/register?redirect=`}>
                   Register
                 </NavDropdown.Item>
               </>

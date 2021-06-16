@@ -1,9 +1,14 @@
 #login-form {
-  margin: 6rem auto;
+  margin: auto;
+  padding: 6rem;
   width: 40%;
 }
 
 #login-form span {
   text-decoration: underline;
   color: navy;
+}
+
+#authform {
+  margin: 1rem auto;
 }

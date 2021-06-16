@@ -51,7 +51,7 @@ const _Requests = (props) => {
           <div id="request-wrapper">
             {requests.map((req, idx) => (
               <div key={idx}>
-                <Card style={{ width: '8rem' }}>
+                <Card style={{ width: '8rem', textAlign: 'center' }}>
                   <Card.Img src={req.member.imageUrl}></Card.Img>
                   <Card.Title>
                     {req.member.firstName} {req.member.lastName}
