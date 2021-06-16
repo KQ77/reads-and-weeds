@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import Nav from './Nav';
 import { Link } from 'react-router-dom';
 import '../../public/css/Landing.css';
-import { Modal, Button, Card, CardGroup } from 'react-bootstrap';
+import {
+  Modal,
+  Button,
+  Card,
+  CardGroup,
+  Popover,
+  OverlayTrigger,
+} from 'react-bootstrap';
 import { Login, Register } from './AuthForm';
 import { ClubList } from './ClubList';
 import { fetchMemberClubs } from '../redux/memberClubs';
@@ -93,7 +100,24 @@ const _Landing = (props) => {
                       <Card.Body>
                         <Card.Title>{club.name}</Card.Title>
                         <Card.Text>{club.location}</Card.Text>
-                        <Card.Text>{club.description}</Card.Text>
+                        <OverlayTrigger
+                          key="right"
+                          placement="right"
+                          overlay={
+                            <Popover id="popover-basic">
+                              <Popover.Title id="popover-title" as="h3">
+                                Description
+                              </Popover.Title>
+                              <Popover.Content>
+                                {club.description}
+                              </Popover.Content>
+                            </Popover>
+                          }
+                        >
+                          {/* <Card.Text>About</Card.Text> */}
+
+                          <span id="about">About</span>
+                        </OverlayTrigger>
                       </Card.Body>
                       <Card.Footer>
                         <Link to={`/bookclubs/${club.id}`}>

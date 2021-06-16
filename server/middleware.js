@@ -4,6 +4,7 @@
 const { Member, Club } = require('./db/seed/seed');
 
 const isLoggedIn = async (req, res, next) => {
+  console.log(req.member, 'req.member from isLoggedIn');
   try {
     if (req.member) {
       return next();

@@ -202,10 +202,15 @@ router.get('/:clubId/members', hasAccess, async (req, res, next) => {
 //ADD a member to a public club
 router.post('/:clubId/members', isLoggedIn, async (req, res, next) => {
   try {
-    //check for invite and delete if present
     const { clubId, memberId } = req.body;
-    console.log(req.body, 'req.body');
-    console.log(clubId, 'clubId');
+    //check for invite and delete if present
+    const member = await Member.findByPk(req.member.id);
+    const invite = await Invite.findOne({
+      where: { email: member.email, clubId },
+    });
+    if (invite) {
+      await invite.destroy();
+    }
     const club = Club.findByPk(clubId);
     if (club.private) {
       const error = new Error(
@@ -295,6 +300,7 @@ router.post('/:clubId/requests', isLoggedIn, async (req, res, next) => {
       res.sendStatus(201);
     }
   } catch (err) {
+    console.log(err, 'err');
     next(err);
   }
 });

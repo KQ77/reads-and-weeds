@@ -98,76 +98,81 @@ const _BookClub = (props) => {
             <div className="flex-container">
               <Sidebar {...props} />
               <div id="right">
-                <div>
+                <div id="club-details">
                   <h2>
                     Next Meet-Up Date: <span>{props.bookclub.meetDate}</span>
                   </h2>
 
                   {isMember ? (
-                    <div>
-                      <div>
-                        Edit Date
-                        <DatePicker
-                          showTimeSelect
-                          dateFormat="MMMM d, yyyy h:mmaa"
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                        />
-                        <Button onClick={(e) => saveDate(e)}>Confirm</Button>
-                      </div>
-                      <div>
-                        <Button
-                          className="main-top"
-                          onClick={() => setShowInvite(true)}
-                        >
-                          INVITE A MEMBER
-                        </Button>
-                        <Link
-                          to={`/bookclubs/${props.match.params.id}/suggestions/search`}
-                        >
-                          <Button className="main-top">ADD A BOOK</Button>
-                        </Link>
-                      </div>
-                      <Col>
-                        <Toast
-                          id="toast"
-                          autohide
-                          duration={1500}
-                          className="rounded mr-2"
-                          onClose={() => setShowToast(false)}
-                          show={showToast}
-                        >
-                          <Toast.Header
-                            style={{ background: 'green', color: 'white' }}
-                          >
-                            Success
-                          </Toast.Header>
-                          <Toast.Body>Invite sent successfully!</Toast.Body>
-                        </Toast>
-                      </Col>
-                      <Modal show={showInvite} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Invite a member</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <CreateInvite
-                            showToast={() => setShowToast(true)}
-                            handleClose={handleClose}
-                            clubId={props.bookclub.id}
-                            {...props}
-                          />
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="secondary" onClick={handleClose}>
-                            Close
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
+                    <div className="date-picker">
+                      <span>
+                        <strong>Edit Date:</strong>{' '}
+                      </span>
+                      <DatePicker
+                        showTimeSelect
+                        dateFormat="MMMM d, yyyy h:mmaa"
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                      />
+                      <Button onClick={(e) => saveDate(e)}>Confirm</Button>
                     </div>
                   ) : (
                     ''
                   )}
                 </div>
+                {isMember ? (
+                  <div>
+                    <Button
+                      className="main-top"
+                      onClick={() => setShowInvite(true)}
+                    >
+                      INVITE A MEMBER
+                    </Button>
+                    <Link
+                      to={`/bookclubs/${props.match.params.id}/suggestions/search`}
+                    >
+                      <Button className="main-top">ADD A BOOK</Button>
+                    </Link>
+
+                    <Col>
+                      <Toast
+                        id="toast"
+                        autohide
+                        duration={1500}
+                        className="rounded mr-2"
+                        onClose={() => setShowToast(false)}
+                        show={showToast}
+                      >
+                        <Toast.Header
+                          style={{ background: 'green', color: 'white' }}
+                        >
+                          Success
+                        </Toast.Header>
+                        <Toast.Body>Invite sent successfully!</Toast.Body>
+                      </Toast>
+                    </Col>
+                    <Modal show={showInvite} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Invite a member</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <CreateInvite
+                          showToast={() => setShowToast(true)}
+                          handleClose={handleClose}
+                          clubId={props.bookclub.id}
+                          {...props}
+                        />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                ) : (
+                  ''
+                )}
                 <section id="current-selection">
                   {!current ? (
                     <div id="no-current">

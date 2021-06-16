@@ -86,45 +86,10 @@ const _Nav = (props) => {
               ''
             )}
           </NavDropdown>
-          {/* {!isLoggedIn ? (
-            <>
-              <Nav.Link
-                onClick={() => {
-                  props.setShow();
-                  props.setAuthType('login');
-                }}
-              >
-                Log In
-              </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  props.setShow();
-                  props.setAuthType('register');
-                }}
-              >
-                Sign Up
-              </Nav.Link>
-            </>
-          ) : (
-            ''
-          )} */}
-          {/* {isLoggedIn ? (
-            <Nav.Link
-              onClick={() => {
-                props.logout();
-              }}
-            >
-              Log Out
-            </Nav.Link>
-          ) : (
-            ''
-          )} */}
-          {/* <Nav.Link href="/create">Create</Nav.Link> */}
-          {/* <Link to="/create">+Create club</Link> */}
         </Nav>
         {/* </Navbar.Collapse> */}
       </Navbar>
-      <InputGroup className="justify-content-center" id="searchbar">
+      {/* <InputGroup className="justify-content-center" id="searchbar">
         <InputGroup.Prepend>
           <InputGroup.Text>
             <img height="20px" src="/images/search_icon.png" />
@@ -142,7 +107,7 @@ const _Nav = (props) => {
         <Button onClick={() => props.fetchResults(searchTerm)} variant="light">
           Search
         </Button>
-      </InputGroup>
+      </InputGroup> */}
     </div>
   );
 };
