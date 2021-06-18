@@ -4,7 +4,14 @@ import '../../public/css/Footer.css';
 export const Footer = (props) => {
   return (
     <div id="footer">
-      <h1>This is a footer</h1>
+      <div>
+        <img src="/images/logo2.png" />
+      </div>
+      <div>
+        <p>About</p>
+        <p>Contact Us</p>
+        <p>Report Bugs</p>
+      </div>
     </div>
   );
 };

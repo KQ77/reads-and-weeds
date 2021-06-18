@@ -1,5 +1,28 @@
 #footer {
+  cursor: 'pointer';
   background: black;
   width: 100%;
-  height: 8rem;
+  padding: 3rem 0;
+}
+
+#footer > div:nth-child(2) {
+  display: flex;
+  justify-content: space-evenly;
+  color: rgb(78, 190, 255);
+  font-size: 1.2rem;
+  font-weight: 100;
+  padding: 3rem;
+}
+
+#footer > div:nth-child(2) > p:hover {
+  color: white;
+}
+#footer h1,
+#footer > div:nth-child(1) {
+  text-align: center;
+}
+
+#footer img {
+  border-radius: 100%;
+  height: 6rem;
 }

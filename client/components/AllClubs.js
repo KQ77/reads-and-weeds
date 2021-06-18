@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchClubs } from '../redux/clubs';
-import { Burger, ClubList } from './index';
+import { Burger, ClubList, Footer } from './index';
 import { connect } from 'react-redux';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import '../../public/css/AllClubs.css';
@@ -75,6 +75,7 @@ const _AllClubs = (props) => {
             <ClubList clubs={results} {...props} />
           </div>
         </div>
+        <Footer />
       </>
     );
   } else {

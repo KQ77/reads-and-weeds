@@ -30,4 +30,9 @@
 
 #clublist div.card-footer {
   height: 4rem;
+  text-align: center;
+}
+
+#clublist div.card-footer button {
+  min-width: 6rem;
 }
