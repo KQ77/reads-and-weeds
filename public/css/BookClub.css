@@ -30,7 +30,7 @@
 
 #right h2 > span {
   font-size: 1.5rem;
-  color: green;
+  color: red;
   margin-left: 1rem;
 }
 #right > div > div > div:nth-child(1) {
@@ -186,7 +186,12 @@ div.date-picker {
 
 div.date-picker button {
   border: #dfdbdb;
-  background: #b8b7b7;
+  background: #2fb02f;
+}
+
+div.date-picker button:hover {
+  background: white;
+  color: green;
 }
 #right div.col {
   padding: 0;
