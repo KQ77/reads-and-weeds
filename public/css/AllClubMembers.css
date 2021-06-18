@@ -2,23 +2,35 @@
   text-align: center;
   padding: 2rem;
   font-family: auto;
+  background: #dee2ea;
 }
 
 #all-members {
+  background: #dee2ea;
   box-shadow: 1px 1px 3px grey;
-  /* background: #e5edf0; */
   display: flex;
-  padding: 3rem;
+  flex-wrap: wrap;
 }
 
-#all-members > div {
+#all-members > div.card {
   margin: 2rem;
   background: white;
   display: flex;
   width: 12rem;
-  /* padding: 0.5rem; */
 }
 
 #all-members div.card img {
-  height: 10rem;
+  height: 12rem;
+}
+
+#all-members-wrapper > div:nth-child(1) {
+  border: 1px solid silver;
+  box-shadow: 1px 1px 3px grey;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-weight: 100;
+}
+
+#all-members-wrapper h1 {
+  font-family: auto;
 }

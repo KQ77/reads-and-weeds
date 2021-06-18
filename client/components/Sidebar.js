@@ -37,6 +37,10 @@ const _Sidebar = (props) => {
     }
     props.fetchClub(props.match.params.id);
   };
+  const getFirstMembers = (members) => {
+    if (members.length <= 6) return members;
+    else return members.slice(0, 6);
+  };
   return (
     <div id="sidebar">
       <div>
@@ -77,7 +81,7 @@ const _Sidebar = (props) => {
       </div>
       <h2>Members ({members.length})</h2>
       <ul>
-        {members.map((member, idx) => (
+        {getFirstMembers(members).map((member, idx) => (
           <li key={idx}>
             <div className="img-background">
               <img

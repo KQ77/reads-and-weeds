@@ -2,7 +2,7 @@
   padding: 1rem;
   width: 20%;
   text-align: center;
-  background-color: rgb(227 235 238);
+  background-color: white;
 }
 
 ul {
@@ -47,10 +47,11 @@ ul {
 
 #sidebar > div {
   height: fit-content;
-  background-color: rgba(255, 255, 255, 0.781);
+  background-color: #f6f6ef;
   border-radius: 12px;
   padding: 0.5rem;
   margin: 0.5rem;
+  border: 0.5px solid silver;
 }
 
 #sidebar > div span {

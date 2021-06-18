@@ -45,10 +45,11 @@ const _Requests = (props) => {
     <>
       <Burger {...props} />
 
-      <div id="club-requests">
-        <h2>Book Club Join Requests</h2>
-        {requests.length ? (
+      {requests.length ? (
+        <div id="club-requests">
           <div id="request-wrapper">
+            <h2>Current Requests</h2>
+
             {requests.map((req, idx) => (
               <div key={idx}>
                 <Card style={{ width: '8rem', textAlign: 'center' }}>
@@ -75,8 +76,10 @@ const _Requests = (props) => {
               </div>
             ))}
           </div>
-        ) : (
-          <div id="no-requests">
+        </div>
+      ) : (
+        <div id="no-requests">
+          <div>
             <h2>All caught up! </h2>
             <h3>Currently there are no requests to join this club.</h3>
             <p>
@@ -85,8 +88,9 @@ const _Requests = (props) => {
               </Link>
             </p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
       <Footer />
     </>
   );

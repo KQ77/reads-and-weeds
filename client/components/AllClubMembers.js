@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../public/css/AllClubMembers.css';
 import { connect } from 'react-redux';
-import { Burger } from './index';
+import { Burger, Footer } from './index';
 
 const _AllClubMembers = (props) => {
   const [members, setMembers] = useState([]);
@@ -23,8 +23,9 @@ const _AllClubMembers = (props) => {
       <Burger {...props} />
       {members.length ? (
         <div id="all-members-wrapper">
-          <h1> Club Members({members.length})</h1>
-          <hr></hr>
+          <div>
+            <h1> Club Members({members.length})</h1>
+          </div>
           <div id="all-members">
             {members.map((member, idx) => (
               <Card key={idx}>
@@ -40,6 +41,7 @@ const _AllClubMembers = (props) => {
               </Card>
             ))}
           </div>
+          <Footer />
         </div>
       ) : (
         ''

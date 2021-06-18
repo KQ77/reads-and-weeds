@@ -16,5 +16,30 @@
 }
 
 #your-clubs {
+  background: #dee2ea;
   padding: 6rem;
+}
+
+#no-member-clubs > div {
+  background-color: white;
+  width: 40%;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: fit-content;
+  margin: auto;
+}
+
+#no-member-clubs {
+  display: flex;
+  min-height: 20rem;
+  background-image: url('../images/blue_pattern.jpeg');
+  background-size: cover;
+}
+
+#your-clubs-wrapper h1 {
+  margin: 0 1rem;
 }

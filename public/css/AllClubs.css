@@ -1,7 +1,8 @@
 #all-clubs {
   padding: 6rem;
-  text-align: center;
+  /* text-align: center; */
   font-family: auto;
+  background: #dee2ea;
 }
 
 #all-clubs button {
@@ -12,5 +13,10 @@
 
 #all-clubs .search-form {
   width: 50%;
-  margin: auto;
+  margin: 1rem;
+  /* margin: auto; */
+}
+
+#all-clubs h1 {
+  margin: 1rem;
 }

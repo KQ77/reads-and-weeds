@@ -40,13 +40,14 @@ img.member-img {
 }
 
 .profile-bg {
+  background: white;
   height: 10rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 0.5px ridge #bebfcd;
+  border: 2px ridge rgb(177 202 228);
 }
 
 .profile-bg,
@@ -68,11 +69,17 @@ img.member-img {
 
 .member-details > div {
   padding: 1rem;
+  background: white;
   width: 50%;
-  border: 2px dotted rgb(177 202 228);
+  margin: 0.1rem;
+  border: 2px ridge rgb(177 202 228);
   min-height: 10rem;
 }
 
 #single-member > .container {
   border: 1px ridge silver;
+}
+
+#single-member {
+  background: #dee2ea;
 }
