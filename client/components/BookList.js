@@ -13,7 +13,8 @@ const _BookList = (props) => {
   //array of all ids to pass to fetchBooks()
   // const bookIds = props.books.map((book) => book.id);
   useEffect(() => {
-    props.fetchBookInfo(props.clubId);
+    const past = props.past ? true : false;
+    props.fetchBookInfo(props.clubId, past);
   }, []);
   const [books, setBooks] = useState([]);
   useEffect(() => {
@@ -23,17 +24,21 @@ const _BookList = (props) => {
   }, [props]);
   if (books.length) {
     return (
-      <div id="book-list">
-        <Carousel {...properties}>
-          {books.map((book, idx) => (
-            <div key={idx}>
-              <Link to={`/bookclubs/${props.bookclub.id}/books/${book.bookId}`}>
-                <img src={book.volumeInfo.imageLinks.thumbnail}></img>
-              </Link>
-            </div>
-          ))}
-        </Carousel>
-      </div>
+      <>
+        <div id="book-list">
+          <Carousel {...properties}>
+            {books.map((book, idx) => (
+              <div key={idx}>
+                <Link
+                  to={`/bookclubs/${props.bookclub.id}/books/${book.bookId}`}
+                >
+                  <img src={book.volumeInfo.imageLinks.thumbnail}></img>
+                </Link>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      </>
     );
   } else {
     return null;
@@ -42,7 +47,7 @@ const _BookList = (props) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchBookInfo: (clubId) => dispatch(fetchBookData(clubId)),
+    fetchBookInfo: (clubId, past) => dispatch(fetchBookData(clubId, past)),
   };
 };
 

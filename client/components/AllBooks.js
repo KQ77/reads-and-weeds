@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchBookData } from '../redux/books';
 import { Card, Form } from 'react-bootstrap';
 import '../../public/css/AllBooks.css';
-import { Burger } from './index';
+import { Burger, Footer } from './index';
 
 //url: /bookclubs/:id/books
 const _AllBooks = (props) => {
@@ -16,7 +16,7 @@ const _AllBooks = (props) => {
     // };
     if (mounted) {
       // set books in state by fetching all books with this club id
-      props.fetchBookData(props.match.params.id);
+      props.fetchBookData(props.match.params.id, true);
     }
     return () => (mounted = false);
   }, []);
@@ -34,18 +34,31 @@ const _AllBooks = (props) => {
           {/* <Form.Control placeholder="search for a book"></Form.Control> */}
           <div>
             {books.map((book, idx) => {
+              const { bookId } = book;
               book = book.volumeInfo;
               return (
-                <Card style={{ width: '7rem', margin: '2rem' }} key={idx}>
-                  <Card.Img src={book.imageLinks.thumbnail}></Card.Img>
-                  <Card.Body style={{ maxHeight: '7rem', padding: '.5rem' }}>
-                    <Card.Text>{book.title}</Card.Text>
-                  </Card.Body>
-                </Card>
+                // <Card style={{ width: '7rem', margin: '2rem' }} key={idx}>
+                //   <Card.Img src={book.imageLinks.thumbnail}></Card.Img>
+                //   <Card.Body style={{ maxHeight: '7rem', padding: '.5rem' }}>
+                //     <Card.Text>{book.title}</Card.Text>
+                //   </Card.Body>
+                // </Card>
+                <div
+                  key={idx}
+                  onClick={() =>
+                    props.history.push(
+                      `/bookclubs/${props.match.params.id}/books/${bookId}`
+                    )
+                  }
+                >
+                  <img src={book.imageLinks.thumbnail} />
+                  <p>{book.title}</p>
+                </div>
               );
             })}
           </div>
         </div>
+        <Footer />
       </>
     );
   } else {
@@ -55,7 +68,7 @@ const _AllBooks = (props) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchBookData: (id) => dispatch(fetchBookData(id)),
+    fetchBookData: (id, past) => dispatch(fetchBookData(id, past)),
   };
 };
 

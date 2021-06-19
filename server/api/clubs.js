@@ -127,7 +127,7 @@ router.put('/:clubId', hasAccess, async (req, res, next) => {
 router.get(`/:clubId/books`, hasAccess, async (req, res, next) => {
   //get all books from the club
   let books = await Book.findAll({ where: { clubId: req.params.clubId } });
-  if (req.body.past) {
+  if (req.query.past) {
     books = books.filter((book) => book.isCurrent === false);
   }
   const gbooks = await Promise.all(books.map((book) => fetchBook(book.gbId)));

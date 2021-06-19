@@ -39,7 +39,9 @@ const _SingleMember = (props) => {
           ></Image>
           <div className="profile-bg shaded"></div>
           <div className="profile-bg">
-            <span>{member.firstName}</span>
+            <span>
+              {member.firstName} {member.lastName}
+            </span>
 
             {isMember(props) ? (
               <Link to={`/members/${member.id}/profile/edit`}>edit</Link>

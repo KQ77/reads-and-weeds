@@ -7,6 +7,7 @@ import { setAuth } from '../redux/auth';
 import { CreateInvite } from './CreateInvite';
 import { LimitedViewClub } from './LimitedViewClub';
 import 'react-datepicker/dist/react-datepicker.css';
+import { fetchBookData } from '../redux/books';
 import axios from 'axios';
 import {
   Sidebar,
@@ -35,6 +36,7 @@ const _BookClub = (props) => {
 
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
+    props.fetchBookData(props.match.params.id, false);
   }, []);
 
   // if no props.auth.id, then fetch auth and set ID
@@ -183,7 +185,7 @@ const _BookClub = (props) => {
                         <Link
                           to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
                         >
-                          <Button>Find a book</Button>
+                          <Button className="blue">Find a book</Button>
                         </Link>
                       </div>
                     </div>
@@ -210,7 +212,7 @@ const _BookClub = (props) => {
                         <Link
                           to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
                         >
-                          <Button>+ add a book</Button>
+                          <Button className="blue">+ add a book</Button>
                         </Link>
                       </div>
                       {/* <h4>Books added by members for consideration</h4> */}
@@ -229,7 +231,7 @@ const _BookClub = (props) => {
                           to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
                         >
                           {' '}
-                          <Button>Find a book</Button>
+                          <Button className="blue">Find a book</Button>
                         </Link>
                       </div>
                     </div>
@@ -265,7 +267,7 @@ const _BookClub = (props) => {
                         <Link
                           to={`/bookclubs/${props.bookclub.id}/suggestions/search`}
                         >
-                          <Button>Find a book</Button>
+                          <Button className="blue">Find a book</Button>
                         </Link>
                       </div>
                     </div>
@@ -280,7 +282,7 @@ const _BookClub = (props) => {
                         <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
                           view all
                         </Link>
-                        <Button>+ add photos</Button>
+                        <Button className="blue">+ add photos</Button>
                       </div>
 
                       <PhotoReel photos={props.bookclub.images} />
@@ -291,7 +293,7 @@ const _BookClub = (props) => {
                         <h3> Remember the good times... </h3>
                         <p>Add club photos here!</p>
                         <Link to={`/bookclubs/${props.bookclub.id}/photos`}>
-                          <Button>+ photos</Button>
+                          <Button className="blue">+ photos</Button>
                         </Link>
                       </div>
                     </div>
@@ -315,6 +317,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchClub: (clubId) => dispatch(fetchClub(clubId)),
     setAuth: () => dispatch(setAuth()),
+    fetchBookData: (id, past) => dispatch(fetchBookData(id, past)),
   };
 };
 

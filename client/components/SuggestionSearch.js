@@ -65,6 +65,7 @@ const _SuggestionSearch = (props) => {
     props.fetchClub(props.match.params.id);
     // props.history.push(`/bookclubs/${props.match.params.id`)
   };
+  console.log(props, 'props');
   return (
     <>
       <Burger {...props} />

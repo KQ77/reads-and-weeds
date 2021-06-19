@@ -151,7 +151,7 @@ div.header {
   margin-left: 20rem;
 }
 
-#bookclub section button {
+#bookclub section button.blue {
   background: #08165eed;
   border: 1px solid black;
 }

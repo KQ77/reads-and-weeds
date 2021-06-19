@@ -35,9 +35,10 @@ const _Suggestions = (props) => {
                 {suggestion.member.id === props.auth.id ? (
                   <Button
                     variant="light"
-                    onClick={() =>
-                      props.removeSuggestion(suggestion.suggestionId)
-                    }
+                    onClick={() => {
+                      props.removeSuggestion(suggestion.suggestionId);
+                      props.fetchClub(props.match.params.id);
+                    }}
                   >
                     - remove suggestion
                   </Button>

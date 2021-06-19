@@ -3,9 +3,23 @@
   font-family: auto;
 }
 
+#all-books > div img {
+  width: inherit;
+  height: 15rem;
+  vertical-align: middle;
+  border-style: none;
+  margin: 1rem;
+  border: 1px solid silver;
+}
 #all-books > div {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#all-books > div p {
+  text-align: center;
 }
 #all-books div.card img {
   height: 8rem;

@@ -14,10 +14,15 @@
 #your-clubs div.card-body {
   font-size: 1.2rem;
 }
-
+#your-clubs > div {
+  display: flex;
+}
 #your-clubs {
   background: #dee2ea;
   padding: 6rem;
+}
+#your-clubs h1 {
+  font-family: auto;
 }
 
 #no-member-clubs > div {

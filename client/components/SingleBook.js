@@ -26,7 +26,7 @@ const _SingleBook = (props) => {
             </p>
             <p>
               <span>Author: </span>
-              {book.authors[0] || ''}
+              {book.authors ? book.authors[0] : ''}
             </p>
             <p>
               <span>Year: </span>

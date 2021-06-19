@@ -12,7 +12,6 @@ const _Burger = (props) => {
       props.setAuth();
     }
   }, []);
-  console.log(props, 'props');
   return (
     <Menu id="burger">
       <span>Welcome {props.auth.firstName}</span>

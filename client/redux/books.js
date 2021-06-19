@@ -4,11 +4,11 @@ const SET_BOOKS = 'SET_BOOKS';
 
 const setBooks = (books) => ({ type: SET_BOOKS, books });
 
-export const fetchBookData = (clubId) => {
+export const fetchBookData = (clubId, past) => {
   return async (dispatch) => {
-    const books = (
-      await axios.get(`/api/clubs/${clubId}/books`, { past: true })
-    ).data;
+    console.log(past, 'past');
+    const books = (await axios.get(`/api/clubs/${clubId}/books?past=${past}`))
+      .data;
     dispatch(setBooks(books));
   };
 };
