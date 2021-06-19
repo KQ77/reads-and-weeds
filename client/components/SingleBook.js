@@ -6,14 +6,16 @@ import { BookFeedback, Footer, Burger } from './index';
 
 const _SingleBook = (props) => {
   const bookId = props.bookId || props.match.params.bookId;
+  console.log(bookId, 'bookId');
   function createDescription(book) {
     return { __html: book.description };
   }
   useEffect(() => {
     //bookId here is a sequelize ID
     props.fetchBook(bookId);
-  }, []);
+  }, [props.bookclub.id]);
   if (props.singleBook.id) {
+    //getting the info from redux state..
     const book = props.singleBook.volumeInfo;
     return (
       <>

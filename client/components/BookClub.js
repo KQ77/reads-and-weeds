@@ -81,11 +81,12 @@ const _BookClub = (props) => {
     });
     props.fetchClub(clubId);
   };
-  const current = props.bookclub.books
-    ? props.bookclub.books.find((book) => book.isCurrent)
-    : undefined;
 
   if (props.bookclub.id) {
+    //   const current = props.bookclub.books
+    //     ? props.bookclub.books.find((book) => book.isCurrent === true)
+    //     : undefined;
+
     return (
       <>
         <Burger {...props} />
@@ -176,7 +177,9 @@ const _BookClub = (props) => {
                   ''
                 )}
                 <section id="current-selection">
-                  {!current ? (
+                  {!props.bookclub.books.find(
+                    (book) => book.isCurrent === true
+                  ) ? (
                     <div id="no-current">
                       <div>
                         <h3>Currently reading a book? </h3>
@@ -199,7 +202,16 @@ const _BookClub = (props) => {
                           update current selection
                         </Link>
                       </div>
-                      <SingleBook clubView={true} bookId={current.id} />
+                      <SingleBook
+                        {...props}
+                        clubView={true}
+                        bookId={
+                          props.bookclub.books.find(
+                            (book) => book.isCurrent === true
+                          ).id
+                        }
+                        current={true}
+                      />
                     </div>
                   )}
                   {/* {isMember ? <Link>add feedback</Link> : ''} */}
@@ -217,7 +229,7 @@ const _BookClub = (props) => {
                       </div>
                       {/* <h4>Books added by members for consideration</h4> */}
 
-                      <Suggestions {...props} />
+                      {/* <Suggestions {...props} /> */}
                     </>
                   ) : (
                     <div id="no-suggestions">
@@ -253,7 +265,7 @@ const _BookClub = (props) => {
                           view all
                         </Link>
                       </div>
-                      <BookList past={true} clubId={props.bookclub.id} />
+                      {/* <BookList past={true} clubId={props.bookclub.id} /> */}
                     </>
                   ) : (
                     <div id="no-past-books">
