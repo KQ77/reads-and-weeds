@@ -230,7 +230,7 @@ const _BookClub = (props) => {
                       </div>
                       {/* <h4>Books added by members for consideration</h4> */}
 
-                      {/* <Suggestions {...props} /> */}
+                      <Suggestions {...props} />
                     </>
                   ) : (
                     <div id="no-suggestions">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Image, Button, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import { Burger } from './index';
+import { Burger, Footer } from './index';
 import '../../public/css/AllPhotos.css';
 import { fetchClub } from '../redux/bookclub';
 import { Link } from 'react-router-dom';
@@ -69,6 +69,7 @@ const _AllPhotos = (props) => {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
   // } else {

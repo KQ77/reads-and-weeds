@@ -10,10 +10,11 @@
   width: 40%;
 }
 #search-result-row {
+  width: 80%;
   display: flex;
   background-color: #dcf0ff;
   margin: 1rem;
-  height: 15rem;
+  height: fit-content;
 }
 
 #search-results {

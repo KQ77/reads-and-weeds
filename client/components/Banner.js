@@ -22,7 +22,7 @@ const _Banner = (props) => {
           <div id="text-container">
             <div id="banner-text">
               <h1>{props.bookclub.name} </h1>{' '}
-              <h2>{props.bookclub.description} </h2>
+              {/* <h2>{props.bookclub.description} </h2> */}
             </div>
           </div>
           <Fade {...fadeProperties}>
@@ -45,7 +45,7 @@ const _Banner = (props) => {
           <div id="text-container">
             <div id="banner-text">
               <h1>{props.bookclub.name} </h1>{' '}
-              <h2>{props.bookclub.description} </h2>
+              {/* <h2>{props.bookclub.description} </h2> */}
             </div>
           </div>
           <div className="each-fade">
