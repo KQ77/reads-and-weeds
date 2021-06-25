@@ -5,12 +5,14 @@ export const Footer = (props) => {
   return (
     <div id="footer">
       <div>
-        <img src="/images/logo2.png" />
+        <p>
+          <img src="/images/logo2.png" />
+        </p>
       </div>
       <div>
         <p>About</p>
         <p>Contact Us</p>
-        <p>Report Bugs</p>
+        {/* <p>Report Bugs</p> */}
       </div>
     </div>
   );

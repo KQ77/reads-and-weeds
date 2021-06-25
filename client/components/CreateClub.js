@@ -4,7 +4,7 @@ import { Form, Button, Image, Col } from 'react-bootstrap';
 import '../../public/css/CreateClub.css';
 import axios from 'axios';
 import { setAuth } from '../redux/auth';
-import { Burger } from './index';
+import { Burger, Footer } from './index';
 
 const _CreateClub = (props) => {
   const [clubData, setClubData] = useState({
@@ -43,6 +43,8 @@ const _CreateClub = (props) => {
   return (
     <>
       <Burger {...props} />
+      <h2 style={{ textAlign: 'center', margin: '2rem' }}> New Club Details</h2>
+
       <div id="create-club">
         <div className="form">
           <Form
@@ -114,6 +116,7 @@ const _CreateClub = (props) => {
           </Form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -103,7 +103,8 @@ const _BookClub = (props) => {
               <div id="right">
                 <div id="club-details">
                   <h2>
-                    Next Meet-Up Date: <span>{props.bookclub.meetDate}</span>
+                    Next Meet-Up Date:{' '}
+                    <span className="date">{props.bookclub.meetDate}</span>
                   </h2>
 
                   {isMember ? (

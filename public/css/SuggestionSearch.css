@@ -1,5 +1,6 @@
 #suggestion-search {
   display: flex;
+  margin: 3rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;

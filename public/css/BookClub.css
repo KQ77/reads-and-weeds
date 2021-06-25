@@ -40,6 +40,9 @@
   align-items: center;
   justify-content: center;
 }
+#club-details span.date {
+  color: blue;
+}
 /* #right > div > div > div:nth-child(2) {
   margin: 0 auto;
   display: flex;

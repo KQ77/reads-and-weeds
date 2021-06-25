@@ -16,7 +16,7 @@ import '../../public/css/SuggestionSearch.css';
 import { fetchClub } from '../redux/bookclub';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Burger } from './index';
+import { Burger, Footer } from './index';
 
 const _SuggestionSearch = (props) => {
   useEffect(() => {
@@ -186,6 +186,7 @@ const _SuggestionSearch = (props) => {
             : ''}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

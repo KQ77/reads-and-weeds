@@ -40,7 +40,7 @@ const _SingleBook = (props) => {
             </p>
             <p>
               <span>Genre: </span>
-              {book.categories[0]}
+              {book.categories ? book.categories[0] : 'n/a'}
             </p>
           </div>
           <div className="row ">
