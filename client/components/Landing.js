@@ -34,7 +34,7 @@ const _Landing = (props) => {
   }, [props.auth.id]);
 
   const clubs = props.memberClubs;
-  const { searchResults } = props;
+  // const { searchResults } = props;
   return (
     <div id="landing">
       <Nav setAuthType={setAuthType} setShow={() => handleShow()} />
@@ -74,7 +74,7 @@ const _Landing = (props) => {
           </div>
         </div>
       </section>
-      <section id="club-search-results">
+      {/* <section id="club-search-results">
         {searchResults.length ? (
           <div>
             <ClubList {...props} clubs={searchResults} />
@@ -82,7 +82,7 @@ const _Landing = (props) => {
         ) : (
           ''
         )}
-      </section>
+      </section> */}
       {/* <section id="your-clubs"> */}
       {props.auth.id ? (
         <>

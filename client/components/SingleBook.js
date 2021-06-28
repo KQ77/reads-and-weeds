@@ -3,6 +3,7 @@ import '../../public/css/SingleBook.css';
 import { connect } from 'react-redux';
 import { fetchBook } from '../redux/singleBook';
 import { BookFeedback, Footer, Burger } from './index';
+import { Link } from 'react-router-dom';
 
 const _SingleBook = (props) => {
   const bookId = props.bookId || props.match.params.bookId;
@@ -41,6 +42,11 @@ const _SingleBook = (props) => {
             <p>
               <span>Genre: </span>
               {book.categories ? book.categories[0] : 'n/a'}
+            </p>
+          </div>
+          <div>
+            <p>
+              <a href={props.singleBook.selfLink}>view on google books</a>
             </p>
           </div>
           <div className="row ">

@@ -195,7 +195,7 @@ const _BookClub = (props) => {
                     </div>
                   ) : (
                     <div>
-                      <div className="header">
+                      <div className="header current">
                         <h1 className="section-heading">Current Selection</h1>
                         <Link
                           to={`/bookclubs/${props.match.params.id}/suggestions/search`}

@@ -3,8 +3,14 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 90%;
+  padding: 6rem;
 }
 
+#current-selection #single-book {
+  width: 100%;
+  padding: 1rem;
+}
 #book-details {
   margin-bottom: 0.5rem;
   display: flex;
