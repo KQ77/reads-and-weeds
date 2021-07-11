@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   padding: 1.5rem;
-  width: 60vw;
+  /* width: 70%; */
   margin: 2rem auto;
   box-shadow: 1px 1px 3px grey;
 }
@@ -24,13 +24,21 @@
   border: 2px solid rgb(218, 74, 175);
   width: 30%;
 }
-
+#create-club .img-thumbnail {
+  width: 80%;
+  height: 60%;
+}
 #create-club div.form,
 #edit-club div.form {
-  width: 65%;
-  margin-left: 3rem;
+  width: 75%;
+  border: purple;
 }
 
+#create-club div.form .form-row > .col-4 {
+  border: 1px solid blue;
+  margin: 2rem;
+  text-align: center;
+}
 #create-club button {
   background-color: peru;
   width: 7rem;
