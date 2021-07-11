@@ -68,7 +68,7 @@ const _Landing = (props) => {
             <Link to="/explore">
               <Button>explore</Button>
             </Link>
-            <Link to="/create">
+            <Link to={props.auth.id ? '/create' : '/login/redirect?url=create'}>
               <Button>create</Button>
             </Link>
           </div>
