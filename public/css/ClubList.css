@@ -10,6 +10,7 @@
 
 #clublist .card-body {
   text-align: left;
+  padding: 0.1rem;
 }
 #clublist span#about {
   text-decoration: underline;
@@ -26,7 +27,7 @@
 }
 
 #clublist > div {
-  margin: 1rem;
+  margin: 0.1rem;
 }
 
 #clublist div.card-footer {
