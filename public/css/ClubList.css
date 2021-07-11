@@ -24,6 +24,7 @@
 #clublist {
   background: #dee2ea;
   display: flex;
+  flex-wrap: wrap;
 }
 
 #clublist > div {

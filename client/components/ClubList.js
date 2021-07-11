@@ -46,7 +46,7 @@ const _ClubList = (props) => {
     <div id="clublist">
       {clubs.map((club, idx) => (
         <React.Fragment key={idx}>
-          <Card style={{ width: '25rem' }}>
+          <Card style={{ width: '15rem' }}>
             <Link
               to={
                 props.auth.id
