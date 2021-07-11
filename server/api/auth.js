@@ -20,7 +20,7 @@ router.post('/register', async (req, res, next) => {
     let member = await Member.findOne({ where: { email } });
     //if member exists, throw error saying so
     if (member) {
-      const error = new Error('member with that email already exists');
+      const error = new Error('a member with that email already exists');
       error.status = 401;
       throw error;
     }

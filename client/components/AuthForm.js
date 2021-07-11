@@ -14,7 +14,7 @@ const AuthForm = (props) => {
   useEffect(() => {
     props.setAuth();
   }, []);
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     //html5 method
@@ -22,27 +22,29 @@ const AuthForm = (props) => {
       event.stopPropagation();
     }
     try {
-      props.authenticate(
+      await props.authenticate(
         { email, password, firstName, lastName },
         props.formName,
         props.redirectUrl
       );
-      if (props.handleClose) {
-        props.handleClose();
-      } else {
-        props.history.push(`/${props.location.search.split('=')[1]}`);
-      }
+      // if (props.handleClose) {
+      //   props.handleClose();
+      // } else {
+      // if (!props.auth.error) {
+      //   props.history.push(`/${props.location.search.split('=')[1]}`);
+      // }
+      // }
     } catch (err) {
       console.log(err, 'err');
-      setError(err);
+      // setError(err);
     }
   };
 
   useEffect(() => {
-    if (props.auth.error) {
-      setError(props.auth.error);
-      props.handleShow();
-    }
+    // if (props.auth.error) {
+    //   setError(props.auth.error);
+    //   // props.handleShow();
+    // }
     if (props.auth.id && props.location.search.split('=').length) {
       props.history.push(`/${props.location.search.split('=')[1]}`);
     }
@@ -95,8 +97,12 @@ const AuthForm = (props) => {
         <Button type="submit" variant="primary">
           Submit
         </Button>
-        <Form.Text style={{ color: 'red' }}>{error}</Form.Text>
+        <Form.Text style={{ color: 'red', fontSize: '1rem' }}>
+          {props.auth.error ? props.auth.error : ''}
+        </Form.Text>
+        {/* <Form.Text style={{ color: 'red' }}>{error}</Form.Text> */}
       </Form>
+      {/* <div className="error">{props.auth.error ? props.auth.error : ''}</div> */}
     </div>
   );
 };

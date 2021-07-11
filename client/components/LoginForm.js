@@ -3,7 +3,7 @@ import { Login, Register, Burger, Footer } from './index';
 import '../../public/css/LoginForm.css';
 import { connect } from 'react-redux';
 
-export const LoginForm = (props) => {
+const _LoginForm = (props) => {
   console.log(props, 'props');
   const [display, setDisplay] = useState(props.login ? 'login' : 'register');
   // useEffect(() => {
@@ -31,4 +31,4 @@ export const LoginForm = (props) => {
   );
 };
 
-// export const LoginForm = connect((state) => state)(_LoginForm);
+export const LoginForm = connect((state) => state)(_LoginForm);

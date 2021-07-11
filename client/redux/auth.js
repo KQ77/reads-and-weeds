@@ -24,10 +24,10 @@ export const authenticateUser =
     try {
       await axios.post(`/api/auth/${method}`, formData);
       dispatch(setAuth());
-      if (url) {
-        console.log(url, 'url in redux store');
-        history.push(`${url}`);
-      }
+      // if (url) {
+      //   console.log(url, 'url in redux store');
+      //   history.push(`${url}`);
+      // }
     } catch (err) {
       dispatch(_setAuth({ error: err.response.data }));
     }
