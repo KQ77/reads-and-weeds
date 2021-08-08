@@ -22,7 +22,7 @@ const _MemberClubs = (props) => {
               <Card
                 key={idx}
                 onClick={() => props.history.push(`/bookclubs/${club.id}`)}
-                style={{ width: '15rem' }}
+                style={{ width: '25rem' }}
               >
                 <Card.Img src={club.displayImage}></Card.Img>
                 <Card.Body>

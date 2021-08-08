@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Footer, EditFeedback, Burger } from './index';
 import { fetchClub } from '../redux/bookclub';
 import { setAuth } from '../redux/auth';
@@ -27,6 +28,7 @@ const _AddFeedback = (props) => {
   };
   // const [book, setBook] = useState(null);
   const handleFilter = (e) => {};
+  //from redux state
   const { books } = props.bookclub;
   if (!books || !props.auth.id) {
     return null;
@@ -41,12 +43,13 @@ const _AddFeedback = (props) => {
       <>
         <Burger {...props} />
         <div id="add-feedback">
+          <Link to={`/bookclubs/${props.match.params.id}`}>back to club</Link>
           <h2>Add/Edit Your Reviews</h2>
-          <Form.Control
+          {/* <Form.Control
             placeholder="search books"
             type="text"
             onChange={(e) => setSearchTerm(e.target.value)}
-          ></Form.Control>
+          ></Form.Control> */}
 
           {books.map((book, idx) => (
             <div key={idx}>
@@ -77,6 +80,7 @@ const _AddFeedback = (props) => {
                 <EditFeedback
                   {...props}
                   setSelectedId={setSelectedId}
+                  //from redux state
                   book={book}
                 />
                 <Button onClick={() => setSelectedId(undefined)} variant="info">
@@ -85,8 +89,8 @@ const _AddFeedback = (props) => {
               </div>
             </div>
           ))}
-          {/* <Footer /> */}
         </div>
+        <Footer />
       </>
     );
   }

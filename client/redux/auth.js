@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { async } from 'regenerator-runtime';
-
+import history from '../history';
 //action constants
 const SET_AUTH = 'SET_AUTH';
 
@@ -18,20 +18,19 @@ export const setAuth = () => async (dispatch) => {
   }
 };
 
-export const authenticateUser =
-  (formData, method, url, history) => async (dispatch) => {
-    //this route creates a token for the user and stores it in a cookie
-    try {
-      await axios.post(`/api/auth/${method}`, formData);
-      dispatch(setAuth());
-      // if (url) {
-      //   console.log(url, 'url in redux store');
-      //   history.push(`${url}`);
-      // }
-    } catch (err) {
-      dispatch(_setAuth({ error: err.response.data }));
-    }
-  };
+export const authenticateUser = (formData, method) => async (dispatch) => {
+  //this route creates a token for the user and stores it in a cookie
+  try {
+    await axios.post(`/api/auth/${method}`, formData);
+    dispatch(setAuth());
+    // if (url) {
+    //   console.log(url, 'url in redux store');
+    //   history.push(`${url}`);
+    // }
+  } catch (err) {
+    dispatch(_setAuth({ error: err.response.data }));
+  }
+};
 export const logout = () => async (dispatch) => {
   await axios.post('/api/auth/logout');
   dispatch(_setAuth({}));

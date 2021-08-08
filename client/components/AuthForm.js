@@ -24,8 +24,7 @@ const AuthForm = (props) => {
     try {
       await props.authenticate(
         { email, password, firstName, lastName },
-        props.formName,
-        props.redirectUrl
+        props.formName
       );
       // if (props.handleClose) {
       //   props.handleClose();
@@ -120,11 +119,11 @@ const mapRegister = (state) => {
   };
 };
 
-const mapDispatch = (dispatch, { history }) => {
+const mapDispatch = (dispatch) => {
   return {
     setAuth: () => dispatch(setAuth()),
-    authenticate: (formData, method, url, history) =>
-      dispatch(authenticateUser(formData, method, url, history)),
+    authenticate: (formData, method) =>
+      dispatch(authenticateUser(formData, method)),
   };
 };
 

@@ -1,5 +1,5 @@
 #your-clubs div.card > img {
-  width: inherit;
+  /* width: inherit; */
   height: 10rem;
 }
 
@@ -8,7 +8,7 @@
 }
 
 #your-clubs div.card {
-  margin: 1rem;
+  margin: auto 0.3rem;
 }
 
 #your-clubs div.card-body {

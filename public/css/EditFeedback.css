@@ -1,7 +1,13 @@
 #edit-feedback {
   width: 50%;
 }
+#edit-feedback form {
+  margin: 1rem auto;
+}
 
+#edit-feedback button {
+  background-color: rgb(33, 190, 33);
+}
 .member-rating {
   width: 20%;
   display: inline;
