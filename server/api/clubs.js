@@ -40,7 +40,16 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 //GET all clubs
 router.get('/', async (req, res, next) => {
   try {
-    res.status(200).send(await Club.findAll({ include: [Member, Request] }));
+    res
+      .status(200)
+      .send(
+        await Club.findAll({
+          include: [
+            { model: Member, attributes: { exclude: ['password'] } },
+            { model: Request },
+          ],
+        })
+      );
   } catch (err) {
     next(err);
   }
