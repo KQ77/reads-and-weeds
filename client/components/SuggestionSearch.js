@@ -73,7 +73,7 @@ const _SuggestionSearch = (props) => {
         <Link to={`/bookclubs/${props.match.params.id}`}> back to club</Link>
       </Row>
       <div id="suggestion-search">
-        <h2>Search For A Book</h2>
+        <h2>Search For Your Next Selection</h2>
         <Form
           onSubmit={(e) => {
             e.preventDefault();
@@ -86,7 +86,9 @@ const _SuggestionSearch = (props) => {
             required
             placeholder="search for a book"
           ></Form.Control>
-          <Button type="submit">search</Button>
+          <Button style={{ marginLeft: '1rem' }} type="submit">
+            search
+          </Button>
         </Form>
 
         <div id="search-results">

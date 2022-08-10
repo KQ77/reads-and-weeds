@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchClubs } from '../redux/clubs';
-import { Burger, ClubList, Footer } from './index';
+import { Burger, ClubList, Footer, Nav } from './index';
 import { connect } from 'react-redux';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import '../../public/css/AllClubs.css';
@@ -40,7 +40,8 @@ const _AllClubs = (props) => {
   if (results) {
     return (
       <>
-        <Burger {...props} />
+        <Nav />
+        {/* <Burger {...props} /> */}
         <div id="all-clubs">
           <h1>Search All Clubs</h1>
           <div className="search-form">

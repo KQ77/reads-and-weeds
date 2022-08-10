@@ -18,6 +18,7 @@ import {
   Footer,
   PhotoReel,
   Burger,
+  Nav,
 } from './index';
 import '../../public/css/BookClub.css';
 import { Button, Modal, Toast, Col } from 'react-bootstrap';
@@ -89,8 +90,8 @@ const _BookClub = (props) => {
 
     return (
       <>
-        <Burger {...props} />
-
+        {/* <Burger {...props} /> */}
+        <Nav />
         <div id="bookclub">
           {hasAccess() && (
             <div id="banner-wrapper">
@@ -113,6 +114,7 @@ const _BookClub = (props) => {
                         <strong>Edit Date:</strong>{' '}
                       </span>
                       <DatePicker
+                        portalId="root-portal"
                         showTimeSelect
                         dateFormat="MMMM d, yyyy h:mmaa"
                         selected={startDate}

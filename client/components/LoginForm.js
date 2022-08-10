@@ -19,7 +19,7 @@ const _LoginForm = (props) => {
       <Burger {...props} />
       <div id="login-form">
         <h2>{display === 'login' ? 'Login' : 'Register'}</h2>
-        <span onClick={() => toggleDisplay()}>
+        <span style={{ cursor: 'default' }} onClick={() => toggleDisplay()}>
           {display === 'login'
             ? 'not a member ? sign up here'
             : 'already a member? login here'}

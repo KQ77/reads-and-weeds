@@ -3,13 +3,13 @@
   margin: 0 auto;
 }
 #navbar-container {
-  padding: 1rem;
+  padding: 1rem 3rem;
   align-items: center;
   display: flex;
   position: absolute;
-  /* background: purple; */
+  background: transparent;
   width: 100vw;
-  z-index: 1;
+  z-index: 2;
 }
 #navbar {
   font-size: 1.2rem;

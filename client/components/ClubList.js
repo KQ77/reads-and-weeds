@@ -61,9 +61,26 @@ const _ClubList = (props) => {
               ></Card.Img>
             </Link>
             <Card.Body>
-              <Card.Title>
+              <OverlayTrigger
+                key="right"
+                placement="top"
+                overlay={
+                  <Popover id="popover-basic">
+                    <Popover.Title id="popover-title" as="h3">
+                      Description
+                    </Popover.Title>
+                    <Popover.Content>{club.description}</Popover.Content>
+                  </Popover>
+                }
+              >
+                <Card.Title>
+                  <strong>{club.name}</strong>
+                </Card.Title>
+                {/* <span id="about">About</span> */}
+              </OverlayTrigger>
+              {/* <Card.Title>
                 <strong>{club.name}</strong>
-              </Card.Title>
+              </Card.Title> */}
               <Card.Text>{club.location}</Card.Text>
               <div id="card-text">
                 <Card.Text>
@@ -73,7 +90,7 @@ const _ClubList = (props) => {
                   {club.members.length === 1 ? '' : 's'}
                 </Card.Text>
               </div>
-              <OverlayTrigger
+              {/* <OverlayTrigger
                 key="right"
                 placement="right"
                 overlay={
@@ -86,7 +103,7 @@ const _ClubList = (props) => {
                 }
               >
                 <span id="about">About</span>
-              </OverlayTrigger>
+              </OverlayTrigger> */}
             </Card.Body>
             <Card.Footer>
               {isMember(props.auth.id, club) ? (

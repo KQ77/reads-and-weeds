@@ -13,6 +13,7 @@
   padding: 0.1rem;
 }
 #clublist span#about {
+  cursor: default;
   text-decoration: underline;
   color: purple;
 }
