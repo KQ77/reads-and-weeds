@@ -22,6 +22,7 @@ export const setAuth = () => async (dispatch) => {
 
 export const authenticateUser = (formData, method) => async (dispatch) => {
   //this route creates a token for the user and stores it in a cookie
+  console.log('attemtping to authenticate user');
   try {
     await axios.post(`/api/auth/${method}`, formData);
     dispatch(setAuth());

@@ -65,6 +65,7 @@ Member.authenticate = async function ({ email, password }) {
     error.status = 401;
     throw error;
   }
+  console.log(member, 'member');
   console.log(await bcrypt.compare(password, member.password));
   if (member && (await bcrypt.compare(password, member.password))) {
     return member.generateToken();
