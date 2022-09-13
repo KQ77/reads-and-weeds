@@ -80,12 +80,13 @@
   color: #08165eed;
   background: white;
 }
+
 #bookclub section {
   margin: 1rem;
   padding: 0.5rem;
   min-height: 15rem;
   border: 1px ridge silver;
-  background: white;
+  background: #f2f5f7;
 }
 
 div.header {

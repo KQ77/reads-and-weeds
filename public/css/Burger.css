@@ -60,7 +60,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-item {
   display: inline-block;
 }
-
+.bm-item:hover {
+  color: rgb(179, 214, 236);
+}
 .bm-item-list a {
   color: white;
   font-size: 1.2rem;
@@ -84,7 +86,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   color: white;
   text-decoration: none;
 }
-#burger span:hover {
-  color: blue;
+/* #burger span:hover {
+  color: rgb(97, 16, 79);
   text-decoration: underline;
-}
+} */

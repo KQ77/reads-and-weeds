@@ -15,9 +15,8 @@
 }
 
 #all-clubs .search-form {
-  width: 50%;
-  margin: 1rem;
-  /* margin: auto; */
+  width: 60%;
+  margin: 1rem auto;
 }
 
 #all-clubs h1 {

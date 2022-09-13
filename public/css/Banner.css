@@ -29,10 +29,12 @@
 }
 .each-fade > div {
   width: 100%;
+  text-align: center;
 }
 
 .each-fade > div img {
-  width: 100%;
+  /* width: 100%; */
+  width: auto;
   height: 30rem;
   border-radius: 8px;
   /* object-fit: cover; */

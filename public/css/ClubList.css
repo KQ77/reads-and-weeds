@@ -23,7 +23,10 @@
 }
 
 #clublist {
-  background: #dee2ea;
+  /* background: #dee2ea; */
+  /* background: transparent;
+  justify-content: center; */
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
 }

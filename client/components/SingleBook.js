@@ -18,6 +18,7 @@ const _SingleBook = (props) => {
   if (props.singleBook.id) {
     //getting the info from redux state..
     const book = props.singleBook.volumeInfo;
+    console.log(book, 'book');
     return (
       <>
         <div id="single-book">
@@ -46,14 +47,14 @@ const _SingleBook = (props) => {
           </div>
           <div>
             <p>
-              <a href={props.singleBook.selfLink}>view on google books</a>
+              <a href={book.infoLink}>view on google books</a>
             </p>
           </div>
           <div className="row ">
             {
               <img
                 className={props.landing ? 'landing' : 'single-book'}
-                src={book.imageLinks.smallThumbnail}
+                src={book.imageLinks?.smallThumbnail}
               ></img>
             }
             <div className="description">

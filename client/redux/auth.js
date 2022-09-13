@@ -12,6 +12,8 @@ export const setAuth = () => async (dispatch) => {
     //now a cookie will be sent with this request
     const member = (await axios.get('/api/auth/member')).data;
     //auth will either be the user or {} if no token - aka if user not yet logged in
+    console.log(member, 'member sent back from api/auth/member');
+
     dispatch(_setAuth(member));
   } catch (err) {
     dispatch(_setAuth({ error: err }));
