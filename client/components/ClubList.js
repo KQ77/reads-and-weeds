@@ -46,7 +46,7 @@ const _ClubList = (props) => {
     <div id="clublist">
       {clubs.map((club, idx) => (
         <React.Fragment key={idx}>
-          <Card style={{ width: '15rem' }}>
+          <Card style={{ margin: '.5rem', maxHeight: '22rem', width: '15rem' }}>
             <Link
               to={
                 props.auth.id
@@ -56,7 +56,7 @@ const _ClubList = (props) => {
             >
               <Card.Img
                 variant="top"
-                style={{ height: '12rem' }}
+                style={{ height: '10rem' }}
                 src={club.displayImage}
               ></Card.Img>
             </Link>
