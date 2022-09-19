@@ -1,6 +1,6 @@
 #your-clubs div.card > img {
   /* width: inherit; */
-  height: 10rem;
+  height: 18rem;
 }
 
 #your-clubs > div > div {
@@ -8,7 +8,7 @@
 }
 
 #your-clubs div.card {
-  margin: auto 0.3rem;
+  margin: 1rem;
 }
 
 #your-clubs div.card-body {
@@ -16,7 +16,10 @@
   color: gray;
 }
 #your-clubs > div {
+  flex-wrap: wrap;
+  margin: 1.5rem;
   display: flex;
+  justify-content: center;
 }
 #your-clubs {
   background: #545454;

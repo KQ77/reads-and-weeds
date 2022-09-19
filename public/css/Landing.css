@@ -25,6 +25,7 @@
 }
 
 #member-clubs > div {
+  flex-wrap: wrap;
   display: flex;
   justify-content: center;
 }
