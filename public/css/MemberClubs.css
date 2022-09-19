@@ -13,12 +13,14 @@
 
 #your-clubs div.card-body {
   font-size: 1.2rem;
+  color: gray;
 }
 #your-clubs > div {
   display: flex;
 }
 #your-clubs {
-  background: #dee2ea;
+  background: #545454;
+  color: white;
   padding: 6rem;
 }
 #your-clubs h1 {

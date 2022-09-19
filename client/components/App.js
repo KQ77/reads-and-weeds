@@ -30,7 +30,7 @@ const _App = (props) => {
     props.setAuth();
   }, []);
   return (
-    <div id="app">
+    <div id="app" style={{ background: 'white' }}>
       <Route exact path="/" component={Landing} />
       <Route exact path="/bookclubs/:id" component={BookClub} />
       <Route

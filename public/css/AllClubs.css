@@ -2,10 +2,12 @@
   padding: 6rem;
   /* text-align: center; */
   font-family: auto;
-  /* background: #dee2ea; */
-  background-image: url('/public/images/gray.jpeg');
+  background: #545454;
+  color: white;
+  font-weight: 100;
+  /* background-image: url('/public/images/gray.jpeg');
   background-position: center;
-  background-size: cover;
+  background-size: cover; */
 }
 
 #all-clubs button {

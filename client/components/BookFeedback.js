@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../../public/css/BookFeedback.css';
 import axios from 'axios';
 
@@ -54,6 +55,9 @@ const _BookFeedback = (props) => {
             selection yet
           </div>
         )}
+        <Link to={`/bookclubs/${props.bookclub.id}/feedback/add`}>
+          Add Your Review Here{' '}
+        </Link>
       </div>
     );
   } else {

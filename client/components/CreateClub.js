@@ -43,7 +43,17 @@ const _CreateClub = (props) => {
   return (
     <>
       <Burger {...props} />
-      <h2 style={{ textAlign: 'center', margin: '2rem' }}> New Club Details</h2>
+      <h2
+        style={{
+          fontWeight: '100',
+          textAlign: 'center',
+          padding: '2rem',
+          color: 'gray',
+        }}
+      >
+        {' '}
+        New Club Details
+      </h2>
 
       <div id="create-club">
         <div className="form">
@@ -54,7 +64,7 @@ const _CreateClub = (props) => {
           >
             <Form.Row>
               <Col xs={4}>
-                <Image thumbnail roundedCircle src={preview} />
+                <Image thumbnail src={preview} />
                 <Form.Group className="file-input" controlId="formFile">
                   <Form.Label>Upload new image</Form.Label>
                   <Form.Control
@@ -65,7 +75,7 @@ const _CreateClub = (props) => {
                   />
                 </Form.Group>
               </Col>
-              <Col>
+              <Col alignItems="center">
                 <Form.Group>
                   <Form.Label>Name Your Club</Form.Label>
                   <Form.Control

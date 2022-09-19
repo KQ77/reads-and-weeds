@@ -36,45 +36,48 @@ const _Landing = (props) => {
   const clubs = props.memberClubs;
   // const { searchResults } = props;
   return (
-    <div id="landing">
+    <>
       <Nav setAuthType={setAuthType} setShow={() => handleShow()} />
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {authType === 'login' ? 'Log In' : 'Register'}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {authType === 'login' ? (
-            <Login handleShow={handleShow} handleClose={handleClose} />
-          ) : (
-            <Register handleShow={handleShow} handleClose={handleClose} />
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <section id="hero">
-        <div>
+      <div id="landing">
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              {authType === 'login' ? 'Log In' : 'Register'}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {authType === 'login' ? (
+              <Login handleShow={handleShow} handleClose={handleClose} />
+            ) : (
+              <Register handleShow={handleShow} handleClose={handleClose} />
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <section id="hero">
           <div>
-            <h1>Q Book Clubs</h1>
-            <p>Explore. Create. Read. Meet. Discuss.</p>
-          </div>
+            <div>
+              <h1>Q Book Clubs</h1>
+              <p>Explore. Create. Read. Meet. Discuss.</p>
+            </div>
 
-          <div>
-            <Link to="/explore">
-              <Button>explore</Button>
-            </Link>
-            <Link to={props.auth.id ? '/create' : '/login/redirect?url=create'}>
-              <Button>create</Button>
-            </Link>
+            <div>
+              <Link to="/explore">
+                <Button>explore</Button>
+              </Link>
+              <Link
+                to={props.auth.id ? '/create' : '/login/redirect?url=create'}
+              >
+                <Button>create</Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
-      {/* <section id="club-search-results">
+        </section>
+        {/* <section id="club-search-results">
         {searchResults.length ? (
           <div>
             <ClubList {...props} clubs={searchResults} />
@@ -83,72 +86,73 @@ const _Landing = (props) => {
           ''
         )}
       </section> */}
-      {/* <section id="your-clubs"> */}
-      {props.auth.id ? (
-        <>
-          {clubs.length ? (
-            <section id="member-clubs">
-              <h1>Your Clubs</h1>
-              <div>
-                {clubs.map((club, idx) => (
-                  <React.Fragment key={idx}>
-                    <Card style={{ width: '15rem' }}>
-                      <Card.Img
-                        variant="top"
-                        src={club.displayImage}
-                      ></Card.Img>
-                      <Card.Body>
-                        <Card.Title>{club.name}</Card.Title>
-                        <Card.Text>{club.location}</Card.Text>
-                        <OverlayTrigger
-                          key="right"
-                          placement="right"
-                          overlay={
-                            <Popover id="popover-basic">
-                              <Popover.Title id="popover-title" as="h3">
-                                Description
-                              </Popover.Title>
-                              <Popover.Content>
-                                {club.description}
-                              </Popover.Content>
-                            </Popover>
-                          }
-                        >
-                          {/* <Card.Text>About</Card.Text> */}
+        {/* <section id="your-clubs"> */}
+        {props.auth.id ? (
+          <>
+            {clubs.length ? (
+              <section id="member-clubs">
+                <h1>Your Clubs</h1>
+                <div>
+                  {clubs.map((club, idx) => (
+                    <React.Fragment key={idx}>
+                      <Card style={{ width: '15rem' }}>
+                        <Card.Img
+                          variant="top"
+                          src={club.displayImage}
+                        ></Card.Img>
+                        <Card.Body>
+                          <Card.Title>{club.name}</Card.Title>
+                          <Card.Text>{club.location}</Card.Text>
+                          <OverlayTrigger
+                            key="right"
+                            placement="right"
+                            overlay={
+                              <Popover id="popover-basic">
+                                <Popover.Title id="popover-title" as="h3">
+                                  Description
+                                </Popover.Title>
+                                <Popover.Content>
+                                  {club.description}
+                                </Popover.Content>
+                              </Popover>
+                            }
+                          >
+                            {/* <Card.Text>About</Card.Text> */}
 
-                          <span id="about">About</span>
-                        </OverlayTrigger>
-                      </Card.Body>
-                      <Card.Footer>
-                        <Link to={`/bookclubs/${club.id}`}>
-                          <Button variant="info">Visit</Button>
-                        </Link>
-                      </Card.Footer>
-                    </Card>
-                  </React.Fragment>
-                ))}
+                            <span id="about">About</span>
+                          </OverlayTrigger>
+                        </Card.Body>
+                        <Card.Footer>
+                          <Link to={`/bookclubs/${club.id}`}>
+                            <Button variant="info">Visit</Button>
+                          </Link>
+                        </Card.Footer>
+                      </Card>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </section>
+            ) : (
+              <div id="no-clubs">
+                <div>
+                  <h2>You are not currently a member of any club...</h2>
+                  <p>
+                    <Link to="/explore">Explore all clubs</Link> to find a new
+                    adventure...
+                  </p>
+                </div>
               </div>
-            </section>
-          ) : (
-            <div id="no-clubs">
-              <div>
-                <h2>You are not currently a member of any club...</h2>
-                <p>
-                  <Link to="/explore">Explore all clubs</Link> to find a new
-                  adventure...
-                </p>
-              </div>
-            </div>
-          )}
+            )}
 
-          {/* <ClubList clubs={clubs} /> */}
-        </>
-      ) : (
-        ''
-      )}
-      {/* </section> */}
-      <Footer />
-    </div>
+            {/* <ClubList clubs={clubs} /> */}
+          </>
+        ) : (
+          ''
+        )}
+        {/* </section> */}
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -30,6 +30,10 @@
 #right h2 {
   font-family: cursive;
 }
+#club-details > h2 {
+  color: white;
+  font-weight: 100;
+}
 
 #right h2 > span {
   font-size: 1.5rem;
@@ -185,6 +189,7 @@ div.header {
 }
 
 div.date-picker {
+  color: white;
   justify-content: space-between;
   display: flex;
   width: 35%;

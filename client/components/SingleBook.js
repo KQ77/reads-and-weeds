@@ -22,7 +22,7 @@ const _SingleBook = (props) => {
     return (
       <>
         <div id="single-book">
-          <Burger {...props} />
+          {/* <Burger {...props} /> */}
           <div id="book-details">
             <p>
               <span>Title: </span>

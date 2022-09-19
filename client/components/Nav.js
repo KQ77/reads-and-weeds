@@ -23,11 +23,12 @@ const _Nav = (props) => {
   const [searchTerm, setSearchTerm] = useState([]);
   return (
     <div id="navbar-container">
+      {/* <Burger {...props} /> */}
       <Navbar id="navbar" expand="lg">
         <Container>
-          <Nav>
-            <Burger {...props} />
-          </Nav>
+          {/* <Nav> */}
+          {/* <Burger {...props} /> */}
+          {/* </Nav> */}
           {/* <Navbar.Brand style={{ color: '#c1c2c9' }} href="/"> */}
           <Navbar.Brand style={{ color: 'white' }} href="/">
             Q-Books

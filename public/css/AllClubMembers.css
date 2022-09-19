@@ -2,7 +2,9 @@
   text-align: center;
   padding: 2rem;
   font-family: auto;
-  background: #dee2ea;
+  color: white;
+  font-weight: 100;
+  background: #545454;
 }
 
 #all-members {
@@ -14,17 +16,20 @@
 
 #all-members > div.card {
   margin: 2rem;
+  color: gray;
   background: white;
   display: flex;
   width: 12rem;
 }
 
+#all-members a {
+  color: gray;
+}
 #all-members div.card img {
   height: 12rem;
 }
 
 #all-members-wrapper > div:nth-child(1) {
-  border: 1px solid silver;
   box-shadow: 1px 1px 3px grey;
   padding: 1rem;
   margin: 1rem 0;

@@ -24,10 +24,8 @@
   border: 2px solid rgb(218, 74, 175);
   width: 30%;
 }
-#create-club .img-thumbnail {
-  width: 80%;
-  height: 60%;
-}
+/* #create-club .img-thumbnail {
+} */
 #create-club div.form,
 #edit-club div.form {
   width: 75%;
@@ -35,7 +33,6 @@
 }
 
 #create-club div.form .form-row > .col-4 {
-  border: 1px solid blue;
   margin: 2rem;
   text-align: center;
 }
@@ -48,4 +45,16 @@
   height: 15rem;
   width: 20rem;
   border-radius: 12px;
+}
+
+#formFile {
+  background-color: #3b414712;
+  width: 50%;
+  margin: 0.5rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+#file-upload-button {
+  margin-right: 1rem;
 }

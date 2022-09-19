@@ -33,6 +33,7 @@
 
 #clublist > div {
   margin: 0.1rem;
+  color: gray;
 }
 
 #clublist div.card-footer {
