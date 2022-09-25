@@ -34,11 +34,10 @@ const _BookClub = (props) => {
   const handleClose = () => {
     setShowInvite(false);
   };
-
   useEffect(() => {
     props.fetchClub(props.match.params.id * 1);
     props.fetchBookData(props.match.params.id, false);
-  }, []);
+  }, [props.match.params.id]);
 
   // if no props.auth.id, then fetch auth and set ID
   useEffect(() => {
@@ -82,7 +81,6 @@ const _BookClub = (props) => {
     });
     props.fetchClub(clubId);
   };
-
   if (props.bookclub.id) {
     //   const current = props.bookclub.books
     //     ? props.bookclub.books.find((book) => book.isCurrent === true)
@@ -91,7 +89,7 @@ const _BookClub = (props) => {
     return (
       <>
         <Burger {...props} />
-        <Nav />
+        <Nav {...props} />
         <div id="bookclub">
           {hasAccess() && (
             <div id="banner-wrapper">
@@ -268,7 +266,7 @@ const _BookClub = (props) => {
                           view all
                         </Link>
                       </div>
-                      {/* <BookList past={true} clubId={props.bookclub.id} /> */}
+                      <BookList past={true} clubId={props.bookclub.id} />
                     </>
                   ) : (
                     <div id="no-past-books">

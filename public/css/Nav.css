@@ -62,3 +62,19 @@
 #navbar > div {
   margin-left: 2rem;
 }
+
+#navbar-clubs {
+  cursor: pointer;
+  background: #ffffff;
+  margin-left: 1rem;
+  color: darkslategray;
+  border-radius: 18px;
+  padding: 0.3rem;
+  width: 8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+#navbar-clubs:hover {
+  background: lightgray;
+}

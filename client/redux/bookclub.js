@@ -5,6 +5,7 @@ const SET_CLUB = 'SET_CLUB';
 const setClub = (club) => ({ type: SET_CLUB, club });
 
 export const fetchClub = (clubId) => {
+  console.log('fetching club...');
   return async (dispatch) => {
     const club = (await axios.get(`/api/clubs/${clubId}`)).data;
     console.log(club, 'club');

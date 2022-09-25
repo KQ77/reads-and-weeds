@@ -22,6 +22,7 @@ import {
 } from './index';
 import { connect } from 'react-redux';
 import { setAuth } from '../redux/auth';
+import { fetchMemberClubs } from '../redux/memberClubs';
 
 const _App = (props) => {
   const [show, setShow] = useState(false);
@@ -29,6 +30,12 @@ const _App = (props) => {
   useEffect(() => {
     props.setAuth();
   }, []);
+  useEffect(() => {
+    //when app is reloaded
+    if (props.auth.id) {
+      props.setMemberClubs(props.auth.id);
+    }
+  }, [props.auth]);
   return (
     <div id="app" style={{ background: 'white' }}>
       <Route exact path="/" component={Landing} />
@@ -69,6 +76,7 @@ const _App = (props) => {
 const mapDispatch = (dispatch) => {
   return {
     setAuth: () => dispatch(setAuth()),
+    setMemberClubs: (memberId) => dispatch(fetchMemberClubs(memberId)),
   };
 };
 export const App = connect((state) => state, mapDispatch)(_App);

@@ -77,79 +77,7 @@ const _Landing = (props) => {
             </div>
           </div>
         </section>
-        {/* <section id="club-search-results">
-        {searchResults.length ? (
-          <div>
-            <ClubList {...props} clubs={searchResults} />
-          </div>
-        ) : (
-          ''
-        )}
-      </section> */}
-        {/* <section id="your-clubs"> */}
-        {props.auth.id ? (
-          <>
-            {clubs.length ? (
-              <section id="member-clubs">
-                <h1>Your Clubs</h1>
-                <div>
-                  {clubs.map((club, idx) => (
-                    <React.Fragment key={idx}>
-                      <Card style={{ width: '15rem' }}>
-                        <Card.Img
-                          variant="top"
-                          src={club.displayImage}
-                        ></Card.Img>
-                        <Card.Body>
-                          <Card.Title>{club.name}</Card.Title>
-                          <Card.Text>{club.location}</Card.Text>
-                          <OverlayTrigger
-                            key="right"
-                            placement="right"
-                            overlay={
-                              <Popover id="popover-basic">
-                                <Popover.Title id="popover-title" as="h3">
-                                  Description
-                                </Popover.Title>
-                                <Popover.Content>
-                                  {club.description}
-                                </Popover.Content>
-                              </Popover>
-                            }
-                          >
-                            {/* <Card.Text>About</Card.Text> */}
 
-                            <span id="about">About</span>
-                          </OverlayTrigger>
-                        </Card.Body>
-                        <Card.Footer>
-                          <Link to={`/bookclubs/${club.id}`}>
-                            <Button variant="info">Visit</Button>
-                          </Link>
-                        </Card.Footer>
-                      </Card>
-                    </React.Fragment>
-                  ))}
-                </div>
-              </section>
-            ) : (
-              <div id="no-clubs">
-                <div>
-                  <h2>You are not currently a member of any club...</h2>
-                  <p>
-                    <Link to="/explore">Explore all clubs</Link> to find a new
-                    adventure...
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* <ClubList clubs={clubs} /> */}
-          </>
-        ) : (
-          ''
-        )}
-        {/* </section> */}
         <Footer />
       </div>
     </>

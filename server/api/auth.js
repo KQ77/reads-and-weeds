@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { Member } = require('../db/seed/seed');
 
 router.post('/login', async (req, res, next) => {
-  console.log('in login route on backend');
   try {
     console.log(
       await Member.authenticate(req.body),

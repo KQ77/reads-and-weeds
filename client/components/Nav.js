@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Navbar, Container } from 'react-bootstrap';
+import { Navbar, Container, Modal } from 'react-bootstrap';
 import '../../public/css/Nav.css';
 import { Burger } from './Menu';
 import { fetchResults } from '../redux/searchResults';
@@ -21,6 +21,10 @@ import { logout } from '../redux/auth';
 const _Nav = (props) => {
   const { isLoggedIn } = props;
   const [searchTerm, setSearchTerm] = useState([]);
+  const [open, setOpen] = useState(false);
+  console.log(props, 'props');
+  const { memberClubs } = props;
+
   return (
     <div id="navbar-container">
       {/* <Burger {...props} /> */}
@@ -100,9 +104,46 @@ const _Nav = (props) => {
               )}
             </NavDropdown>
           </Nav>
+          <Navbar.Text onClick={() => setOpen(true)} id="navbar-clubs">
+            Your Clubs
+          </Navbar.Text>
         </Container>
         {/* </Navbar.Collapse> */}
       </Navbar>
+      <Modal show={open} onHide={() => setOpen(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Your Clubs</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {memberClubs.length ? (
+            memberClubs.map((club) => (
+              <div>
+                <Link
+                  onClick={() => setOpen(false)}
+                  to={`/bookclubs/${club.id}`}
+                >
+                  <img
+                    style={{
+                      marginRight: '2rem',
+                      borderRadius: '100%',
+                      height: '3rem',
+                      width: '3rem',
+                    }}
+                    src={club.displayImage}
+                  />
+                  {club.name}
+                </Link>
+                <hr />
+              </div>
+            ))
+          ) : (
+            <div>
+              You are not a member of any club at this time
+              <button>Create Club</button>
+            </div>
+          )}
+        </Modal.Body>
+      </Modal>
       {/* <InputGroup className="justify-content-center" id="searchbar">
         <InputGroup.Prepend>
           <InputGroup.Text>
@@ -127,8 +168,10 @@ const _Nav = (props) => {
 };
 
 const mapState = (state) => {
+  console.log(state, 'state');
   return {
     auth: state.auth,
+    memberClubs: state.memberClubs,
     isLoggedIn: state.auth.id ? true : false,
   };
 };

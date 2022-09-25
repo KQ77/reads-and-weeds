@@ -6,12 +6,14 @@ import { logout, setAuth } from '../redux/auth';
 import { connect } from 'react-redux';
 
 const _Burger = (props) => {
+  console.log(props, 'props');
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!props.auth) {
       props.setAuth();
     }
   }, []);
+
   return (
     <Menu id="burger">
       <span>Welcome {props.auth.firstName}</span>

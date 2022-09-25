@@ -1,8 +1,9 @@
 #bookclub {
   /* background: #dee2ea; */
-  background-image: url('/public/images/gray.jpeg');
+  /* background-image: url('/public/images/gray.jpeg');
   background-position: center;
-  background-size: cover;
+  background-size: cover; */
+  background: #2f3535;
   position: absolute;
   width: 100vw;
   z-index: 1;
