@@ -1,14 +1,14 @@
 /* member photo itself */
 img.member-img {
   border: 4px solid white;
-  width: 15rem;
-  height: 15rem;
+  width: 13rem;
+  height: 13rem;
   border-radius: 12px 0 0 12px;
   overflow: hidden;
-  background-color: rgb(133, 126, 201);
+  background-color: rgb(67, 63, 100);
   position: absolute;
-  top: 4rem;
-  left: 18rem;
+  top: 6rem;
+  left: 20rem;
 }
 
 /* member details, bio, name, etc */
@@ -20,7 +20,7 @@ img.member-img {
 
 .member-details > div > span {
   font-size: 1.5rem;
-  color: rgb(20, 20, 148);
+  color: rgb(87 87 88);
 }
 
 .member-details p {
@@ -59,7 +59,7 @@ img.member-img {
   font-size: 2rem;
 }
 .shaded {
-  background-color: rgb(177 202 228);
+  background-color: rgb(25 10 66);
 }
 
 .img-background {
@@ -81,5 +81,5 @@ img.member-img {
 }
 
 #single-member {
-  background: #dee2ea;
+  background: #2f3535;
 }

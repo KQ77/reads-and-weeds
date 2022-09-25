@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../public/css/SingleMember.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Footer, Burger } from './index';
+import { Footer, Burger, Nav } from './index';
 import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -30,48 +30,50 @@ const _SingleMember = (props) => {
   } else {
     return (
       <>
-        <Burger {...props} />
+        <Nav {...props} />
         <div id="single-member">
-          <Image
-            className="member-img"
-            src={member.imageUrl}
-            roundedCircle
-          ></Image>
-          <div className="profile-bg shaded"></div>
-          <div className="profile-bg">
-            <span>
-              {member.firstName} {member.lastName}
-            </span>
+          <div>
+            <Image
+              className="member-img"
+              src={member.imageUrl}
+              roundedCircle
+            ></Image>
+            <div className="profile-bg shaded"></div>
+            <div className="profile-bg">
+              <span>
+                {member.firstName} {member.lastName}
+              </span>
 
-            {isMember(props) ? (
-              <Link to={`/members/${member.id}/profile/edit`}>edit</Link>
-            ) : (
-              ''
-            )}
-          </div>
-          <div className="member-details">
-            <div className="member-bio">
-              <span className="bold">Bio</span>
-              <p>{member.bio}</p>
+              {isMember(props) ? (
+                <Link to={`/members/${member.id}/profile/edit`}>edit</Link>
+              ) : (
+                ''
+              )}
             </div>
-            <div>
-              <span className="bold">Favorites</span>
-              <p>
-                <span>Book: </span>
-                {member.faveBook}
-              </p>
-              <p>
-                <span>Book Club Selection: </span>
-                {member.favePick}
-              </p>
-              <p>
-                <span>Genre: </span>
-                {member.genre}
-              </p>
+            <div className="member-details">
+              <div className="member-bio">
+                <span className="bold">Bio</span>
+                <p>{member.bio}</p>
+              </div>
+              <div>
+                <span className="bold">Favorites</span>
+                <p>
+                  <span>Book: </span>
+                  {member.faveBook}
+                </p>
+                <p>
+                  <span>Book Club Selection: </span>
+                  {member.favePick}
+                </p>
+                <p>
+                  <span>Genre: </span>
+                  {member.genre}
+                </p>
+              </div>
             </div>
-          </div>
 
-          <Footer />
+            <Footer />
+          </div>
         </div>
       </>
     );

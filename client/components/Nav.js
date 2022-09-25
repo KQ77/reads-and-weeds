@@ -27,7 +27,7 @@ const _Nav = (props) => {
 
   return (
     <div id="navbar-container">
-      {/* <Burger {...props} /> */}
+      <Burger {...props} />
       <Navbar id="navbar" expand="lg">
         <Container>
           {/* <Nav> */}
