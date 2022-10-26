@@ -80,8 +80,9 @@ router.post('/', isLoggedIn, upload.single('image'), async (req, res, next) => {
       });
     }
     await club.update({ adminId: req.member.id });
-
-    res.status(201).redirect(`/bookclubs/${club.id}`);
+    setTimeout(() => {
+      res.status(201).redirect(`/bookclubs/${club.id}`);
+    }, 10000);
   } catch (err) {
     next(err);
   }

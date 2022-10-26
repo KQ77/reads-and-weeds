@@ -36,7 +36,7 @@ router.post('/register', async (req, res, next) => {
     res.cookie('token', token, {
       httpOnly: true,
       // secure: process.env.NODE_ENV === 'production' ? true : false,
-      secure: true,
+      secure: false,
     });
     res.send();
   } catch (err) {

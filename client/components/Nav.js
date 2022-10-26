@@ -116,8 +116,8 @@ const _Nav = (props) => {
         </Modal.Header>
         <Modal.Body>
           {memberClubs.length ? (
-            memberClubs.map((club) => (
-              <div>
+            memberClubs.map((club, idx) => (
+              <div key={idx}>
                 <Link
                   onClick={() => setOpen(false)}
                   to={`/bookclubs/${club.id}`}
