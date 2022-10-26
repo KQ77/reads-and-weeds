@@ -40,9 +40,7 @@ const _AllClubs = (props) => {
   if (results) {
     return (
       <>
-        <Burger {...props} />
-        <Nav />
-        {/* <Burger {...props} /> */}
+        <Nav {...props} />
         <div id="all-clubs">
           <h1>Search All Clubs</h1>
           <div className="search-form">

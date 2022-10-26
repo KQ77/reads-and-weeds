@@ -88,7 +88,6 @@ const _BookClub = (props) => {
 
     return (
       <>
-        {/* <Burger {...props} /> */}
         <Nav {...props} />
         <div id="bookclub">
           {hasAccess() && (
